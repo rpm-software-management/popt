@@ -5,8 +5,18 @@ test -z "$srcdir" && srcdir=.
 
 THEDIR="`pwd`"
 
+libtoolize=`which glibtoolize`
+case $libtoolize in
+/*) ;;
+*)  libtoolize=`which libtoolize`
+    case $libtoolize in
+    /*) ;;
+    *)  libtoolize=libtoolize
+    esac
+esac
+
 cd "$srcdir"
-libtoolize --copy --force
+$libtoolize --copy --force
 aclocal
 autoheader
 automake -a -c
