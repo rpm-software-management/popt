@@ -5,10 +5,10 @@ test -z "$srcdir" && srcdir=.
 
 THEDIR="`pwd`"
 
-libtoolize=`which glibtoolize`
+libtoolize=`which glibtoolize 2>/dev/null`
 case $libtoolize in
 /*) ;;
-*)  libtoolize=`which libtoolize`
+*)  libtoolize=`which libtoolize 2>/dev/null`
     case $libtoolize in
     /*) ;;
     *)  libtoolize=libtoolize
