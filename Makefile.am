@@ -46,7 +46,7 @@ man_MANS = popt.3
 #BUILT_SOURCES = popt.lcd
 
 popt.lcd: Makefile.am ${libpopt_la_SOURCES} ${include_HEADERS} ${noinst_HEADERS}
-	lclint -dump $@ ${libpopt_la_SOURCES}
+	$(LINT) -dump $@ ${libpopt_la_SOURCES}
 
 .PHONY:	sources
 sources:
