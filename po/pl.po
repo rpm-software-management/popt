@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.9-20030515\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-29 07:48-0500\n"
+"Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
+"POT-Creation-Date: 2007-01-21 14:25-0500\n"
 "PO-Revision-Date: 2003-06-08 20:32+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -18,105 +18,107 @@ msgstr ""
 msgid "unknown errno"
 msgstr "nieznane errno"
 
-#: popt.c:964
+#: popt.c:996
 #, c-format
 msgid "option type (%d) not implemented in popt\n"
 msgstr "rodzaj opcji (%d) nie zaimplementowany w popt\n"
 
-#: popt.c:1184
+#: popt.c:1208
 msgid "missing argument"
 msgstr "brak parametru"
 
-#: popt.c:1186
+#: popt.c:1210
 msgid "unknown option"
 msgstr "nieznana opcja"
 
-#: popt.c:1188
+#: popt.c:1212
 msgid "mutually exclusive logical operations requested"
 msgstr "¿±danie wykluczaj±cych siê operacji"
 
-#: popt.c:1190
+#: popt.c:1214
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg nie mo¿e byæ NULL"
 
-#: popt.c:1192
+#: popt.c:1216
 msgid "aliases nested too deeply"
 msgstr "zbyt du¿e zag³êbienie aliasów"
 
-#: popt.c:1194
+#: popt.c:1218
 msgid "error in parameter quoting"
 msgstr "b³±d w cytowaniu parametru"
 
-#: popt.c:1196
+#: popt.c:1220
 msgid "invalid numeric value"
 msgstr "b³êdna warto¶æ liczbowa"
 
-#: popt.c:1198
+#: popt.c:1222
 msgid "number too large or too small"
 msgstr "liczba zbyt du¿a lub zbyt ma³a"
 
-#: popt.c:1200
+#: popt.c:1224
 msgid "memory allocation failed"
 msgstr "b³±d alokacji pamiêci"
 
-#: popt.c:1204
+#: popt.c:1228
 msgid "unknown error"
 msgstr "nieznany b³±d"
 
-#: popthelp.c:64 popthelp.c:75
+#: popt.h:172
+msgid "Options implemented via popt alias/exec:"
+msgstr "Opcje zaimplementowane poprzez popt alias/exec:"
+
+#: popt.h:188
+msgid "Help options:"
+msgstr "Opcje pomocy:"
+
+#: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "Poka¿ tê pomoc"
 
-#: popthelp.c:65 popthelp.c:76
+#: popthelp.c:69 popthelp.c:80
 msgid "Display brief usage message"
 msgstr "Wy¶wietl skrócony sposób u¿ycia"
 
-#: popthelp.c:79
+#: popthelp.c:83
 msgid "Display option defaults in message"
 msgstr "Wy¶wietl domy¶lne opcje w opisie"
 
-#: popthelp.c:124
+#: popthelp.c:128
 msgid "NONE"
 msgstr "BRAK"
 
-#: popthelp.c:126
+#: popthelp.c:130
 msgid "VAL"
 msgstr "WART"
 
-#: popthelp.c:130
+#: popthelp.c:134
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:131
+#: popthelp.c:135
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:132
+#: popthelp.c:136
 msgid "STRING"
 msgstr "£AÑCUCH"
 
-#: popthelp.c:133
+#: popthelp.c:137
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:134
+#: popthelp.c:138
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:135
+#: popthelp.c:139
 msgid "ARG"
 msgstr "PARAM"
 
-#: popthelp.c:548
+#: popthelp.c:552
 msgid "Usage:"
 msgstr "Sk³adnia:"
 
-#: popthelp.c:572
+#: popthelp.c:576
 msgid "[OPTION...]"
 msgstr "[OPCJA...]"
-
-#~ msgid "Options implemented via popt alias/exec:"
-#~ msgstr "Opcje zaimplementowane poprzez popt alias/exec:"
-
-#~ msgid "Help options:"
-#~ msgstr "Opcje pomocy:"

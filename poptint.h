@@ -74,7 +74,7 @@ struct poptContext_s {
 /*@only@*/ /*@null@*/
     poptItem aliases;
     int numAliases;
-    int flags;
+    unsigned int flags;
 /*@owned@*/ /*@null@*/
     poptItem execs;
     int numExecs;
@@ -82,6 +82,7 @@ struct poptContext_s {
     const char ** finalArgv;
     int finalArgvCount;
     int finalArgvAlloced;
+    int (*maincall) (int argc, const char **argv);
 /*@dependent@*/ /*@null@*/
     poptItem doExec;
 /*@only@*/
@@ -112,5 +113,10 @@ struct poptContext_s {
 #endif
 
 #define N_(foo) foo
+
+#define POPT_WARNING "(popt): Warning **: "
+
+int   POPT_fprintf (FILE* steam, const char *format, ...);
+char *POPT_prev_char (const char *str);
 
 #endif

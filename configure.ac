@@ -1,9 +1,16 @@
 AC_INIT(popt.h)
 AC_CANONICAL_SYSTEM
 AC_PREREQ(2.12)
-AC_CONFIG_HEADERS
-AM_INIT_AUTOMAKE(popt, 1.10.2)
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE(popt, 1.10.9)
+
+# Library code modified:                              REVISION++
+# Interfaces changed/added/removed:   CURRENT++       REVISION=0
+# Interfaces added:                             AGE++
+# Interfaces removed:                           AGE=0
+AC_SUBST(LT_CURRENT, 0)
+AC_SUBST(LT_REVISION, 0)
+AC_SUBST(LT_AGE, 8)
 
 ALL_LINGUAS="cs da de es eu_ES fi fr gl hu id is it ja ko no pl pt pt_BR ro ru sk sl sr sv tr uk wa zh zh_CN zh_TW"
 
@@ -53,24 +60,33 @@ AC_SUBST(TARGET)
 
 dnl XXX Choose /usr/lib or /usr/lib64 for library installs.
 MARK64=
-case "${target_cpu}" in
-x86_64*|powerpc64*|ppc64*|sparc64*|s390x*)        MARK64=64 ;;
-esac
+if ! echo "${libdir}" | grep -q '64$' ; then
+    case "${target_cpu}" in
+    x86_64*|powerpc64*|ppc64*|sparc64*|s390x*) MARK64=64 ;;
+    esac
+fi
 AC_SUBST(MARK64)
 
 AC_CHECK_HEADERS(alloca.h float.h libintl.h mcheck.h unistd.h)
-AC_MSG_CHECKING(for /usr/ucblib in LIBS)
-if test -d /usr/ucblib ; then
-	if test "$build" = "mips-sni-sysv4" ; then
-		addlib /usr/ccs/lib -lc
-	fi
 
-	addlib /usr/ucblib
-	
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-fi
+# For some systems we know that we have ld_version scripts.
+# Use it then as default.
+have_ld_version_script=no
+case "${host}" in
+    *-*-linux*)
+        have_ld_version_script=yes
+        ;;
+    *-*-gnu*)
+        have_ld_version_script=yes
+        ;;
+esac
+AC_ARG_ENABLE([ld-version-script],
+              AC_HELP_STRING([--enable-ld-version-script],
+                             [enable/disable use of linker version script.
+                              (default is system dependent)]),
+              [have_ld_version_script=$enableval],
+              [ : ] )
+AM_CONDITIONAL(HAVE_LD_VERSION_SCRIPT, test "$have_ld_version_script" = "yes")
 
 if test ! -f ../rpm.c
 then
@@ -87,11 +103,11 @@ AC_CHECK_FUNC(setreuid, [], [
 AC_CHECK_FUNCS(getuid geteuid mtrace __secure_getenv setregid strerror)
 
 
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 
 POPT_SOURCE_PATH="`pwd`"
 AC_DEFINE_UNQUOTED(POPT_SOURCE_PATH, "$POPT_SOURCE_PATH",
 	[Full path to popt top_srcdir.])
 AC_SUBST(POPT_SOURCE_PATH)
 
-AC_OUTPUT([Doxyfile Makefile intl/Makefile po/Makefile.in])
+AC_OUTPUT([Doxyfile Makefile po/Makefile.in intl/Makefile])

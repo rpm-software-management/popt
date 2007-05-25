@@ -73,7 +73,7 @@ static struct poptOption moreCallbackArgs[] = {
   { NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_INC_DATA,
 	(void *)option_callback, 0,
 	NULL, NULL },
-  { "cb2", 'c', POPT_ARG_STRING, NULL, 'c',
+  { "cb2", 'c', POPT_ARG_STRING, NULL, (int)'c',
 	"Test argument callbacks", NULL },
   POPT_TABLEEND
 };
@@ -82,9 +82,9 @@ static struct poptOption moreCallbackArgs[] = {
 static struct poptOption callbackArgs[] = {
   { NULL, '\0', POPT_ARG_CALLBACK, (void *)option_callback, 0,
 	"sampledata", NULL },
-  { "cb", 'c', POPT_ARG_STRING, NULL, 'c',
+  { "cb", 'c', POPT_ARG_STRING, NULL, (int)'c',
 	"Test argument callbacks", NULL },
-  { "longopt", '\0', 0, NULL, 'l',
+  { "longopt", '\0', 0, NULL, (int)'l',
 	"Unused option for help testing", NULL },
   POPT_TABLEEND
 };
@@ -245,7 +245,7 @@ int main(int argc, const char ** argv)
 	fprintf(stdout, " aLong: %ld", aLong);
 /*@-realcompare@*/
     if (aFloat != bFloat)
-	fprintf(stdout, " aFloat: %g", aFloat);
+	fprintf(stdout, " aFloat: %g", (double)aFloat);
     if (aDouble != bDouble)
 	fprintf(stdout, " aDouble: %g", aDouble);
 /*@=realcompare@*/

@@ -29,7 +29,7 @@ const char * findProgramPath(const char * argv0)
     strcpy(pathbuf, path);
 
     chptr = NULL;
-    /*@-branchstate@*/
+/*@-branchstate@*/
     do {
 	if ((chptr = strchr(start, ':')))
 	    *chptr = '\0';
@@ -43,7 +43,7 @@ const char * findProgramPath(const char * argv0)
 	else
 	    start = NULL;
     } while (start && *start);
-    /*@=branchstate@*/
+/*@=branchstate@*/
 
     free(buf);
 

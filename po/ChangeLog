@@ -1,6 +1,12 @@
-2002-02-10  gettextize  <bug-gnu-utils@gnu.org>
+2006-12-08  gettextize  <bug-gnu-gettext@gnu.org>
 
-	* Makefile.in.in: Upgrade to gettext-0.10.40.
-	* cat-id-tbl.c: Remove file.
-	* stamp-cat-id: Remove file.
+	* Makefile.in.in: New file, from gettext-0.16.
+	* boldquot.sed: New file, from gettext-0.16.
+	* en@boldquot.header: New file, from gettext-0.16.
+	* en@quot.header: New file, from gettext-0.16.
+	* insert-header.sin: New file, from gettext-0.16.
+	* quot.sed: New file, from gettext-0.16.
+	* remove-potcdate.sin: New file, from gettext-0.16.
+	* Rules-quot: New file, from gettext-0.16.
+	* POTFILES.in: New file.
 

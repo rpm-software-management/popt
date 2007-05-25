@@ -76,8 +76,8 @@ run test1 "test1 - 23" "--echo-args -a" --echo-args -e -a
 run test1 "test1 - 24" "arg1: 0 arg2: (none) short: 1" -onedash
 run test1 "test1 - 25" "arg1: 0 arg2: (none) short: 1" --onedash
 run test1 "test1 - 26" "callback: c arg for cb2 foo arg1: 0 arg2: (none)" --cb2 foo
-run test1 "test1 - 27" "arg1: 0 arg2: (none) -" -
-run test1 "test1 - 28" "arg1: 0 arg2: foo -" - -2 foo
+run test1 "test1 - 27" "arg1: 0 arg2: (none) rest: -" -
+run test1 "test1 - 28" "arg1: 0 arg2: foo rest: -" - -2 foo
 run test1 "test1 - 29" "arg1: 0 arg2: bbbb" --arg2=aaaa -2 bbbb
 run test1 "test1 - 30" "arg1: 0 arg2: 'foo bingo' rest: boggle" --grab bingo boggle
 run test1 "test1 - 31" "arg1: 0 arg2: 'foo bar' rest: boggle" --grabbar boggle

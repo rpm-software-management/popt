@@ -19,6 +19,8 @@
 
 /*@access poptContext@*/
 
+#define	_POPTHELP_MAXLINE	((size_t)79)
+
 /**
  * Display arguments.
  * @param con		context
@@ -27,17 +29,19 @@
  * @param arg		(unused)
  * @param data		(unused)
  */
+/*@exits@*/
 static void displayArgs(poptContext con,
 		/*@unused@*/ enum poptCallbackReason foo,
 		struct poptOption * key, 
 		/*@unused@*/ const char * arg, /*@unused@*/ void * data)
 	/*@globals fileSystem@*/
-	/*@modifies fileSystem@*/
+	/*@modifies con, fileSystem@*/
 {
     if (key->shortName == '?')
 	poptPrintHelp(con, stdout, 0);
     else
 	poptPrintUsage(con, stdout, 0);
+/*@i@*/ con = poptFreeContext(con);		/* XXX keep valgrind happy */
     exit(0);
 }
 
@@ -60,9 +64,9 @@ struct poptOption poptAliasOptions[] = {
 /*@-castfcnptr@*/
 /*@observer@*/ /*@unchecked@*/
 struct poptOption poptHelpOptions[] = {
-  { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, '\0', NULL, NULL },
-  { "help", '?', 0, NULL, '?', N_("Show this help message"), NULL },
-  { "usage", '\0', 0, NULL, 'u', N_("Display brief usage message"), NULL },
+  { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, 0, NULL, NULL },
+  { "help", '?', 0, NULL, (int)'?', N_("Show this help message"), NULL },
+  { "usage", '\0', 0, NULL, (int)'u', N_("Display brief usage message"), NULL },
     POPT_TABLEEND
 } ;
 
@@ -71,9 +75,9 @@ static struct poptOption poptHelpOptions2[] = {
 /*@-readonlytrans@*/
   { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 /*@=readonlytrans@*/
-  { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, '\0', NULL, NULL },
-  { "help", '?', 0, NULL, '?', N_("Show this help message"), NULL },
-  { "usage", '\0', 0, NULL, 'u', N_("Display brief usage message"), NULL },
+  { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, 0, NULL, NULL },
+  { "help", '?', 0, NULL, (int)'?', N_("Show this help message"), NULL },
+  { "usage", '\0', 0, NULL, (int)'u', N_("Display brief usage message"), NULL },
 #ifdef	NOTYET
   { "defaults", '\0', POPT_ARG_NONE, &show_option_defaults, 0,
 	N_("Display option defaults in message"), NULL },
@@ -88,7 +92,7 @@ struct poptOption * poptHelpOptionsI18N = poptHelpOptions2;
 /**
  * @param table		option(s)
  */
-/*@observer@*/ /*@null@*/ static const char *const
+/*@observer@*/ /*@null@*/ static const char *
 getTableTranslationDomain(/*@null@*/ const struct poptOption *table)
 	/*@*/
 {
@@ -106,7 +110,7 @@ getTableTranslationDomain(/*@null@*/ const struct poptOption *table)
  * @param opt		option(s)
  * @param translation_domain	translation domain
  */
-/*@observer@*/ /*@null@*/ static const char *const
+/*@observer@*/ /*@null@*/ static const char *
 getArgDescrip(const struct poptOption * opt,
 		/*@-paramuse@*/ /* FIX: i18n macros disabled with lclint */
 		/*@null@*/ const char * translation_domain)
@@ -222,7 +226,7 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 	/*@modifies *fp, fileSystem @*/
 {
     size_t indentLength = maxLeftCol + 5;
-    size_t lineLength = 79 - indentLength;
+    size_t lineLength = _POPTHELP_MAXLINE - indentLength;
     const char * help = D_(translation_domain, opt->descrip);
     const char * argDescrip = getArgDescrip(opt, translation_domain);
     size_t helpLength;
@@ -260,7 +264,7 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 	    *le++ = '[';
 
 	/* Choose type of output */
-	/*@-branchstate@*/
+/*@-branchstate@*/
 	if (opt->argInfo & POPT_ARGFLAG_SHOW_DEFAULT) {
 	    defs = singleOptionDefaultValue(lineLength, opt, translation_domain);
 	    if (defs) {
@@ -279,7 +283,7 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 		defs = t;
 	    }
 	}
-	/*@=branchstate@*/
+/*@=branchstate@*/
 
 	if (opt->argDescrip == NULL) {
 	    switch (opt->argInfo & POPT_ARG_MASK) {
@@ -341,7 +345,7 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 		mbstate_t t;
 		size_t n;
 
-		memset ((void *)&t, '\0', sizeof (t));	/* In initial state.  */
+		memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
 		/* Determine number of characters.  */
 		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
 
@@ -356,7 +360,7 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 /*@=boundswrite@*/
 
     if (help)
-	fprintf(fp,"  %-*s   ", maxLeftCol+displaypad, left);
+	fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
     else {
 	fprintf(fp,"  %s\n", left); 
 	goto out;
@@ -366,9 +370,7 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 /*@-branchstate@*/
     if (defs) {
 	help = defs;
-	defs = NULL;
     }
-/*@=branchstate@*/
 
     helpLength = strlen(help);
 /*@-boundsread@*/
@@ -391,8 +393,10 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 	helpLength = strlen(help);
     }
 /*@=boundsread@*/
+/*@=branchstate@*/
 
     if (helpLength) fprintf(fp, "%s\n", help);
+    help = NULL;
 
 out:
     /*@-dependenttrans@*/
@@ -441,7 +445,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 		size_t n;
 
 /*@-boundswrite@*/
-		memset ((void *)&t, '\0', sizeof (t));	/* In initial state.  */
+		memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
 /*@=boundswrite@*/
 		/* Determine number of characters.  */
 		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
@@ -528,7 +532,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	    sub_transdom = translation_domain;
 	    
 	if (opt->descrip)
-	    fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
+	    POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
 
 	singleTableHelp(con, fp, opt->arg, left, sub_transdom);
     }
@@ -538,19 +542,19 @@ static void singleTableHelp(poptContext con, FILE * fp,
  * @param con		context
  * @param fp		output file handle
  */
-static int showHelpIntro(poptContext con, FILE * fp)
+static size_t showHelpIntro(poptContext con, FILE * fp)
 	/*@globals fileSystem @*/
 	/*@modifies *fp, fileSystem @*/
 {
-    int len = 6;
+    size_t len = (size_t)6;
     const char * fn;
 
     fprintf(fp, POPT_("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {
 /*@-boundsread@*/
-	/*@-nullderef -type@*/	/* LCL: wazzup? */
+/*@-type@*/	/* LCL: wazzup? */
 	fn = con->optionStack->argv[0];
-	/*@=nullderef =type@*/
+/*@=type@*/
 /*@=boundsread@*/
 	if (fn == NULL) return len;
 	if (strchr(fn, '/')) fn = strrchr(fn, '/') + 1;
@@ -588,26 +592,30 @@ static size_t singleOptionUsage(FILE * fp, size_t cursor,
 	/*@globals fileSystem @*/
 	/*@modifies *fp, fileSystem @*/
 {
-    size_t len = 4;
+    size_t len = (size_t)4;
     char shortStr[2] = { '\0', '\0' };
     const char * item = shortStr;
     const char * argDescrip = getArgDescrip(opt, translation_domain);
+    int bingo = 0;
 
     if (opt->shortName != '\0' && opt->longName != NULL) {
 	len += 2;
 	if (!(opt->argInfo & POPT_ARGFLAG_ONEDASH)) len++;
 	len += strlen(opt->longName);
+	bingo++;
     } else if (opt->shortName != '\0') {
 	len++;
 	shortStr[0] = opt->shortName;
 	shortStr[1] = '\0';
+	bingo++;
     } else if (opt->longName) {
 	len += strlen(opt->longName);
 	if (!(opt->argInfo & POPT_ARGFLAG_ONEDASH)) len++;
 	item = opt->longName;
+	bingo++;
     }
 
-    if (len == 4) return cursor;
+    if (!bingo) return cursor;
 
 #ifdef POPT_WCHAR_HACK
     /* XXX Calculate no. of display characters. */
@@ -617,7 +625,7 @@ static size_t singleOptionUsage(FILE * fp, size_t cursor,
 	size_t n;
 
 /*@-boundswrite@*/
-	memset ((void *)&t, '\0', sizeof (t));	/* In initial state.  */
+	memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
 /*@=boundswrite@*/
 	/* Determine number of characters.  */
 	n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
@@ -628,9 +636,9 @@ static size_t singleOptionUsage(FILE * fp, size_t cursor,
 	len += sizeof("=")-1 + strlen(argDescrip);
 #endif
 
-    if ((cursor + len) > 79) {
+    if ((cursor + len) > _POPTHELP_MAXLINE) {
 	fprintf(fp, "\n       ");
-	cursor = 7;
+	cursor = (size_t)7;
     } 
 
     if (opt->longName && opt->shortName) {
@@ -666,7 +674,7 @@ static size_t itemUsage(FILE * fp, size_t cursor,
 {
     int i;
 
-    /*@-branchstate@*/		/* FIX: W2DO? */
+/*@-branchstate@*/		/* FIX: W2DO? */
     if (item != NULL)
     for (i = 0; i < nitems; i++, item++) {
 	const struct poptOption * opt;
@@ -678,7 +686,7 @@ static size_t itemUsage(FILE * fp, size_t cursor,
 	    cursor = singleOptionUsage(fp, cursor, opt, translation_domain);
 	}
     }
-    /*@=branchstate@*/
+/*@=branchstate@*/
 
     return cursor;
 }
@@ -709,7 +717,7 @@ static size_t singleTableUsage(poptContext con, FILE * fp, size_t cursor,
 	/*@globals fileSystem @*/
 	/*@modifies *fp, done, fileSystem @*/
 {
-    /*@-branchstate@*/		/* FIX: W2DO? */
+/*@-branchstate@*/		/* FIX: W2DO? */
     if (opt != NULL)
     for (; (opt->longName || opt->shortName || opt->arg) ; opt++) {
         if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INTL_DOMAIN) {
@@ -740,7 +748,7 @@ static size_t singleTableUsage(poptContext con, FILE * fp, size_t cursor,
 	    cursor = singleOptionUsage(fp, cursor, opt, translation_domain);
 	}
     }
-    /*@=branchstate@*/
+/*@=branchstate@*/
 
     return cursor;
 }
@@ -753,15 +761,16 @@ static size_t singleTableUsage(poptContext con, FILE * fp, size_t cursor,
  * @retval str		concatenation of short options
  * @return		length of display string
  */
-static int showShortOptions(const struct poptOption * opt, FILE * fp,
+static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 		/*@null@*/ char * str)
 	/*@globals fileSystem @*/
 	/*@modifies *str, *fp, fileSystem @*/
 	/*@requires maxRead(str) >= 0 @*/
 {
     /* bufsize larger then the ascii set, lazy alloca on top level call. */
-    char * s = (str != NULL ? str : memset(alloca(300), 0, 300));
-    int len = 0;
+    size_t nb = (size_t)300;
+    char * s = (str != NULL ? str : memset(alloca(nb), 0, nb));
+    size_t len = (size_t)0;
 
 /*@-boundswrite@*/
     if (opt != NULL)
@@ -775,7 +784,7 @@ static int showShortOptions(const struct poptOption * opt, FILE * fp,
 /*@=boundswrite@*/
 
     /* On return to top level, print the short options, return print length. */
-    if (s == str && *s != '\0') {
+    if (s != str && *s != '\0') {
 	fprintf(fp, " [-%s]", s);
 	len = strlen(s) + sizeof(" [-]")-1;
     }
@@ -805,7 +814,7 @@ void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
 
     if (con->otherHelp) {
 	cursor += strlen(con->otherHelp) + 1;
-	if (cursor > 79) fprintf(fp, "\n       ");
+	if (cursor > _POPTHELP_MAXLINE) fprintf(fp, "\n       ");
 	fprintf(fp, " %s", con->otherHelp);
     }
 

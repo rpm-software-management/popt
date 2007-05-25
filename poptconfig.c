@@ -46,16 +46,16 @@ static void configLine(poptContext con, char * line)
     while (*line != '\0' && isspace(*line)) line++;
     if (*line == '\0') return;
 
-    /*@-temptrans@*/ /* FIX: line alias is saved */
+/*@-temptrans@*/ /* FIX: line alias is saved */
     if (opt[0] == '-' && opt[1] == '-')
 	item->option.longName = opt + 2;
     else if (opt[0] == '-' && opt[2] == '\0')
 	item->option.shortName = opt[1];
-    /*@=temptrans@*/
+/*@=temptrans@*/
 
     if (poptParseArgvString(line, &item->argc, &item->argv)) return;
 
-    /*@-modobserver@*/
+/*@-modobserver@*/
     item->option.argInfo = POPT_ARGFLAG_DOC_HIDDEN;
     for (i = 0, j = 0; i < item->argc; i++, j++) {
 	const char * f;
@@ -81,15 +81,15 @@ static void configLine(poptContext con, char * line)
 	item->argv[j] = NULL;
 	item->argc = j;
     }
-    /*@=modobserver@*/
+/*@=modobserver@*/
 /*@=boundswrite@*/
 	
-    /*@-nullstate@*/ /* FIX: item->argv[] may be NULL */
+/*@-nullstate@*/ /* FIX: item->argv[] may be NULL */
     if (!strcmp(entryType, "alias"))
 	(void) poptAddItem(con, item, 0);
     else if (!strcmp(entryType, "exec"))
 	(void) poptAddItem(con, item, 1);
-    /*@=nullstate@*/
+/*@=nullstate@*/
 }
 /*@=compmempass@*/
 
@@ -128,7 +128,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 
     chptr = file;
     end = (file + fileLength);
-    /*@-infloops@*/	/* LCL: can't detect chptr++ */
+/*@-infloops@*/	/* LCL: can't detect chptr++ */
     while (chptr < end) {
 	switch (*chptr) {
 	  case '\n':
@@ -154,7 +154,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    /*@switchbreak@*/ break;
 	}
     }
-    /*@=infloops@*/
+/*@=infloops@*/
 /*@=boundswrite@*/
 
     return 0;

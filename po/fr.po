@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.8.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-29 07:48-0500\n"
+"Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
+"POT-Creation-Date: 2007-01-21 14:25-0500\n"
 "PO-Revision-Date: 2003-06-22 23:43+0200\n"
 "Last-Translator: RPM French Translation <rpm-fr@livna.org>\n"
 "Language-Team: RPM French Translation <rpm-fr@livna.org>\n"
@@ -24,99 +24,107 @@ msgstr ""
 msgid "unknown errno"
 msgstr "errno inconnu"
 
-#: popt.c:964
+#: popt.c:996
 #, c-format
 msgid "option type (%d) not implemented in popt\n"
 msgstr "type(%d) d'option non implémenté dans popt\n"
 
-#: popt.c:1184
+#: popt.c:1208
 msgid "missing argument"
 msgstr "argument manquant"
 
-#: popt.c:1186
+#: popt.c:1210
 msgid "unknown option"
 msgstr "option iconnue"
 
-#: popt.c:1188
+#: popt.c:1212
 msgid "mutually exclusive logical operations requested"
 msgstr "opérations logiques mutuellement exclusives requises"
 
-#: popt.c:1190
+#: popt.c:1214
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ne devrait pas être NULL"
 
-#: popt.c:1192
+#: popt.c:1216
 msgid "aliases nested too deeply"
 msgstr "les alias sont trop entremellés"
 
-#: popt.c:1194
+#: popt.c:1218
 msgid "error in parameter quoting"
 msgstr "erreur en citant les paramètres"
 
-#: popt.c:1196
+#: popt.c:1220
 msgid "invalid numeric value"
 msgstr "valeur numérique invalide"
 
-#: popt.c:1198
+#: popt.c:1222
 msgid "number too large or too small"
 msgstr "nombre trop grand ou trop petit"
 
-#: popt.c:1200
+#: popt.c:1224
 msgid "memory allocation failed"
 msgstr "échec de l'allocation de mémoire"
 
-#: popt.c:1204
+#: popt.c:1228
 msgid "unknown error"
 msgstr "erreur inconnue"
 
-#: popthelp.c:64 popthelp.c:75
+#: popt.h:172
+msgid "Options implemented via popt alias/exec:"
+msgstr ""
+
+#: popt.h:188
+msgid "Help options:"
+msgstr ""
+
+#: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "Montre ce message d'aide"
 
-#: popthelp.c:65 popthelp.c:76
+#: popthelp.c:69 popthelp.c:80
 msgid "Display brief usage message"
 msgstr "Affiche un bref descriptif de l'utilisation"
 
-#: popthelp.c:79
+#: popthelp.c:83
 msgid "Display option defaults in message"
 msgstr "Afficher les valeurs par défaut des options dans le message"
 
-#: popthelp.c:124
+#: popthelp.c:128
 msgid "NONE"
 msgstr "RIEN"
 
-#: popthelp.c:126
+#: popthelp.c:130
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:130
+#: popthelp.c:134
 msgid "INT"
 msgstr "ENTIER"
 
-#: popthelp.c:131
+#: popthelp.c:135
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:132
+#: popthelp.c:136
 msgid "STRING"
 msgstr "CHAINE"
 
-#: popthelp.c:133
+#: popthelp.c:137
 msgid "FLOAT"
 msgstr "FLOTTANT"
 
-#: popthelp.c:134
+#: popthelp.c:138
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:135
+#: popthelp.c:139
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:548
+#: popthelp.c:552
 msgid "Usage:"
 msgstr "Utilisation:"
 
-#: popthelp.c:572
+#: popthelp.c:576
 msgid "[OPTION...]"
 msgstr "[OPTION...]"

@@ -4,6 +4,7 @@
 
 findme.c
 popt.c
+popt.h
 poptconfig.c
 popthelp.c
 poptparse.c

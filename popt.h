@@ -17,41 +17,43 @@
  * \name Arg type identifiers
  */
 /*@{*/
-#define POPT_ARG_NONE		0	/*!< no arg */
-#define POPT_ARG_STRING		1	/*!< arg will be saved as string */
-#define POPT_ARG_INT		2	/*!< arg will be converted to int */
-#define POPT_ARG_LONG		3	/*!< arg will be converted to long */
-#define POPT_ARG_INCLUDE_TABLE	4	/*!< arg points to table */
-#define POPT_ARG_CALLBACK	5	/*!< table-wide callback... must be
+#define POPT_ARG_NONE		 0U	/*!< no arg */
+#define POPT_ARG_STRING		 1U	/*!< arg will be saved as string */
+#define POPT_ARG_INT		 2U	/*!< arg will be converted to int */
+#define POPT_ARG_LONG		 3U	/*!< arg will be converted to long */
+#define POPT_ARG_INCLUDE_TABLE	 4U	/*!< arg points to table */
+#define POPT_ARG_CALLBACK	 5U	/*!< table-wide callback... must be
 					   set first in table; arg points 
 					   to callback, descrip points to 
 					   callback data to pass */
-#define POPT_ARG_INTL_DOMAIN    6       /*!< set the translation domain
+#define POPT_ARG_INTL_DOMAIN     6U	/*!< set the translation domain
 					   for this table and any
 					   included tables; arg points
 					   to the domain string */
-#define POPT_ARG_VAL		7	/*!< arg should take value val */
-#define	POPT_ARG_FLOAT		8	/*!< arg will be converted to float */
-#define	POPT_ARG_DOUBLE		9	/*!< arg will be converted to double */
+#define POPT_ARG_VAL		 7U	/*!< arg should take value val */
+#define	POPT_ARG_FLOAT		 8U	/*!< arg will be converted to float */
+#define	POPT_ARG_DOUBLE		 9U	/*!< arg will be converted to double */
 
-#define POPT_ARG_MASK		0x0000FFFF
+#define POPT_ARG_MAINCALL	10U 	/*!< return (*arg) (argc, argv) */
+
+#define POPT_ARG_MASK		0x0000FFFFU
 /*@}*/
 
 /** \ingroup popt
  * \name Arg modifiers
  */
 /*@{*/
-#define POPT_ARGFLAG_ONEDASH	0x80000000  /*!< allow -longoption */
-#define POPT_ARGFLAG_DOC_HIDDEN 0x40000000  /*!< don't show in help/usage */
-#define POPT_ARGFLAG_STRIP	0x20000000  /*!< strip this arg from argv(only applies to long args) */
-#define	POPT_ARGFLAG_OPTIONAL	0x10000000  /*!< arg may be missing */
+#define POPT_ARGFLAG_ONEDASH	0x80000000U  /*!< allow -longoption */
+#define POPT_ARGFLAG_DOC_HIDDEN 0x40000000U  /*!< don't show in help/usage */
+#define POPT_ARGFLAG_STRIP	0x20000000U  /*!< strip this arg from argv(only applies to long args) */
+#define	POPT_ARGFLAG_OPTIONAL	0x10000000U  /*!< arg may be missing */
 
-#define	POPT_ARGFLAG_OR		0x08000000  /*!< arg will be or'ed */
-#define	POPT_ARGFLAG_NOR	0x09000000  /*!< arg will be nor'ed */
-#define	POPT_ARGFLAG_AND	0x04000000  /*!< arg will be and'ed */
-#define	POPT_ARGFLAG_NAND	0x05000000  /*!< arg will be nand'ed */
-#define	POPT_ARGFLAG_XOR	0x02000000  /*!< arg will be xor'ed */
-#define	POPT_ARGFLAG_NOT	0x01000000  /*!< arg will be negated */
+#define	POPT_ARGFLAG_OR		0x08000000U  /*!< arg will be or'ed */
+#define	POPT_ARGFLAG_NOR	0x09000000U  /*!< arg will be nor'ed */
+#define	POPT_ARGFLAG_AND	0x04000000U  /*!< arg will be and'ed */
+#define	POPT_ARGFLAG_NAND	0x05000000U  /*!< arg will be nand'ed */
+#define	POPT_ARGFLAG_XOR	0x02000000U  /*!< arg will be xor'ed */
+#define	POPT_ARGFLAG_NOT	0x01000000U  /*!< arg will be negated */
 #define POPT_ARGFLAG_LOGICALOPS \
         (POPT_ARGFLAG_OR|POPT_ARGFLAG_AND|POPT_ARGFLAG_XOR)
 
@@ -60,7 +62,8 @@
 #define	POPT_BIT_CLR	(POPT_ARG_VAL|POPT_ARGFLAG_NAND)
 					/*!< clear arg bit(s) */
 
-#define	POPT_ARGFLAG_SHOW_DEFAULT 0x00800000 /*!< show default value in --help */
+#define	POPT_ARGFLAG_SHOW_DEFAULT 0x00800000U /*!< show default value in --help */
+#define	POPT_ARGFLAG_RANDOM	0x00400000U  /*<! random value in [1,arg] */
 
 /*@}*/
 
@@ -68,12 +71,12 @@
  * \name Callback modifiers
  */
 /*@{*/
-#define POPT_CBFLAG_PRE		0x80000000  /*!< call the callback before parse */
-#define POPT_CBFLAG_POST	0x40000000  /*!< call the callback after parse */
-#define POPT_CBFLAG_INC_DATA	0x20000000  /*!< use data from the include line,
+#define POPT_CBFLAG_PRE		0x80000000U  /*!< call the callback before parse */
+#define POPT_CBFLAG_POST	0x40000000U  /*!< call the callback after parse */
+#define POPT_CBFLAG_INC_DATA	0x20000000U  /*!< use data from the include line,
 					       not the subtable */
-#define POPT_CBFLAG_SKIPOPTION	0x10000000  /*!< don't callback with option */
-#define POPT_CBFLAG_CONTINUE	0x08000000  /*!< continue callbacks with option */
+#define POPT_CBFLAG_SKIPOPTION	0x10000000U  /*!< don't callback with option */
+#define POPT_CBFLAG_CONTINUE	0x08000000U  /*!< continue callbacks with option */
 /*@}*/
 
 /** \ingroup popt
@@ -96,17 +99,17 @@
  * \name poptBadOption() flags
  */
 /*@{*/
-#define POPT_BADOPTION_NOALIAS  (1 << 0)  /*!< don't go into an alias */
+#define POPT_BADOPTION_NOALIAS  (1U << 0)  /*!< don't go into an alias */
 /*@}*/
 
 /** \ingroup popt
  * \name poptGetContext() flags
  */
 /*@{*/
-#define POPT_CONTEXT_NO_EXEC	(1 << 0)  /*!< ignore exec expansions */
-#define POPT_CONTEXT_KEEP_FIRST	(1 << 1)  /*!< pay attention to argv[0] */
-#define POPT_CONTEXT_POSIXMEHARDER (1 << 2) /*!< options can't follow args */
-#define POPT_CONTEXT_ARG_OPTS	(1 << 4) /*!< return args as options with value 0 */
+#define POPT_CONTEXT_NO_EXEC	(1U << 0)  /*!< ignore exec expansions */
+#define POPT_CONTEXT_KEEP_FIRST	(1U << 1)  /*!< pay attention to argv[0] */
+#define POPT_CONTEXT_POSIXMEHARDER (1U << 2) /*!< options can't follow args */
+#define POPT_CONTEXT_ARG_OPTS	(1U << 4) /*!< return args as options with value 0 */
 /*@}*/
 
 /** \ingroup popt
@@ -115,7 +118,7 @@ struct poptOption {
 /*@observer@*/ /*@null@*/
     const char * longName;	/*!< may be NULL */
     char shortName;		/*!< may be NUL */
-    int argInfo;
+    unsigned int argInfo;
 /*@shared@*/ /*@null@*/
     void * arg;			/*!< depends on argInfo */
     int val;			/*!< 0 means don't return, just update flag */
@@ -154,6 +157,10 @@ typedef struct poptItem_s {
  */
 /*@{*/
 
+#if !defined(N_)
+#define	N_(foo)	foo
+#endif
+
 /**
  * Empty table marker to enable displaying popt alias/exec options.
  */
@@ -162,7 +169,7 @@ typedef struct poptItem_s {
 extern struct poptOption poptAliasOptions[];
 /*@=exportvar@*/
 #define POPT_AUTOALIAS { NULL, '\0', POPT_ARG_INCLUDE_TABLE, poptAliasOptions, \
-			0, "Options implemented via popt alias/exec:", NULL },
+			0, N_("Options implemented via popt alias/exec:"), NULL },
 
 /**
  * Auto help table options.
@@ -178,9 +185,9 @@ extern struct poptOption * poptHelpOptionsI18N;
 /*@=exportvar@*/
 
 #define POPT_AUTOHELP { NULL, '\0', POPT_ARG_INCLUDE_TABLE, poptHelpOptions, \
-			0, "Help options:", NULL },
+			0, N_("Help options:"), NULL },
 
-#define POPT_TABLEEND { NULL, '\0', 0, 0, 0, NULL, NULL }
+#define POPT_TABLEEND { NULL, '\0', 0, NULL, 0, NULL, NULL }
 /*@}*/
 
 /** \ingroup popt
@@ -197,6 +204,8 @@ typedef struct poptOption * poptOption;
 /*@=exporttype =typeuse@*/
 #endif
 
+/** \ingroup popt
+ */
 /*@-exportconst@*/
 enum poptCallbackReason {
     POPT_CALLBACK_REASON_PRE	= 0, 
@@ -240,7 +249,7 @@ poptContext poptGetContext(
 		/*@dependent@*/ /*@keep@*/ const char * name,
 		int argc, /*@dependent@*/ /*@keep@*/ const char ** argv,
 		/*@dependent@*/ /*@keep@*/ const struct poptOption * options,
-		int flags)
+		unsigned int flags)
 	/*@*/;
 
 /** \ingroup popt
@@ -303,7 +312,7 @@ const char ** poptGetArgs(/*@null@*/poptContext con)
  * @return		offending option
  */
 /*@observer@*/
-const char * poptBadOption(/*@null@*/poptContext con, int flags)
+const char * poptBadOption(/*@null@*/poptContext con, unsigned int flags)
 	/*@*/;
 
 /** \ingroup popt
@@ -460,7 +469,7 @@ int poptConfigFileToString(FILE *fp, /*@out@*/ char ** argstrp, int flags)
  * @return		error string
  */
 /*@observer@*/
-const char *const poptStrerror(const int error)
+const char * poptStrerror(const int error)
 	/*@*/;
 
 /** \ingroup popt
@@ -536,8 +545,9 @@ int poptStrippedArgv(poptContext con, int argc, char ** argv)
  */
 /*@-incondefs@*/
 /*@unused@*/
-int poptSaveLong(/*@null@*/ long * arg, int argInfo, long aLong)
-	/*@modifies *arg @*/
+int poptSaveLong(/*@null@*/ long * arg, unsigned int argInfo, long aLong)
+	/*@globals internalState @*/
+	/*@modifies *arg, internalState @*/
 	/*@requires maxSet(arg) >= 0 /\ maxRead(arg) == 0 @*/;
 /*@=incondefs@*/
 
@@ -551,8 +561,9 @@ int poptSaveLong(/*@null@*/ long * arg, int argInfo, long aLong)
  */
 /*@-incondefs@*/
 /*@unused@*/
-int poptSaveInt(/*@null@*/ int * arg, int argInfo, long aLong)
-	/*@modifies *arg @*/
+int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
+	/*@globals internalState @*/
+	/*@modifies *arg, internalState @*/
 	/*@requires maxSet(arg) >= 0 /\ maxRead(arg) == 0 @*/;
 /*@=incondefs@*/
 

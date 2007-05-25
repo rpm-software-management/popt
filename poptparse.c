@@ -33,12 +33,12 @@ int poptDupArgv(int argc, const char **argv,
     argv2 = (void *) dst;
     dst += (argc + 1) * sizeof(*argv);
 
-    /*@-branchstate@*/
+/*@-branchstate@*/
     for (i = 0; i < argc; i++) {
 	argv2[i] = dst;
 	dst += strlen(strcpy(dst, argv[i])) + 1;
     }
-    /*@=branchstate@*/
+/*@=branchstate@*/
     argv2[argc] = NULL;
 
     if (argvPtr) {
@@ -61,7 +61,7 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     int argvAlloced = POPT_ARGV_ARRAY_GROW_DELTA;
     const char ** argv = malloc(sizeof(*argv) * argvAlloced);
     int argc = 0;
-    int buflen = strlen(s) + 1;
+    size_t buflen = strlen(s) + 1;
     char * buf = memset(alloca(buflen), 0, buflen);
     int rc = POPT_ERROR_MALLOC;
 
@@ -133,11 +133,11 @@ int poptConfigFileToString(FILE *fp, char ** argstrp, /*@unused@*/ int flags)
     char * p;
     char * q;
     char * x;
-    int t;
-    int argvlen = 0;
+    size_t t;
+    size_t argvlen = 0;
     size_t maxlinelen = sizeof(line);
     size_t linelen;
-    int maxargvlen = 480;
+    size_t maxargvlen = (size_t)480;
     int linenum = 0;
 
     *argstrp = NULL;
@@ -205,7 +205,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp, /*@unused@*/ int flags)
 	/* now, loop and strip all ending whitespace */
 	x = p + linelen;
 	while (isspace(*--x))
-	    *x = 0;	/* null out last char if space (including fgets() NL) */
+	    *x = '\0';	/* null out last char if space (including fgets() NL) */
 
 	/* rest of line accept */
 	t = x - p;
