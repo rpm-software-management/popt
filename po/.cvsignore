@@ -2,6 +2,7 @@ Makefile
 Makefile.in
 POTFILES
 stamp-cat-id
+stamp-po
 cat-id-tbl.c
 *.mo
 *.gmo
