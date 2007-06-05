@@ -18,7 +18,7 @@ esac
 cd "$srcdir"
 gettextize --copy --force --intl
 $libtoolize --copy --force
-aclocal
+aclocal -I m4
 autoheader
 automake -a -c
 autoconf
