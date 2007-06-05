@@ -16,6 +16,7 @@ case $libtoolize in
 esac
 
 cd "$srcdir"
+gettextize --copy --force --intl
 $libtoolize --copy --force
 aclocal
 autoheader

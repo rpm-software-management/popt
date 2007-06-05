@@ -110,4 +110,4 @@ AC_DEFINE_UNQUOTED(POPT_SOURCE_PATH, "$POPT_SOURCE_PATH",
 	[Full path to popt top_srcdir.])
 AC_SUBST(POPT_SOURCE_PATH)
 
-AC_OUTPUT([Doxyfile Makefile po/Makefile.in intl/Makefile])
+AC_OUTPUT([Doxyfile Makefile])
