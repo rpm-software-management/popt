@@ -1,6 +1,7 @@
 .deps
 .depend
 .libs
+ABOUT-NLS
 ChangeLog
 Doxyfile
 Makefile
@@ -19,11 +20,13 @@ configure
 doxygen
 depcomp
 install-sh
+intl
 libtool
 ltconfig
 ltmain.sh
 m4
 missing
+mkinstalldirs
 stamp-h
 stamp-h1
 stamp-h.in

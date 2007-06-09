@@ -1,15 +1,11 @@
-#
-# Note: popt is now an rpm sub-package (including libpopt.so*) so you probably
-# shouldn't need to use this spec file to package popt anymore.
-#
 Summary: A C library for parsing command line parameters.
 Name: popt
-Version: 1.10.7
-Release: 0.1
+Version: 1.11
+Release: 1
 License: X Consortium
 Group: System Environment/Libraries
-Source: ftp://ftp.redhat.com/pub/redhat/code/popt/popt-%{version}.tar.gz
-BuildRoot: /var/tmp/%{name}root
+Source: http://rpm5.org/v/files/popt/%{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-root
 
 %description
 Popt is a C library for parsing command line parameters.  Popt
@@ -28,25 +24,27 @@ capabilities.
 %setup -q
 
 %build
-#CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=/usr
-
 %configure
 make
 
 %install
+rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
+%find_lang popt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f popt.lang
 %defattr(-,root,root)
-%{_prefix}/lib/libpopt.*
-%{_prefix}/include/popt.h
-%{_prefix}/man/man3/popt.3
-%{_prefix}/share/locale/*/LC_MESSAGES/popt.mo
+%{_libdir}/libpopt.*
+%{_includedir}/popt.h
+%{_mandir}/man3/popt.3*
 
 %changelog
+* Sat Jun  9 2007 Jeff Johnson <jbj@rpm5.org>
+- release popt-1.11 through rpm5.org.
+
 * Thu Dec 10 1998 Michael Johnson <johnsonm@redhat.com>
 - released 1.2.2; see CHANGES
 
