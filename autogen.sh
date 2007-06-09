@@ -16,7 +16,7 @@ case $libtoolize in
 esac
 
 cd "$srcdir"
-gettextize --copy --force --intl
+[ -f po/Makefile.in.in ] || gettextize --copy --force --intl
 $libtoolize --copy --force
 aclocal -I m4
 autoheader

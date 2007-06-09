@@ -1,6 +1,7 @@
 .deps
 .depend
 .libs
+ChangeLog
 Doxyfile
 Makefile
 Makefile.in
@@ -11,6 +12,7 @@ config.guess
 config.h
 config.h.in
 config.log
+config.rpath
 config.status
 config.sub
 configure
@@ -20,6 +22,7 @@ install-sh
 libtool
 ltconfig
 ltmain.sh
+m4
 missing
 stamp-h
 stamp-h1

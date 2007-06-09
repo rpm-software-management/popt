@@ -1,8 +1,8 @@
-AC_INIT(popt.h)
-AC_CANONICAL_SYSTEM
-AC_PREREQ(2.12)
+AC_PREREQ(2.57)
+AC_INIT(popt, 1.11, popt-devel@rpm5.org)
+AC_CANONICAL_TARGET
+AC_CONFIG_SRCDIR([popt.h])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE(popt, 1.10.9)
 
 # Library code modified:                              REVISION++
 # Interfaces changed/added/removed:   CURRENT++       REVISION=0
@@ -12,23 +12,23 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
 
+AM_INIT_AUTOMAKE([foreign])
+
 ALL_LINGUAS="cs da de es eu_ES fi fr gl hu id is it ja ko no pl pt pt_BR ro ru sk sl sr sv tr uk wa zh zh_CN zh_TW"
 
-AC_ISC_POSIX
-
 AC_PROG_CC
-AC_GCC_TRADITIONAL
-AM_C_PROTOTYPES
-AC_SYS_LARGEFILE
-
-dnl AM_DISABLE_SHARED
-AM_PROG_LIBTOOL
-
 AC_PROG_INSTALL
+AC_PROG_LIBTOOL
 
 if test "X$CC" = Xgcc; then
     CFLAGS="-Wall $CFLAGS"
 fi
+
+AC_GCC_TRADITIONAL
+AC_SYS_LARGEFILE
+
+AC_ISC_POSIX
+AM_C_PROTOTYPES
 
 dnl XXX lose rpm libs
 LIBS=
@@ -102,7 +102,6 @@ AC_CHECK_FUNC(setreuid, [], [
 ])
 AC_CHECK_FUNCS(getuid geteuid mtrace __secure_getenv setregid strerror)
 
-
 AM_GNU_GETTEXT([external])
 
 POPT_SOURCE_PATH="`pwd`"
@@ -110,4 +109,4 @@ AC_DEFINE_UNQUOTED(POPT_SOURCE_PATH, "$POPT_SOURCE_PATH",
 	[Full path to popt top_srcdir.])
 AC_SUBST(POPT_SOURCE_PATH)
 
-AC_OUTPUT([Doxyfile Makefile intl/Makefile po/Makefile.in])
+AC_OUTPUT([Doxyfile Makefile po/Makefile.in])
