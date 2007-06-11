@@ -377,9 +377,10 @@ static int execCommand(poptContext con)
 	/*@modifies internalState @*/
 {
     poptItem item = con->doExec;
-    const char ** argv;
+    const char ** argv = NULL;
     int argc = 0;
     int rc;
+    int ec = POPT_ERROR_ERRNO;
 
     if (item == NULL) /*XXX can't happen*/
 	return POPT_ERROR_NOARG;
@@ -399,8 +400,8 @@ static int execCommand(poptContext con)
     } else
 	argv[argc] = findProgramPath(item->argv[0]);
     if (argv[argc++] == NULL) {
-	free(argv);
-	return POPT_ERROR_NOARG;
+	ec = POPT_ERROR_NOARG;
+	goto exit;
     }
 
     if (item->argc > 1) {
@@ -423,9 +424,9 @@ static int execCommand(poptContext con)
 
 #if defined(hpux) || defined(__hpux)
     rc = setresgid(getgid(), getgid(),-1);
-    if (rc) return POPT_ERROR_ERRNO;
+    if (rc) goto exit;
     rc = setresuid(getuid(), getuid(),-1);
-    if (rc) return POPT_ERROR_ERRNO;
+    if (rc) goto exit;
 #else
 /*
  * XXX " ... on BSD systems setuid() should be preferred over setreuid()"
@@ -434,22 +435,22 @@ static int execCommand(poptContext con)
  */
 #if defined(HAVE_SETUID)
     rc = setgid(getgid());
-    if (rc) return POPT_ERROR_ERRNO;
+    if (rc) goto exit;
     rc = setuid(getuid());
-    if (rc) return POPT_ERROR_ERRNO;
+    if (rc) goto exit;
 #elif defined (HAVE_SETREUID)
     rc = setregid(getgid(), getgid());
-    if (rc) return POPT_ERROR_ERRNO;
+    if (rc) goto exit;
     rc = setreuid(getuid(), getuid());
-    if (rc) return POPT_ERROR_ERRNO;
+    if (rc) goto exit;
 #else
     ; /* Can't drop privileges */
 #endif
 #endif
 
     if (argv[0] == NULL) {
-	free(argv);
-	return POPT_ERROR_NOARG;
+	ec = POPT_ERROR_NOARG;
+	goto exit;
     }
 
 #ifdef	MYDEBUG
@@ -464,7 +465,9 @@ if (_popt_debug)
 
     rc = execvp(argv[0], (char *const *)argv);
 
-    return POPT_ERROR_ERRNO;
+exit:
+    if (argv) free(argv);
+    return ec;
 }
 /*@=bounds =boundswrite @*/
 
