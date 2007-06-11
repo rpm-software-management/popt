@@ -398,7 +398,10 @@ static int execCommand(poptContext con)
 	argv[argc] = s;
     } else
 	argv[argc] = findProgramPath(item->argv[0]);
-    if (argv[argc++] == NULL) return POPT_ERROR_NOARG;
+    if (argv[argc++] == NULL) {
+	free(argv);
+	return POPT_ERROR_NOARG;
+    }
 
     if (item->argc > 1) {
 	memcpy(argv + argc, item->argv + 1, sizeof(*argv) * (item->argc - 1));
@@ -444,8 +447,10 @@ static int execCommand(poptContext con)
 #endif
 #endif
 
-    if (argv[0] == NULL)
+    if (argv[0] == NULL) {
+	free(argv);
 	return POPT_ERROR_NOARG;
+    }
 
 #ifdef	MYDEBUG
 if (_popt_debug)
