@@ -64,7 +64,7 @@ struct poptOption poptAliasOptions[] = {
 /*@-castfcnptr@*/
 /*@observer@*/ /*@unchecked@*/
 struct poptOption poptHelpOptions[] = {
-  { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, 0, NULL, NULL },
+  { NULL, '\0', POPT_ARG_CALLBACK, (void *)displayArgs, 0, NULL, NULL },
   { "help", '?', 0, NULL, (int)'?', N_("Show this help message"), NULL },
   { "usage", '\0', 0, NULL, (int)'u', N_("Display brief usage message"), NULL },
     POPT_TABLEEND
@@ -75,7 +75,7 @@ static struct poptOption poptHelpOptions2[] = {
 /*@-readonlytrans@*/
   { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 /*@=readonlytrans@*/
-  { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, 0, NULL, NULL },
+  { NULL, '\0', POPT_ARG_CALLBACK, (void *)displayArgs, 0, NULL, NULL },
   { "help", '?', 0, NULL, (int)'?', N_("Show this help message"), NULL },
   { "usage", '\0', 0, NULL, (int)'u', N_("Display brief usage message"), NULL },
 #ifdef	NOTYET
