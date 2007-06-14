@@ -571,7 +571,7 @@ static const char * findNextArg(/*@special@*/ poptContext con,
 	    if (delete_arg) {
 		if (os->argb == NULL) os->argb = PBM_ALLOC(os->argc);
 		if (os->argb != NULL)	/* XXX can't happen */
-		PBM_SET(i, os->argb);
+		    PBM_SET(i, os->argb);
 	    }
 	    /*@innerbreak@*/ break;
 /*@=sizeoftype@*/
