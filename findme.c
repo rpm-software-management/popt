@@ -12,9 +12,9 @@
 const char * POPT_findProgramPath(const char * argv0)
 {
     char * path = getenv("PATH");
-    char * pathbuf;
+    char * pathbuf = NULL;
     char * start, * chptr;
-    char * buf;
+    char * buf = NULL;
 
     if (argv0 == NULL) return NULL;	/* XXX can't happen */
     /* If there is a / in the argv[0], it has to be an absolute path */
@@ -23,9 +23,10 @@ const char * POPT_findProgramPath(const char * argv0)
 
     if (path == NULL) return NULL;
 
-    start = pathbuf = alloca(strlen(path) + 1);
+    start = pathbuf = malloc(strlen(path) + 1);
+    if (pathbuf == NULL) goto exit;
     buf = malloc(strlen(path) + strlen(argv0) + sizeof("/"));
-    if (buf == NULL) return NULL;	/* XXX can't happen */
+    if (buf == NULL) goto exit;
     strcpy(pathbuf, path);
 
     chptr = NULL;
@@ -35,8 +36,10 @@ const char * POPT_findProgramPath(const char * argv0)
 	    *chptr = '\0';
 	sprintf(buf, "%s/%s", start, argv0);
 
-	if (!access(buf, X_OK))
+	if (!access(buf, X_OK)) {
+	    free(pathbuf);
 	    return buf;
+	}
 
 	if (chptr) 
 	    start = chptr + 1;
@@ -45,7 +48,11 @@ const char * POPT_findProgramPath(const char * argv0)
     } while (start && *start);
 /*@=branchstate@*/
 
-    free(buf);
+exit:
+    if (pathbuf)
+        free(pathbuf);
+    if (buf)
+        free(buf);
 
     return NULL;
 }

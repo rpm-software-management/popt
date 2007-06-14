@@ -39,32 +39,6 @@ extern __const __int32_t *__ctype_toupper;
 #include <libc.h>
 #endif
 
-#if defined(__LCLINT__)
-/*@-declundef -incondefs @*/ /* LCL: missing annotation */
-/*@only@*/ /*@out@*/
-void * alloca (size_t __size)
-	/*@ensures MaxSet(result) == (__size - 1) @*/
-	/*@*/;
-/*@=declundef =incondefs @*/
-#endif
-
-/* AIX requires this to be the first thing in the file.  */ 
-#ifndef __GNUC__
-# ifdef HAVE_ALLOCA_H
-#  include <alloca.h>
-# else
-#  ifdef _AIX
-#pragma alloca
-#  else
-#   ifndef alloca /* predefined by HP cc +Olibcalls */
-char *alloca ();
-#   endif
-#  endif
-# endif
-#elif defined(__GNUC__) && defined(__STRICT_ANSI__)
-#define alloca __builtin_alloca
-#endif
-
 /*@-redecl -redef@*/
 /*@mayexit@*/ /*@only@*/ /*@unused@*/
 char * xstrdup (const char *str)

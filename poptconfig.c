@@ -17,7 +17,8 @@ static void configLine(poptContext con, char * line)
     size_t nameLength;
     const char * entryType;
     const char * opt;
-    poptItem item = alloca(sizeof(*item));
+    struct poptItem_s item_buf;
+    poptItem item = &item_buf;
     int i, j;
 
     if (con->appName == NULL)
@@ -95,8 +96,8 @@ static void configLine(poptContext con, char * line)
 
 int poptReadConfigFile(poptContext con, const char * fn)
 {
-    const char * file, * chptr, * end;
-    char * buf;
+    char * file = NULL, * chptr, * end;
+    char * buf = NULL;
 /*@dependent@*/ char * dst;
     int fd, rc;
     off_t fileLength;
@@ -113,18 +114,20 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	return POPT_ERROR_ERRNO;
     }
 
-    file = alloca(fileLength + 1);
+    file = malloc(fileLength + 1);
     if (read(fd, (char *)file, fileLength) != fileLength) {
 	rc = errno;
 	(void) close(fd);
 	errno = rc;
 	return POPT_ERROR_ERRNO;
     }
-    if (close(fd) == -1)
+    if (close(fd) == -1) {
+	free(file);
 	return POPT_ERROR_ERRNO;
+    }
 
 /*@-boundswrite@*/
-    dst = buf = alloca(fileLength + 1);
+    dst = buf = malloc(fileLength + 1);
 
     chptr = file;
     end = (file + fileLength);
@@ -157,6 +160,9 @@ int poptReadConfigFile(poptContext con, const char * fn)
 /*@=infloops@*/
 /*@=boundswrite@*/
 
+    free(file);
+    free(buf);
+
     return 0;
 }
 
@@ -171,10 +177,11 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
     if (rc) return rc;
 
     if ((home = getenv("HOME"))) {
-	fn = alloca(strlen(home) + 20);
+	fn = malloc(strlen(home) + 20);
 	strcpy(fn, home);
 	strcat(fn, "/.popt");
 	rc = poptReadConfigFile(con, fn);
+	free(fn);
 	if (rc) return rc;
     }
 

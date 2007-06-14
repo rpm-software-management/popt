@@ -394,8 +394,9 @@ static int execCommand(poptContext con)
     if (argv == NULL) return POPT_ERROR_MALLOC;
 
     if (!strchr(item->argv[0], '/') && con->execPath != NULL) {
-	char *s = alloca(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
-	sprintf(s, "%s/%s", con->execPath, item->argv[0]);
+	char *s = malloc(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
+	if (s)
+	    sprintf(s, "%s/%s", con->execPath, item->argv[-1]);
 	argv[argc] = s;
     } else
 	argv[argc] = POPT_findProgramPath(item->argv[0]);
@@ -448,11 +449,6 @@ static int execCommand(poptContext con)
 #endif
 #endif
 
-    if (argv[0] == NULL) {
-	ec = POPT_ERROR_NOARG;
-	goto exit;
-    }
-
 #ifdef	MYDEBUG
 if (_popt_debug)
     {	const char ** avp;
@@ -466,14 +462,18 @@ if (_popt_debug)
     rc = execvp(argv[0], (char *const *)argv);
 
 exit:
-    if (argv) free(argv);
+    if (argv) {
+        if (argv[0])
+            free((void *)argv[0]);
+        free(argv);
+    }
     return ec;
 }
 /*@=bounds =boundswrite @*/
 
 /*@-boundswrite@*/
 /*@observer@*/ /*@null@*/ static const struct poptOption *
-findOption(const struct poptOption * opt, /*@null@*/ const char * longName,
+findOption(const struct poptOption * opt, /*@null@*/ const char * longName, int longNameLen,
 		char shortName,
 		/*@null@*/ /*@out@*/ poptCallbackType * callback,
 		/*@null@*/ /*@out@*/ const void ** callbackData,
@@ -498,7 +498,7 @@ findOption(const struct poptOption * opt, /*@null@*/ const char * longName,
 /*@=branchstate@*/
 	    /* Recurse on included sub-tables. */
 	    if (arg == NULL) continue;	/* XXX program error */
-	    opt2 = findOption(arg, longName, shortName, callback,
+	    opt2 = findOption(arg, longName, longNameLen, shortName, callback,
 			      callbackData, singleDash);
 	    if (opt2 == NULL) continue;
 	    /* Sub-table data will be inheirited if no data yet. */
@@ -512,7 +512,7 @@ findOption(const struct poptOption * opt, /*@null@*/ const char * longName,
 	    cb = opt;
 	} else if (longName != NULL && opt->longName != NULL &&
 		   (!singleDash || (opt->argInfo & POPT_ARGFLAG_ONEDASH)) &&
-		   !strcmp(longName, opt->longName))
+		   (!strncmp(longName, opt->longName, longNameLen) && strlen(opt->longName) == longNameLen))
 	{
 	    break;
 	} else if (shortName && shortName == opt->shortName) {
@@ -764,7 +764,8 @@ int poptGetNextOpt(poptContext con)
 
 	/* Process next long option */
 	if (!con->os->nextCharArg) {
-	    char * localOptString, * optString;
+	    char * optString;
+            int optStringLen;
 	    int thisopt;
 
 /*@-sizeoftype@*/
@@ -795,8 +796,7 @@ int poptGetNextOpt(poptContext con)
 	    }
 
 	    /* Make a copy we can hack at */
-	    localOptString = optString =
-		strcpy(alloca(strlen(origOptString) + 1), origOptString);
+	    optString = origOptString;
 
 	    if (optString[0] == '\0')
 		return POPT_ERROR_BADOPT;
@@ -824,13 +824,11 @@ int poptGetNextOpt(poptContext con)
 		/* Check for "--long=arg" option. */
 		for (oe = optString; *oe && *oe != '='; oe++)
 		    {};
-		if (*oe == '=') {
-		    *oe++ = '\0';
-		    /* XXX longArg is mapped back to persistent storage. */
-		    longArg = origOptString + (oe - localOptString);
-		}
+		optStringLen = oe - optString;
+		if (*oe == '=')
+		    longArg = oe + 1;
 
-		opt = findOption(con->options, optString, '\0', &cb, &cbData,
+		opt = findOption(con->options, optString, optStringLen, '\0', &cb, &cbData,
 				 singleDash);
 		if (!opt && !singleDash)
 		    return POPT_ERROR_BADOPT;
@@ -867,7 +865,7 @@ int poptGetNextOpt(poptContext con)
 		continue;
 	    }
 
-	    opt = findOption(con->options, NULL, *origOptString, &cb,
+	    opt = findOption(con->options, NULL, 0, *origOptString, &cb,
 			     &cbData, 0);
 	    if (!opt)
 		return POPT_ERROR_BADOPT;
@@ -1140,7 +1138,8 @@ poptContext poptFreeContext(poptContext con)
 int poptAddAlias(poptContext con, struct poptAlias alias,
 		/*@unused@*/ int flags)
 {
-    poptItem item = alloca(sizeof(*item));
+    struct poptItem_s item_buf;
+    poptItem item = &item_buf;
     memset(item, 0, sizeof(*item));
     item->option.longName = alias.longName;
     item->option.shortName = alias.shortName;

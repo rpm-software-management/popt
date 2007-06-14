@@ -62,10 +62,12 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     const char ** argv = malloc(sizeof(*argv) * argvAlloced);
     int argc = 0;
     size_t buflen = strlen(s) + 1;
-    char * buf = memset(alloca(buflen), 0, buflen);
+    char * buf, * bufOrig = NULL;
     int rc = POPT_ERROR_MALLOC;
 
     if (argv == NULL) return rc;
+    buf = bufOrig = calloc(1, buflen);
+    if (buf == NULL) return rc;
     argv[argc] = buf;
 
     for (src = s; *src != '\0'; src++) {
@@ -116,6 +118,7 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     rc = poptDupArgv(argc, argv, argcPtr, argvPtr);
 
 exit:
+    if (bufOrig) free(bufOrig);
     if (argv) free(argv);
     return rc;
 }

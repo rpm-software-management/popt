@@ -767,10 +767,13 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 	/*@modifies *str, *fp, fileSystem @*/
 	/*@requires maxRead(str) >= 0 @*/
 {
-    /* bufsize larger then the ascii set, lazy alloca on top level call. */
+    /* bufsize larger then the ascii set, lazy allocation on top level call. */
     size_t nb = (size_t)300;
-    char * s = (str != NULL ? str : memset(alloca(nb), 0, nb));
+    char * s = (str != NULL ? str : calloc(1, nb));
     size_t len = (size_t)0;
+
+    if (s == NULL)
+	return 0;
 
 /*@-boundswrite@*/
     if (opt != NULL)
@@ -788,19 +791,23 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 	fprintf(fp, " [-%s]", s);
 	len = strlen(s) + sizeof(" [-]")-1;
     }
+    if (s != str)
+	free(s);
     return len;
 }
 
 void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
 {
-    poptDone done = memset(alloca(sizeof(*done)), 0, sizeof(*done));
+    struct poptDone_s done_buf;
+    poptDone done = &done_buf;
     size_t cursor;
 
+    memset(done, 0, sizeof(*done));
     done->nopts = 0;
     done->maxopts = 64;
     cursor = done->maxopts * sizeof(*done->opts);
 /*@-boundswrite@*/
-    done->opts = memset(alloca(cursor), 0, cursor);
+    done->opts = calloc(1, cursor);
     /*@-keeptrans@*/
     done->opts[done->nopts++] = (const void *) con->options;
     /*@=keeptrans@*/
@@ -819,6 +826,7 @@ void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
     }
 
     fprintf(fp, "\n");
+    free(done->opts);
 }
 
 void poptSetOtherOptionHelp(poptContext con, const char * text)
