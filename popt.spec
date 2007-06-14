@@ -4,7 +4,7 @@ Version: 1.11
 Release: 1
 License: X Consortium
 Group: System Environment/Libraries
-Source: http://rpm5.org/v/files/popt/%{name}-%{version}.tar.gz
+Source: http://rpm5.org/files/popt/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
