@@ -764,7 +764,7 @@ int poptGetNextOpt(poptContext con)
 
 	/* Process next long option */
 	if (!con->os->nextCharArg) {
-	    char * optString;
+	    const char * optString;
             int optStringLen;
 	    int thisopt;
 
@@ -805,7 +805,7 @@ int poptGetNextOpt(poptContext con)
 		con->restLeftover = 1;
 		continue;
 	    } else {
-		char *oe;
+		const char *oe;
 		int singleDash;
 
 		optString++;
