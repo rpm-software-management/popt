@@ -10,7 +10,7 @@
 
 #include "system.h"
 
-#if HAVE_FLOAT_H
+#ifdef HAVE_FLOAT_H
 #include <float.h>
 #endif
 #include <math.h>
