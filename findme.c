@@ -9,7 +9,7 @@
 #include "system.h"
 #include "findme.h"
 
-const char * findProgramPath(const char * argv0)
+const char * POPT_findProgramPath(const char * argv0)
 {
     char * path = getenv("PATH");
     char * pathbuf;

@@ -14,7 +14,7 @@
  * @param argv0		name of executable
  * @return		(malloc'd) absolute path to executable (or NULL)
  */
-/*@null@*/ const char * findProgramPath(/*@null@*/ const char * argv0)
+/*@null@*/ const char * POPT_findProgramPath(/*@null@*/ const char * argv0)
 	/*@*/;
 
 #endif
