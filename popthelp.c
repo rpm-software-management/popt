@@ -423,7 +423,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
     while (opt->longName || opt->shortName || opt->arg) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
 	    if (opt->arg)	/* XXX program error */
-	    len = maxArgWidth(opt->arg, translation_domain);
+	        len = maxArgWidth(opt->arg, translation_domain);
 	    if (len > max) max = len;
 	} else if (!(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
 	    len = sizeof("  ")-1;
