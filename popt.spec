@@ -5,6 +5,7 @@ Release: 1
 License: X Consortium
 Group: System Environment/Libraries
 Source: http://rpm5.org/files/popt/%{name}-%{version}.tar.gz
+BuildRequires: gettext
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
