@@ -185,7 +185,7 @@ int main(int argc, const char ** argv)
     int help = 0;
     int usage = 0;
 
-#if HAVE_MCHECK_H && HAVE_MTRACE
+#if defined(HAVE_MCHECK_H) && defined(HAVE_MTRACE)
     /*@-moduncon -noeffectuncon@*/
     mtrace();   /* Trace malloc only if MALLOC_TRACE=mtrace-output-file. */
     /*@=moduncon =noeffectuncon@*/
@@ -269,7 +269,7 @@ int main(int argc, const char ** argv)
 
 exit:
     optCon = poptFreeContext(optCon);
-#if HAVE_MCHECK_H && HAVE_MTRACE
+#if defined(HAVE_MCHECK_H) && defined(HAVE_MTRACE)
     /*@-moduncon -noeffectuncon@*/
     muntrace();   /* Trace malloc only if MALLOC_TRACE=mtrace-output-file. */
     /*@=moduncon =noeffectuncon@*/

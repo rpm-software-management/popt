@@ -123,7 +123,7 @@ main(int argc, const char ** argv) {
     optionsTable[1].arg = databaseOptionsTable;
     optionsTable[2].arg = userOptionsTable;
 
-#if HAVE_MCHECK_H && HAVE_MTRACE
+#if defined(HAVE_MCHECK_H) && defined(HAVE_MTRACE)
     mtrace();   /* Trace malloc only if MALLOC_TRACE=mtrace-output-file. */
 #endif
 
