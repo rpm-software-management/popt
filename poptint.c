@@ -5,7 +5,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <errno.h>
+#ifdef HAVE_ICONV
 #include <iconv.h>
+#endif
 #ifdef HAVE_LANGINFO_H
 #include <langinfo.h>
 #endif
@@ -18,6 +20,7 @@
   (retval) = vfprintf ((stream), (format), (args)); \
   va_end ((args));
 
+#ifdef HAVE_ICONV
 static char *
 strdup_locale_from_utf8 (char *buffer)
 {
@@ -87,6 +90,7 @@ strdup_locale_from_utf8 (char *buffer)
 
   return dest_str;
 }
+#endif
 
 static char *
 strdup_vprintf (const char *format, va_list ap)
@@ -124,14 +128,18 @@ POPT_fprintf (FILE* stream, const char *format, ...)
   buffer = strdup_vprintf (format, args);
   va_end (args);
 
+#ifdef HAVE_ICONV
   locale_str = strdup_locale_from_utf8 (buffer);
   if (locale_str) {
     retval = fprintf (stream, "%s", locale_str);
     free (locale_str);
   } else {
     fprintf (stderr, POPT_WARNING "%s\n", "Invalid UTF-8");
+#endif
     retval = fprintf (stream, "%s", buffer);
+#ifdef HAVE_ICONV
   }
+#endif
   free (buffer);
 
   return retval;
