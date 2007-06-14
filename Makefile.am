@@ -4,7 +4,7 @@ AUTOMAKE_OPTIONS = 1.4 foreign
 
 LINT = splint
 
-EXTRA_DIST = autogen.sh CHANGES $(man_MANS) popt.spec libpopt.vers \
+EXTRA_DIST = config.rpath autogen.sh CHANGES $(man_MANS) popt.spec libpopt.vers \
 	testit.sh test-poptrc test3-data/0* \
 	po/*.in po/*.po po/popt.pot \
 	popt.ps
