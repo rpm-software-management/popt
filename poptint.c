@@ -122,7 +122,9 @@ POPT_fprintf (FILE* stream, const char *format, ...)
   int retval = 0;
   va_list args;
   char *buffer = NULL;
+#ifdef HAVE_ICONV
   char *locale_str = NULL;
+#endif
 
   va_start (args, format);
   buffer = strdup_vprintf (format, args);
