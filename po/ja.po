@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
-"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
 "POT-Creation-Date: 2007-06-14 15:31+0200\n"
 "PO-Revision-Date: 2003--8-25 19:00+0900\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
