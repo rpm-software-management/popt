@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.6.3\n"
 "Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
-"POT-Creation-Date: 2007-01-21 14:25-0500\n"
+"POT-Creation-Date: 2007-06-14 15:31+0200\n"
 "PO-Revision-Date: 2001-07-24 00:03+0100\n"
 "Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -14,48 +14,48 @@ msgstr ""
 msgid "unknown errno"
 msgstr "neznámé èíslo chyby"
 
-#: popt.c:996
+#: popt.c:1002
 #, c-format
 msgid "option type (%d) not implemented in popt\n"
 msgstr "volba (%d) není v popt implementována\n"
 
-#: popt.c:1208
+#: popt.c:1215
 msgid "missing argument"
 msgstr "chybí argument"
 
-#: popt.c:1210
+#: popt.c:1217
 msgid "unknown option"
 msgstr "neznámá volba"
 
-#: popt.c:1212
+#: popt.c:1219
 msgid "mutually exclusive logical operations requested"
 msgstr "po¾adovány vzájemnì výluèné logické operace"
 
-#: popt.c:1214
+#: popt.c:1221
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg nesmí být NULL"
 
-#: popt.c:1216
+#: popt.c:1223
 msgid "aliases nested too deeply"
 msgstr "aliasy vnoøené pøíli¹ hluboko"
 
-#: popt.c:1218
+#: popt.c:1225
 msgid "error in parameter quoting"
 msgstr "chyba v quotování parametrù"
 
-#: popt.c:1220
+#: popt.c:1227
 msgid "invalid numeric value"
 msgstr "chybná numerická hodnota"
 
-#: popt.c:1222
+#: popt.c:1229
 msgid "number too large or too small"
 msgstr "èíslo je pøíli¹ velké nebo pøíli¹ malé"
 
-#: popt.c:1224
+#: popt.c:1231
 msgid "memory allocation failed"
 msgstr "selhala alokace pamìti"
 
-#: popt.c:1228
+#: popt.c:1235
 msgid "unknown error"
 msgstr "neznámá chyba"
 

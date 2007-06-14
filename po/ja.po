@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.6.3\n"
 "Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
-"POT-Creation-Date: 2007-01-21 14:25-0500\n"
+"POT-Creation-Date: 2007-06-14 15:31+0200\n"
 "PO-Revision-Date: 2003--8-25 19:00+0900\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -18,48 +18,48 @@ msgstr ""
 msgid "unknown errno"
 msgstr "不明なエラー番号"
 
-#: popt.c:996
+#: popt.c:1002
 #, c-format
 msgid "option type (%d) not implemented in popt\n"
 msgstr "オプションタイプ (%d) はpoptには実装されていません\n"
 
-#: popt.c:1208
+#: popt.c:1215
 msgid "missing argument"
 msgstr "引数がありません"
 
-#: popt.c:1210
+#: popt.c:1217
 msgid "unknown option"
 msgstr "不明なオプション"
 
-#: popt.c:1212
+#: popt.c:1219
 msgid "mutually exclusive logical operations requested"
 msgstr "排他的な悪ぺーレーションが必要です"
 
-#: popt.c:1214
+#: popt.c:1221
 msgid "opt->arg should not be NULL"
 msgstr "opt->argはNULLではいけません"
 
-#: popt.c:1216
+#: popt.c:1223
 msgid "aliases nested too deeply"
 msgstr "エイリアスのネストが深すぎます"
 
-#: popt.c:1218
+#: popt.c:1225
 msgid "error in parameter quoting"
 msgstr "パラメータのクオート付けでエラー"
 
-#: popt.c:1220
+#: popt.c:1227
 msgid "invalid numeric value"
 msgstr "不正な数値"
 
-#: popt.c:1222
+#: popt.c:1229
 msgid "number too large or too small"
 msgstr "数値が大きすぎるか小さすぎます"
 
-#: popt.c:1224
+#: popt.c:1231
 msgid "memory allocation failed"
 msgstr "メモリ確保に失敗しました"
 
-#: popt.c:1228
+#: popt.c:1235
 msgid "unknown error"
 msgstr "不明なエラー"
 
