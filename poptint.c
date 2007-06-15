@@ -97,9 +97,12 @@ strdup_vprintf (const char *format, va_list ap)
 {
   char *buffer = NULL;
   char c;
+  va_list apc;
+
+  va_copy(apc, ap);	/* XXX linux amd64/ppc needs a copy. */
 
   buffer = calloc (sizeof (char), vsnprintf (&c, 1, format, ap) + 1);
-  vsprintf (buffer, format, ap);
+  vsprintf (buffer, format, apc);
 
   return buffer;
 }
