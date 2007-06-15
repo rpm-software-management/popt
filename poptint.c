@@ -103,6 +103,7 @@ strdup_vprintf (const char *format, va_list ap)
 
   buffer = calloc (sizeof (char), vsnprintf (&c, 1, format, ap) + 1);
   vsprintf (buffer, format, apc);
+  va_end(apc);
 
   va_end(apc);
 
@@ -141,7 +142,6 @@ POPT_fprintf (FILE* stream, const char *format, ...)
     retval = fprintf (stream, "%s", locale_str);
     free (locale_str);
   } else {
-    fprintf (stderr, POPT_WARNING "%s\n", "Invalid UTF-8");
 #endif
     retval = fprintf (stream, "%s", buffer);
 #ifdef HAVE_ICONV

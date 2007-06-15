@@ -114,8 +114,6 @@ struct poptContext_s {
 
 #define N_(foo) foo
 
-#define POPT_WARNING "(popt): Warning **: "
-
 int   POPT_fprintf (FILE* steam, const char *format, ...);
 char *POPT_prev_char (const char *str);
 
