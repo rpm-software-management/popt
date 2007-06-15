@@ -103,7 +103,6 @@ strdup_vprintf (const char *format, va_list ap)
 
   buffer = calloc (sizeof (char), vsnprintf (&c, 1, format, ap) + 1);
   vsprintf (buffer, format, apc);
-  va_end(apc);
 
   va_end(apc);
 
