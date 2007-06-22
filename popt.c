@@ -396,7 +396,7 @@ static int execCommand(poptContext con)
     if (!strchr(item->argv[0], '/') && con->execPath != NULL) {
 	char *s = malloc(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
 	if (s)
-	    sprintf(s, "%s/%s", con->execPath, item->argv[-1]);
+	    sprintf(s, "%s/%s", con->execPath, item->argv[0]);
 	argv[argc] = s;
     } else
 	argv[argc] = POPT_findProgramPath(item->argv[0]);
