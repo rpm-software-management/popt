@@ -105,6 +105,10 @@ AC_CHECK_FUNCS(getuid geteuid mtrace __secure_getenv setregid strerror)
 
 AM_GNU_GETTEXT([external])
 
+popt_sysconfdir="${sysconfdir}"
+eval "popt_sysconfdir=\"${popt_sysconfdir}\"" # expand contained ${prefix}
+AC_DEFINE_UNQUOTED([POPT_SYSCONFDIR], ["$popt_sysconfdir"], [Full path to default POPT configuration directory])
+
 POPT_SOURCE_PATH="`pwd`"
 AC_DEFINE_UNQUOTED(POPT_SOURCE_PATH, "$POPT_SOURCE_PATH",
 	[Full path to popt top_srcdir.])

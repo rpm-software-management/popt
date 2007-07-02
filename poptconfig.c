@@ -173,6 +173,9 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
 
     if (con->appName == NULL) return 0;
 
+    rc = poptReadConfigFile(con, POPT_SYSCONFDIR "/popt");
+    if (rc) return rc;
+
     rc = poptReadConfigFile(con, "/etc/popt");
     if (rc) return rc;
 
