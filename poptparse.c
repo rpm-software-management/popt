@@ -67,7 +67,10 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
 
     if (argv == NULL) return rc;
     buf = bufOrig = calloc(1, buflen);
-    if (buf == NULL) return rc;
+    if (buf == NULL) {
+	free(argv);
+	return rc;
+    }
     argv[argc] = buf;
 
     for (src = s; *src != '\0'; src++) {
