@@ -1,6 +1,7 @@
 1.11 -> 1.12
     - jbj: plug a memory leak.
     - jbj: fix index thinko.
+    - jbj: add vi.po (Translation Project).
     
 1.5 -> 1.6
 	- add ability to perform callbacks for every, not just first, match.
