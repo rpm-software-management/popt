@@ -14,7 +14,7 @@ AC_SUBST(LT_AGE, 8)
 
 AM_INIT_AUTOMAKE([foreign])
 
-ALL_LINGUAS="cs da de es fr gl hu is ja ko nl no pl pt ro ru sk sl sv tr uk vi wa"
+ALL_LINGUAS="cs da de es fr gl hu is ja ko nl nb pl pt ro ru sk sl sv tr uk vi wa"
 
 AC_PROG_CC
 AC_PROG_INSTALL
