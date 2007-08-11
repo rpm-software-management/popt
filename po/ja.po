@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
-"Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
-"POT-Creation-Date: 2007-08-08 11:39-0400\n"
+"Project-Id-Version: popt 1.12\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2007-08-11 11:32-0400\n"
 "PO-Revision-Date: 2003--8-25 19:00+0900\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -83,42 +83,42 @@ msgstr "使い方の概要を表示します"
 msgid "Display option defaults in message"
 msgstr "オプションのデフォルト値をメッセージに表示します"
 
-#: popthelp.c:128
+#: popthelp.c:135
 msgid "NONE"
 msgstr "なし"
 
-#: popthelp.c:130
+#: popthelp.c:137
 msgid "VAL"
 msgstr "値"
 
-#: popthelp.c:134
+#: popthelp.c:141
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:135
+#: popthelp.c:142
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:136
+#: popthelp.c:143
 msgid "STRING"
 msgstr "文字列"
 
-#: popthelp.c:137
+#: popthelp.c:144
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:138
+#: popthelp.c:145
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:139
+#: popthelp.c:146
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:552
+#: popthelp.c:559
 msgid "Usage:"
 msgstr "使い方:"
 
-#: popthelp.c:576
+#: popthelp.c:583
 msgid "[OPTION...]"
 msgstr "[オプション...]"

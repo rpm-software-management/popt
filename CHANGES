@@ -1,3 +1,7 @@
+1.12 -> 1.13:
+   - jbj: use PACKAGE_BUGREPORT.
+   - jbj: hotwire POPT_AUTOHELP/POPT_AUTOALIAS lookup in popt i18n domain.
+
 1.11 -> 1.12
     - jbj: plug a memory leak.
     - jbj: fix index thinko.

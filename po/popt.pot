@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
-"POT-Creation-Date: 2007-08-08 11:39-0400\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2007-08-11 11:32-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,42 +84,42 @@ msgstr ""
 msgid "Display option defaults in message"
 msgstr ""
 
-#: popthelp.c:128
+#: popthelp.c:135
 msgid "NONE"
 msgstr ""
 
-#: popthelp.c:130
+#: popthelp.c:137
 msgid "VAL"
 msgstr ""
 
-#: popthelp.c:134
+#: popthelp.c:141
 msgid "INT"
 msgstr ""
 
-#: popthelp.c:135
+#: popthelp.c:142
 msgid "LONG"
 msgstr ""
 
-#: popthelp.c:136
+#: popthelp.c:143
 msgid "STRING"
 msgstr ""
 
-#: popthelp.c:137
+#: popthelp.c:144
 msgid "FLOAT"
 msgstr ""
 
-#: popthelp.c:138
+#: popthelp.c:145
 msgid "DOUBLE"
 msgstr ""
 
-#: popthelp.c:139
+#: popthelp.c:146
 msgid "ARG"
 msgstr ""
 
-#: popthelp.c:552
+#: popthelp.c:559
 msgid "Usage:"
 msgstr ""
 
-#: popthelp.c:576
+#: popthelp.c:583
 msgid "[OPTION...]"
 msgstr ""

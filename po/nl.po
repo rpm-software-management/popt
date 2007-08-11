@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
-"Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
-"POT-Creation-Date: 2007-08-08 11:39-0400\n"
+"Project-Id-Version: popt 1.12\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2007-08-11 11:32-0400\n"
 "PO-Revision-Date: 2007-06-29 17:38+0200\n"
 "Last-Translator: Tim Van Holder <tim.van.holder@telenet.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -86,44 +86,44 @@ msgstr "Toon korte tekst over gebruik"
 msgid "Display option defaults in message"
 msgstr "Toon standaardwaarden van opties in de tekst"
 
-#: popthelp.c:128
+#: popthelp.c:135
 msgid "NONE"
 msgstr "GEEN"
 
-#: popthelp.c:130
+#: popthelp.c:137
 msgid "VAL"
 msgstr "WAARDE"
 
-#: popthelp.c:134
+#: popthelp.c:141
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:135
+#: popthelp.c:142
 msgid "LONG"
 msgstr "LONG"
 
 # TEKENREEKS lijkt me niet gepast; dus ofwel STRING behouden, ofwel TEKST
-#: popthelp.c:136
+#: popthelp.c:143
 msgid "STRING"
 msgstr "TEKST"
 
-#: popthelp.c:137
+#: popthelp.c:144
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:138
+#: popthelp.c:145
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
 # of hier ARGUMENT van maken?
-#: popthelp.c:139
+#: popthelp.c:146
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:552
+#: popthelp.c:559
 msgid "Usage:"
 msgstr "Gebruik:"
 
-#: popthelp.c:576
+#: popthelp.c:583
 msgid "[OPTION...]"
 msgstr "[OPTIE...]"
