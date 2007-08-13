@@ -1,4 +1,5 @@
 1.12 -> 1.13:
+   - jbj: add zh_CN.po (Translation Project).
    - jbj: use PACKAGE_BUGREPORT.
    - jbj: hotwire POPT_AUTOHELP/POPT_AUTOALIAS lookup in popt i18n domain.
 
