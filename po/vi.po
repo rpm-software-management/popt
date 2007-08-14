@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-11 11:32-0400\n"
+"POT-Creation-Date: 2007-08-14 10:34-0400\n"
 "PO-Revision-Date: 2007-07-12 22:37+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -65,14 +65,6 @@ msgstr "lỗi cấp phát bộ nhớ"
 msgid "unknown error"
 msgstr "lỗi không rõ"
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr "Các tùy chọn được thực hiện thông qua popt alias/exec:"
-
-#: popt.h:188
-msgid "Help options:"
-msgstr "Tùy chọn trợ giúp:"
-
 #: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "Xem thông điệp trợ giúp này"
@@ -84,6 +76,14 @@ msgstr "Hiển thị thông điệp cách sử dụng ngắn"
 #: popthelp.c:83
 msgid "Display option defaults in message"
 msgstr "Hiển thị các giá trị mặc định của tùy chọn trong thông điệp"
+
+#: popthelp.c:126
+msgid "Help options:"
+msgstr "Tùy chọn trợ giúp:"
+
+#: popthelp.c:127
+msgid "Options implemented via popt alias/exec:"
+msgstr "Các tùy chọn được thực hiện thông qua popt alias/exec:"
 
 #: popthelp.c:135
 msgid "NONE"

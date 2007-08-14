@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-11 11:32-0400\n"
+"POT-Creation-Date: 2007-08-14 10:34-0400\n"
 "PO-Revision-Date: 2003-06-08 20:32+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -63,14 +63,6 @@ msgstr "błąd alokacji pamięci"
 msgid "unknown error"
 msgstr "nieznany błąd"
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr "Opcje zaimplementowane poprzez popt alias/exec:"
-
-#: popt.h:188
-msgid "Help options:"
-msgstr "Opcje pomocy:"
-
 #: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "Pokaż tą pomoc"
@@ -82,6 +74,14 @@ msgstr "Wyświetl skrócony sposób użycia"
 #: popthelp.c:83
 msgid "Display option defaults in message"
 msgstr "Wyświetl domyślne opcje w opisie"
+
+#: popthelp.c:126
+msgid "Help options:"
+msgstr "Opcje pomocy:"
+
+#: popthelp.c:127
+msgid "Options implemented via popt alias/exec:"
+msgstr "Opcje zaimplementowane poprzez popt alias/exec:"
 
 #: popthelp.c:135
 msgid "NONE"

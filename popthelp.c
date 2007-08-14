@@ -123,8 +123,8 @@ getArgDescrip(const struct poptOption * opt,
 	/* Some strings need popt library, not application, i18n domain. */
 	if (opt == (poptHelpOptions + 1)
 	 || opt == (poptHelpOptions + 2)
-	 || !strcmp(opt->argDescrip,"Help options:")
-	 || !strcmp(opt->argDescrip,"Options implemented via popt alias/exec:"))
+	 || !strcmp(opt->argDescrip,N_("Help options:"))
+	 || !strcmp(opt->argDescrip,N_("Options implemented via popt alias/exec:")))
 	    return POPT_(opt->argDescrip);
 
 	/* Use the application i18n domain. */

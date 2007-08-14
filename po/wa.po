@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-11 11:32-0400\n"
+"POT-Creation-Date: 2007-08-14 10:34-0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Nobody yet\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -67,14 +67,6 @@ msgstr ""
 msgid "unknown error"
 msgstr ""
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr ""
-
-#: popt.h:188
-msgid "Help options:"
-msgstr ""
-
 #: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "Mostrer ci messaedje d' aide chal"
@@ -87,6 +79,14 @@ msgstr "Mostre on court messaedje so kmint vos è siervi"
 #, fuzzy
 msgid "Display option defaults in message"
 msgstr "Mostre on court messaedje so kmint vos è siervi"
+
+#: popthelp.c:126
+msgid "Help options:"
+msgstr ""
+
+#: popthelp.c:127
+msgid "Options implemented via popt alias/exec:"
+msgstr ""
 
 #: popthelp.c:135
 msgid "NONE"

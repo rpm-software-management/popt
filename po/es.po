@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-11 11:32-0400\n"
+"POT-Creation-Date: 2007-08-14 10:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Leandro Lucarella <luca@linuxmendoza.org.ar>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,14 +64,6 @@ msgstr ""
 msgid "unknown error"
 msgstr "error desconocido"
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr ""
-
-#: popt.h:188
-msgid "Help options:"
-msgstr ""
-
 #: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "Muestra este mensaje de ayuda"
@@ -84,6 +76,14 @@ msgstr "Indica el modo de uso resumido"
 #, fuzzy
 msgid "Display option defaults in message"
 msgstr "Indica el modo de uso resumido"
+
+#: popthelp.c:126
+msgid "Help options:"
+msgstr ""
+
+#: popthelp.c:127
+msgid "Options implemented via popt alias/exec:"
+msgstr ""
 
 #: popthelp.c:135
 msgid "NONE"

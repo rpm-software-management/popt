@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-11 11:32-0400\n"
+"POT-Creation-Date: 2007-08-14 10:34-0400\n"
 "PO-Revision-Date: 2007-08-13 22:32+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
 "Language-Team: Chinese (simplified) <translation-team-zh-cn@lists."
@@ -66,14 +66,6 @@ msgstr "内存分配错误"
 msgid "unknown error"
 msgstr "未知的错误"
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr "通过 popt alias/exec 实现的选项:"
-
-#: popt.h:188
-msgid "Help options:"
-msgstr "帮助选项:"
-
 #: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "显示这个帮助信息"
@@ -85,6 +77,14 @@ msgstr "显示简短的使用说明"
 #: popthelp.c:83
 msgid "Display option defaults in message"
 msgstr "在信息中显示默认的选项"
+
+#: popthelp.c:126
+msgid "Help options:"
+msgstr "帮助选项:"
+
+#: popthelp.c:127
+msgid "Options implemented via popt alias/exec:"
+msgstr "通过 popt alias/exec 实现的选项:"
 
 #: popthelp.c:135
 msgid "NONE"

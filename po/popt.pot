@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-11 11:32-0400\n"
+"POT-Creation-Date: 2007-08-14 10:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,14 +64,6 @@ msgstr ""
 msgid "unknown error"
 msgstr ""
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr ""
-
-#: popt.h:188
-msgid "Help options:"
-msgstr ""
-
 #: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr ""
@@ -82,6 +74,14 @@ msgstr ""
 
 #: popthelp.c:83
 msgid "Display option defaults in message"
+msgstr ""
+
+#: popthelp.c:126
+msgid "Help options:"
+msgstr ""
+
+#: popthelp.c:127
+msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
 #: popthelp.c:135

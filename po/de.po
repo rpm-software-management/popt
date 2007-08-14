@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-11 11:32-0400\n"
+"POT-Creation-Date: 2007-08-14 10:34-0400\n"
 "PO-Revision-Date: 2007-02-17 21:00+0100\n"
 "Last-Translator: Robert Scheck <rpm@robert-scheck.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -63,14 +63,6 @@ msgstr "Speicherzuordnung fehlgeschlagen"
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr "Optionen über popt alias/exec implementiert:"
-
-#: popt.h:188
-msgid "Help options:"
-msgstr "Hilfe-Optionen:"
-
 #: popthelp.c:68 popthelp.c:79
 msgid "Show this help message"
 msgstr "Zeigt diese Hilfe an"
@@ -82,6 +74,14 @@ msgstr "Zeigt eine kurze Verwendungsinformation"
 #: popthelp.c:83
 msgid "Display option defaults in message"
 msgstr "Zeigt die Standardeinstellungen an"
+
+#: popthelp.c:126
+msgid "Help options:"
+msgstr "Hilfe-Optionen:"
+
+#: popthelp.c:127
+msgid "Options implemented via popt alias/exec:"
+msgstr "Optionen über popt alias/exec implementiert:"
 
 #: popthelp.c:135
 msgid "NONE"
