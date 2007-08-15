@@ -119,6 +119,9 @@ getArgDescrip(const struct poptOption * opt,
 {
     if (!(opt->argInfo & POPT_ARG_MASK)) return NULL;
 
+    if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL)
+	return opt->argDescrip;
+
     if (opt->argDescrip) {
 	/* Some strings need popt library, not application, i18n domain. */
 	if (opt == (poptHelpOptions + 1)
@@ -143,6 +146,7 @@ getArgDescrip(const struct poptOption * opt,
     case POPT_ARG_STRING:	return POPT_("STRING");
     case POPT_ARG_FLOAT:	return POPT_("FLOAT");
     case POPT_ARG_DOUBLE:	return POPT_("DOUBLE");
+    case POPT_ARG_MAINCALL:	return NULL;
     default:			return POPT_("ARG");
     }
 }
@@ -192,6 +196,9 @@ singleOptionDefaultValue(size_t lineLength,
     {	double aDouble = *((double *)opt->arg);
 	le += sprintf(le, "%g", aDouble);
     }	break;
+    case POPT_ARG_MAINCALL:
+	le += sprintf(le, "%p", opt->arg);
+	break;
     case POPT_ARG_STRING:
     {	const char * s = *(const char **)opt->arg;
 	if (s == NULL) {
@@ -260,7 +267,8 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 	sprintf(left, "-%c", opt->shortName);
     else if (opt->longName)
 	sprintf(left, "%s%s",
-		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"),
+		((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL ? "" :
+		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--")),
 		opt->longName);
     if (!*left) goto out;
 
@@ -342,7 +350,8 @@ static void singleOptionHelp(FILE * fp, size_t maxLeftCol,
 	} else {
 	    size_t lelen;
 
-	    *le++ = '=';
+	    *le++ = ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL)
+		? ' ' : '=';
 	    strcpy(le, argDescrip);
 	    lelen = strlen(le);
 	    le += lelen;

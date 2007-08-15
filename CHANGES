@@ -1,8 +1,9 @@
 1.12 -> 1.13:
-   - jbj: remove N_(...) markings from popt.h, markers in popthelp.c instead.
-   - jbj: add zh_CN.po (Translation Project).
-   - jbj: use PACKAGE_BUGREPORT.
-   - jbj: hotwire POPT_AUTOHELP/POPT_AUTOALIAS lookup in popt i18n domain.
+    - jbj: help formatting for POPT_ARG_MAINCALL.
+    - jbj: remove N_(...) markings from popt.h, markers in popthelp.c instead.
+    - jbj: add zh_CN.po (Translation Project).
+    - jbj: use PACKAGE_BUGREPORT.
+    - jbj: hotwire POPT_AUTOHELP/POPT_AUTOALIAS lookup in popt i18n domain.
 
 1.11 -> 1.12
     - jbj: plug a memory leak.
