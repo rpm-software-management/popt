@@ -10,6 +10,11 @@
 
 #include "system.h"
 
+#define	POPT_USE_TIOCGWINSZ
+#ifdef	POPT_USE_TIOCGWINSZ
+#include <sys/ioctl.h>
+#endif
+
 #define	POPT_WCHAR_HACK
 #ifdef 	POPT_WCHAR_HACK
 #include <wchar.h>			/* for mbsrtowcs */
@@ -18,8 +23,6 @@
 #include "poptint.h"
 
 /*@access poptContext@*/
-
-#define	_POPTHELP_MAXLINE	((size_t)79)
 
 /**
  * Display arguments.
@@ -88,6 +91,33 @@ static struct poptOption poptHelpOptions2[] = {
 /*@observer@*/ /*@unchecked@*/
 struct poptOption * poptHelpOptionsI18N = poptHelpOptions2;
 /*@=castfcnptr@*/
+
+#define	_POPTHELP_MAXLINE	((size_t)79)
+
+typedef struct columns_s {
+    size_t cur;
+    size_t max;
+} * columns_t;
+
+/**
+ * Return no. of columns in output window.
+ * @param fp		FILE
+ * @return		no. of columns
+ */
+static size_t maxColumnWidth(FILE *fp)
+	/*@*/
+{
+    size_t maxcols = _POPTHELP_MAXLINE;
+#if defined(TIOCGWINSZ)
+    struct winsize ws;
+    int fdno = fileno(fp ? fp : stdout);
+
+    if (fdno >= 0 && !ioctl(fdno, TIOCGWINSZ, &ws)
+     && ws.ws_col > maxcols && ws.ws_col < 256)
+	maxcols = ws.ws_col - 1;
+#endif
+    return maxcols;
+}
 
 /**
  * @param table		option(s)
@@ -229,18 +259,19 @@ singleOptionDefaultValue(size_t lineLength,
 /**
  * Display help text for an option.
  * @param fp		output file handle
- * @param maxLeftCol	largest argument display width
+ * @param columns	output display width control
  * @param opt		option(s)
  * @param translation_domain	translation domain
  */
-static void singleOptionHelp(FILE * fp, size_t maxLeftCol, 
+static void singleOptionHelp(FILE * fp, columns_t columns,
 		const struct poptOption * opt,
 		/*@null@*/ const char * translation_domain)
 	/*@globals fileSystem @*/
 	/*@modifies *fp, fileSystem @*/
 {
+    size_t maxLeftCol = columns->cur;
     size_t indentLength = maxLeftCol + 5;
-    size_t lineLength = _POPTHELP_MAXLINE - indentLength;
+    size_t lineLength = columns->max - indentLength;
     const char * help = D_(translation_domain, opt->descrip);
     const char * argDescrip = getArgDescrip(opt, translation_domain);
     size_t helpLength;
@@ -491,7 +522,8 @@ static size_t maxArgWidth(const struct poptOption * opt,
  * @param translation_domain	translation domain
  */
 static void itemHelp(FILE * fp,
-		/*@null@*/ poptItem items, int nitems, size_t left,
+		/*@null@*/ poptItem items, int nitems,
+		columns_t columns,
 		/*@null@*/ const char * translation_domain)
 	/*@globals fileSystem @*/
 	/*@modifies *fp, fileSystem @*/
@@ -505,7 +537,7 @@ static void itemHelp(FILE * fp,
 	opt = &item->option;
 	if ((opt->longName || opt->shortName) && 
 	    !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN))
-	    singleOptionHelp(fp, left, opt, translation_domain);
+	    singleOptionHelp(fp, columns, opt, translation_domain);
     }
 }
 
@@ -514,11 +546,12 @@ static void itemHelp(FILE * fp,
  * @param con		context
  * @param fp		output file handle
  * @param table		option(s)
- * @param left		largest argument display width
+ * @param columns	output display width control
  * @param translation_domain	translation domain
  */
 static void singleTableHelp(poptContext con, FILE * fp,
-		/*@null@*/ const struct poptOption * table, size_t left,
+		/*@null@*/ const struct poptOption * table,
+		columns_t columns,
 		/*@null@*/ const char * translation_domain)
 	/*@globals fileSystem @*/
 	/*@modifies *fp, fileSystem @*/
@@ -527,8 +560,8 @@ static void singleTableHelp(poptContext con, FILE * fp,
     const char *sub_transdom;
 
     if (table == poptAliasOptions) {
-	itemHelp(fp, con->aliases, con->numAliases, left, NULL);
-	itemHelp(fp, con->execs, con->numExecs, left, NULL);
+	itemHelp(fp, con->aliases, con->numAliases, columns, NULL);
+	itemHelp(fp, con->execs, con->numExecs, columns, NULL);
 	return;
     }
 
@@ -536,7 +569,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
     for (opt = table; (opt->longName || opt->shortName || opt->arg); opt++) {
 	if ((opt->longName || opt->shortName) && 
 	    !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN))
-	    singleOptionHelp(fp, left, opt, translation_domain);
+	    singleOptionHelp(fp, columns, opt, translation_domain);
     }
 
     if (table != NULL)
@@ -550,7 +583,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	if (opt->descrip)
 	    POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
 
-	singleTableHelp(con, fp, opt->arg, left, sub_transdom);
+	singleTableHelp(con, fp, opt->arg, columns, sub_transdom);
     }
 }
 
@@ -583,7 +616,7 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 
 void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
 {
-    size_t leftColWidth;
+    columns_t columns = memset(alloca(sizeof(*columns)), 0, sizeof(*columns));
 
     (void) showHelpIntro(con, fp);
     if (con->otherHelp)
@@ -591,18 +624,19 @@ void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
     else
 	fprintf(fp, " %s\n", POPT_("[OPTION...]"));
 
-    leftColWidth = maxArgWidth(con->options, NULL);
-    singleTableHelp(con, fp, con->options, leftColWidth, NULL);
+    columns->cur = maxArgWidth(con->options, NULL);
+    columns->max = maxColumnWidth(fp);
+    singleTableHelp(con, fp, con->options, columns, NULL);
 }
 
 /**
  * Display usage text for an option.
  * @param fp		output file handle
- * @param cursor	current display position
+ * @param columns	output display width control
  * @param opt		option(s)
  * @param translation_domain	translation domain
  */
-static size_t singleOptionUsage(FILE * fp, size_t cursor, 
+static size_t singleOptionUsage(FILE * fp, columns_t columns,
 		const struct poptOption * opt,
 		/*@null@*/ const char *translation_domain)
 	/*@globals fileSystem @*/
@@ -631,7 +665,7 @@ static size_t singleOptionUsage(FILE * fp, size_t cursor,
 	bingo++;
     }
 
-    if (!bingo) return cursor;
+    if (!bingo) return columns->cur;
 
 #ifdef POPT_WCHAR_HACK
     /* XXX Calculate no. of display characters. */
@@ -652,9 +686,9 @@ static size_t singleOptionUsage(FILE * fp, size_t cursor,
 	len += sizeof("=")-1 + strlen(argDescrip);
 #endif
 
-    if ((cursor + len) > _POPTHELP_MAXLINE) {
+    if ((columns->cur + len) > columns->max) {
 	fprintf(fp, "\n       ");
-	cursor = (size_t)7;
+	columns->cur = (size_t)7;
     } 
 
     if (opt->longName && opt->shortName) {
@@ -671,18 +705,18 @@ static size_t singleOptionUsage(FILE * fp, size_t cursor,
 	    (argDescrip ? argDescrip : ""));
     }
 
-    return cursor + len + 1;
+    return columns->cur + len + 1;
 }
 
 /**
  * Display popt alias and exec usage.
  * @param fp		output file handle
- * @param cursor	current display position
+ * @param columns	output display width control
  * @param item		alias/exec array
  * @param nitems	no. of ara/exec entries
  * @param translation_domain	translation domain
  */
-static size_t itemUsage(FILE * fp, size_t cursor,
+static size_t itemUsage(FILE * fp, columns_t columns,
 		/*@null@*/ poptItem item, int nitems,
 		/*@null@*/ const char * translation_domain)
 	/*@globals fileSystem @*/
@@ -699,12 +733,12 @@ static size_t itemUsage(FILE * fp, size_t cursor,
 	    translation_domain = (const char *)opt->arg;
 	} else if ((opt->longName || opt->shortName) &&
 		 !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
-	    cursor = singleOptionUsage(fp, cursor, opt, translation_domain);
+	    columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
 	}
     }
 /*@=branchstate@*/
 
-    return cursor;
+    return columns->cur;
 }
 
 /**
@@ -720,13 +754,13 @@ typedef struct poptDone_s {
  * Display usage text for a table of options.
  * @param con		context
  * @param fp		output file handle
- * @param cursor	current display position
+ * @param columns	output display width control
  * @param opt		option(s)
  * @param translation_domain	translation domain
  * @param done		tables already processed
  * @return
  */
-static size_t singleTableUsage(poptContext con, FILE * fp, size_t cursor,
+static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 		/*@null@*/ const struct poptOption * opt,
 		/*@null@*/ const char * translation_domain,
 		/*@null@*/ poptDone done)
@@ -757,16 +791,16 @@ static size_t singleTableUsage(poptContext con, FILE * fp, size_t cursor,
 		    done->opts[done->nopts++] = (const void *) opt->arg;
 /*@=boundswrite@*/
 	    }
-	    cursor = singleTableUsage(con, fp, cursor, opt->arg,
+	    columns->cur = singleTableUsage(con, fp, columns, opt->arg,
 			translation_domain, done);
 	} else if ((opt->longName || opt->shortName) &&
 		 !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
-	    cursor = singleOptionUsage(fp, cursor, opt, translation_domain);
+	    columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
 	}
     }
 /*@=branchstate@*/
 
-    return cursor;
+    return columns->cur;
 }
 
 /**
@@ -814,30 +848,31 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 
 void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
 {
+    columns_t columns = memset(alloca(sizeof(*columns)), 0, sizeof(*columns));
     struct poptDone_s done_buf;
     poptDone done = &done_buf;
-    size_t cursor;
 
     memset(done, 0, sizeof(*done));
     done->nopts = 0;
     done->maxopts = 64;
-    cursor = done->maxopts * sizeof(*done->opts);
+    columns->cur = done->maxopts * sizeof(*done->opts);
+    columns->max = maxColumnWidth(fp);
 /*@-boundswrite@*/
-    done->opts = calloc(1, cursor);
+    done->opts = calloc(1, columns->cur);
     /*@-keeptrans@*/
     done->opts[done->nopts++] = (const void *) con->options;
     /*@=keeptrans@*/
 /*@=boundswrite@*/
 
-    cursor = showHelpIntro(con, fp);
-    cursor += showShortOptions(con->options, fp, NULL);
-    cursor = singleTableUsage(con, fp, cursor, con->options, NULL, done);
-    cursor = itemUsage(fp, cursor, con->aliases, con->numAliases, NULL);
-    cursor = itemUsage(fp, cursor, con->execs, con->numExecs, NULL);
+    columns->cur = showHelpIntro(con, fp);
+    columns->cur += showShortOptions(con->options, fp, NULL);
+    columns->cur = singleTableUsage(con, fp, columns, con->options, NULL, done);
+    columns->cur = itemUsage(fp, columns, con->aliases, con->numAliases, NULL);
+    columns->cur = itemUsage(fp, columns, con->execs, con->numExecs, NULL);
 
     if (con->otherHelp) {
-	cursor += strlen(con->otherHelp) + 1;
-	if (cursor > _POPTHELP_MAXLINE) fprintf(fp, "\n       ");
+	columns->cur += strlen(con->otherHelp) + 1;
+	if (columns->cur > columns->max) fprintf(fp, "\n       ");
 	fprintf(fp, " %s", con->otherHelp);
     }
 

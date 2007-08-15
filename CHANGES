@@ -1,4 +1,6 @@
 1.12 -> 1.13:
+    - jbj: refactor column cursor to a structure, carry maxcols as well.
+    - jbj: use TIOCGWINSZ to determine --help column wrapping.
     - jbj: help formatting for POPT_ARG_MAINCALL.
     - jbj: remove N_(...) markings from popt.h, markers in popthelp.c instead.
     - jbj: add zh_CN.po (Translation Project).
