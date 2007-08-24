@@ -68,7 +68,7 @@ if ! echo "${libdir}" | grep -q '64$' ; then
 fi
 AC_SUBST(MARK64)
 
-AC_CHECK_HEADERS(float.h libintl.h mcheck.h unistd.h)
+AC_CHECK_HEADERS(float.h libintl.h mcheck.h unistd.h langinfo.h)
 
 # For some systems we know that we have ld_version scripts.
 # Use it then as default.
@@ -101,7 +101,7 @@ fi
 AC_CHECK_FUNC(setreuid, [], [
     AC_CHECK_LIB(ucb, setreuid, [if echo $LIBS | grep -- -lucb >/dev/null ;then :; else LIBS="$LIBS -lc -lucb" USEUCB=y;fi])
 ])
-AC_CHECK_FUNCS(getuid geteuid mtrace __secure_getenv setregid strerror)
+AC_CHECK_FUNCS(getuid geteuid mtrace __secure_getenv setregid strerror iconv)
 
 AM_GNU_GETTEXT([external])
 

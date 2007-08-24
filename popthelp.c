@@ -407,9 +407,9 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 /*@=boundswrite@*/
 
     if (help)
-	fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
+	POPT_fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
     else {
-	fprintf(fp,"  %s\n", left); 
+	POPT_fprintf(fp,"  %s\n", left); 
 	goto out;
     }
 
@@ -426,14 +426,16 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	char format[16];
 
 	ch = help + lineLength - 1;
-	while (ch > help && !isspace(*ch)) ch--;
+	while (ch > help && !isspace(*ch))
+	    ch = POPT_prev_char (ch);
 	if (ch == help) break;		/* give up */
-	while (ch > (help + 1) && isspace(*ch)) ch--;
+	while (ch > (help + 1) && isspace(*ch))
+	    ch = POPT_prev_char (ch);
 	ch++;
 
 	sprintf(format, "%%.%ds\n%%%ds", (int) (ch - help), (int) indentLength);
 	/*@-formatconst@*/
-	fprintf(fp, format, help, " ");
+	POPT_fprintf(fp, format, help, " ");
 	/*@=formatconst@*/
 	help = ch;
 	while (isspace(*help) && *help) help++;
@@ -442,7 +444,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 /*@=boundsread@*/
 /*@=branchstate@*/
 
-    if (helpLength) fprintf(fp, "%s\n", help);
+    if (helpLength) POPT_fprintf(fp, "%s\n", help);
     help = NULL;
 
 out:
