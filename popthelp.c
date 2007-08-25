@@ -24,6 +24,9 @@
 
 /*@access poptContext@*/
 
+/* XXX isspace(3) has i18n encoding signednesss issues on Solaris. */
+#define	_isspaceptr(_chp)	((int)(*(unsigned char *)(_chp)))
+
 /**
  * Display arguments.
  * @param con		context
@@ -426,10 +429,10 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	char format[16];
 
 	ch = help + lineLength - 1;
-	while (ch > help && !isspace(*ch))
+	while (ch > help && !_isspaceptr(ch))
 	    ch = POPT_prev_char (ch);
 	if (ch == help) break;		/* give up */
-	while (ch > (help + 1) && isspace(*ch))
+	while (ch > (help + 1) && _isspaceptr(ch))
 	    ch = POPT_prev_char (ch);
 	ch++;
 
@@ -438,7 +441,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	POPT_fprintf(fp, format, help, " ");
 	/*@=formatconst@*/
 	help = ch;
-	while (isspace(*help) && *help) help++;
+	while (_isspaceptr(help) && *help) help++;
 	helpLength = strlen(help);
     }
 /*@=boundsread@*/

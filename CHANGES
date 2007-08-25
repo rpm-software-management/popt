@@ -1,4 +1,5 @@
 1.12 -> 1.13:
+    - jbj: isspace(3) has i18n encoding signednesss issues on Solaris (#172393).
     - jbj: refactor column cursor to a structure, carry maxcols as well.
     - jbj: use TIOCGWINSZ to determine --help column wrapping.
     - jbj: help formatting for POPT_ARG_MAINCALL.
