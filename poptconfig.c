@@ -168,15 +168,19 @@ int poptReadConfigFile(poptContext con, const char * fn)
 
 int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
 {
+    static const char _popt_sysconfdir[] = POPT_SYSCONFDIR "/popt";
+    static const char _popt_etc[] = "/etc/popt";
     char * fn, * home;
     int rc;
 
     if (con->appName == NULL) return 0;
 
-    rc = poptReadConfigFile(con, POPT_SYSCONFDIR "/popt");
-    if (rc) return rc;
+    if (strcmp(_popt_sysconfdir, _popt_etc)) {
+	rc = poptReadConfigFile(con, _popt_sysconfdir);
+	if (rc) return rc;
+    }
 
-    rc = poptReadConfigFile(con, "/etc/popt");
+    rc = poptReadConfigFile(con, _popt_etc);
     if (rc) return rc;
 
     if ((home = getenv("HOME"))) {

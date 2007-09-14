@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-08-14 10:34-0400\n"
+"POT-Creation-Date: 2007-09-06 08:50-0400\n"
 "PO-Revision-Date: 2001-07-24 00:03+0100\n"
 "Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -59,62 +59,62 @@ msgstr "selhala alokace pamìti"
 msgid "unknown error"
 msgstr "neznámá chyba"
 
-#: popthelp.c:68 popthelp.c:79
+#: popthelp.c:74 popthelp.c:85
 msgid "Show this help message"
 msgstr "Vypí¹e tuto nápovìdu"
 
-#: popthelp.c:69 popthelp.c:80
+#: popthelp.c:75 popthelp.c:86
 msgid "Display brief usage message"
 msgstr "Vypí¹e krátký návod k pou¾ití"
 
-#: popthelp.c:83
+#: popthelp.c:89
 msgid "Display option defaults in message"
 msgstr "Zobrazit implicitní volby ve zprávì"
 
-#: popthelp.c:126
+#: popthelp.c:162
 msgid "Help options:"
 msgstr ""
 
-#: popthelp.c:127
+#: popthelp.c:163
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: popthelp.c:135
+#: popthelp.c:171
 msgid "NONE"
 msgstr "NONE"
 
-#: popthelp.c:137
+#: popthelp.c:173
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:141
+#: popthelp.c:177
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:142
+#: popthelp.c:178
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:143
+#: popthelp.c:179
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:144
+#: popthelp.c:180
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:145
+#: popthelp.c:181
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:146
+#: popthelp.c:183
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:559
+#: popthelp.c:606
 msgid "Usage:"
 msgstr "Pou¾ití:"
 
-#: popthelp.c:583
+#: popthelp.c:630
 msgid "[OPTION...]"
 msgstr "[VOLBY...]"
