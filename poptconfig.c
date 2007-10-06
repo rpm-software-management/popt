@@ -8,6 +8,8 @@
 
 #include "system.h"
 #include "poptint.h"
+#include <sys/stat.h>
+#include <glob.h>
 /*@access poptContext @*/
 
 /*@-compmempass@*/	/* FIX: item->option.longName kept, not dependent. */
@@ -171,6 +173,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
     static const char _popt_sysconfdir[] = POPT_SYSCONFDIR "/popt";
     static const char _popt_etc[] = "/etc/popt";
     char * fn, * home;
+    struct stat s;
     int rc;
 
     if (con->appName == NULL) return 0;
@@ -182,6 +185,26 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
 
     rc = poptReadConfigFile(con, _popt_etc);
     if (rc) return rc;
+
+    stat("/etc/popt.d", &s);
+    if(S_ISDIR(s.st_mode)) {
+        glob_t g;
+	if (!glob("/etc/popt.d/*", 0, NULL, &g)) {
+            int i;
+	    for (i=0; i<g.gl_pathc; i++) {
+		char *f=g.gl_pathv[i];
+		if (strstr(f, ".rpmnew") || strstr(f, ".rpmsave"))
+		    continue;
+		if (!stat(f, &s)) {
+		    if (!S_ISREG(s.st_mode) && !S_ISLNK(s.st_mode))
+			continue;
+		}
+		rc = poptReadConfigFile(con, f);
+		if (rc) return rc;
+	    }
+	    globfree(&g);
+	}
+    }
 
     if ((home = getenv("HOME"))) {
 	fn = malloc(strlen(home) + 20);
