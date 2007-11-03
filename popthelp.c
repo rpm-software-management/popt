@@ -20,6 +20,11 @@
 #include <wchar.h>			/* for mbsrtowcs */
 /*@access mbstate_t @*/
 #endif
+
+#ifdef HAVE_ALLOCA_H
+#include <alloca.h>
+#endif
+
 #include "poptint.h"
 
 /*@access poptContext@*/

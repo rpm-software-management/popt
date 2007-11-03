@@ -68,7 +68,7 @@ if ! echo "${libdir}" | grep -q '64$' ; then
 fi
 AC_SUBST(MARK64)
 
-AC_CHECK_HEADERS(float.h libintl.h mcheck.h unistd.h langinfo.h)
+AC_CHECK_HEADERS(float.h libintl.h mcheck.h unistd.h langinfo.h alloca.h)
 
 # For some systems we know that we have ld_version scripts.
 # Use it then as default.
