@@ -29,9 +29,6 @@
 
 /*@access poptContext@*/
 
-/* XXX isspace(3) has i18n encoding signednesss issues on Solaris. */
-#define	_isspaceptr(_chp)	isspace((int)(*(unsigned char *)(_chp)))
-
 /**
  * Display arguments.
  * @param con		context

@@ -17,6 +17,9 @@ extern __const __int32_t *__ctype_toupper;
 
 #include <ctype.h>
 
+/* XXX isspace(3) has i18n encoding signednesss issues on Solaris. */
+#define	_isspaceptr(_chp)	isspace((int)(*(unsigned char *)(_chp)))
+
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
