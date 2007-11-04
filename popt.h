@@ -486,7 +486,7 @@ void poptSetExecPath(poptContext con, const char * path, int allowAbsolute)
  */
 void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
 	/*@globals fileSystem @*/
-	/*@modifies *fp, fileSystem @*/;
+	/*@modifies fp, fileSystem @*/;
 
 /** \ingroup popt
  * Print terse description of options.
@@ -496,7 +496,7 @@ void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
  */
 void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
 	/*@globals fileSystem @*/
-	/*@modifies *fp, fileSystem @*/;
+	/*@modifies fp, fileSystem @*/;
 
 /** \ingroup popt
  * Provide text to replace default "[OPTION...]" in help/usage output.

@@ -115,10 +115,12 @@ int poptReadConfigFile(poptContext con, const char * fn)
     }
 
     file = malloc(fileLength + 1);
-    if (read(fd, (char *)file, fileLength) != fileLength) {
+    if (file == NULL || read(fd, (char *)file, fileLength) != fileLength) {
 	rc = errno;
 	(void) close(fd);
 	errno = rc;
+	if (file)
+	    free(file);
 	return POPT_ERROR_ERRNO;
     }
     if (close(fd) == -1) {
@@ -127,6 +129,8 @@ int poptReadConfigFile(poptContext con, const char * fn)
     }
 
     dst = buf = malloc(fileLength + 1);
+    if (dst == NULL)
+	return POPT_ERROR_ERRNO;
 
     chptr = file;
     end = (file + fileLength);
@@ -182,9 +186,9 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
     rc = poptReadConfigFile(con, _popt_etc);
     if (rc) return rc;
 
-    stat("/etc/popt.d", &s);
-    if(S_ISDIR(s.st_mode)) {
+    if (!stat("/etc/popt.d", &s) && S_ISDIR(s.st_mode)) {
         glob_t g;
+/*@-moduncon -nullpass -type @*/ /* FIX: annotations for glob/globfree */
 	if (!glob("/etc/popt.d/*", 0, NULL, &g)) {
             int i;
 	    for (i=0; i<g.gl_pathc; i++) {
@@ -198,16 +202,22 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
 		rc = poptReadConfigFile(con, f);
 		if (rc) return rc;
 	    }
+/*@-noeffectuncon@*/
 	    globfree(&g);
+/*@=noeffectuncon@*/
 	}
+/*@=moduncon =nullpass =type @*/
     }
 
     if ((home = getenv("HOME"))) {
 	fn = malloc(strlen(home) + 20);
-	strcpy(fn, home);
-	strcat(fn, "/.popt");
-	rc = poptReadConfigFile(con, fn);
-	free(fn);
+	if (fn != NULL) {
+	    strcpy(fn, home);
+	    strcat(fn, "/.popt");
+	    rc = poptReadConfigFile(con, fn);
+	    free(fn);
+	} else
+	    rc = POPT_ERROR_ERRNO;
 	if (rc) return rc;
     }
 

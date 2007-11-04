@@ -17,58 +17,28 @@
 
 -bitwisesigned
 -branchstate
--compdef
--globuse
--internalglobs
--modnomods
--modobserveruncon
--mods
--moduncon
--modunconnomods
--mustmod
--noeffectuncon
--nullderef
--nullpass
--nullptrarith
--nullret
--nullstate
--protoparammatch
--retalias
--retvalint
--retvalother
--sizeoftype
--type
--unrecog
-
--temptrans
-
-+charint
--exportvar
-+matchanyintegral
--varuse
 
 # --- +partial artifacts
 
 # --- not-yet at strict level
 -elseifcomplete		# 18
--exportfcn		# 25
--ifblock		# 202
--namechecks		# 206
--ptrarith		# 43
+-exportfcn		# 29
+-ifblock		# 251
+-namechecks		# 111
+-ptrarith		# 47
 
--mustdefine		# 10
--shiftimplementation	# 120
+-mustdefine		# 12
 -sys-dir-errors
 
--strictops		# 16
--whileblock		# 10
+-strictops		# 24
+-whileblock		# 15
 
 # --- not-yet at checks level
--mustfree		# 52
--predboolptr		# 62
--usedef			# 1
+-mustfree		# 38
+-predboolptr		# 82
+-usedef			# 7
 
 # --- not-yet at standard level
--boolops		# 112
--predboolint		# 38
-+ignorequals		# 17
+-boolops		# 127
+-predboolint		# 42
++ignorequals		# 30

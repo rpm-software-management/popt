@@ -446,7 +446,9 @@ if (_popt_debug)
     }
 #endif
 
+/*@-nullstate@*/
     rc = execvp(argv[0], (char *const *)argv);
+/*@=nullstate@*/
 
 exit:
     if (argv) {

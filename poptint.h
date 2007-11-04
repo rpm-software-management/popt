@@ -114,7 +114,41 @@ struct poptContext_s {
 
 #define N_(foo) foo
 
-int   POPT_fprintf (FILE* steam, const char *format, ...);
-char *POPT_prev_char (const char *str);
+#ifdef HAVE_ICONV
+#include <iconv.h>
+#if defined(__LCLINT__)
+/*@-declundef -incondefs @*/
+extern /*@only@*/ iconv_t iconv_open(const char *__tocode, const char *__fromcode)
+	/*@*/;
+
+extern size_t iconv(iconv_t __cd, /*@null@*/ char ** __inbuf,
+		    /*@out@*/ size_t * __inbytesleft,
+		    /*@out@*/ char ** __outbuf,
+		    /*@out@*/ size_t * __outbytesleft)
+	/*@modifies __cd,
+		*__inbuf, *__inbytesleft, *__outbuf, *__outbytesleft @*/;
+
+extern int iconv_close(/*@only@*/ iconv_t __cd)
+	/*@modifies __cd @*/;
+/*@=declundef =incondefs @*/
+#endif
+#endif
+
+#ifdef HAVE_LANGINFO_H
+#include <langinfo.h>
+#if defined(__LCLINT__)
+/*@-declundef -incondefs @*/
+extern char *nl_langinfo (nl_item __item)
+	/*@*/;
+/*@=declundef =incondefs @*/
+#endif
+#endif
+
+int   POPT_fprintf (FILE* stream, const char *format, ...)
+	/*@globals fileSystem @*/
+	/*@modifies stream, fileSystem @*/;
+
+char *POPT_prev_char (/*@returned@*/ const char *str)
+	/*@*/;
 
 #endif
