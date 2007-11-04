@@ -45,7 +45,6 @@
 +charint
 -exportvar
 +matchanyintegral
--loopswitchbreak
 -varuse
 
 # --- +partial artifacts

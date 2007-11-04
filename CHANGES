@@ -1,4 +1,8 @@
 1.12 -> 1.13:
+    - jbj: change sizeof to use the type implicitly, rather than explicitly.
+    - jbj: remove incorrect casts, changing to size_t where needed.
+    - jbj: remove unused STD_VFPRINTF macro.
+    - jbj: reindent (and otherwise diddle) recent patch for popt coding style.
     - jbj: remove splint bounds/branch annotations, little gain, much pain.
     - jbj: revert alloca usage again again.
     - jbj: handle Solaris signed character isspace(3) issues consistently.
