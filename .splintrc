@@ -12,8 +12,41 @@
 +strict			# lclint level
 
 # --- in progress
-+bounds
+#+bounds
 -bufferoverflowhigh
+
+-bitwisesigned
+-branchstate
+-compdef
+-globuse
+-internalglobs
+-modnomods
+-modobserveruncon
+-mods
+-moduncon
+-modunconnomods
+-mustmod
+-noeffectuncon
+-nullderef
+-nullpass
+-nullptrarith
+-nullret
+-nullstate
+-protoparammatch
+-retalias
+-retvalint
+-retvalother
+-sizeoftype
+-type
+-unrecog
+
+-temptrans
+
++charint
+-exportvar
++matchanyintegral
+-loopswitchbreak
+-varuse
 
 # --- +partial artifacts
 

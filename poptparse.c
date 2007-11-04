@@ -10,7 +10,6 @@
 
 #define POPT_ARGV_ARRAY_GROW_DELTA 5
 
-/*@-boundswrite@*/
 int poptDupArgv(int argc, const char **argv,
 		int * argcPtr, const char *** argvPtr)
 {
@@ -33,12 +32,10 @@ int poptDupArgv(int argc, const char **argv,
     argv2 = (void *) dst;
     dst += (argc + 1) * sizeof(*argv);
 
-/*@-branchstate@*/
     for (i = 0; i < argc; i++) {
 	argv2[i] = dst;
 	dst += strlen(strcpy(dst, argv[i])) + 1;
     }
-/*@=branchstate@*/
     argv2[argc] = NULL;
 
     if (argvPtr) {
@@ -51,9 +48,7 @@ int poptDupArgv(int argc, const char **argv,
 	*argcPtr = argc;
     return 0;
 }
-/*@=boundswrite@*/
 
-/*@-bounds@*/
 int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
 {
     const char * src;
@@ -125,7 +120,6 @@ exit:
     if (argv) free(argv);
     return rc;
 }
-/*@=bounds@*/
 
 /* still in the dev stage.
  * return values, perhaps 1== file erro

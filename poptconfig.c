@@ -27,7 +27,6 @@ static void configLine(poptContext con, char * line)
 	return;
     nameLength = strlen(con->appName);
     
-/*@-boundswrite@*/
     memset(item, 0, sizeof(*item));
 
     if (strncmp(line, con->appName, nameLength)) return;
@@ -85,7 +84,6 @@ static void configLine(poptContext con, char * line)
 	item->argc = j;
     }
 /*@=modobserver@*/
-/*@=boundswrite@*/
 	
 /*@-nullstate@*/ /* FIX: item->argv[] may be NULL */
     if (!strcmp(entryType, "alias"))
@@ -128,7 +126,6 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	return POPT_ERROR_ERRNO;
     }
 
-/*@-boundswrite@*/
     dst = buf = malloc(fileLength + 1);
 
     chptr = file;
@@ -160,7 +157,6 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	}
     }
 /*@=infloops@*/
-/*@=boundswrite@*/
 
     free(file);
     free(buf);

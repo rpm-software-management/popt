@@ -21,9 +21,6 @@
 /*@access mbstate_t @*/
 #endif
 
-#ifdef HAVE_ALLOCA_H
-#include <alloca.h>
-#endif
 
 #include "poptint.h"
 
@@ -49,6 +46,7 @@ static void displayArgs(poptContext con,
 	poptPrintHelp(con, stdout, 0);
     else
 	poptPrintUsage(con, stdout, 0);
+
 /*@i@*/ con = poptFreeContext(con);		/* XXX keep valgrind happy */
     exit(0);
 }
@@ -206,7 +204,6 @@ singleOptionDefaultValue(size_t lineLength,
     char * l = le;
 
     if (le == NULL) return NULL;	/* XXX can't happen */
-/*@-boundswrite@*/
     *le = '\0';
     *le++ = '(';
     strcpy(le, defstr);	le += strlen(le);
@@ -256,7 +253,6 @@ singleOptionDefaultValue(size_t lineLength,
     }
     *le++ = ')';
     *le = '\0';
-/*@=boundswrite@*/
 
     return l;
 }
@@ -289,7 +285,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     if (opt->longName)	nb += strlen(opt->longName);
     if (argDescrip)	nb += strlen(argDescrip);
 
-/*@-boundswrite@*/
     left = malloc(nb);
     if (left == NULL) return;	/* XXX can't happen */
     left[0] = '\0';
@@ -315,7 +310,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    *le++ = '[';
 
 	/* Choose type of output */
-/*@-branchstate@*/
 	if (opt->argInfo & POPT_ARGFLAG_SHOW_DEFAULT) {
 	    defs = singleOptionDefaultValue(lineLength, opt, translation_domain);
 	    if (defs) {
@@ -334,7 +328,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 		defs = t;
 	    }
 	}
-/*@=branchstate@*/
 
 	if (opt->argDescrip == NULL) {
 	    switch (opt->argInfo & POPT_ARG_MASK) {
@@ -409,7 +402,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    *le++ = ']';
 	*le = '\0';
     }
-/*@=boundswrite@*/
 
     if (help)
 	POPT_fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
@@ -419,13 +411,11 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     }
 
     left = _free(left);
-/*@-branchstate@*/
     if (defs) {
 	help = defs;
     }
 
     helpLength = strlen(help);
-/*@-boundsread@*/
     while (helpLength > lineLength) {
 	const char * ch;
 	char format[16];
@@ -446,8 +436,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	while (_isspaceptr(help) && *help) help++;
 	helpLength = strlen(help);
     }
-/*@=boundsread@*/
-/*@=branchstate@*/
 
     if (helpLength) POPT_fprintf(fp, "%s\n", help);
     help = NULL;
@@ -498,9 +486,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 		mbstate_t t;
 		size_t n;
 
-/*@-boundswrite@*/
 		memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
-/*@=boundswrite@*/
 		/* Determine number of characters.  */
 		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
 		len += sizeof("=")-1 + n;
@@ -607,11 +593,9 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 
     fprintf(fp, POPT_("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {
-/*@-boundsread@*/
 /*@-type@*/	/* LCL: wazzup? */
 	fn = con->optionStack->argv[0];
 /*@=type@*/
-/*@=boundsread@*/
 	if (fn == NULL) return len;
 	if (strchr(fn, '/')) fn = strrchr(fn, '/') + 1;
 	fprintf(fp, " %s", fn);
@@ -623,7 +607,7 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 
 void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
 {
-    columns_t columns = memset(alloca(sizeof(*columns)), 0, sizeof(*columns));
+    columns_t columns = calloc(1, sizeof(*columns));
 
     (void) showHelpIntro(con, fp);
     if (con->otherHelp)
@@ -631,9 +615,11 @@ void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
     else
 	fprintf(fp, " %s\n", POPT_("[OPTION...]"));
 
+assert(columns);
     columns->cur = maxArgWidth(con->options, NULL);
     columns->max = maxColumnWidth(fp);
     singleTableHelp(con, fp, con->options, columns, NULL);
+    free(columns);
 }
 
 /**
@@ -681,9 +667,7 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
 	mbstate_t t;
 	size_t n;
 
-/*@-boundswrite@*/
 	memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
-/*@=boundswrite@*/
 	/* Determine number of characters.  */
 	n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
 	len += sizeof("=")-1 + n;
@@ -731,7 +715,6 @@ static size_t itemUsage(FILE * fp, columns_t columns,
 {
     int i;
 
-/*@-branchstate@*/		/* FIX: W2DO? */
     if (item != NULL)
     for (i = 0; i < nitems; i++, item++) {
 	const struct poptOption * opt;
@@ -743,7 +726,6 @@ static size_t itemUsage(FILE * fp, columns_t columns,
 	    columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
 	}
     }
-/*@=branchstate@*/
 
     return columns->cur;
 }
@@ -774,7 +756,6 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 	/*@globals fileSystem @*/
 	/*@modifies *fp, done, fileSystem @*/
 {
-/*@-branchstate@*/		/* FIX: W2DO? */
     if (opt != NULL)
     for (; (opt->longName || opt->shortName || opt->arg) ; opt++) {
         if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INTL_DOMAIN) {
@@ -783,9 +764,7 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 	    if (done) {
 		int i = 0;
 		for (i = 0; i < done->nopts; i++) {
-/*@-boundsread@*/
 		    const void * that = done->opts[i];
-/*@=boundsread@*/
 		    if (that == NULL || that != opt->arg)
 			/*@innercontinue@*/ continue;
 		    /*@innerbreak@*/ break;
@@ -793,10 +772,8 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 		/* Skip if this table has already been processed. */
 		if (opt->arg == NULL || i < done->nopts)
 		    continue;
-/*@-boundswrite@*/
 		if (done->nopts < done->maxopts)
 		    done->opts[done->nopts++] = (const void *) opt->arg;
-/*@=boundswrite@*/
 	    }
 	    columns->cur = singleTableUsage(con, fp, columns, opt->arg,
 			translation_domain, done);
@@ -805,7 +782,6 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 	    columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
 	}
     }
-/*@=branchstate@*/
 
     return columns->cur;
 }
@@ -832,7 +808,6 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
     if (s == NULL)
 	return 0;
 
-/*@-boundswrite@*/
     if (opt != NULL)
     for (; (opt->longName || opt->shortName || opt->arg); opt++) {
 	if (opt->shortName && !(opt->argInfo & POPT_ARG_MASK))
@@ -841,7 +816,6 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 	    if (opt->arg)	/* XXX program error */
 		len = showShortOptions(opt->arg, fp, s);
     } 
-/*@=boundswrite@*/
 
     /* On return to top level, print the short options, return print length. */
     if (s != str && *s != '\0') {
@@ -855,21 +829,20 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 
 void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
 {
-    columns_t columns = memset(alloca(sizeof(*columns)), 0, sizeof(*columns));
+    columns_t columns = calloc(1, sizeof(*columns));
     struct poptDone_s done_buf;
     poptDone done = &done_buf;
 
     memset(done, 0, sizeof(*done));
     done->nopts = 0;
     done->maxopts = 64;
+assert(columns);
     columns->cur = done->maxopts * sizeof(*done->opts);
     columns->max = maxColumnWidth(fp);
-/*@-boundswrite@*/
     done->opts = calloc(1, columns->cur);
     /*@-keeptrans@*/
     done->opts[done->nopts++] = (const void *) con->options;
     /*@=keeptrans@*/
-/*@=boundswrite@*/
 
     columns->cur = showHelpIntro(con, fp);
     columns->cur += showShortOptions(con->options, fp, NULL);
@@ -885,6 +858,7 @@ void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
 
     fprintf(fp, "\n");
     free(done->opts);
+    free(columns);
 }
 
 void poptSetOtherOptionHelp(poptContext con, const char * text)

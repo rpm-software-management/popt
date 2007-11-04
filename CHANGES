@@ -1,6 +1,7 @@
 1.12 -> 1.13:
+    - jbj: remove splint bounds/branch annotations, little gain, much pain.
+    - jbj: revert alloca usage again again.
     - jbj: handle Solaris signed character isspace(3) issues consistently.
-    - bero: include <alloca.h> where necessary.
     - bero: read /etc/popt.d/* files.
     - jbj: don't read /etc/popt twice (#290531).
     - jbj: isspace(3) has i18n encoding signednesss issues on Solaris (#172393).

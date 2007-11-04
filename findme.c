@@ -30,7 +30,6 @@ const char * POPT_findProgramPath(const char * argv0)
     strcpy(pathbuf, path);
 
     chptr = NULL;
-/*@-branchstate@*/
     do {
 	if ((chptr = strchr(start, ':')))
 	    *chptr = '\0';
@@ -46,7 +45,6 @@ const char * POPT_findProgramPath(const char * argv0)
 	else
 	    start = NULL;
     } while (start && *start);
-/*@=branchstate@*/
 
 exit:
     if (pathbuf)
