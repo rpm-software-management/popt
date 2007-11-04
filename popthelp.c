@@ -615,11 +615,12 @@ void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
     else
 	fprintf(fp, " %s\n", POPT_("[OPTION...]"));
 
-assert(columns);
-    columns->cur = maxArgWidth(con->options, NULL);
-    columns->max = maxColumnWidth(fp);
-    singleTableHelp(con, fp, con->options, columns, NULL);
-    free(columns);
+    if (columns) {
+	columns->cur = maxArgWidth(con->options, NULL);
+	columns->max = maxColumnWidth(fp);
+	singleTableHelp(con, fp, con->options, columns, NULL);
+	free(columns);
+    }
 }
 
 /**
@@ -836,7 +837,7 @@ void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
     memset(done, 0, sizeof(*done));
     done->nopts = 0;
     done->maxopts = 64;
-assert(columns);
+  if (columns) {
     columns->cur = done->maxopts * sizeof(*done->opts);
     columns->max = maxColumnWidth(fp);
     done->opts = calloc(1, columns->cur);
@@ -859,6 +860,7 @@ assert(columns);
     fprintf(fp, "\n");
     free(done->opts);
     free(columns);
+  }
 }
 
 void poptSetOtherOptionHelp(poptContext con, const char * text)
