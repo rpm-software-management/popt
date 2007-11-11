@@ -59,15 +59,6 @@ else
 fi
 AC_SUBST(TARGET)
 
-dnl XXX Choose /usr/lib or /usr/lib64 for library installs.
-MARK64=
-if ! echo "${libdir}" | grep -q '64$' ; then
-    case "${target_cpu}" in
-    x86_64*|powerpc64*|ppc64*|sparc64*|s390x*) MARK64=64 ;;
-    esac
-fi
-AC_SUBST(MARK64)
-
 AC_CHECK_HEADERS(float.h libintl.h mcheck.h unistd.h langinfo.h)
 
 # For some systems we know that we have ld_version scripts.

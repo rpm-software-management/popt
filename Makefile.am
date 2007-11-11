@@ -35,7 +35,7 @@ TESTS = testit.sh
 
 include_HEADERS = popt.h
 
-usrlibdir = $(libdir)@MARK64@
+usrlibdir = $(libdir)
 usrlib_LTLIBRARIES = libpopt.la
 
 libpopt_la_SOURCES = popt.c findme.c poptparse.c poptconfig.c popthelp.c poptint.c
