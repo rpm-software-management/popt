@@ -1,4 +1,5 @@
 1.12 -> 1.13:
+    - jbj: re-add it.po (from Sandro Bonazzola <sandro.bonazzola@gmail.com>).
     - jbj: rescuscitate the splint annotations.
     - jbj: change sizeof to use the type implicitly, rather than explicitly.
     - jbj: remove incorrect casts, changing to size_t where needed.

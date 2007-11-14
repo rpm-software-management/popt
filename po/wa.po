@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-09-06 08:50-0400\n"
+"POT-Creation-Date: 2007-11-14 15:19-0500\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Nobody yet\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -22,48 +22,48 @@ msgstr ""
 msgid "unknown errno"
 msgstr ""
 
-#: popt.c:1002
+#: popt.c:981
 #, c-format
 msgid "option type (%d) not implemented in popt\n"
 msgstr ""
 
-#: popt.c:1215
+#: popt.c:1187
 msgid "missing argument"
 msgstr ""
 
-#: popt.c:1217
+#: popt.c:1189
 msgid "unknown option"
 msgstr ""
 
-#: popt.c:1219
+#: popt.c:1191
 msgid "mutually exclusive logical operations requested"
 msgstr ""
 
-#: popt.c:1221
+#: popt.c:1193
 msgid "opt->arg should not be NULL"
 msgstr ""
 
-#: popt.c:1223
+#: popt.c:1195
 msgid "aliases nested too deeply"
 msgstr ""
 
-#: popt.c:1225
+#: popt.c:1197
 msgid "error in parameter quoting"
 msgstr ""
 
-#: popt.c:1227
+#: popt.c:1199
 msgid "invalid numeric value"
 msgstr ""
 
-#: popt.c:1229
+#: popt.c:1201
 msgid "number too large or too small"
 msgstr ""
 
-#: popt.c:1231
+#: popt.c:1203
 msgid "memory allocation failed"
 msgstr ""
 
-#: popt.c:1235
+#: popt.c:1207
 msgid "unknown error"
 msgstr ""
 
@@ -80,50 +80,50 @@ msgstr "Mostre on court messaedje so kmint vos è siervi"
 msgid "Display option defaults in message"
 msgstr "Mostre on court messaedje so kmint vos è siervi"
 
-#: popthelp.c:162
+#: popthelp.c:163
 msgid "Help options:"
 msgstr ""
 
-#: popthelp.c:163
+#: popthelp.c:164
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: popthelp.c:171
+#: popthelp.c:172
 msgid "NONE"
 msgstr ""
 
-#: popthelp.c:173
+#: popthelp.c:174
 msgid "VAL"
 msgstr ""
 
-#: popthelp.c:177
+#: popthelp.c:178
 msgid "INT"
 msgstr ""
 
-#: popthelp.c:178
+#: popthelp.c:179
 msgid "LONG"
 msgstr ""
 
-#: popthelp.c:179
+#: popthelp.c:180
 msgid "STRING"
 msgstr ""
 
-#: popthelp.c:180
+#: popthelp.c:181
 msgid "FLOAT"
 msgstr ""
 
-#: popthelp.c:181
+#: popthelp.c:182
 msgid "DOUBLE"
 msgstr ""
 
-#: popthelp.c:183
+#: popthelp.c:184
 msgid "ARG"
 msgstr ""
 
-#: popthelp.c:606
+#: popthelp.c:597
 msgid "Usage:"
 msgstr ""
 
-#: popthelp.c:630
+#: popthelp.c:619
 msgid "[OPTION...]"
 msgstr ""
