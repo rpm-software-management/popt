@@ -362,11 +362,12 @@ ways to discover them. One is to ask popt to fill in a variable with the
 .sp
 .nf
 .B #include <popt.h>
-.BI "const char * poptGetOptArg(poptContext " con ");"
+.BI "char * poptGetOptArg(poptContext " con ");"
 .fi
 .sp
 This function returns the argument given for the final option returned by
 .BR poptGetNextOpt() ", or it returns " NULL " if no argument was specified."
+The calling function is responsible for deallocating this string.
 .sp
 .SS "4. LEFTOVER ARGUMENTS"
 Many applications take an arbitrary number of command-line arguments,

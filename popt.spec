@@ -1,6 +1,6 @@
 Summary: A C library for parsing command line parameters.
 Name: popt
-Version: 1.12
+Version: 1.13
 Release: 1
 License: X Consortium
 Group: System Environment/Libraries
@@ -29,6 +29,13 @@ make
 rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
 %find_lang popt
+
+%track
+prog popt = {
+    version   = %{version}
+    url       = http://rpm5.org/%{name}
+    regex     = %{name}-(\d+\.\d+\.\d+)\.tar\.gz
+}
 
 %clean
 rm -rf $RPM_BUILD_ROOT

@@ -1,4 +1,9 @@
+1.13 -> 1.14:
+
 1.12 -> 1.13:
+    - release popt-1.13.
+    - jbj: add a %track section (as in rpm-5.0) to popt.spec.
+    - jbj: chg poptGetOptArg() to "char *", document application needs to free.
     - jbj: re-add it.po (from Sandro Bonazzola <sandro.bonazzola@gmail.com>).
     - jbj: rescuscitate the splint annotations.
     - jbj: change sizeof to use the type implicitly, rather than explicitly.

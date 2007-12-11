@@ -869,10 +869,10 @@ int poptGetNextOpt(poptContext con)
 	    con->os->nextArg = _free(con->os->nextArg);
 	    if (longArg) {
 		longArg = expandNextArg(con, longArg);
-		con->os->nextArg = longArg;
+		con->os->nextArg = (char *) longArg;
 	    } else if (con->os->nextCharArg) {
 		longArg = expandNextArg(con, con->os->nextCharArg);
-		con->os->nextArg = longArg;
+		con->os->nextArg = (char *) longArg;
 		con->os->nextCharArg = NULL;
 	    } else {
 		while (con->os->next == con->os->argc &&
@@ -903,7 +903,7 @@ int poptGetNextOpt(poptContext con)
 			    /* XXX watchout: subtle side-effects live here. */
 			    longArg = con->os->argv[con->os->next++];
 			    longArg = expandNextArg(con, longArg);
-			    con->os->nextArg = longArg;
+			    con->os->nextArg = (char *) longArg;
 			}
 		    }
 		}
@@ -1025,9 +1025,9 @@ int poptGetNextOpt(poptContext con)
     return (opt ? opt->val : -1);	/* XXX can't happen */
 }
 
-const char * poptGetOptArg(poptContext con)
+char * poptGetOptArg(poptContext con)
 {
-    const char * ret = NULL;
+    char * ret = NULL;
     if (con) {
 	ret = con->os->nextArg;
 	con->os->nextArg = NULL;

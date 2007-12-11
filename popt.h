@@ -271,7 +271,7 @@ int poptGetNextOpt(/*@null@*/poptContext con)
  * @return		option argument, NULL if no argument is available
  */
 /*@observer@*/ /*@null@*/ /*@unused@*/
-const char * poptGetOptArg(/*@null@*/poptContext con)
+char * poptGetOptArg(/*@null@*/poptContext con)
 	/*@modifies con @*/;
 
 /** \ingroup popt

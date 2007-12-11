@@ -50,7 +50,7 @@ struct optionStackEntry {
     pbm_set * argb;
     int next;
 /*@only@*/ /*@null@*/
-    const char * nextArg;
+    char * nextArg;
 /*@observer@*/ /*@null@*/
     const char * nextCharArg;
 /*@dependent@*/ /*@null@*/
