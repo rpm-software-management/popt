@@ -73,6 +73,7 @@ struct poptOption poptHelpOptions[] = {
   { NULL, '\0', POPT_ARG_CALLBACK, (void *)displayArgs, 0, NULL, NULL },
   { "help", '?', 0, NULL, (int)'?', N_("Show this help message"), NULL },
   { "usage", '\0', 0, NULL, (int)'u', N_("Display brief usage message"), NULL },
+  { "", '\0',	0, NULL, 0, N_("Terminate options"), NULL },
     POPT_TABLEEND
 } ;
 
@@ -88,6 +89,7 @@ static struct poptOption poptHelpOptions2[] = {
   { "defaults", '\0', POPT_ARG_NONE, &show_option_defaults, 0,
 	N_("Display option defaults in message"), NULL },
 #endif
+  { "", '\0',	0, NULL, 0, N_("Terminate options"), NULL },
     POPT_TABLEEND
 } ;
 

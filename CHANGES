@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: include "-- Terminate options" end-of-options msg in poptHelpOptions.
     - jbj: opt->argDescrip[0] determines "--foo=bar" or "--foo bar".
     - jbj: --long always padded for alignment with/without "-X, ".
     - jbj: Display shortName iff printable non-space.
