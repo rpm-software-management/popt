@@ -22,7 +22,7 @@ shell-like rules.
 %setup -q
 
 %build
-%configure
+%configure --libdir=/%{_lib}
 make
 
 %install
