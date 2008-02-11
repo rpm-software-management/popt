@@ -32,7 +32,7 @@ fi
 cd "$THEDIR"
 
 if [ X"$@" = X  -a "X`uname -s`" = "XLinux" ]; then
-    $srcdir/configure --prefix=/usr "$@"
+    $srcdir/configure --prefix=/usr --libdir=/lib "$@"
 else
     $srcdir/configure "$@"
 fi
