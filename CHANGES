@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: POPT_AUTOALIAS: if no popt aliases/execs, don't display the sub-head.
     - jbj: add --libdir=/%{_lib} to popt.spec.
     - jbj: add .cvsignore to m4 subdirectory.
     - jbj: remove duplicate nb locale from ALL_LINGUAS.

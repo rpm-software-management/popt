@@ -576,6 +576,9 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	if (sub_transdom == NULL)
 	    sub_transdom = translation_domain;
 	    
+	/* If no popt aliases/execs, skip poptAliasOption processing. */
+	if (opt->arg == poptAliasOptions && !(con->numAliases || con->numExecs))
+	    continue;
 	if (opt->descrip)
 	    xx = POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
 
