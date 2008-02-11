@@ -276,6 +276,9 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     size_t lineLength = columns->max - indentLength;
     const char * help = D_(translation_domain, opt->descrip);
     const char * argDescrip = getArgDescrip(opt, translation_domain);
+    /* Display shortName iff printable non-space. */
+    int prtshort = (isprint((int)opt->shortName) && opt->shortName != ' ');
+    int prtlong = (opt->longName != NULL);
     size_t helpLength;
     char * defs = NULL;
     char * left;
@@ -292,18 +295,20 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     left[0] = '\0';
     left[maxLeftCol] = '\0';
 
-    if (opt->longName && opt->shortName)
+    if (!(prtshort || prtlong))
+	goto out;
+    if (prtshort && prtlong)
 	sprintf(left, "-%c, %s%s", opt->shortName,
 		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"),
 		opt->longName);
-    else if (opt->shortName != '\0') 
+    else if (prtshort) 
 	sprintf(left, "-%c", opt->shortName);
-    else if (opt->longName)
-	sprintf(left, "%s%s",
+    else if (prtlong)
+	/* XXX --long always padded for alignment with/without "-X, ". */
+	sprintf(left, "    %s%s",
 		((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL ? "" :
 		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--")),
 		opt->longName);
-    if (!*left) goto out;
 
     if (argDescrip) {
 	char * le = left + strlen(left);
@@ -381,8 +386,10 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	} else {
 	    size_t lelen;
 
-	    *le++ = ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL)
-		? ' ' : '=';
+	    /* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
+	    if (!strchr(" =(", argDescrip[0]))
+		*le++ = ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL)
+			? ' ' : '=';
 	    strcpy(le, argDescrip);
 	    lelen = strlen(le);
 	    le += lelen;
@@ -393,7 +400,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 		size_t n;
 
 		memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
-		/* Determine number of characters.  */
+		/* Determine number of display characters.  */
 		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
 
 		displaypad = (int) (lelen-n);
@@ -413,9 +420,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     }
 
     left = _free(left);
-    if (defs) {
+    if (defs)
 	help = defs;
-    }
 
     helpLength = strlen(help);
     while (helpLength > lineLength) {
@@ -471,8 +477,8 @@ static size_t maxArgWidth(const struct poptOption * opt,
 	    if (len > max) max = len;
 	} else if (!(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
 	    len = sizeof("  ")-1;
-	    if (opt->shortName != '\0') len += sizeof("-X")-1;
-	    if (opt->shortName != '\0' && opt->longName) len += sizeof(", ")-1;
+	    /* XXX --long always padded for alignment with/without "-X, ". */
+	    len += sizeof("-X, ")-1;
 	    if (opt->longName) {
 		len += ((opt->argInfo & POPT_ARGFLAG_ONEDASH)
 			? sizeof("-")-1 : sizeof("--")-1);
@@ -481,27 +487,27 @@ static size_t maxArgWidth(const struct poptOption * opt,
 
 	    s = getArgDescrip(opt, translation_domain);
 
-#ifdef POPT_WCHAR_HACK
 	    /* XXX Calculate no. of display characters. */
 	    if (s) {
+		size_t n;
+#ifdef POPT_WCHAR_HACK
 		const char * scopy = s;
 		mbstate_t t;
-		size_t n;
 
 		memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
-		/* Determine number of characters.  */
+		/* Determine number of display characters.  */
 		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
-		len += sizeof("=")-1 + n;
-	    }
 #else
-	    if (s)
-		len += sizeof("=")-1 + strlen(s);
+		n = strlen(s);
 #endif
+		/* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
+		if (!strchr(" =(", s[0])) len += sizeof("=")-1;
+		len += n;
+	    }
 
 	    if (opt->argInfo & POPT_ARGFLAG_OPTIONAL) len += sizeof("[]")-1;
 	    if (len > max) max = len;
 	}
-
 	opt++;
     }
     
@@ -642,66 +648,63 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
 	/*@globals fileSystem @*/
 	/*@modifies fp, columns->cur, fileSystem @*/
 {
-    size_t len = (size_t)4;
-    char shortStr[2] = { '\0', '\0' };
-    const char * item = shortStr;
+    size_t len = sizeof(" []") - 1;
     const char * argDescrip = getArgDescrip(opt, translation_domain);
-    int bingo = 0;
+    /* Display shortName iff printable non-space. */
+    int prtshort = (isprint((int)opt->shortName) && opt->shortName != ' ');
+    int prtlong = (opt->longName != NULL);
 
-    if (opt->shortName != '\0' && opt->longName != NULL) {
-	len += 2;
-	if (!(opt->argInfo & POPT_ARGFLAG_ONEDASH)) len++;
+    if (!(prtshort || prtlong))
+	return columns->cur;
+
+    len = sizeof(" []") - 1;
+    if (prtshort)
+	len += sizeof("-c") - 1;
+    if (prtlong) {
+	if (prtshort) len += sizeof("|") - 1;
+	len += ((opt->argInfo & POPT_ARGFLAG_ONEDASH)
+		? sizeof("-") : sizeof("--")) - 1;
 	len += strlen(opt->longName);
-	bingo++;
-    } else if (opt->shortName != '\0') {
-	len++;
-	shortStr[0] = opt->shortName;
-	shortStr[1] = '\0';
-	bingo++;
-    } else if (opt->longName) {
-	len += strlen(opt->longName);
-	if (!(opt->argInfo & POPT_ARGFLAG_ONEDASH)) len++;
-	item = opt->longName;
-	bingo++;
     }
 
-    if (!bingo) return columns->cur;
-
+    if (argDescrip) {
+	size_t n;
 #ifdef POPT_WCHAR_HACK
     /* XXX Calculate no. of display characters. */
-    if (argDescrip) {
 	const char * scopy = argDescrip;
 	mbstate_t t;
-	size_t n;
 
 	memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
-	/* Determine number of characters.  */
+	/* Determine number of display characters.  */
 	n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
-	len += sizeof("=")-1 + n;
-    }
 #else
-    if (argDescrip) 
-	len += sizeof("=")-1 + strlen(argDescrip);
+	n = strlen(argDescrip);
 #endif
+	/* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
+	if (!strchr(" =(", argDescrip[0])) len += sizeof("=")-1;
+	len += n;
+    }
 
     if ((columns->cur + len) > columns->max) {
 	fprintf(fp, "\n       ");
 	columns->cur = (size_t)7;
     } 
 
-    if (opt->longName && opt->shortName) {
-	fprintf(fp, " [-%c|-%s%s%s%s]",
-	    opt->shortName, ((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "" : "-"),
-	    opt->longName,
-	    (argDescrip ? " " : ""),
-	    (argDescrip ? argDescrip : ""));
-    } else {
-	fprintf(fp, " [-%s%s%s%s]",
-	    ((opt->shortName || (opt->argInfo & POPT_ARGFLAG_ONEDASH)) ? "" : "-"),
-	    item,
-	    (argDescrip ? (opt->shortName != '\0' ? " " : "=") : ""),
-	    (argDescrip ? argDescrip : ""));
+    fprintf(fp, " [");
+    if (prtshort)
+	fprintf(fp, "-%c", opt->shortName);
+    if (prtlong) {
+	fprintf(fp, "%s%s%s",
+		(prtshort ? "|" : ""),
+		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"),
+		opt->longName);
     }
+    if (argDescrip) {
+	/* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
+	if (!strchr(" =(", argDescrip[0])) fprintf(fp, "=");
+	fprintf(fp, "%s", argDescrip);
+    }
+    fprintf(fp, "]");
 
     return columns->cur + len + 1;
 }
@@ -770,7 +773,7 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 	    translation_domain = (const char *)opt->arg;
 	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
 	    if (done) {
-		int i;
+		int i = 0;
 		if (done->opts != NULL)
 		for (i = 0; i < done->nopts; i++) {
 		    const void * that = done->opts[i];
@@ -819,9 +822,11 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 
     if (opt != NULL)
     for (; (opt->longName || opt->shortName || opt->arg); opt++) {
-	if (opt->shortName && !(opt->argInfo & POPT_ARG_MASK))
-	    s[strlen(s)] = opt->shortName;
-	else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE)
+	if (opt->shortName && !(opt->argInfo & POPT_ARG_MASK)) {
+	    /* Display shortName iff printable non-space. */
+	    if (isprint((int)opt->shortName) && opt->shortName != ' ')
+		s[strlen(s)] = opt->shortName;
+	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE)
 	    if (opt->arg)	/* XXX program error */
 		len = showShortOptions(opt->arg, fp, s);
     } 

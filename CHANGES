@@ -1,4 +1,7 @@
 1.13 -> 1.14:
+    - jbj: opt->argDescrip[0] determines "--foo=bar" or "--foo bar".
+    - jbj: --long always padded for alignment with/without "-X, ".
+    - jbj: Display shortName iff printable non-space.
     - jbj: POPT_AUTOALIAS: if no popt aliases/execs, don't display the sub-head.
     - jbj: add --libdir=/%{_lib} to popt.spec.
     - jbj: add .cvsignore to m4 subdirectory.
