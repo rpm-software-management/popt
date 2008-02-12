@@ -43,6 +43,14 @@ typedef struct {
 #define PBM_ISSET(d, s) ((__PBM_BITS (s)[__PBM_IX (d)] & __PBM_MASK (d)) != 0)
 
 /** \ingroup popt
+ * Typedef's for string and array of strings.
+ */
+/*@-exporttype@*/
+typedef const char * poptString;
+typedef poptString * poptArgv;
+/*@=exporttype@*/
+
+/** \ingroup popt
  * A union to simplify opt->arg access without casting.
  */
 /*@-exporttype -fielduse@*/
@@ -51,6 +59,9 @@ typedef union poptArg_u {
     void * ptr;
     int * intp;
     long * longp;
+    long long * longlongp;
+    float * floatp;
+    double * doublep;
     const char ** argv;
     poptCallbackType cb;
 /*@shared@*/
@@ -69,7 +80,7 @@ typedef union poptArg_u {
 struct optionStackEntry {
     int argc;
 /*@only@*/ /*@null@*/
-    const char ** argv;
+    poptArgv argv;
 /*@only@*/ /*@null@*/
     pbm_set * argb;
     int next;
@@ -87,7 +98,7 @@ struct poptContext_s {
 /*@dependent@*/
     struct optionStackEntry * os;
 /*@owned@*/ /*@null@*/
-    const char ** leftovers;
+    poptArgv leftovers;
     int numLeftovers;
     int nextLeftover;
 /*@keep@*/
@@ -103,7 +114,7 @@ struct poptContext_s {
     poptItem execs;
     int numExecs;
 /*@only@*/ /*@null@*/
-    const char ** finalArgv;
+    poptArgv finalArgv;
     int finalArgvCount;
     int finalArgvAlloced;
     int (*maincall) (int argc, const char **argv);

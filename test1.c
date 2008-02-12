@@ -42,9 +42,13 @@ static int aInt = 271828;
 /*@unchecked@*/
 static int bInt = 271828;
 /*@unchecked@*/
-static long aLong = 738905609L;
+static long aLong = 738905609LL;
 /*@unchecked@*/
-static long bLong = 738905609L;
+static long bLong = 738905609LL;
+/*@unchecked@*/
+static long long aLongLong = 738905609L;
+/*@unchecked@*/
+static long long bLongLong = 738905609L;
 /*@unchecked@*/
 static float aFloat = 3.1415926535;
 /*@unchecked@*/
@@ -121,6 +125,8 @@ static struct poptOption options[] = {
 	"POPT_ARG_INT: 271828", NULL },
   { "long", 'l', POPT_ARG_LONG | POPT_ARGFLAG_SHOW_DEFAULT, &aLong, 0,
 	"POPT_ARG_LONG: 738905609", NULL },
+  { "longlong", 'L', POPT_ARG_LONGLONG | POPT_ARGFLAG_SHOW_DEFAULT, &aLongLong, 0,
+	"POPT_ARG_LONGLONG: 738905609", NULL },
   { "float", 'f', POPT_ARG_FLOAT | POPT_ARGFLAG_SHOW_DEFAULT, &aFloat, 0,
 	"POPT_ARG_FLOAT: 3.14159", NULL },
   { "double", 'd', POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &aDouble, 0,
@@ -148,10 +154,10 @@ static struct poptOption options[] = {
 
 static void resetVars(void)
 	/*@globals arg1, arg2, arg3, inc, shortopt,
-		aVal, aFlag, aInt, aLong, aFloat, aDouble,
+		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble,
 		oStr, singleDash, pass2 @*/
 	/*@modifies arg1, arg2, arg3, inc, shortopt,
-		aVal, aFlag, aInt, aLong, aFloat, aDouble,
+		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble,
 		oStr, singleDash, pass2 @*/
 {
     arg1 = 0;
@@ -165,6 +171,7 @@ static void resetVars(void)
 
     aInt = bInt;
     aLong = bLong;
+    aLongLong = bLongLong;
     aFloat = bFloat;
     aDouble = bDouble;
 
@@ -243,6 +250,8 @@ int main(int argc, const char ** argv)
 	fprintf(stdout, " aInt: %d", aInt);
     if (aLong != bLong)
 	fprintf(stdout, " aLong: %ld", aLong);
+    if (aLongLong != bLongLong)
+	fprintf(stdout, " aLongLong: %lld", aLongLong);
 /*@-realcompare@*/
     if (aFloat != bFloat)
 	fprintf(stdout, " aFloat: %g", (double)aFloat);

@@ -357,7 +357,7 @@ static int execCommand(poptContext con)
 	/*@modifies internalState @*/
 {
     poptItem item = con->doExec;
-    const char ** argv = NULL;
+    poptArgv argv = NULL;
     int argc = 0;
     int rc;
     int ec = POPT_ERROR_ERRNO;
@@ -431,7 +431,7 @@ static int execCommand(poptContext con)
 
 #ifdef	MYDEBUG
 if (_popt_debug)
-    {	const char ** avp;
+    {	poptArgv avp;
 	fprintf(stderr, "==> execvp(%s) argv[%d]:", argv[0], argc);
 	for (avp = argv; *avp; avp++)
 	    fprintf(stderr, " '%s'", *avp);
@@ -619,6 +619,46 @@ static void poptStripArg(/*@special@*/ poptContext con, int which)
 
 /*@unchecked@*/
 static unsigned int seed = 0;
+
+/*@-bitwisesigned@*/	/* LCL: logical ops with unsigned. */
+int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
+{
+#ifdef	NOTYET
+    /* XXX Check alignment, may fail on funky platforms. */
+    if (arg == NULL || (((unsigned long long)arg) & (sizeof(*arg)-1)))
+	return POPT_ERROR_NULLARG;
+#endif
+
+    if (aLongLong != 0 && argInfo & POPT_ARGFLAG_RANDOM) {
+	if (!seed) {
+	    srandom((unsigned)getpid());
+	    srandom((unsigned)random());
+	}
+	aLongLong = random() % (aLongLong > 0 ? aLongLong : -aLongLong);
+	aLongLong++;
+    }
+    if (argInfo & POPT_ARGFLAG_NOT)
+	aLongLong = ~aLongLong;
+    switch (argInfo & POPT_ARGFLAG_LOGICALOPS) {
+    case 0:
+	*arg = aLongLong;
+	break;
+    case POPT_ARGFLAG_OR:
+	*arg |= aLongLong;
+	break;
+    case POPT_ARGFLAG_AND:
+	*arg &= aLongLong;
+	break;
+    case POPT_ARGFLAG_XOR:
+	*arg ^= aLongLong;
+	break;
+    default:
+	return POPT_ERROR_BADOPERATION;
+	/*@notreached@*/ break;
+    }
+    return 0;
+}
+/*@=bitwisesigned@*/
 
 /*@-bitwisesigned@*/	/* LCL: logical ops with unsigned. */
 int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
@@ -898,35 +938,51 @@ int poptGetNextOpt(poptContext con)
 	    longArg = NULL;
 
 	    if (opt->arg) {
+		poptArg arg = { .ptr = opt->arg };
 		switch (poptArgType(opt)) {
 		case POPT_ARG_STRING:
 		    /* XXX memory leak, hard to plug */
-		    *((const char **) opt->arg) = (con->os->nextArg)
+		    arg.argv[0] = (con->os->nextArg)
 			? xstrdup(con->os->nextArg) : NULL;
 		    /*@switchbreak@*/ break;
 
 		case POPT_ARG_INT:
 		case POPT_ARG_LONG:
-		{   long aLong = 0;
+		case POPT_ARG_LONGLONG:
+		{   long long aNUM = 0;
 		    char *end;
 
 		    if (con->os->nextArg) {
-			aLong = strtol(con->os->nextArg, &end, 0);
+			aNUM = strtoll(con->os->nextArg, &end, 0);
 			if (!(end && *end == '\0'))
 			    return POPT_ERROR_BADNUMBER;
 		    }
 
+/* XXX let's not demand C99 compiler flags for <limits.h> quite yet. */
+#if !defined(LLONG_MAX)
+#   define LLONG_MAX    9223372036854775807LL
+#   define LLONG_MIN    (-LLONG_MAX - 1LL)
+#endif
+
+		    if (poptArgType(opt) == POPT_ARG_LONGLONG) {
+			if (aNUM == LLONG_MAX || aNUM == LLONG_MIN)
+			    return POPT_ERROR_OVERFLOW;
+			if (poptSaveLongLong(arg.longlongp, opt->argInfo, aNUM))
+			    return POPT_ERROR_BADOPERATION;
+		    } else
 		    if (poptArgType(opt) == POPT_ARG_LONG) {
-			if (aLong == LONG_MIN || aLong == LONG_MAX)
+			if (aNUM > LONG_MAX || aNUM < LONG_MIN)
 			    return POPT_ERROR_OVERFLOW;
-			if (poptSaveLong((long *)opt->arg, opt->argInfo, aLong))
+			if (poptSaveLong(arg.longp, opt->argInfo, aNUM))
 			    return POPT_ERROR_BADOPERATION;
-		    } else {
-			if (aLong > INT_MAX || aLong < INT_MIN)
+		    } else
+		    if (poptArgType(opt) == POPT_ARG_INT) {
+			if (aNUM > INT_MAX || aNUM < INT_MIN)
 			    return POPT_ERROR_OVERFLOW;
-			if (poptSaveInt((int *)opt->arg, opt->argInfo, aLong))
+			if (poptSaveInt(arg.intp, opt->argInfo, aNUM))
 			    return POPT_ERROR_BADOPERATION;
-		    }
+		    } else
+			return POPT_ERROR_BADOPERATION;
 		}   /*@switchbreak@*/ break;
 
 		case POPT_ARG_FLOAT:
@@ -948,14 +1004,14 @@ int poptGetNextOpt(poptContext con)
 		    }
 
 		    if (poptArgType(opt) == POPT_ARG_DOUBLE) {
-			*((double *) opt->arg) = aDouble;
+			arg.doublep[0] = aDouble;
 		    } else {
 #define _ABS(a)	((((a) - 0.0) < DBL_EPSILON) ? -(a) : (a))
 			if ((_ABS(aDouble) - FLT_MAX) > DBL_EPSILON)
 			    return POPT_ERROR_OVERFLOW;
 			if ((FLT_MIN - _ABS(aDouble)) > DBL_EPSILON)
 			    return POPT_ERROR_OVERFLOW;
-			*((float *) opt->arg) = aDouble;
+			arg.floatp[0] = aDouble;
 		    }
 		}   /*@switchbreak@*/ break;
 		case POPT_ARG_MAINCALL:

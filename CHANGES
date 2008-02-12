@@ -1,4 +1,7 @@
 1.13 -> 1.14:
+    - jbj: hmmm, POSIXly correct --echo-args needs fixing, disable for now.
+    - jbj: poptint.h: typedef's for string and string arrays.
+    - jbj: add POPT_ARG_LONGLONG, and poptSaveLongLong().
     - jbj: poptint.h: add poptSubstituteHelpI18N() to bury the ABI hack.
     - jbj: start using poptArg and poptArgType() where useful.
     - jbj: poptint.h: add a poptArgType define for bitfield type abstraction.

@@ -19,8 +19,8 @@
 /*@{*/
 #define POPT_ARG_NONE		 0U	/*!< no arg */
 #define POPT_ARG_STRING		 1U	/*!< arg will be saved as string */
-#define POPT_ARG_INT		 2U	/*!< arg will be converted to int */
-#define POPT_ARG_LONG		 3U	/*!< arg will be converted to long */
+#define POPT_ARG_INT		 2U	/*!< arg ==> int */
+#define POPT_ARG_LONG		 3U	/*!< arg ==> long */
 #define POPT_ARG_INCLUDE_TABLE	 4U	/*!< arg points to table */
 #define POPT_ARG_CALLBACK	 5U	/*!< table-wide callback... must be
 					   set first in table; arg points 
@@ -31,10 +31,11 @@
 					   included tables; arg points
 					   to the domain string */
 #define POPT_ARG_VAL		 7U	/*!< arg should take value val */
-#define	POPT_ARG_FLOAT		 8U	/*!< arg will be converted to float */
-#define	POPT_ARG_DOUBLE		 9U	/*!< arg will be converted to double */
+#define	POPT_ARG_FLOAT		 8U	/*!< arg ==> float */
+#define	POPT_ARG_DOUBLE		 9U	/*!< arg ==> double */
+#define	POPT_ARG_LONGLONG	 10U	/*!< arg ==> long long */
 
-#define POPT_ARG_MAINCALL	10U 	/*!< return (*arg) (argc, argv) */
+#define POPT_ARG_MAINCALL	256+10U	/*!< EXPERIMENTAL: return (*arg) (argc, argv) */
 
 #define POPT_ARG_MASK		0x0000FFFFU
 /*@}*/
@@ -530,6 +531,23 @@ const char * poptGetInvocationName(poptContext con)
 int poptStrippedArgv(poptContext con, int argc, char ** argv)
 	/*@modifies *argv @*/;
 /*@=fcnuse@*/
+
+/**
+ * Save a long long, performing logical operation with value.
+ * @warning Alignment check may be too strict on certain platorms.
+ * @param arg		integer pointer, aligned on int boundary.
+ * @param argInfo	logical operation (see POPT_ARGFLAG_*)
+ * @param aLongLong	value to use
+ * @return		0 on success, POPT_ERROR_NULLARG/POPT_ERROR_BADOPERATION
+ */
+/*@-incondefs@*/
+/*@unused@*/
+int poptSaveLongLong(/*@null@*/ long long * arg, unsigned int argInfo,
+		long long aLongLong)
+	/*@globals internalState @*/
+	/*@modifies *arg, internalState @*/
+	/*@requires maxSet(arg) >= 0 /\ maxRead(arg) == 0 @*/;
+/*@=incondefs@*/
 
 /**
  * Save a long, performing logical operation with value.
