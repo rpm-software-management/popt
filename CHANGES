@@ -1,4 +1,7 @@
 1.13 -> 1.14:
+    - jbj: start using poptArg and poptArgType() where useful.
+    - jbj: poptint.h: add a poptArgType define for bitfield type abstraction.
+    - jbj: poptint.h: add a poptArg union for opt->arg access without casts.
     - jbj: include "-- Terminate options" end-of-options msg in poptHelpOptions.
     - jbj: opt->argDescrip[0] determines "--foo=bar" or "--foo bar".
     - jbj: --long always padded for alignment with/without "-X, ".

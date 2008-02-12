@@ -42,6 +42,20 @@ typedef struct {
 #define PBM_CLR(d, s)   (__PBM_BITS (s)[__PBM_IX (d)] &= ~__PBM_MASK (d))
 #define PBM_ISSET(d, s) ((__PBM_BITS (s)[__PBM_IX (d)] & __PBM_MASK (d)) != 0)
 
+/** \ingroup popt
+ * A union to simplify opt->arg access without casting.
+ */
+typedef union poptArg_u {
+    void * ptr;
+    int * intp;
+    long * longp;
+    const char ** argv;
+    poptCallbackType cb;
+    poptOption opt;
+} poptArg;
+
+#define	poptArgType(opt)	((opt)->argInfo & POPT_ARG_MASK)
+
 struct optionStackEntry {
     int argc;
 /*@only@*/ /*@null@*/

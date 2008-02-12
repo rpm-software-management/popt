@@ -40,14 +40,16 @@ static void displayArgs(poptContext con,
 		struct poptOption * key, 
 		/*@unused@*/ const char * arg, /*@unused@*/ void * data)
 	/*@globals fileSystem@*/
-	/*@modifies con, fileSystem@*/
+	/*@modifies fileSystem@*/
 {
     if (key->shortName == '?')
 	poptPrintHelp(con, stdout, 0);
     else
 	poptPrintUsage(con, stdout, 0);
 
-/*@i@*/ con = poptFreeContext(con);		/* XXX keep valgrind happy */
+#if !defined(__LCLINT__)	/* XXX keep both splint & valgrind happy */
+    con = poptFreeContext(con);
+#endif
     exit(0);
 }
 
@@ -129,13 +131,11 @@ static size_t maxColumnWidth(FILE *fp)
  * @param table		option(s)
  */
 /*@observer@*/ /*@null@*/ static const char *
-getTableTranslationDomain(/*@null@*/ const struct poptOption *table)
+getTableTranslationDomain(/*@null@*/ const struct poptOption *opt)
 	/*@*/
 {
-    const struct poptOption *opt;
-
-    if (table != NULL)
-    for (opt = table; opt->longName || opt->shortName || opt->arg; opt++) {
+    if (opt != NULL)
+    for (; opt->longName || opt->shortName || opt->arg; opt++) {
 	if (opt->argInfo == POPT_ARG_INTL_DOMAIN)
 	    return opt->arg;
     }
@@ -153,9 +153,9 @@ getArgDescrip(const struct poptOption * opt,
 		/*@=paramuse@*/
 	/*@*/
 {
-    if (!(opt->argInfo & POPT_ARG_MASK)) return NULL;
+    if (!poptArgType(opt)) return NULL;
 
-    if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL)
+    if (poptArgType(opt) == POPT_ARG_MAINCALL)
 	return opt->argDescrip;
 
     if (opt->argDescrip) {
@@ -170,7 +170,7 @@ getArgDescrip(const struct poptOption * opt,
 	return D_(translation_domain, opt->argDescrip);
     }
 
-    switch (opt->argInfo & POPT_ARG_MASK) {
+    switch (poptArgType(opt)) {
     case POPT_ARG_NONE:		return POPT_("NONE");
 #ifdef	DYING
     case POPT_ARG_VAL:		return POPT_("VAL");
@@ -213,7 +213,7 @@ singleOptionDefaultValue(size_t lineLength,
     *le++ = ':';
     *le++ = ' ';
     if (opt->arg)	/* XXX programmer error */
-    switch (opt->argInfo & POPT_ARG_MASK) {
+    switch (poptArgType(opt)) {
     case POPT_ARG_VAL:
     case POPT_ARG_INT:
     {	long aLong = *((int *)opt->arg);
@@ -279,8 +279,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     const char * help = D_(translation_domain, opt->descrip);
     const char * argDescrip = getArgDescrip(opt, translation_domain);
     /* Display shortName iff printable non-space. */
-    int prtshort = (isprint((int)opt->shortName) && opt->shortName != ' ');
-    int prtlong = (opt->longName != NULL);
+    int prtshort = (int)(isprint((int)opt->shortName) && opt->shortName != ' ');
     size_t helpLength;
     char * defs = NULL;
     char * left;
@@ -297,6 +296,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     left[0] = '\0';
     left[maxLeftCol] = '\0';
 
+#define	prtlong	(opt->longName != NULL)	/* XXX splint needs a clue */
     if (!(prtshort || prtlong))
 	goto out;
     if (prtshort && prtlong)
@@ -308,9 +308,10 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     else if (prtlong)
 	/* XXX --long always padded for alignment with/without "-X, ". */
 	sprintf(left, "    %s%s",
-		((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL ? "" :
+		(poptArgType(opt) == POPT_ARG_MAINCALL ? "" :
 		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--")),
 		opt->longName);
+#undef	prtlong
 
     if (argDescrip) {
 	char * le = left + strlen(left);
@@ -339,7 +340,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	}
 
 	if (opt->argDescrip == NULL) {
-	    switch (opt->argInfo & POPT_ARG_MASK) {
+	    switch (poptArgType(opt)) {
 	    case POPT_ARG_NONE:
 		break;
 	    case POPT_ARG_VAL:
@@ -390,7 +391,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 
 	    /* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
 	    if (!strchr(" =(", argDescrip[0]))
-		*le++ = ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_MAINCALL)
+		*le++ = (poptArgType(opt) == POPT_ARG_MAINCALL)
 			? ' ' : '=';
 	    strcpy(le, argDescrip);
 	    lelen = strlen(le);
@@ -473,7 +474,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
     
     if (opt != NULL)
     while (opt->longName || opt->shortName || opt->arg) {
-	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
+	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    if (opt->arg)	/* XXX program error */
 	        len = maxArgWidth(opt->arg, translation_domain);
 	    if (len > max) max = len;
@@ -570,15 +571,15 @@ static void singleTableHelp(poptContext con, FILE * fp,
     }
 
     if (table != NULL)
-    for (opt = table; (opt->longName || opt->shortName || opt->arg); opt++) {
+    for (opt = table; opt->longName || opt->shortName || opt->arg; opt++) {
 	if ((opt->longName || opt->shortName) && 
 	    !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN))
 	    singleOptionHelp(fp, columns, opt, translation_domain);
     }
 
     if (table != NULL)
-    for (opt = table; (opt->longName || opt->shortName || opt->arg); opt++) {
-	if ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_INCLUDE_TABLE)
+    for (opt = table; opt->longName || opt->shortName || opt->arg; opt++) {
+	if (poptArgType(opt) != POPT_ARG_INCLUDE_TABLE)
 	    continue;
 	sub_transdom = getTableTranslationDomain(opt->arg);
 	if (sub_transdom == NULL)
@@ -653,9 +654,9 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
     size_t len = sizeof(" []") - 1;
     const char * argDescrip = getArgDescrip(opt, translation_domain);
     /* Display shortName iff printable non-space. */
-    int prtshort = (isprint((int)opt->shortName) && opt->shortName != ' ');
-    int prtlong = (opt->longName != NULL);
+    int prtshort = (int)(isprint((int)opt->shortName) && opt->shortName != ' ');
 
+#define	prtlong	(opt->longName != NULL)	/* XXX splint needs a clue */
     if (!(prtshort || prtlong))
 	return columns->cur;
 
@@ -695,12 +696,13 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
     fprintf(fp, " [");
     if (prtshort)
 	fprintf(fp, "-%c", opt->shortName);
-    if (prtlong) {
+    if (prtlong)
 	fprintf(fp, "%s%s%s",
 		(prtshort ? "|" : ""),
 		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"),
 		opt->longName);
-    }
+#undef	prtlong
+
     if (argDescrip) {
 	/* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
 	if (!strchr(" =(", argDescrip[0])) fprintf(fp, "=");
@@ -731,7 +733,7 @@ static size_t itemUsage(FILE * fp, columns_t columns,
     for (i = 0; i < nitems; i++, item++) {
 	const struct poptOption * opt;
 	opt = &item->option;
-        if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INTL_DOMAIN) {
+        if (poptArgType(opt) == POPT_ARG_INTL_DOMAIN) {
 	    translation_domain = (const char *)opt->arg;
 	} else if ((opt->longName || opt->shortName) &&
 		 !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
@@ -771,9 +773,9 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 {
     if (opt != NULL)
     for (; (opt->longName || opt->shortName || opt->arg) ; opt++) {
-        if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INTL_DOMAIN) {
+        if (poptArgType(opt) == POPT_ARG_INTL_DOMAIN) {
 	    translation_domain = (const char *)opt->arg;
-	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
+	} else if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    if (done) {
 		int i = 0;
 		if (done->opts != NULL)
@@ -824,11 +826,11 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 
     if (opt != NULL)
     for (; (opt->longName || opt->shortName || opt->arg); opt++) {
-	if (opt->shortName && !(opt->argInfo & POPT_ARG_MASK)) {
+	if (opt->shortName && !poptArgType(opt)) {
 	    /* Display shortName iff printable non-space. */
 	    if (isprint((int)opt->shortName) && opt->shortName != ' ')
 		s[strlen(s)] = opt->shortName;
-	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE)
+	} else if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE)
 	    if (opt->arg)	/* XXX program error */
 		len = showShortOptions(opt->arg, fp, s);
     } 

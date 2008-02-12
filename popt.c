@@ -67,21 +67,19 @@ static void invokeCallbacksPRE(poptContext con, const struct poptOption * opt)
 {
     if (opt != NULL)
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
-	if (opt->arg == NULL) continue;		/* XXX program error. */
-	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    void * arg = opt->arg;
+	poptArg arg = { .ptr = opt->arg };
+	if (arg.ptr == NULL) continue;		/* XXX program error. */
+	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg == poptHelpOptions) arg = poptHelpOptionsI18N;
+	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
 	    /* Recurse on included sub-tables. */
-	    invokeCallbacksPRE(con, arg);
-	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK &&
+	    invokeCallbacksPRE(con, arg.opt);
+	} else if (poptArgType(opt) == POPT_ARG_CALLBACK &&
 		   (opt->argInfo & POPT_CBFLAG_PRE))
-	{   /*@-castfcnptr@*/
-	    poptCallbackType cb = (poptCallbackType)opt->arg;
-	    /*@=castfcnptr@*/
+	{
 	    /* Perform callback. */
 	    /*@-noeffectuncon @*/
-	    cb(con, POPT_CALLBACK_REASON_PRE, NULL, NULL, opt->descrip);
+	    arg.cb(con, POPT_CALLBACK_REASON_PRE, NULL, NULL, opt->descrip);
 	    /*@=noeffectuncon @*/
 	}
     }
@@ -93,21 +91,19 @@ static void invokeCallbacksPOST(poptContext con, const struct poptOption * opt)
 {
     if (opt != NULL)
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
-	if (opt->arg == NULL) continue;		/* XXX program error. */
-	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    void * arg = opt->arg;
+	poptArg arg = { .ptr = opt->arg };
+	if (arg.ptr == NULL) continue;		/* XXX program error. */
+	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg == poptHelpOptions) arg = poptHelpOptionsI18N;
+	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
 	    /* Recurse on included sub-tables. */
-	    invokeCallbacksPOST(con, arg);
-	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK &&
+	    invokeCallbacksPOST(con, arg.opt);
+	} else if (poptArgType(opt) == POPT_ARG_CALLBACK &&
 		   (opt->argInfo & POPT_CBFLAG_POST))
-	{   /*@-castfcnptr@*/
-	    poptCallbackType cb = (poptCallbackType)opt->arg;
-	    /*@=castfcnptr@*/
+	{
 	    /* Perform callback. */
 	    /*@-noeffectuncon @*/
-	    cb(con, POPT_CALLBACK_REASON_POST, NULL, NULL, opt->descrip);
+	    arg.cb(con, POPT_CALLBACK_REASON_POST, NULL, NULL, opt->descrip);
 	    /*@=noeffectuncon @*/
 	}
     }
@@ -121,34 +117,34 @@ static void invokeCallbacksOPTION(poptContext con,
 	/*@modifies internalState@*/
 {
     const struct poptOption * cbopt = NULL;
+    poptArg cbarg = { .ptr = NULL };
 
     if (opt != NULL)
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
-	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    void * arg = opt->arg;
+	poptArg arg = { .ptr = opt->arg };
+	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg == poptHelpOptions) arg = poptHelpOptionsI18N;
+	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
 	    /* Recurse on included sub-tables. */
 	    if (opt->arg != NULL)	/* XXX program error */
 		invokeCallbacksOPTION(con, opt->arg, myOpt, myData, shorty);
-	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK &&
+	} else if (poptArgType(opt) == POPT_ARG_CALLBACK &&
 		  !(opt->argInfo & POPT_CBFLAG_SKIPOPTION)) {
 	    /* Save callback info. */
 	    cbopt = opt;
+	    cbarg.ptr = opt->arg;
 	} else if (cbopt != NULL &&
 		   ((myOpt->shortName && opt->shortName && shorty &&
 			myOpt->shortName == opt->shortName) ||
 		    (myOpt->longName != NULL && opt->longName != NULL &&
 			!strcmp(myOpt->longName, opt->longName)))
 		   )
-	{   /*@-castfcnptr@*/
-	    poptCallbackType cb = (poptCallbackType)cbopt->arg;
-	    /*@=castfcnptr@*/
+	{
 	    const void * cbData = (cbopt->descrip ? cbopt->descrip : myData);
 	    /* Perform callback. */
-	    if (cb != NULL) {	/* XXX program error */
+	    if (cbarg.cb != NULL) {	/* XXX program error */
 		/*@-noeffectuncon @*/
-		cb(con, POPT_CALLBACK_REASON_OPTION, myOpt,
+		cbarg.cb(con, POPT_CALLBACK_REASON_OPTION, myOpt,
 			con->os->nextArg, cbData);
 		/*@=noeffectuncon @*/
 	    }
@@ -468,22 +464,23 @@ findOption(const struct poptOption * opt, /*@null@*/ const char * longName, int 
 	/*@modifies *callback, *callbackData */
 {
     const struct poptOption * cb = NULL;
+    poptArg cbarg = { .ptr = NULL };
 
     /* This happens when a single - is given */
     if (singleDash && !shortName && (longName && *longName == '\0'))
 	shortName = '-';
 
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
+	poptArg arg = { .ptr = opt->arg };
 
-	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
+	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    const struct poptOption * opt2;
-	    void * arg = opt->arg;
 
 	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg == poptHelpOptions) arg = poptHelpOptionsI18N;
+	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
 	    /* Recurse on included sub-tables. */
-	    if (arg == NULL) continue;	/* XXX program error */
-	    opt2 = findOption(arg, longName, longNameLen, shortName, callback,
+	    if (arg.ptr == NULL) continue;	/* XXX program error */
+	    opt2 = findOption(arg.opt, longName, longNameLen, shortName, callback,
 			      callbackData, singleDash);
 	    if (opt2 == NULL) continue;
 	    /* Sub-table data will be inheirited if no data yet. */
@@ -493,8 +490,9 @@ findOption(const struct poptOption * opt, /*@null@*/ const char * longName, int 
 	    *callbackData = opt->descrip;
 /*@=observertrans =dependenttrans @*/
 	    return opt2;
-	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK) {
+	} else if (poptArgType(opt) == POPT_ARG_CALLBACK) {
 	    cb = opt;
+	    cbarg.ptr = opt->arg;
 	} else if (longName != NULL && opt->longName != NULL &&
 		   (!singleDash || (opt->argInfo & POPT_ARGFLAG_ONEDASH)) &&
 		   (!strncmp(longName, opt->longName, longNameLen) && strlen(opt->longName) == longNameLen))
@@ -509,20 +507,13 @@ findOption(const struct poptOption * opt, /*@null@*/ const char * longName, int 
 	return NULL;
 
 /*@-modobserver -mods @*/
-    if (callback) *callback = NULL;
-    if (callbackData) *callbackData = NULL;
-    if (cb) {
-	if (callback)
-	/*@-castfcnptr@*/
-	    *callback = (poptCallbackType)cb->arg;
-	/*@=castfcnptr@*/
-	if (!(cb->argInfo & POPT_CBFLAG_INC_DATA)) {
-	    if (callbackData)
+    if (callback)
+	*callback = (cb ? cbarg.cb : NULL);
+    if (callbackData)
 /*@-observertrans@*/	/* FIX: typedef double indirection. */
-		*callbackData = cb->descrip;
+	*callbackData = (cb && !(cb->argInfo & POPT_CBFLAG_INC_DATA)
+		? cb->descrip : NULL);
 /*@=observertrans@*/
-	}
-    }
 /*@=modobserver =mods @*/
 
     return opt;
@@ -857,15 +848,15 @@ int poptGetNextOpt(poptContext con)
 	}
 
 	if (opt == NULL) return POPT_ERROR_BADOPT;	/* XXX can't happen */
-	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) == POPT_ARG_NONE) {
+	if (opt->arg && poptArgType(opt) == POPT_ARG_NONE) {
 	    if (poptSaveInt((int *)opt->arg, opt->argInfo, 1L))
 		return POPT_ERROR_BADOPERATION;
-	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_VAL) {
+	} else if (poptArgType(opt) == POPT_ARG_VAL) {
 	    if (opt->arg) {
 		if (poptSaveInt((int *)opt->arg, opt->argInfo, (long)opt->val))
 		    return POPT_ERROR_BADOPERATION;
 	    }
-	} else if ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE) {
+	} else if (poptArgType(opt) != POPT_ARG_NONE) {
 	    con->os->nextArg = _free(con->os->nextArg);
 	    if (longArg) {
 		longArg = expandNextArg(con, longArg);
@@ -911,7 +902,7 @@ int poptGetNextOpt(poptContext con)
 	    longArg = NULL;
 
 	    if (opt->arg) {
-		switch (opt->argInfo & POPT_ARG_MASK) {
+		switch (poptArgType(opt)) {
 		case POPT_ARG_STRING:
 		    /* XXX memory leak, hard to plug */
 		    *((const char **) opt->arg) = (con->os->nextArg)
@@ -929,7 +920,7 @@ int poptGetNextOpt(poptContext con)
 			    return POPT_ERROR_BADNUMBER;
 		    }
 
-		    if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_LONG) {
+		    if (poptArgType(opt) == POPT_ARG_LONG) {
 			if (aLong == LONG_MIN || aLong == LONG_MAX)
 			    return POPT_ERROR_OVERFLOW;
 			if (poptSaveLong((long *)opt->arg, opt->argInfo, aLong))
@@ -960,7 +951,7 @@ int poptGetNextOpt(poptContext con)
 			    return POPT_ERROR_BADNUMBER;
 		    }
 
-		    if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_DOUBLE) {
+		    if (poptArgType(opt) == POPT_ARG_DOUBLE) {
 			*((double *) opt->arg) = aDouble;
 		    } else {
 #define _ABS(a)	((((a) - 0.0) < DBL_EPSILON) ? -(a) : (a))
@@ -979,7 +970,7 @@ int poptGetNextOpt(poptContext con)
 		default:
 		    fprintf(stdout,
 			POPT_("option type (%d) not implemented in popt\n"),
-			(opt->argInfo & POPT_ARG_MASK));
+			poptArgType(opt));
 		    exit(EXIT_FAILURE);
 		    /*@notreached@*/ /*@switchbreak@*/ break;
 		}
@@ -988,7 +979,7 @@ int poptGetNextOpt(poptContext con)
 
 	if (cb)
 	    invokeCallbacksOPTION(con, con->options, opt, cbData, shorty);
-	else if (opt->val && ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_VAL))
+	else if (opt->val && (poptArgType(opt) != POPT_ARG_VAL))
 	    done = 1;
 
 	if ((con->finalArgvCount + 2) >= (con->finalArgvAlloced)) {
@@ -1011,11 +1002,11 @@ int poptGetNextOpt(poptContext con)
 		con->finalArgv[con->finalArgvCount++] = NULL;
 	}
 
-	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) == POPT_ARG_NONE)
+	if (opt->arg && poptArgType(opt) == POPT_ARG_NONE)
 	    /*@-ifempty@*/ ; /*@=ifempty@*/
-	else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_VAL)
+	else if (poptArgType(opt) == POPT_ARG_VAL)
 	    /*@-ifempty@*/ ; /*@=ifempty@*/
-	else if ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE) {
+	else if (poptArgType(opt) != POPT_ARG_NONE) {
 	    if (con->finalArgv != NULL && con->os->nextArg != NULL)
 	        con->finalArgv[con->finalArgvCount++] =
 			xstrdup(con->os->nextArg);
