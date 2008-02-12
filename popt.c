@@ -70,8 +70,7 @@ static void invokeCallbacksPRE(poptContext con, const struct poptOption * opt)
 	poptArg arg = { .ptr = opt->arg };
 	if (arg.ptr == NULL) continue;		/* XXX program error. */
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
-	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
+	    poptSubstituteHelpI18N(arg.opt);	/* XXX side effects */
 	    /* Recurse on included sub-tables. */
 	    invokeCallbacksPRE(con, arg.opt);
 	} else if (poptArgType(opt) == POPT_ARG_CALLBACK &&
@@ -94,8 +93,7 @@ static void invokeCallbacksPOST(poptContext con, const struct poptOption * opt)
 	poptArg arg = { .ptr = opt->arg };
 	if (arg.ptr == NULL) continue;		/* XXX program error. */
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
-	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
+	    poptSubstituteHelpI18N(arg.opt);	/* XXX side effects */
 	    /* Recurse on included sub-tables. */
 	    invokeCallbacksPOST(con, arg.opt);
 	} else if (poptArgType(opt) == POPT_ARG_CALLBACK &&
@@ -123,8 +121,7 @@ static void invokeCallbacksOPTION(poptContext con,
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
 	poptArg arg = { .ptr = opt->arg };
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
-	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
+	    poptSubstituteHelpI18N(arg.opt);	/* XXX side effects */
 	    /* Recurse on included sub-tables. */
 	    if (opt->arg != NULL)	/* XXX program error */
 		invokeCallbacksOPTION(con, opt->arg, myOpt, myData, shorty);
@@ -476,8 +473,7 @@ findOption(const struct poptOption * opt, /*@null@*/ const char * longName, int 
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    const struct poptOption * opt2;
 
-	    /* XXX sick hack to preserve pretense of ABI. */
-	    if (arg.opt == poptHelpOptions) arg.opt = poptHelpOptionsI18N;
+	    poptSubstituteHelpI18N(arg.opt);	/* XXX side effects */
 	    /* Recurse on included sub-tables. */
 	    if (arg.ptr == NULL) continue;	/* XXX program error */
 	    opt2 = findOption(arg.opt, longName, longNameLen, shortName, callback,

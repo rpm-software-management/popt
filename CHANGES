@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: poptint.h: add poptSubstituteHelpI18N() to bury the ABI hack.
     - jbj: start using poptArg and poptArgType() where useful.
     - jbj: poptint.h: add a poptArgType define for bitfield type abstraction.
     - jbj: poptint.h: add a poptArg union for opt->arg access without casts.

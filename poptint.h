@@ -45,16 +45,26 @@ typedef struct {
 /** \ingroup popt
  * A union to simplify opt->arg access without casting.
  */
+/*@-exporttype -fielduse@*/
 typedef union poptArg_u {
+/*@shared@*/
     void * ptr;
     int * intp;
     long * longp;
     const char ** argv;
     poptCallbackType cb;
+/*@shared@*/
     poptOption opt;
 } poptArg;
+/*@=exporttype =fielduse@*/
 
 #define	poptArgType(opt)	((opt)->argInfo & POPT_ARG_MASK)
+
+/* XXX sick hack to preserve pretense of a popt-1.x ABI. */
+#define	poptSubstituteHelpI18N(opt) \
+  { /*@-observertrans@*/ \
+    if ((opt) == poptHelpOptions) (opt) = poptHelpOptionsI18N; \
+    /*@=observertrans@*/ }
 
 struct optionStackEntry {
     int argc;
