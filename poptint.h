@@ -69,7 +69,10 @@ typedef union poptArg_u {
 } poptArg;
 /*@=exporttype =fielduse@*/
 
-#define	poptArgType(opt)	((opt)->argInfo & POPT_ARG_MASK)
+#define	poptArgType(_opt)	((_opt)->argInfo & POPT_ARG_MASK)
+#define	F_ISSET(_opt, _FLAG)	((_opt)->argInfo & POPT_ARGFLAG_##_FLAG)
+#define	LF_ISSET(_FLAG)		(argInfo & POPT_ARGFLAG_##_FLAG)
+#define	CBF_ISSET(_opt, _FLAG)	((_opt)->argInfo & POPT_CBFLAG_##_FLAG)
 
 /* XXX sick hack to preserve pretense of a popt-1.x ABI. */
 #define	poptSubstituteHelpI18N(opt) \

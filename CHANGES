@@ -1,4 +1,7 @@
 1.13 -> 1.14:
+    - jbj: free aliases/execs with common code.
+    - jbj: rewrite the callback logic using a switch for simplicity.
+    - jbj: hide bit field structure behind F_ISSET/LF_ISSET/CBF_ISSET macros.
     - jbj: expose poptSaveLongLong and poptSaveString in the loader map.
     - jbj: add POPT_ARG_ARGV, starting with the poptSaveString() method.
     - jbj: add help for POPT_ARG_LONGLONG.

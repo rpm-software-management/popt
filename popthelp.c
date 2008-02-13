@@ -310,7 +310,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	goto out;
     if (prtshort && prtlong)
 	sprintf(left, "-%c, %s%s", opt->shortName,
-		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"),
+		(F_ISSET(opt, ONEDASH) ? "-" : "--"),
 		opt->longName);
     else if (prtshort) 
 	sprintf(left, "-%c", opt->shortName);
@@ -319,18 +319,18 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	sprintf(left, "    %s%s",
 		(poptArgType(opt) == POPT_ARG_MAINCALL ? "" :
 		(poptArgType(opt) == POPT_ARG_ARGV ? "" :
-		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"))),
+		(F_ISSET(opt, ONEDASH) ? "-" : "--"))),
 		opt->longName);
 #undef	prtlong
 
     if (argDescrip) {
 	char * le = left + strlen(left);
 
-	if (opt->argInfo & POPT_ARGFLAG_OPTIONAL)
+	if (F_ISSET(opt, OPTIONAL))
 	    *le++ = '[';
 
 	/* Choose type of output */
-	if (opt->argInfo & POPT_ARGFLAG_SHOW_DEFAULT) {
+	if (F_ISSET(opt, SHOW_DEFAULT)) {
 	    defs = singleOptionDefaultValue(lineLength, opt, translation_domain);
 	    if (defs) {
 		char * t = malloc((help ? strlen(help) : 0) +
@@ -356,8 +356,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    case POPT_ARG_VAL:
 #ifdef	NOTNOW	/* XXX pug ugly nerdy output */
 	    {	long aLong = opt->val;
-		int ops = (opt->argInfo & POPT_ARGFLAG_LOGICALOPS);
-		int negate = (opt->argInfo & POPT_ARGFLAG_NOT);
+		int ops = F_ISSET(opt, LOGICALOPS);
+		int negate = F_ISSET(opt, NOT);
 
 		/* Don't bother displaying typical values */
 		if (!ops && (aLong == 0L || aLong == 1L || aLong == -1L))
@@ -421,7 +421,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    }
 #endif
 	}
-	if (opt->argInfo & POPT_ARGFLAG_OPTIONAL)
+	if (F_ISSET(opt, OPTIONAL))
 	    *le++ = ']';
 	*le = '\0';
     }
@@ -489,13 +489,12 @@ static size_t maxArgWidth(const struct poptOption * opt,
 	    if (opt->arg)	/* XXX program error */
 	        len = maxArgWidth(opt->arg, translation_domain);
 	    if (len > max) max = len;
-	} else if (!(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
+	} else if (!F_ISSET(opt, DOC_HIDDEN)) {
 	    len = sizeof("  ")-1;
 	    /* XXX --long always padded for alignment with/without "-X, ". */
 	    len += sizeof("-X, ")-1;
 	    if (opt->longName) {
-		len += ((opt->argInfo & POPT_ARGFLAG_ONEDASH)
-			? sizeof("-")-1 : sizeof("--")-1);
+		len += (F_ISSET(opt, ONEDASH) ? sizeof("-") : sizeof("--")) - 1;
 		len += strlen(opt->longName);
 	    }
 
@@ -508,7 +507,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 		const char * scopy = s;
 		mbstate_t t;
 
-		memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
+		memset ((void *)&t, 0, sizeof(t));	/* In initial state.  */
 		/* Determine number of display characters.  */
 		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
 #else
@@ -519,7 +518,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 		len += n;
 	    }
 
-	    if (opt->argInfo & POPT_ARGFLAG_OPTIONAL) len += sizeof("[]")-1;
+	    if (F_ISSET(opt, OPTIONAL)) len += sizeof("[]")-1;
 	    if (len > max) max = len;
 	}
 	opt++;
@@ -550,8 +549,7 @@ static void itemHelp(FILE * fp,
     for (i = 0, item = items; i < nitems; i++, item++) {
 	const struct poptOption * opt;
 	opt = &item->option;
-	if ((opt->longName || opt->shortName) && 
-	    !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN))
+	if ((opt->longName || opt->shortName) && !F_ISSET(opt, DOC_HIDDEN))
 	    singleOptionHelp(fp, columns, opt, translation_domain);
     }
 }
@@ -583,8 +581,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
 
     if (table != NULL)
     for (opt = table; opt->longName || opt->shortName || opt->arg; opt++) {
-	if ((opt->longName || opt->shortName) && 
-	    !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN))
+	if ((opt->longName || opt->shortName) && !F_ISSET(opt, DOC_HIDDEN))
 	    singleOptionHelp(fp, columns, opt, translation_domain);
     }
 
@@ -662,7 +659,7 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
 	/*@globals fileSystem @*/
 	/*@modifies fp, columns->cur, fileSystem @*/
 {
-    size_t len = sizeof(" []") - 1;
+    size_t len = sizeof(" []")-1;
     const char * argDescrip = getArgDescrip(opt, translation_domain);
     /* Display shortName iff printable non-space. */
     int prtshort = (int)(isprint((int)opt->shortName) && opt->shortName != ' ');
@@ -671,13 +668,12 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
     if (!(prtshort || prtlong))
 	return columns->cur;
 
-    len = sizeof(" []") - 1;
+    len = sizeof(" []")-1;
     if (prtshort)
-	len += sizeof("-c") - 1;
+	len += sizeof("-c")-1;
     if (prtlong) {
-	if (prtshort) len += sizeof("|") - 1;
-	len += ((opt->argInfo & POPT_ARGFLAG_ONEDASH)
-		? sizeof("-") : sizeof("--")) - 1;
+	if (prtshort) len += sizeof("|")-1;
+	len += (F_ISSET(opt, ONEDASH) ? sizeof("-") : sizeof("--")) - 1;
 	len += strlen(opt->longName);
     }
 
@@ -688,7 +684,7 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
 	const char * scopy = argDescrip;
 	mbstate_t t;
 
-	memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
+	memset ((void *)&t, 0, sizeof(t));	/* In initial state.  */
 	/* Determine number of display characters.  */
 	n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
 #else
@@ -710,7 +706,7 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
     if (prtlong)
 	fprintf(fp, "%s%s%s",
 		(prtshort ? "|" : ""),
-		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"),
+		(F_ISSET(opt, ONEDASH) ? "-" : "--"),
 		opt->longName);
 #undef	prtlong
 
@@ -746,8 +742,8 @@ static size_t itemUsage(FILE * fp, columns_t columns,
 	opt = &item->option;
         if (poptArgType(opt) == POPT_ARG_INTL_DOMAIN) {
 	    translation_domain = (const char *)opt->arg;
-	} else if ((opt->longName || opt->shortName) &&
-		 !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
+	} else
+	if ((opt->longName || opt->shortName) && !F_ISSET(opt, DOC_HIDDEN)) {
 	    columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
 	}
     }
@@ -786,7 +782,8 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
     for (; (opt->longName || opt->shortName || opt->arg) ; opt++) {
         if (poptArgType(opt) == POPT_ARG_INTL_DOMAIN) {
 	    translation_domain = (const char *)opt->arg;
-	} else if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
+	} else
+	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    if (done) {
 		int i = 0;
 		if (done->opts != NULL)
@@ -804,8 +801,8 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 	    }
 	    columns->cur = singleTableUsage(con, fp, columns, opt->arg,
 			translation_domain, done);
-	} else if ((opt->longName || opt->shortName) &&
-		 !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
+	} else
+	if ((opt->longName || opt->shortName) && !F_ISSET(opt, DOC_HIDDEN)) {
 	    columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
 	}
     }
