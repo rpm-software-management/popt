@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: expose poptSaveLongLong and poptSaveString in the loader map.
     - jbj: add POPT_ARG_ARGV, starting with the poptSaveString() method.
     - jbj: add help for POPT_ARG_LONGLONG.
     - jbj: hmmm, POSIXly correct --echo-args needs fixing, disable for now.

@@ -1,7 +1,6 @@
 LIBPOPT_0
 {
   global:
-    findProgramPath;
     _fini;
     _init;
     poptAddAlias;
@@ -28,6 +27,8 @@ LIBPOPT_0
     poptResetContext;
     poptSaveInt;
     poptSaveLong;
+    poptSaveLongLong;
+    poptSaveString;
     poptSetExecPath;
     poptSetOtherOptionHelp;
     poptStrerror;
