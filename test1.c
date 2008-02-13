@@ -57,6 +57,9 @@ static float bFloat = 3.1415926535;
 static double aDouble = 9.86960440108935861883;
 /*@unchecked@*/
 static double bDouble = 9.86960440108935861883;
+/*@unchecked@*/ /*@only@*/ /*@null@*/
+static const char ** aArgv = NULL;
+
 /*@unchecked@*/ /*@null@*/
 static char * oStr = (char *) -1;
 /*@unchecked@*/
@@ -132,6 +135,16 @@ static struct poptOption options[] = {
   { "double", 'd', POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &aDouble, 0,
 	"POPT_ARG_DOUBLE: 9.8696", NULL },
 
+   { "randint", '\0', POPT_ARG_INT|POPT_ARGFLAG_RANDOM, &aInt, 0,
+	"POPT_ARGFLAG_RANDOM: experimental", NULL },
+   { "randlong", '\0', POPT_ARG_LONG|POPT_ARGFLAG_RANDOM, &aLong, 0,
+	"POPT_ARGFLAG_RANDOM: experimental", NULL },
+   { "randlonglong", '\0', POPT_ARG_LONGLONG|POPT_ARGFLAG_RANDOM, &aLongLong, 0,
+	"POPT_ARGFLAG_RANDOM: experimental", NULL },
+
+   { "argv", '\0', POPT_ARG_ARGV, &aArgv, 0,
+	"POPT_ARG_ARGV: experimental", NULL },
+
   { "bitset", '\0', POPT_BIT_SET | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x4321,
 	"POPT_BIT_SET: |= 0x4321", 0},
   { "bitclr", '\0', POPT_BIT_CLR | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x1234,
@@ -154,10 +167,10 @@ static struct poptOption options[] = {
 
 static void resetVars(void)
 	/*@globals arg1, arg2, arg3, inc, shortopt,
-		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble,
+		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble, aArgv,
 		oStr, singleDash, pass2 @*/
 	/*@modifies arg1, arg2, arg3, inc, shortopt,
-		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble,
+		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble, aArgv,
 		oStr, singleDash, pass2 @*/
 {
     arg1 = 0;
@@ -174,6 +187,18 @@ static void resetVars(void)
     aLongLong = bLongLong;
     aFloat = bFloat;
     aDouble = bDouble;
+
+    if (aArgv) {
+	int i;
+	for (i = 0; aArgv[i] != NULL; i++) {
+/*@-unqualifiedtrans@*/
+	    free(aArgv[i]);
+/*@=unqualifiedtrans@*/
+	    aArgv[i] = NULL;
+	}
+	free(aArgv);
+	aArgv = NULL;
+    }
 
     oStr = (char *) -1;
 

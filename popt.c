@@ -617,17 +617,45 @@ static void poptStripArg(/*@special@*/ poptContext con, int which)
 /*@=compdef@*/
 }
 
+int poptSaveString(const char *** argvp, /*@unused@*/ unsigned int argInfo,
+		const char * val)
+{
+    poptArgv argv;
+    int argc = 0;
+
+    if (argvp == NULL)
+	return -1;
+
+    /* XXX likely needs an upper bound on argc. */
+    if (*argvp)
+    while ((*argvp)[argc] != NULL)
+	argc++;
+ 
+/*@-unqualifiedtrans@*/
+    *argvp = xrealloc(*argvp, (argc + 1 + 1) * sizeof(**argvp));
+/*@=unqualifiedtrans@*/
+    if ((argv = *argvp) != NULL) {
+	argv[argc++] = xstrdup(val);
+	argv[argc  ] = NULL;
+    }
+/*@-nullstate@*/
+    return 0;
+/*@=nullstate@*/
+}
+
 /*@unchecked@*/
 static unsigned int seed = 0;
 
 /*@-bitwisesigned@*/	/* LCL: logical ops with unsigned. */
 int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 {
+    if (arg == NULL
 #ifdef	NOTYET
     /* XXX Check alignment, may fail on funky platforms. */
-    if (arg == NULL || (((unsigned long long)arg) & (sizeof(*arg)-1)))
-	return POPT_ERROR_NULLARG;
+     || (((unsigned long long)arg) & (sizeof(*arg)-1))
 #endif
+    )
+	return POPT_ERROR_NULLARG;
 
     if (aLongLong != 0 && argInfo & POPT_ARGFLAG_RANDOM) {
 	if (!seed) {
@@ -822,19 +850,19 @@ int poptGetNextOpt(poptContext con)
 		else
 		    singleDash = 1;
 
-		/* XXX aliases with arg substitution need "--alias=arg" */
-		if (handleAlias(con, optString, '\0', NULL))
-		    continue;
-
-		if (handleExec(con, optString, '\0'))
-		    continue;
-
 		/* Check for "--long=arg" option. */
 		for (oe = optString; *oe && *oe != '='; oe++)
 		    {};
 		optStringLen = oe - optString;
 		if (*oe == '=')
 		    longArg = oe + 1;
+
+		/* XXX aliases with arg substitution need "--alias=arg" */
+		if (handleAlias(con, optString, '\0', NULL))
+		    continue;
+
+		if (handleExec(con, optString, '\0'))
+		    continue;
 
 		opt = findOption(con->options, optString, optStringLen, '\0', &cb, &cbData,
 				 singleDash);
@@ -953,7 +981,9 @@ int poptGetNextOpt(poptContext con)
 		    char *end;
 
 		    if (con->os->nextArg) {
+/*@-unrecog@*/
 			aNUM = strtoll(con->os->nextArg, &end, 0);
+/*@=unrecog@*/
 			if (!(end && *end == '\0'))
 			    return POPT_ERROR_BADNUMBER;
 		    }

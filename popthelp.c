@@ -157,6 +157,8 @@ getArgDescrip(const struct poptOption * opt,
 
     if (poptArgType(opt) == POPT_ARG_MAINCALL)
 	return opt->argDescrip;
+    if (poptArgType(opt) == POPT_ARG_ARGV)
+	return opt->argDescrip;
 
     if (opt->argDescrip) {
 	/* Some strings need popt library, not application, i18n domain. */
@@ -179,10 +181,12 @@ getArgDescrip(const struct poptOption * opt,
 #endif
     case POPT_ARG_INT:		return POPT_("INT");
     case POPT_ARG_LONG:		return POPT_("LONG");
+    case POPT_ARG_LONGLONG:	return POPT_("LONGLONG");
     case POPT_ARG_STRING:	return POPT_("STRING");
     case POPT_ARG_FLOAT:	return POPT_("FLOAT");
     case POPT_ARG_DOUBLE:	return POPT_("DOUBLE");
     case POPT_ARG_MAINCALL:	return NULL;
+    case POPT_ARG_ARGV:		return NULL;
     default:			return POPT_("ARG");
     }
 }
@@ -212,30 +216,34 @@ singleOptionDefaultValue(size_t lineLength,
     strcpy(le, defstr);	le += strlen(le);
     *le++ = ':';
     *le++ = ' ';
-    if (opt->arg)	/* XXX programmer error */
+  if (opt->arg) {	/* XXX programmer error */
+    poptArg arg = { .ptr = opt->arg };
     switch (poptArgType(opt)) {
     case POPT_ARG_VAL:
     case POPT_ARG_INT:
-    {	long aLong = *((int *)opt->arg);
-	le += sprintf(le, "%ld", aLong);
-    }	break;
+	le += sprintf(le, "%d", arg.intp[0]);
+	break;
     case POPT_ARG_LONG:
-    {	long aLong = *((long *)opt->arg);
-	le += sprintf(le, "%ld", aLong);
-    }	break;
+	le += sprintf(le, "%ld", arg.longp[0]);
+	break;
+    case POPT_ARG_LONGLONG:
+	le += sprintf(le, "%lld", arg.longlongp[0]);
+	break;
     case POPT_ARG_FLOAT:
-    {	double aDouble = *((float *)opt->arg);
+    {	double aDouble = arg.floatp[0];
 	le += sprintf(le, "%g", aDouble);
     }	break;
     case POPT_ARG_DOUBLE:
-    {	double aDouble = *((double *)opt->arg);
-	le += sprintf(le, "%g", aDouble);
-    }	break;
+	le += sprintf(le, "%g", arg.doublep[0]);
+	break;
     case POPT_ARG_MAINCALL:
 	le += sprintf(le, "%p", opt->arg);
 	break;
+    case POPT_ARG_ARGV:
+	le += sprintf(le, "%p", opt->arg);
+	break;
     case POPT_ARG_STRING:
-    {	const char * s = *(const char **)opt->arg;
+    {	const char * s = arg.argv[0];
 	if (s == NULL) {
 	    strcpy(le, "null");	le += strlen(le);
 	} else {
@@ -254,6 +262,7 @@ singleOptionDefaultValue(size_t lineLength,
 	return NULL;
 	/*@notreached@*/ break;
     }
+  }
     *le++ = ')';
     *le = '\0';
 
@@ -309,7 +318,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	/* XXX --long always padded for alignment with/without "-X, ". */
 	sprintf(left, "    %s%s",
 		(poptArgType(opt) == POPT_ARG_MAINCALL ? "" :
-		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--")),
+		(poptArgType(opt) == POPT_ARG_ARGV ? "" :
+		((opt->argInfo & POPT_ARGFLAG_ONEDASH) ? "-" : "--"))),
 		opt->longName);
 #undef	prtlong
 
@@ -377,6 +387,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 		break;
 	    case POPT_ARG_INT:
 	    case POPT_ARG_LONG:
+	    case POPT_ARG_LONGLONG:
 	    case POPT_ARG_FLOAT:
 	    case POPT_ARG_DOUBLE:
 	    case POPT_ARG_STRING:
@@ -391,8 +402,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 
 	    /* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
 	    if (!strchr(" =(", argDescrip[0]))
-		*le++ = (poptArgType(opt) == POPT_ARG_MAINCALL)
-			? ' ' : '=';
+		*le++ = ((poptArgType(opt) == POPT_ARG_MAINCALL) ? ' ' :
+			 (poptArgType(opt) == POPT_ARG_ARGV) ? ' ' : '=');
 	    strcpy(le, argDescrip);
 	    lelen = strlen(le);
 	    le += lelen;

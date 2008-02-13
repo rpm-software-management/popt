@@ -35,7 +35,8 @@
 #define	POPT_ARG_DOUBLE		 9U	/*!< arg ==> double */
 #define	POPT_ARG_LONGLONG	 10U	/*!< arg ==> long long */
 
-#define POPT_ARG_MAINCALL	256+10U	/*!< EXPERIMENTAL: return (*arg) (argc, argv) */
+#define POPT_ARG_MAINCALL	256+11U	/*!< EXPERIMENTAL: return (*arg) (argc, argv) */
+#define	POPT_ARG_ARGV		256+12U	/*!< (unimplemented): dupe'd arg appended to realloc'd argv array. */
 
 #define POPT_ARG_MASK		0x0000FFFFU
 /*@}*/
@@ -531,6 +532,18 @@ const char * poptGetInvocationName(poptContext con)
 int poptStrippedArgv(poptContext con, int argc, char ** argv)
 	/*@modifies *argv @*/;
 /*@=fcnuse@*/
+
+/**
+ * Add a string to an argv array.
+ * @retval *argvp	argv array
+ * @param argInfo	(unused)
+ * @param val		string arg to add (using strdup)
+ * @return		0 always
+ */
+/*@unused@*/
+int poptSaveString(/*@null@*/ const char *** argvp, unsigned int argInfo,
+		const char * val)
+	/*@modifies *argvp @*/;
 
 /**
  * Save a long long, performing logical operation with value.
