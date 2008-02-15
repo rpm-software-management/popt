@@ -970,8 +970,15 @@ int poptGetNextOpt(poptContext con)
 	    if (opt->arg) {
 		poptArg arg = { .ptr = opt->arg };
 		switch (poptArgType(opt)) {
+		case POPT_ARG_ARGV:
+		    /* XXX memory leak, application is responsible for free. */
+		    if (con->os->nextArg == NULL)
+			return POPT_ERROR_NULLARG;	/* XXX better return? */
+		    if (poptSaveString(arg.ptr, opt->argInfo, con->os->nextArg))
+			return POPT_ERROR_BADOPERATION;
+		    /*@switchbreak@*/ break;
 		case POPT_ARG_STRING:
-		    /* XXX memory leak, hard to plug */
+		    /* XXX memory leak, application is responsible for free. */
 		    arg.argv[0] = (con->os->nextArg)
 			? xstrdup(con->os->nextArg) : NULL;
 		    /*@switchbreak@*/ break;
