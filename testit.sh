@@ -9,7 +9,7 @@ run() {
 
     result=`$builddir/$prog $*`
     if [ "$answer" != "$result" ]; then
-	echo "Test \"$*\" failed with: \"$result\" != \"$answer\" "
+	echo "Test \"$prog $*\" failed with: \"$result\" != \"$answer\" "
 	exit 2
     fi
 }
@@ -69,13 +69,10 @@ run test1 "test1 - 17" "arg1: 1 arg2: (none) rest: foo --arg2 something" --arg1 
 unset POSIXLY_CORRECT
 run test1 "test1 - 18" "callback: c sampledata bar arg1: 1 arg2: (none)" --arg1 --cb bar
 run test1 "test1 - 19" "" --echo-args
-
-# XXX FIXME
-#run test1 "test1 - 20" "--arg1" --echo-args --arg1
-#run test1 "test1 - 21" "--arg2 something" -T something -e
-#run test1 "test1 - 22" "--arg2 something more args" -T something -a more args
-#run test1 "test1 - 23" "--echo-args -a" --echo-args -e -a
-
+run test1 "test1 - 20" "--arg1" --echo-args --arg1
+run test1 "test1 - 21" "--arg2 something" -T something -e
+run test1 "test1 - 22" "--arg2 something more args" -T something -a more args
+run test1 "test1 - 23" "--echo-args -a" --echo-args -e -a
 run test1 "test1 - 24" "arg1: 0 arg2: (none) short: 1" -onedash
 run test1 "test1 - 25" "arg1: 0 arg2: (none) short: 1" --onedash
 run test1 "test1 - 26" "callback: c arg for cb2 foo arg1: 0 arg2: (none)" --cb2 foo
