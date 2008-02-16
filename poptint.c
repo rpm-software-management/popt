@@ -2,6 +2,27 @@
 #include <stdarg.h>
 #include "poptint.h"
 
+#if defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
+/*
+ * Rebind a "UTF-8" codeset for popt's internal use.
+ */
+char *
+POPT_dgettext(const char * dom, const char * str)
+{
+    char * codeset = NULL;
+    char * retval = NULL;
+
+    if (!dom) 
+	dom = textdomain(NULL);
+    codeset = bind_textdomain_codeset(dom, NULL);
+    bind_textdomain_codeset(dom, "UTF-8");
+    retval = dgettext(dom, str);
+    bind_textdomain_codeset(dom, codeset);
+
+    return retval;
+}
+#endif
+
 #ifdef HAVE_ICONV
 static /*@only@*/ /*@null@*/ char *
 strdup_locale_from_utf8 (/*@null@*/ char *buffer)

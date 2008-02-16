@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: add POPT_dgettext() for popt internal UTF-8 codeset (Takao Fujiwara).
     - jbj: add POPT_next_char(), backout POPT_fprintf() usage (for the moment).
     - jbj: finish POPT_ARG_ARGV implementation.
     - jbj: free aliases/execs with common code.
