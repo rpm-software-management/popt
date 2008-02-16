@@ -182,11 +182,14 @@ extern char *nl_langinfo (nl_item __item)
 #endif
 #endif
 
+char *POPT_prev_char (/*@returned@*/ const char *str)
+	/*@*/;
+
+char *POPT_next_char (/*@returned@*/ const char *str)
+	/*@*/;
+
 int   POPT_fprintf (FILE* stream, const char *format, ...)
 	/*@globals fileSystem @*/
 	/*@modifies stream, fileSystem @*/;
-
-char *POPT_prev_char (/*@returned@*/ const char *str)
-	/*@*/;
 
 #endif

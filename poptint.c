@@ -124,6 +124,18 @@ POPT_prev_char (const char *str)
     }
 }
 
+char *
+POPT_next_char (const char *str)
+{
+    char *p = (char *)str;
+
+    while (1) {
+	p++;
+	if ((*p & 0xc0) != (char)0x80)
+	    return (char *)p;
+    }
+}
+
 int
 POPT_fprintf (FILE* stream, const char *format, ...)
 {

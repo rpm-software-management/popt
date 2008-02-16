@@ -448,18 +448,19 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	if (ch == help) break;		/* give up */
 	while (ch > (help + 1) && _isspaceptr(ch))
 	    ch = POPT_prev_char (ch);
-	ch++;
+	ch = POPT_next_char(ch);
 
 	sprintf(format, "%%.%ds\n%%%ds", (int) (ch - help), (int) indentLength);
 	/*@-formatconst@*/
-	xx = POPT_fprintf(fp, format, help, " ");
+	fprintf(fp, format, help, " ");
 	/*@=formatconst@*/
 	help = ch;
-	while (_isspaceptr(help) && *help) help++;
+	while (_isspaceptr(help) && *help)
+	    help = POPT_next_char(help);
 	helpLength = strlen(help);
     }
 
-    if (helpLength) xx = POPT_fprintf(fp, "%s\n", help);
+    if (helpLength) fprintf(fp, "%s\n", help);
     help = NULL;
 
 out:
