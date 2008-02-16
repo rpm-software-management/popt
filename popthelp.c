@@ -128,6 +128,26 @@ static size_t maxColumnWidth(FILE *fp)
 }
 
 /**
+ * Determine number of display characters in a string.
+ * @param s		string
+ * @return		no. of display characters.
+ */
+static inline size_t stringDisplayWidth(const char *s)
+{
+    size_t n = strlen(s);
+
+#ifdef	POPT_WCHAR_HACK
+    mbstate_t t;
+
+    memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
+    /* Determine number of display characters.  */
+    n = mbsrtowcs (NULL, &s, n, &t);
+#endif
+
+    return n;
+}
+
+/**
  * @param table		option(s)
  */
 /*@observer@*/ /*@null@*/ static const char *
@@ -408,18 +428,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    lelen = strlen(le);
 	    le += lelen;
 
-#ifdef	POPT_WCHAR_HACK
-	    {	const char * scopy = argDescrip;
-		mbstate_t t;
-		size_t n;
-
-		memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
-		/* Determine number of display characters.  */
-		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
-
-		displaypad = (int) (lelen-n);
-	    }
-#endif
+	    /* Adjust for (possible) wide characters. */
+	    displaypad = (int)(lelen - stringDisplayWidth(argDescrip));
 	}
 	if (F_ISSET(opt, OPTIONAL))
 	    *le++ = ']';
@@ -482,7 +492,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 {
     size_t max = 0;
     size_t len = 0;
-    const char * s;
+    const char * argDescrip;
     
     if (opt != NULL)
     while (opt->longName || opt->shortName || opt->arg) {
@@ -499,24 +509,15 @@ static size_t maxArgWidth(const struct poptOption * opt,
 		len += strlen(opt->longName);
 	    }
 
-	    s = getArgDescrip(opt, translation_domain);
+	    argDescrip = getArgDescrip(opt, translation_domain);
 
-	    /* XXX Calculate no. of display characters. */
-	    if (s) {
-		size_t n;
-#ifdef POPT_WCHAR_HACK
-		const char * scopy = s;
-		mbstate_t t;
+	    if (argDescrip) {
 
-		memset ((void *)&t, 0, sizeof(t));	/* In initial state.  */
-		/* Determine number of display characters.  */
-		n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
-#else
-		n = strlen(s);
-#endif
 		/* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
-		if (!strchr(" =(", s[0])) len += sizeof("=")-1;
-		len += n;
+		if (!strchr(" =(", argDescrip[0])) len += sizeof("=")-1;
+
+		/* Adjust for (possible) wide characters. */
+		len += stringDisplayWidth(argDescrip);
 	    }
 
 	    if (F_ISSET(opt, OPTIONAL)) len += sizeof("[]")-1;
@@ -622,6 +623,7 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 /*@=type@*/
 	if (fn == NULL) return len;
 	if (strchr(fn, '/')) fn = strrchr(fn, '/') + 1;
+	/* XXX POPT_fprintf not needed for argv[0] display. */
 	fprintf(fp, " %s", fn);
 	len += strlen(fn) + 1;
     }
@@ -679,21 +681,12 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
     }
 
     if (argDescrip) {
-	size_t n;
-#ifdef POPT_WCHAR_HACK
-    /* XXX Calculate no. of display characters. */
-	const char * scopy = argDescrip;
-	mbstate_t t;
 
-	memset ((void *)&t, 0, sizeof(t));	/* In initial state.  */
-	/* Determine number of display characters.  */
-	n = mbsrtowcs (NULL, &scopy, strlen(scopy), &t);
-#else
-	n = strlen(argDescrip);
-#endif
 	/* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
 	if (!strchr(" =(", argDescrip[0])) len += sizeof("=")-1;
-	len += n;
+
+	/* Adjust for (possible) wide characters. */
+	len += stringDisplayWidth(argDescrip);
     }
 
     if ((columns->cur + len) > columns->max) {

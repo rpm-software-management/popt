@@ -1,4 +1,7 @@
 1.13 -> 1.14:
+    - jbj: add utf8_skip_data table[] to keep track of utf8 character widths.
+    - jbj: refactor the POPT_WCHAR_HACK into stringDisplayWidth().
+    - jbj: add POPT_dgettext() prototype.
     - jbj: add POPT_dgettext() for popt internal UTF-8 codeset (Takao Fujiwara).
     - jbj: add POPT_next_char(), backout POPT_fprintf() usage (for the moment).
     - jbj: finish POPT_ARG_ARGV implementation.

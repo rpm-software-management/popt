@@ -182,6 +182,11 @@ extern char *nl_langinfo (nl_item __item)
 #endif
 #endif
 
+#if defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
+char *POPT_dgettext(const char * dom, const char * str)
+	/*@*/;
+#endif
+
 char *POPT_prev_char (/*@returned@*/ const char *str)
 	/*@*/;
 
