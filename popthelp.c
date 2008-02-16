@@ -135,13 +135,16 @@ static size_t maxColumnWidth(FILE *fp)
 static inline size_t stringDisplayWidth(const char *s)
 {
     size_t n = strlen(s);
-
 #ifdef	POPT_WCHAR_HACK
     mbstate_t t;
 
     memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
     /* Determine number of display characters.  */
     n = mbsrtowcs (NULL, &s, n, &t);
+#else
+    n = 0;
+    for (; *s; s = POPT_next_char(s));
+	n++;
 #endif
 
     return n;
@@ -460,10 +463,19 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    ch = POPT_prev_char (ch);
 	ch = POPT_next_char(ch);
 
-	sprintf(format, "%%.%ds\n%%%ds", (int) (ch - help), (int) indentLength);
-	/*@-formatconst@*/
-	fprintf(fp, format, help, " ");
-	/*@=formatconst@*/
+	/*
+	 *  XXX strdup is necessary to add NUL terminator so that an unknown
+	 *  no. of (possible) multi-byte characters can be displayed.
+	 */
+	{   char * fmthelp = xstrdup(help);
+	    fmthelp[ch - help] = '\0';
+	    sprintf(format, "%%s\n%%%ds", (int) indentLength);
+	    /*@-formatconst@*/
+	    xx = POPT_fprintf(fp, format, fmthelp, " ");
+	    /*@=formatconst@*/
+	    free(fmthelp);
+	}
+
 	help = ch;
 	while (_isspaceptr(help) && *help)
 	    help = POPT_next_char(help);
@@ -616,7 +628,7 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
     size_t len = (size_t)6;
     const char * fn;
 
-    fprintf(fp, POPT_("Usage:"));
+    POPT_fprintf(fp, POPT_("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {
 /*@-type@*/	/* LCL: wazzup? */
 	fn = con->optionStack->argv[0];
@@ -637,9 +649,9 @@ void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
 
     (void) showHelpIntro(con, fp);
     if (con->otherHelp)
-	fprintf(fp, " %s\n", con->otherHelp);
+	POPT_fprintf(fp, " %s\n", con->otherHelp);
     else
-	fprintf(fp, " %s\n", POPT_("[OPTION...]"));
+	POPT_fprintf(fp, " %s\n", POPT_("[OPTION...]"));
 
     if (columns) {
 	columns->cur = maxArgWidth(con->options, NULL);
