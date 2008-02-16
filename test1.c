@@ -42,13 +42,13 @@ static int aInt = 271828;
 /*@unchecked@*/
 static int bInt = 271828;
 /*@unchecked@*/
-static long aLong = 738905609LL;
+static long aLong = 738905609L;
 /*@unchecked@*/
-static long bLong = 738905609LL;
+static long bLong = 738905609L;
 /*@unchecked@*/
-static long long aLongLong = 738905609L;
+static long long aLongLong = 738905609LL;
 /*@unchecked@*/
-static long long bLongLong = 738905609L;
+static long long bLongLong = 738905609LL;
 /*@unchecked@*/
 static float aFloat = 3.1415926535;
 /*@unchecked@*/

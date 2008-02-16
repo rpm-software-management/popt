@@ -15,7 +15,6 @@
 #+bounds
 -bufferoverflowhigh
 
--bitwisesigned
 -branchstate
 
 # --- +partial artifacts
@@ -41,4 +40,3 @@
 # --- not-yet at standard level
 -boolops		# 127
 -predboolint		# 42
-+ignorequals		# 30

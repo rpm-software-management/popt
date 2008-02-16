@@ -35,8 +35,8 @@
 #define	POPT_ARG_DOUBLE		 9U	/*!< arg ==> double */
 #define	POPT_ARG_LONGLONG	 10U	/*!< arg ==> long long */
 
-#define POPT_ARG_MAINCALL	16+11U	/*!< EXPERIMENTAL: return (*arg) (argc, argv) */
-#define	POPT_ARG_ARGV		16+12U	/*!< (unimplemented): dupe'd arg appended to realloc'd argv array. */
+#define POPT_ARG_MAINCALL	16U+11U	/*!< EXPERIMENTAL: return (*arg) (argc, argv) */
+#define	POPT_ARG_ARGV		12U	/*!< dupe'd arg appended to realloc'd argv array. */
 
 #define POPT_ARG_MASK		0x0000FFFFU
 /*@}*/

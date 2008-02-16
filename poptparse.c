@@ -61,7 +61,7 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     int rc = POPT_ERROR_MALLOC;
 
     if (argv == NULL) return rc;
-    buf = bufOrig = calloc(1, buflen);
+    buf = bufOrig = calloc((size_t)1, buflen);
     if (buf == NULL) {
 	free(argv);
 	return rc;
@@ -180,7 +180,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp, /*@unused@*/ int flags)
 	if (*q == '\0') {
 	    /* single command line option (ie, no name=val, just name) */
 	    q[-1] = '\0';		/* kill off newline from fgets() call */
-	    argvlen += (t = q - p) + (sizeof(" --")-1);
+	    argvlen += (t = (size_t)(q - p)) + (sizeof(" --")-1);
 	    if (argvlen >= maxargvlen) {
 		maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
 		argstr = realloc(argstr, maxargvlen);
@@ -208,7 +208,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp, /*@unused@*/ int flags)
 	    *x = '\0';	/* null out last char if space (including fgets() NL) */
 
 	/* rest of line accept */
-	t = x - p;
+	t = (size_t)(x - p);
 	argvlen += t + (sizeof("' --='")-1);
 	if (argvlen >= maxargvlen) {
 	    maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;

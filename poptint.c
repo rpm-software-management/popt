@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include "poptint.h"
 
+/*@-varuse +charint +ignoresigns @*/
 /*@unchecked@*/ /*@observer@*/
 static const unsigned char utf8_skip_data[256] = {
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -13,6 +14,7 @@ static const unsigned char utf8_skip_data[256] = {
     2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,6,6,1,1
 };
+/*@=varuse =charint =ignoresigns @*/
 
 #if defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
 /*
@@ -135,7 +137,7 @@ strdup_vprintf (const char *format, va_list ap)
     va_copy(apc, ap);	/* XXX linux amd64/ppc needs a copy. */
 /*@=noeffectuncon =unrecog @*/
 
-    buffer = calloc(sizeof(*buffer), vsnprintf (&c, 1, format, ap) + 1);
+    buffer = calloc(sizeof(*buffer), (size_t)vsnprintf (&c, (size_t)1, format, ap) + 1);
     if (buffer != NULL)
 	xx = vsprintf(buffer, format, apc);
 
@@ -152,7 +154,7 @@ POPT_prev_char (const char *str)
 
     while (1) {
 	p--;
-	if ((*p & 0xc0) != (char)0x80)
+	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
 	    return (char *)p;
     }
 }
@@ -162,11 +164,12 @@ POPT_next_char (const char *str)
 {
     char *p = (char *)str;
 
-    while (1) {
+    while (*p != '\0') {
 	p++;
-	if ((*p & 0xc0) != (char)0x80)
-	    return (char *)p;
+	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
+	    break;
     }
+    return (char *)p;
 }
 
 int

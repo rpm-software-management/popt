@@ -173,7 +173,7 @@ poptContext poptGetContext(const char * name, int argc, const char ** argv,
     if (!(flags & POPT_CONTEXT_KEEP_FIRST))
 	con->os->next = 1;			/* skip argv[0] */
 
-    con->leftovers = calloc( (argc + 1), sizeof(*con->leftovers) );
+    con->leftovers = calloc( (size_t)(argc + 1), sizeof(*con->leftovers) );
 /*@-dependenttrans -assignexpose@*/	/* FIX: W2DO? */
     con->options = options;
 /*@=dependenttrans =assignexpose@*/
@@ -183,7 +183,7 @@ poptContext poptGetContext(const char * name, int argc, const char ** argv,
     con->execs = NULL;
     con->numExecs = 0;
     con->finalArgvAlloced = argc * 2;
-    con->finalArgv = calloc( con->finalArgvAlloced, sizeof(*con->finalArgv) );
+    con->finalArgv = calloc( (size_t)con->finalArgvAlloced, sizeof(*con->finalArgv) );
     con->execAbsolute = 1;
     con->arg_strip = NULL;
 
@@ -456,7 +456,8 @@ exit:
 }
 
 /*@observer@*/ /*@null@*/ static const struct poptOption *
-findOption(const struct poptOption * opt, /*@null@*/ const char * longName, int longNameLen,
+findOption(const struct poptOption * opt,
+		/*@null@*/ const char * longName, size_t longNameLen,
 		char shortName,
 		/*@null@*/ /*@out@*/ poptCallbackType * callback,
 		/*@null@*/ /*@out@*/ const void ** callbackData,
@@ -664,7 +665,7 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 	    srandom((unsigned)getpid());
 	    srandom((unsigned)random());
 	}
-	aLongLong = random() % (aLongLong > 0 ? aLongLong : -aLongLong);
+	aLongLong = (long long)(random() % (aLongLong > 0 ? aLongLong : -aLongLong));
 	aLongLong++;
     }
     if (LF_ISSET(NOT))
@@ -747,16 +748,16 @@ int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
 	aLong = ~aLong;
     switch (LF_ISSET(LOGICALOPS)) {
     case 0:
-	*arg = aLong;
+	*arg = (int) aLong;
 	break;
     case POPT_ARGFLAG_OR:
-	*arg |= aLong;
+	*arg |= (int) aLong;
 	break;
     case POPT_ARGFLAG_AND:
-	*arg &= aLong;
+	*arg &= (int) aLong;
 	break;
     case POPT_ARGFLAG_XOR:
-	*arg ^= aLong;
+	*arg ^= (int) aLong;
 	break;
     default:
 	return POPT_ERROR_BADOPERATION;
@@ -803,7 +804,7 @@ int poptGetNextOpt(poptContext con)
 	/* Process next long option */
 	if (!con->os->nextCharArg) {
 	    const char * optString;
-            int optStringLen;
+            size_t optStringLen;
 	    int thisopt;
 
 /*@-sizeoftype@*/
@@ -855,7 +856,7 @@ int poptGetNextOpt(poptContext con)
 		/* Check for "--long=arg" option. */
 		for (oe = optString; *oe && *oe != '='; oe++)
 		    {};
-		optStringLen = oe - optString;
+		optStringLen = (size_t)(oe - optString);
 		if (*oe == '=')
 		    longArg = oe + 1;
 
@@ -1010,15 +1011,15 @@ int poptGetNextOpt(poptContext con)
 			    return POPT_ERROR_BADOPERATION;
 		    } else
 		    if (poptArgType(opt) == POPT_ARG_LONG) {
-			if (aNUM > LONG_MAX || aNUM < LONG_MIN)
+			if (aNUM > (long long)LONG_MAX || aNUM < (long long)LONG_MIN)
 			    return POPT_ERROR_OVERFLOW;
-			if (poptSaveLong(arg.longp, opt->argInfo, aNUM))
+			if (poptSaveLong(arg.longp, opt->argInfo, (long)aNUM))
 			    return POPT_ERROR_BADOPERATION;
 		    } else
 		    if (poptArgType(opt) == POPT_ARG_INT) {
-			if (aNUM > INT_MAX || aNUM < INT_MIN)
+			if (aNUM > (long long)INT_MAX || aNUM < (long long)INT_MIN)
 			    return POPT_ERROR_OVERFLOW;
-			if (poptSaveInt(arg.intp, opt->argInfo, aNUM))
+			if (poptSaveInt(arg.intp, opt->argInfo, (long)aNUM))
 			    return POPT_ERROR_BADOPERATION;
 		    } else
 			return POPT_ERROR_BADOPERATION;
@@ -1050,7 +1051,7 @@ int poptGetNextOpt(poptContext con)
 			    return POPT_ERROR_OVERFLOW;
 			if ((FLT_MIN - _ABS(aDouble)) > DBL_EPSILON)
 			    return POPT_ERROR_OVERFLOW;
-			arg.floatp[0] = aDouble;
+			arg.floatp[0] = (float) aDouble;
 		    }
 		}   /*@switchbreak@*/ break;
 		case POPT_ARG_MAINCALL:
@@ -1060,7 +1061,7 @@ int poptGetNextOpt(poptContext con)
 		    /*@switchbreak@*/ break;
 		default:
 		    fprintf(stdout,
-			POPT_("option type (%d) not implemented in popt\n"),
+			POPT_("option type (%u) not implemented in popt\n"),
 			poptArgType(opt));
 		    exit(EXIT_FAILURE);
 		    /*@notreached@*/ /*@switchbreak@*/ break;

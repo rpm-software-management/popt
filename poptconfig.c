@@ -107,15 +107,17 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	return (errno == ENOENT ? 0 : POPT_ERROR_ERRNO);
 
     fileLength = lseek(fd, 0, SEEK_END);
-    if (fileLength == -1 || lseek(fd, 0, 0) == -1) {
+    if (fileLength == (off_t)-1 || lseek(fd, 0, 0) == (off_t)-1) {
 	rc = errno;
 	(void) close(fd);
 	errno = rc;
 	return POPT_ERROR_ERRNO;
     }
 
-    file = malloc(fileLength + 1);
-    if (file == NULL || read(fd, (char *)file, fileLength) != fileLength) {
+    file = malloc((size_t)fileLength + 1);
+    if (file == NULL
+     || read(fd, (char *)file, (size_t)fileLength) != (ssize_t)fileLength)
+    {
 	rc = errno;
 	(void) close(fd);
 	errno = rc;
@@ -128,7 +130,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	return POPT_ERROR_ERRNO;
     }
 
-    dst = buf = malloc(fileLength + 1);
+    dst = buf = malloc((size_t)fileLength + 1);
     if (dst == NULL)
 	return POPT_ERROR_ERRNO;
 
