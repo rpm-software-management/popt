@@ -304,8 +304,9 @@ static int handleExec(/*@special@*/ poptContext con,
 
 /* Only one of longName, shortName may be set at a time */
 static int handleAlias(/*@special@*/ poptContext con,
-		/*@null@*/ const char * longName, char shortName,
-		/*@exposed@*/ /*@null@*/ const char * nextCharArg)
+		/*@null@*/ const char * longName, size_t longNameLen,
+		char shortName,
+		/*@exposed@*/ /*@null@*/ const char * nextArg)
 	/*@uses con->aliases, con->numAliases, con->optionStack, con->os,
 		con->os->currAlias, con->os->currAlias->option.longName @*/
 	/*@modifies con @*/
@@ -315,9 +316,11 @@ static int handleAlias(/*@special@*/ poptContext con,
     int i;
 
     if (item) {
-	if (longName && (item->option.longName &&
-		!strcmp(longName, item->option.longName)))
+	if (longName && item->option.longName
+	 && longNameLen == strlen(item->option.longName)
+	 && !strncmp(longName, item->option.longName, longNameLen))
 	    return 0;
+	else
 	if (shortName && shortName == item->option.shortName)
 	    return 0;
     }
@@ -327,10 +330,14 @@ static int handleAlias(/*@special@*/ poptContext con,
 
     for (i = con->numAliases - 1; i >= 0; i--) {
 	item = con->aliases + i;
-	if (longName && !(item->option.longName &&
-			!strcmp(longName, item->option.longName)))
-	    continue;
-	else if (shortName != item->option.shortName)
+	if (longName) {
+	    if (item->option.longName == NULL)
+		continue;
+	    if (longNameLen != strlen(item->option.longName))
+		continue;
+	    if (strncmp(longName, item->option.longName, longNameLen))
+		continue;
+	} else if (shortName != item->option.shortName)
 	    continue;
 	break;
     }
@@ -339,8 +346,8 @@ static int handleAlias(/*@special@*/ poptContext con,
     if ((con->os - con->optionStack + 1) == POPT_OPTION_DEPTH)
 	return POPT_ERROR_OPTSTOODEEP;
 
-    if (nextCharArg && *nextCharArg)
-	con->os->nextCharArg = nextCharArg;
+    if (longName == NULL && nextArg && *nextArg)
+	con->os->nextCharArg = nextArg;
 
     con->os++;
     con->os->next = 0;
@@ -348,8 +355,20 @@ static int handleAlias(/*@special@*/ poptContext con,
     con->os->nextArg = NULL;
     con->os->nextCharArg = NULL;
     con->os->currAlias = con->aliases + i;
-    rc = poptDupArgv(con->os->currAlias->argc, con->os->currAlias->argv,
-		&con->os->argc, &con->os->argv);
+    {	const char ** av;
+	int ac = con->os->currAlias->argc;
+	/* Append --foo=bar arg to alias argv array (if present). */ 
+	if (longName && nextArg && *nextArg) {
+	    int i;
+	    av = alloca((ac + 1 + 1) * sizeof(*av));
+	    for (i = 0; i < ac; i++)
+		av[i] = con->os->currAlias->argv[i];
+	    av[ac++] = nextArg;
+	    av[ac] = NULL;
+	} else
+	    av = con->os->currAlias->argv;
+	rc = poptDupArgv(ac, av, &con->os->argc, &con->os->argv);
+    }
     con->os->argb = NULL;
 
     return (rc ? rc : 1);
@@ -861,8 +880,10 @@ int poptGetNextOpt(poptContext con)
 		    longArg = oe + 1;
 
 		/* XXX aliases with arg substitution need "--alias=arg" */
-		if (handleAlias(con, optString, '\0', NULL))
+		if (handleAlias(con, optString, optStringLen, '\0', longArg)) {
+		    longArg = NULL;
 		    continue;
+		}
 
 		if (handleExec(con, optString, '\0'))
 		    continue;
@@ -891,7 +912,7 @@ int poptGetNextOpt(poptContext con)
 
 	    con->os->nextCharArg = NULL;
 
-	    if (handleAlias(con, NULL, *origOptString, origOptString + 1))
+	    if (handleAlias(con, NULL, 0, *origOptString, origOptString + 1))
 		continue;
 
 	    if (handleExec(con, NULL, *origOptString)) {
