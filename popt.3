@@ -125,6 +125,7 @@ lfB lfR lfR.
 Value	Description	arg Type
 POPT_ARG_NONE	No argument expected	int
 POPT_ARG_STRING	No type checking to be performed	char *
+POPT_ARG_ARGV	No type checking to be performed	char **
 POPT_ARG_INT	An integer argument is expected	int
 POPT_ARG_LONG	A long integer is expected	long
 POPT_ARG_LONGLONG	A long long integer is expected	long long
@@ -150,7 +151,10 @@ specified, \fB-longopt\fR is accepted as well.
 .RI "program variables when the option is used. If " arg " is " 
 .BR NULL ", it is ignored and popt takes no special action. " 
 Otherwise it should point to a variable of the type indicated in the 
-right-most column of the table above.
+.RB "right-most column of the table above. A " POPT_ARG_ARGV " arg will
+(re-)allocate an array of char * string pointers, append the string argument, and add a
+.BR NULL " sentinel at the end of the array as needed."
+.RB "The target char ** address of a " POPT_ARG_ARGV " arg should be initialized to " NULL "."
 .sp
 .RI "If the option takes no argument (" argInfo " is " 
 .BR POPT_ARG_NONE "), the variable pointed to by " 
@@ -159,7 +163,7 @@ will perhaps not escape the attention of hunt-and-peck typists that
 .RB "the value of " POPT_ARG_NONE " is 0.)  If the option does take "
 an argument, the variable that 
 .IR arg " points to is updated to reflect the value of the argument." 
-.RB "Any string is acceptable for " POPT_ARG_STRING " arguments, but "
+.RB "Any string is acceptable for " POPT_ARG_STRING " and " POPT_ARG_ARGV " arguments, but "
 .BR POPT_ARG_INT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", " POPT_ARG_FLOAT ", and "
 .BR POPT_ARG_DOUBLE " are converted to the appropriate type, and an "
 error returned if the conversion fails.
@@ -192,8 +196,8 @@ arguments.
 .sp
 .RB "If popt should automatically provide " --usage " and " --help " (" -? ")
 .RB "options, one line in the table should be the macro " POPT_AUTOHELP ".
-.RB "This macro includes another option table (via " POPT_ARG_INCLUDE_TABLE;
-see below) in the main one which provides the table entries for these
+.RB "This macro includes another option table (via " POPT_ARG_INCLUDE_TABLE
+; see below) in the main one which provides the table entries for these
 .RB "arguments. When " --usage " or " --help " are passed to programs which
 use popt's automatical help, popt displays the appropriate message on 
 stderr as soon as it finds the option, and exits the program with a
@@ -670,21 +674,21 @@ int main(int argc, char *argv[]) {
    poptContext optCon;   /* context for parsing command-line options */
 
    struct poptOption optionsTable[] = {
-	    { "bps", 'b', POPT_ARG_INT, &speed, 0,
-		"signaling rate in bits-per-second", "BPS" },
-	    { "crnl", 'c', 0, 0, 'c',
-		"expand cr characters to cr/lf sequences" },
-	    { "hwflow", 'h', 0, 0, 'h',
-		"use hardware (RTS/CTS) flow control" },
-	    { "noflow", 'n', 0, 0, 'n',
-		"use no flow control" },
-	    { "raw", 'r', 0, &raw, 0,
-		"don't perform any character conversions" },
-	    { "swflow", 's', 0, 0, 's',
-		"use software (XON/XOF) flow control" } ,
-	    POPT_AUTOHELP
-	    { NULL, 0, 0, NULL, 0 }
-   };
+      { "bps", 'b', POPT_ARG_INT, &speed, 0,
+	"signaling rate in bits-per-second", "BPS" },
+      { "crnl", 'c', 0, 0, 'c',
+	"expand cr characters to cr/lf sequences", NULL },
+      { "hwflow", 'h', 0, 0, 'h',
+	"use hardware (RTS/CTS) flow control", NULL },
+      { "noflow", 'n', 0, 0, 'n',
+	"use no flow control", NULL },
+      { "raw", 'r', 0, &raw, 0,
+	"don't perform any character conversions", NULL },
+      { "swflow", 's', 0, 0, 's',
+	"use software (XON/XOF) flow control", NULL } ,
+      POPT_AUTOHELP
+      { NULL, 0, 0, NULL, 0 }
+    };
 
    optCon = poptGetContext(NULL, argc, argv, optionsTable, 0);
    poptSetOtherOptionHelp(optCon, "[OPTIONS]* <port>");
@@ -697,18 +701,18 @@ int main(int argc, char *argv[]) {
    /* Now do options processing, get portname */
    while ((c = poptGetNextOpt(optCon)) >= 0) {
       switch (c) {
-         case 'c': 
-            buf[i++] = 'c';         
-            break;
-         case 'h': 
-            buf[i++] = 'h';
-            break;
-         case 's':
-            buf[i++] = 's';
-            break;
-         case 'n':
-            buf[i++] = 'n';
-            break;
+       case 'c': 
+          buf[i++] = 'c';         
+          break;
+       case 'h': 
+          buf[i++] = 'h';
+          break;
+       case 's':
+          buf[i++] = 's';
+          break;
+       case 'n':
+          buf[i++] = 'n';
+          break;
       }
    }
    portname = poptGetArg(optCon);

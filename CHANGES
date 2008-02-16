@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: popt.3: add POPT_ARG_ARGV description.
     - jbj: use NUL terminator to align help with (possible) multibyte chars.
     - jbj: add utf8_skip_data table[] to keep track of utf8 character widths.
     - jbj: refactor the POPT_WCHAR_HACK into stringDisplayWidth().
