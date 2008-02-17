@@ -99,6 +99,7 @@ run test1 "test1 - 43" "arg1: 0 arg2: (none) oStr: yadda" --optional=yadda
 run test1 "test1 - 44" "arg1: 0 arg2: (none) oStr: yadda" --optional yadda
 run test1 "test1 - 45" "arg1: 0 arg2: (none) oStr: ping rest: pong" --optional=ping pong
 run test1 "test1 - 46" "arg1: 0 arg2: (none) oStr: ping rest: pong" --optional ping pong
+run test1 "test1 - 47" "arg1: 0 arg2: (none) aArgv: A B rest: C" --argv A --argv B C
 
 #run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
 #run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer

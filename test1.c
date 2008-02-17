@@ -143,7 +143,7 @@ static struct poptOption options[] = {
 	"POPT_ARGFLAG_RANDOM: experimental", NULL },
 
    { "argv", '\0', POPT_ARG_ARGV, &aArgv, 0,
-	"POPT_ARG_ARGV: experimental", NULL },
+	"POPT_ARG_ARGV: append arg to array (can be used multiple times", NULL},
 
   { "bitset", '\0', POPT_BIT_SET | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x4321,
 	"POPT_BIT_SET: |= 0x4321", 0},
@@ -283,6 +283,13 @@ int main(int argc, const char ** argv)
     if (aDouble != bDouble)
 	fprintf(stdout, " aDouble: %g", aDouble);
 /*@=realcompare@*/
+    if (aArgv != NULL) {
+	const char **av = aArgv;
+	const char * arg;
+	fprintf(stdout, " aArgv:");
+	while ((arg = *av++) != NULL)
+	    fprintf(stdout, " %s", arg);
+    }
     if (oStr != (char *)-1)
 	fprintf(stdout, " oStr: %s", (oStr ? oStr : "(none)"));
     if (singleDash)
