@@ -187,10 +187,10 @@ char *POPT_dgettext(const char * dom, const char * str)
 	/*@*/;
 #endif
 
-char *POPT_prev_char (/*@returned@*/ const char *str)
+const char *POPT_prev_char (/*@returned@*/ const char *str)
 	/*@*/;
 
-char *POPT_next_char (/*@returned@*/ const char *str)
+const char *POPT_next_char (/*@returned@*/ const char *str)
 	/*@*/;
 
 int   POPT_fprintf (FILE* stream, const char *format, ...)

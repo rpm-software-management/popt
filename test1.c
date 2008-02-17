@@ -192,7 +192,7 @@ static void resetVars(void)
 	int i;
 	for (i = 0; aArgv[i] != NULL; i++) {
 /*@-unqualifiedtrans@*/
-	    free(aArgv[i]);
+	    free((void *)aArgv[i]);
 /*@=unqualifiedtrans@*/
 	    aArgv[i] = NULL;
 	}

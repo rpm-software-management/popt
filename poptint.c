@@ -83,7 +83,7 @@ strdup_locale_from_utf8 (/*@null@*/ char *buffer)
 		    done = 1;
 		    /*@switchbreak@*/ break;
 		case E2BIG:
-		{   size_t used = pout - dest_str;
+		{   size_t used = (size_t)(pout - dest_str);
 		    dest_size *= 2;
 		    dest_str = realloc(dest_str, (dest_size + 1) * sizeof(*dest_str));
 		    if (dest_str == NULL) {
@@ -147,29 +147,29 @@ strdup_vprintf (const char *format, va_list ap)
 }
 /*@=mustmod@*/
 
-char *
+const char *
 POPT_prev_char (const char *str)
 {
-    char *p = (char *)str;
+    const char *p = str;
 
     while (1) {
 	p--;
 	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
-	    return (char *)p;
+	    return p;
     }
 }
 
-char *
+const char *
 POPT_next_char (const char *str)
 {
-    char *p = (char *)str;
+    const char *p = str;
 
     while (*p != '\0') {
 	p++;
 	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
 	    break;
     }
-    return (char *)p;
+    return p;
 }
 
 int

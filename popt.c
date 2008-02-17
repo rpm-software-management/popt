@@ -316,7 +316,7 @@ static int handleAlias(/*@special@*/ poptContext con,
     int i;
 
     if (item) {
-	if (longName && item->option.longName
+	if (longName && item->option.longName != NULL
 	 && longNameLen == strlen(item->option.longName)
 	 && !strncmp(longName, item->option.longName, longNameLen))
 	    return 0;
@@ -346,7 +346,7 @@ static int handleAlias(/*@special@*/ poptContext con,
     if ((con->os - con->optionStack + 1) == POPT_OPTION_DEPTH)
 	return POPT_ERROR_OPTSTOODEEP;
 
-    if (longName == NULL && nextArg && *nextArg)
+    if (longName == NULL && nextArg != NULL && *nextArg != '\0')
 	con->os->nextCharArg = nextArg;
 
     con->os++;
@@ -358,16 +358,21 @@ static int handleAlias(/*@special@*/ poptContext con,
     {	const char ** av;
 	int ac = con->os->currAlias->argc;
 	/* Append --foo=bar arg to alias argv array (if present). */ 
-	if (longName && nextArg && *nextArg) {
-	    int i;
-	    av = alloca((ac + 1 + 1) * sizeof(*av));
-	    for (i = 0; i < ac; i++)
-		av[i] = con->os->currAlias->argv[i];
-	    av[ac++] = nextArg;
-	    av[ac] = NULL;
+	if (longName && nextArg != NULL && *nextArg != '\0') {
+	    av = malloc((ac + 1 + 1) * sizeof(*av));
+	    if (av != NULL) {	/* XXX won't happen. */
+		for (i = 0; i < ac; i++) {
+		    av[i] = con->os->currAlias->argv[i];
+		}
+		av[ac++] = nextArg;
+		av[ac] = NULL;
+	    } else	/* XXX revert to old popt behavior if malloc fails. */
+		av = con->os->currAlias->argv;
 	} else
 	    av = con->os->currAlias->argv;
 	rc = poptDupArgv(ac, av, &con->os->argc, &con->os->argv);
+	if (av != NULL && av != con->os->currAlias->argv)
+	    free(av);
     }
     con->os->argb = NULL;
 

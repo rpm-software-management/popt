@@ -10,8 +10,8 @@
 
 #include "system.h"
 
-#define	POPT_USE_TIOCGWINSZ
-#ifdef	POPT_USE_TIOCGWINSZ
+#define        POPT_USE_TIOCGWINSZ
+#ifdef POPT_USE_TIOCGWINSZ
 #include <sys/ioctl.h>
 #endif
 
@@ -20,8 +20,6 @@
 #include <wchar.h>			/* for mbsrtowcs */
 /*@access mbstate_t @*/
 #endif
-
-
 #include "poptint.h"
 
 /*@access poptContext@*/
@@ -99,21 +97,21 @@ static struct poptOption poptHelpOptions2[] = {
 struct poptOption * poptHelpOptionsI18N = poptHelpOptions2;
 /*@=castfcnptr@*/
 
-#define	_POPTHELP_MAXLINE	((size_t)79)
+#define        _POPTHELP_MAXLINE       ((size_t)79)
 
 typedef struct columns_s {
     size_t cur;
     size_t max;
 } * columns_t;
 
-/**
+/** 
  * Return no. of columns in output window.
- * @param fp		FILE
- * @return		no. of columns
- */
+ * @param fp           FILE
+ * @return             no. of columns 
+ */ 
 static size_t maxColumnWidth(FILE *fp)
 	/*@*/
-{
+{   
     size_t maxcols = _POPTHELP_MAXLINE;
 #if defined(TIOCGWINSZ)
     struct winsize ws;
@@ -127,7 +125,7 @@ static size_t maxColumnWidth(FILE *fp)
     }
 #endif
     return maxcols;
-}
+}   
 
 /**
  * Determine number of display characters in a string.
@@ -190,8 +188,8 @@ getArgDescrip(const struct poptOption * opt,
 	/* Some strings need popt library, not application, i18n domain. */
 	if (opt == (poptHelpOptions + 1)
 	 || opt == (poptHelpOptions + 2)
-	 || !strcmp(opt->argDescrip,N_("Help options:"))
-	 || !strcmp(opt->argDescrip,N_("Options implemented via popt alias/exec:")))
+	 || !strcmp(opt->argDescrip, N_("Help options:"))
+	 || !strcmp(opt->argDescrip, N_("Options implemented via popt alias/exec:")))
 	    return POPT_(opt->argDescrip);
 
 	/* Use the application i18n domain. */
@@ -459,7 +457,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 
 	ch = help + lineLength - 1;
 	while (ch > help && !_isspaceptr(ch))
-	    ch = POPT_prev_char (ch);
+	    ch = POPT_prev_char(ch);
 	if (ch == help) break;		/* give up */
 	while (ch > (help + 1) && _isspaceptr(ch))
 	    ch = POPT_prev_char (ch);
