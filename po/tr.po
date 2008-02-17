@@ -1,13 +1,16 @@
+# Translation of popt to Turkish.
+# Nilgun Belma Buguner <nilgun@technologist.com>, 2000.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.12\n"
+"Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-16 19:54-0500\n"
 "PO-Revision-Date: 2000-02-11 13:01+0200\n"
 "Last-Translator: Nilgun Belma Buguner <nilgun@technologist.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso8859-9\n"
+"Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: popt.c:35

@@ -1,19 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Spanish translations for popt.
+# Copyright (C) 2007 Free Software Foundation, Inc.
+# Leandro Lucarella <luca@linuxmendoza.org.ar>, 2007
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-16 19:54-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2007-12-28 12:22+0100\n"
 "Last-Translator: Leandro Lucarella <luca@linuxmendoza.org.ar>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: ENCODING\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: popt.c:35
 msgid "unknown errno"
@@ -22,7 +21,7 @@ msgstr "errno desconocido"
 #: popt.c:1090
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "tipo de opcin (%d) no implementada en popt\n"
+msgstr "tipo de opción (%d) no implementada en popt\n"
 
 #: popt.c:1294
 msgid "missing argument"
@@ -30,11 +29,11 @@ msgstr "falta argumento"
 
 #: popt.c:1296
 msgid "unknown option"
-msgstr "opcin desconocida"
+msgstr "opción desconocida"
 
 #: popt.c:1298
 msgid "mutually exclusive logical operations requested"
-msgstr "requerida operacin lgica mutuamente exclusiva"
+msgstr "requerida operación lógica mutuamente exclusiva"
 
 #: popt.c:1300
 msgid "opt->arg should not be NULL"
@@ -46,15 +45,15 @@ msgstr "alias anidados muy profundamente"
 
 #: popt.c:1304
 msgid "error in parameter quoting"
-msgstr "error en cita de parmetros"
+msgstr "error en cita de parámetros"
 
 #: popt.c:1306
 msgid "invalid numeric value"
-msgstr "valor numrico invlido"
+msgstr "valor numérico inválido"
 
 #: popt.c:1308
 msgid "number too large or too small"
-msgstr "nmero muy largo o muy pequeo"
+msgstr "número muy largo o muy pequeño"
 
 #: popt.c:1310
 msgid "memory allocation failed"
@@ -77,9 +76,8 @@ msgid "Terminate options"
 msgstr ""
 
 #: popthelp.c:90
-#, fuzzy
 msgid "Display option defaults in message"
-msgstr "Indica el modo de uso resumido"
+msgstr ""
 
 #: popthelp.c:191
 msgid "Help options:"
@@ -128,8 +126,8 @@ msgstr "ARG"
 
 #: popthelp.c:634
 msgid "Usage:"
-msgstr "Modo de Uso:"
+msgstr "Modo de uso:"
 
 #: popthelp.c:658
 msgid "[OPTION...]"
-msgstr "[OPCIN...]"
+msgstr "[OPCIÓN...]"

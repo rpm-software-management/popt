@@ -1,9 +1,16 @@
+# Swedish messages for popt.
+# Copyright © 2008 Free Software Foundation, Inc.
+# This file is distributed under the same license as the popt package.
+# Göran Uddeborg <goeran@uddeborg.se>, 2008.
+#
+# $Revision: 1.2 $
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.12\n"
+"Project-Id-Version: popt 1.13\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-16 19:54-0500\n"
-"PO-Revision-Date: 2007-06-12 22:00+0200\n"
+"PO-Revision-Date: 2008-01-30 22:22+0100\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +44,7 @@ msgstr "opt->arg får inte vara NULL"
 
 #: popt.c:1302
 msgid "aliases nested too deeply"
-msgstr "alias är nästlade för djupt"
+msgstr "alias är nästade för djupt"
 
 #: popt.c:1304
 msgid "error in parameter quoting"

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.12\n"
+"Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-16 19:54-0500\n"
 "PO-Revision-Date: Sun Jan 21 2001 04:30:32+0200\n"

@@ -1,17 +1,17 @@
 # Polish translation for popt.
-# Copyright (C) 2002 Free Software Foundation, Inc.
-# Jakub Bogusz <qboosh@pld-linux.org>, 2002.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# Jakub Bogusz <qboosh@pld.org.pl>, 2002.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.12\n"
+"Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-16 19:54-0500\n"
 "PO-Revision-Date: 2003-06-08 20:32+0200\n"
-"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
+"Last-Translator: Jakub Bogusz <qboosh@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: popt.c:35
@@ -33,43 +33,43 @@ msgstr "nieznana opcja"
 
 #: popt.c:1298
 msgid "mutually exclusive logical operations requested"
-msgstr "≈ºƒÖdanie wykluczajƒÖcych siƒô operacji"
+msgstr "ø±danie wykluczaj±cych siÍ operacji"
 
 #: popt.c:1300
 msgid "opt->arg should not be NULL"
-msgstr "opt->arg nie mo≈ºe byƒá NULL"
+msgstr "opt->arg nie moøe byÊ NULL"
 
 #: popt.c:1302
 msgid "aliases nested too deeply"
-msgstr "zbyt du≈ºe zag≈Çƒôbienie alias√≥w"
+msgstr "zbyt duøe zag≥Íbienie aliasÛw"
 
 #: popt.c:1304
 msgid "error in parameter quoting"
-msgstr "b≈ÇƒÖd w cytowaniu parametru"
+msgstr "b≥±d w cytowaniu parametru"
 
 #: popt.c:1306
 msgid "invalid numeric value"
-msgstr "b≈Çƒôdna warto≈õƒá liczbowa"
+msgstr "b≥Ídna warto∂Ê liczbowa"
 
 #: popt.c:1308
 msgid "number too large or too small"
-msgstr "liczba zbyt du≈ºa lub zbyt ma≈Ça"
+msgstr "liczba zbyt duøa lub zbyt ma≥a"
 
 #: popt.c:1310
 msgid "memory allocation failed"
-msgstr "b≈ÇƒÖd alokacji pamiƒôci"
+msgstr "b≥±d alokacji pamiÍci"
 
 #: popt.c:1314
 msgid "unknown error"
-msgstr "nieznany b≈ÇƒÖd"
+msgstr "nieznany b≥±d"
 
 #: popthelp.c:74 popthelp.c:86
 msgid "Show this help message"
-msgstr "Poka≈º tƒÖ pomoc"
+msgstr "Pokaø tÍ pomoc"
 
 #: popthelp.c:75 popthelp.c:87
 msgid "Display brief usage message"
-msgstr "Wy≈õwietl skr√≥cony spos√≥b u≈ºycia"
+msgstr "Wy∂wietl skrÛcony sposÛb uøycia"
 
 #: popthelp.c:76 popthelp.c:92
 #, fuzzy
@@ -78,7 +78,7 @@ msgstr "Opcje pomocy:"
 
 #: popthelp.c:90
 msgid "Display option defaults in message"
-msgstr "Wy≈õwietl domy≈õlne opcje w opisie"
+msgstr "Wy∂wietl domy∂lne opcje w opisie"
 
 #: popthelp.c:191
 msgid "Help options:"
@@ -111,7 +111,7 @@ msgstr "LONG"
 
 #: popthelp.c:209
 msgid "STRING"
-msgstr "≈ÅA≈ÉCUCH"
+msgstr "£A—CUCH"
 
 #: popthelp.c:210
 msgid "FLOAT"
@@ -127,7 +127,7 @@ msgstr "PARAM"
 
 #: popthelp.c:634
 msgid "Usage:"
-msgstr "U≈ºycie:"
+msgstr "Sk≥adnia:"
 
 #: popthelp.c:658
 msgid "[OPTION...]"
