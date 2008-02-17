@@ -1,3 +1,5 @@
+%define	_libdir	/%{_lib}
+
 Summary: A C library for parsing command line parameters.
 Name: popt
 Version: 1.14
@@ -22,7 +24,7 @@ shell-like rules.
 %setup -q
 
 %build
-%configure --libdir=/%{_lib}
+%configure
 make
 
 %install
@@ -47,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/popt.3*
 
 %changelog
+* Tue Dec 11 2007 Jeff Johnson <jbj@rpm5.org>
+- release popt-1.13 through rpm5.org.
+
 * Tue Jul 10 2007 Jeff Johnson <jbj@rpm5.org>
 - release popt-1.12 through rpm5.org.
 

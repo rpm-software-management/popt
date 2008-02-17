@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-11-14 15:19-0500\n"
+"POT-Creation-Date: 2008-02-16 19:54-0500\n"
 "PO-Revision-Date: 2007-08-13 22:32+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
 "Language-Team: Chinese (simplified) <translation-team-zh-cn@lists."
@@ -21,107 +21,117 @@ msgstr ""
 msgid "unknown errno"
 msgstr "未知的错误"
 
-#: popt.c:981
-#, c-format
-msgid "option type (%d) not implemented in popt\n"
+#: popt.c:1090
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt\n"
 msgstr "选项类别 (%d) 没有在 popt 中实现\n"
 
-#: popt.c:1187
+#: popt.c:1294
 msgid "missing argument"
 msgstr "缺少参数"
 
-#: popt.c:1189
+#: popt.c:1296
 msgid "unknown option"
 msgstr "未知的选项"
 
-#: popt.c:1191
+#: popt.c:1298
 msgid "mutually exclusive logical operations requested"
 msgstr "需要 XOR 逻辑运算"
 
-#: popt.c:1193
+#: popt.c:1300
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg 不应该为 NULL"
 
-#: popt.c:1195
+#: popt.c:1302
 msgid "aliases nested too deeply"
 msgstr "别名嵌套太深"
 
-#: popt.c:1197
+#: popt.c:1304
 msgid "error in parameter quoting"
 msgstr "参数引号错误"
 
-#: popt.c:1199
+#: popt.c:1306
 msgid "invalid numeric value"
 msgstr "无效的数值"
 
-#: popt.c:1201
+#: popt.c:1308
 msgid "number too large or too small"
 msgstr "数值太大或太小"
 
-#: popt.c:1203
+#: popt.c:1310
 msgid "memory allocation failed"
 msgstr "内存分配错误"
 
-#: popt.c:1207
+#: popt.c:1314
 msgid "unknown error"
 msgstr "未知的错误"
 
-#: popthelp.c:74 popthelp.c:85
+#: popthelp.c:74 popthelp.c:86
 msgid "Show this help message"
 msgstr "显示这个帮助信息"
 
-#: popthelp.c:75 popthelp.c:86
+#: popthelp.c:75 popthelp.c:87
 msgid "Display brief usage message"
 msgstr "显示简短的使用说明"
 
-#: popthelp.c:89
+#: popthelp.c:76 popthelp.c:92
+#, fuzzy
+msgid "Terminate options"
+msgstr "帮助选项:"
+
+#: popthelp.c:90
 msgid "Display option defaults in message"
 msgstr "在信息中显示默认的选项"
 
-#: popthelp.c:163
+#: popthelp.c:191
 msgid "Help options:"
 msgstr "帮助选项:"
 
-#: popthelp.c:164
+#: popthelp.c:192
 msgid "Options implemented via popt alias/exec:"
 msgstr "通过 popt alias/exec 实现的选项:"
 
-#: popthelp.c:172
+#: popthelp.c:200
 msgid "NONE"
 msgstr "NONE"
 
-#: popthelp.c:174
+#: popthelp.c:202
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:178
+#: popthelp.c:206
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:179
+#: popthelp.c:207
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:180
+#: popthelp.c:208
+#, fuzzy
+msgid "LONGLONG"
+msgstr "LONG"
+
+#: popthelp.c:209
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:181
+#: popthelp.c:210
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:182
+#: popthelp.c:211
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:184
+#: popthelp.c:214
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:597
+#: popthelp.c:634
 msgid "Usage:"
 msgstr "用法:"
 
-#: popthelp.c:619
+#: popthelp.c:658
 msgid "[OPTION...]"
 msgstr "[选项...]"

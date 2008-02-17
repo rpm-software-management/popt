@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.12\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2007-11-14 15:19-0500\n"
+"POT-Creation-Date: 2008-02-16 19:54-0500\n"
 "PO-Revision-Date: 2001-07-05 21:00-0500\n"
 "Last-Translator: Eugene Kanter <eugene@blackcatlinux.com>\n"
 "Language-Team: Black Cat Linux Team <blackcat-support@blackcatlinux.com>\n"
@@ -14,107 +14,116 @@ msgstr ""
 msgid "unknown errno"
 msgstr "неизвестный номер ошибки"
 
-#: popt.c:981
-#, c-format
-msgid "option type (%d) not implemented in popt\n"
+#: popt.c:1090
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt\n"
 msgstr "обработка параметра (%d) в popt не предусмотрена\n"
 
-#: popt.c:1187
+#: popt.c:1294
 msgid "missing argument"
 msgstr "пропущен аргумент"
 
-#: popt.c:1189
+#: popt.c:1296
 msgid "unknown option"
 msgstr "неизвестный параметр"
 
-#: popt.c:1191
+#: popt.c:1298
 msgid "mutually exclusive logical operations requested"
 msgstr "запрошены взаимно исключающие логические операции"
 
-#: popt.c:1193
+#: popt.c:1300
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg не может быть NULL"
 
-#: popt.c:1195
+#: popt.c:1302
 msgid "aliases nested too deeply"
 msgstr "превышен уровень допустимой рекурсии подстановок"
 
-#: popt.c:1197
+#: popt.c:1304
 msgid "error in parameter quoting"
 msgstr "ошибкa помещения параметров в кавычки"
 
-#: popt.c:1199
+#: popt.c:1306
 msgid "invalid numeric value"
 msgstr "неправильное числовое значение"
 
-#: popt.c:1201
+#: popt.c:1308
 msgid "number too large or too small"
 msgstr "числовое значение за пределами предусмотренного"
 
-#: popt.c:1203
+#: popt.c:1310
 msgid "memory allocation failed"
 msgstr "ошибка выделения памяти"
 
-#: popt.c:1207
+#: popt.c:1314
 msgid "unknown error"
 msgstr "неизвестная ошибка"
 
-#: popthelp.c:74 popthelp.c:85
+#: popthelp.c:74 popthelp.c:86
 msgid "Show this help message"
 msgstr "Показать это сообщение"
 
-#: popthelp.c:75 popthelp.c:86
+#: popthelp.c:75 popthelp.c:87
 msgid "Display brief usage message"
 msgstr "Показать краткую инструкцию по использованию"
 
-#: popthelp.c:89
+#: popthelp.c:76 popthelp.c:92
+msgid "Terminate options"
+msgstr ""
+
+#: popthelp.c:90
 msgid "Display option defaults in message"
 msgstr "Показать параметры по умолчанию"
 
-#: popthelp.c:163
+#: popthelp.c:191
 msgid "Help options:"
 msgstr ""
 
-#: popthelp.c:164
+#: popthelp.c:192
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: popthelp.c:172
+#: popthelp.c:200
 msgid "NONE"
 msgstr "NONE"
 
-#: popthelp.c:174
+#: popthelp.c:202
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:178
+#: popthelp.c:206
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:179
+#: popthelp.c:207
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:180
+#: popthelp.c:208
+#, fuzzy
+msgid "LONGLONG"
+msgstr "LONG"
+
+#: popthelp.c:209
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:181
+#: popthelp.c:210
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:182
+#: popthelp.c:211
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:184
+#: popthelp.c:214
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:597
+#: popthelp.c:634
 msgid "Usage:"
 msgstr "Использование:"
 
-#: popthelp.c:619
+#: popthelp.c:658
 msgid "[OPTION...]"
 msgstr "[ПАРАМЕТР...]"
