@@ -344,8 +344,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	/* XXX --long always padded for alignment with/without "-X, ". */
 	sprintf(left, "    %s%s",
 		(poptArgType(opt) == POPT_ARG_MAINCALL ? "" :
-		(poptArgType(opt) == POPT_ARG_ARGV ? "" :
-		(F_ISSET(opt, ONEDASH) ? "-" : "--"))),
+		(F_ISSET(opt, ONEDASH) ? "-" : "--")),
 		opt->longName);
 #undef	prtlong
 

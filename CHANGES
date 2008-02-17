@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: display POPT_ARG_ARGV options in --help just like other options.
     - jbj: add test for POPT_ARG_ARGV handling.
     - jbj: fix: permit "--foo bar" and "--foo=bar" equivalent forms for aliases.
     - jbj: fix: tests 20 -> 23 require an explicit '--' arg separator now.
