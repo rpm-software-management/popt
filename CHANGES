@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: updated pl.po (Translation Project).
     - jbj: add new fi, th, zh_TW translations (Translation Project).
     - jbj: add "make updatepo" to simplify PO file maintenance.
     - jbj: display POPT_ARG_ARGV options in --help just like other options.
