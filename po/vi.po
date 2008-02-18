@@ -1,30 +1,30 @@
 # Vietnamese translation for POPT.
 # Copyright © 2008 Free Software Foundation, Inc.
-# This file is distributed under the same license as the popt-1.13 package
+# This file is distributed under the same license as the popt-1.14 package
 # Clytie Siddall <clytie@riverland.net.au>, 2007-2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.13\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-02-16 19:54-0500\n"
-"PO-Revision-Date: 2008-01-07 21:53+1030\n"
+"POT-Creation-Date: 2008-02-18 08:21-0500\n"
+"PO-Revision-Date: 2008-02-18 16:20+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: LocFactoryEditor 1.7b1\n"
+"X-Generator: LocFactoryEditor 1.7b3\n"
 
 #: popt.c:35
 msgid "unknown errno"
 msgstr "số hiệu lỗi không rõ"
 
 #: popt.c:1090
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "kiểu tùy chọn (%d) chưa được thực hiện trong popt\n"
+msgstr "kiểu tùy chọn (%u) chưa được thực hiện trong popt\n"
 
 #: popt.c:1294
 msgid "missing argument"
@@ -66,72 +66,70 @@ msgstr "lỗi cấp phát bộ nhớ"
 msgid "unknown error"
 msgstr "lỗi không rõ"
 
-#: popthelp.c:74 popthelp.c:86
+#: popthelp.c:74 popthelp.c:85
 msgid "Show this help message"
 msgstr "Xem thông điệp trợ giúp này"
 
-#: popthelp.c:75 popthelp.c:87
+#: popthelp.c:75 popthelp.c:86
 msgid "Display brief usage message"
 msgstr "Hiển thị thông điệp cách sử dụng ngắn"
 
-#: popthelp.c:76 popthelp.c:92
-#, fuzzy
-msgid "Terminate options"
-msgstr "Tùy chọn trợ giúp:"
-
-#: popthelp.c:90
+#: popthelp.c:89
 msgid "Display option defaults in message"
 msgstr "Hiển thị các giá trị mặc định của tùy chọn trong thông điệp"
 
-#: popthelp.c:191
+#: popthelp.c:91
+msgid "Terminate options"
+msgstr "Tùy chọn chấm dứt"
+
+#: popthelp.c:190
 msgid "Help options:"
 msgstr "Tùy chọn trợ giúp:"
 
-#: popthelp.c:192
+#: popthelp.c:191
 msgid "Options implemented via popt alias/exec:"
 msgstr "Các tùy chọn được thực hiện thông qua popt alias/exec:"
 
-#: popthelp.c:200
+#: popthelp.c:199
 msgid "NONE"
 msgstr "KHÔNG CÓ"
 
-#: popthelp.c:202
+#: popthelp.c:201
 msgid "VAL"
 msgstr "GIÁ TRỊ"
 
-#: popthelp.c:206
+#: popthelp.c:205
 msgid "INT"
 msgstr "SỐ NGUYÊN"
 
-#: popthelp.c:207
+#: popthelp.c:206
 msgid "LONG"
 msgstr "DÀI"
 
-#: popthelp.c:208
-#, fuzzy
+#: popthelp.c:207
 msgid "LONGLONG"
-msgstr "DÀI"
+msgstr "DÀIDÀI"
 
-#: popthelp.c:209
+#: popthelp.c:208
 msgid "STRING"
 msgstr "CHUỖI"
 
-#: popthelp.c:210
+#: popthelp.c:209
 msgid "FLOAT"
 msgstr "NỔI"
 
-#: popthelp.c:211
+#: popthelp.c:210
 msgid "DOUBLE"
 msgstr "ĐÔI"
 
-#: popthelp.c:214
+#: popthelp.c:213
 msgid "ARG"
 msgstr "ĐỐI SỐ"
 
-#: popthelp.c:634
+#: popthelp.c:633
 msgid "Usage:"
-msgstr "Cách sử dụng:"
+msgstr "Sử dụng:"
 
-#: popthelp.c:658
+#: popthelp.c:657
 msgid "[OPTION...]"
 msgstr "[TÙY_CHỌN...]"

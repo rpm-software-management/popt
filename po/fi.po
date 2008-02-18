@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.13\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-02-16 19:54-0500\n"
+"POT-Creation-Date: 2008-02-18 08:21-0500\n"
 "PO-Revision-Date: 2008-01-06 19:42+0200\n"
 "Last-Translator: Jorma Karvonen <karvjorm@users.sf.net>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -67,74 +67,74 @@ msgstr "muistin varaus ei onnistunut"
 msgid "unknown error"
 msgstr "tuntematon virhe"
 
-#: popthelp.c:74 popthelp.c:86
+#: popthelp.c:74 popthelp.c:85
 msgid "Show this help message"
 msgstr "Näytä tämä ohje"
 
-#: popthelp.c:75 popthelp.c:87
+#: popthelp.c:75 popthelp.c:86
 msgid "Display brief usage message"
 msgstr "Näytä lyhyt käyttöohje"
 
-#: popthelp.c:76 popthelp.c:92
+#: popthelp.c:89
+msgid "Display option defaults in message"
+msgstr "Näytä valitsinoletukset ohjeessa"
+
+#: popthelp.c:91
 #, fuzzy
 msgid "Terminate options"
 msgstr "Ohjevalitsimet:"
 
-#: popthelp.c:90
-msgid "Display option defaults in message"
-msgstr "Näytä valitsinoletukset ohjeessa"
-
-#: popthelp.c:191
+#: popthelp.c:190
 msgid "Help options:"
 msgstr "Ohjevalitsimet:"
 
-#: popthelp.c:192
+#: popthelp.c:191
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 "Valitsimet toteutettu ”popt alias”-määrittelyillä tai ”popt exec”-"
 "määrittelyillä:"
 
-#: popthelp.c:200
+#: popthelp.c:199
 msgid "NONE"
 msgstr "EI MITÄÄN"
 
-#: popthelp.c:202
+#: popthelp.c:201
 msgid "VAL"
 msgstr "ARVO"
 
-#: popthelp.c:206
+#: popthelp.c:205
 msgid "INT"
 msgstr "INT-KOKONAISLUKU"
 
-#: popthelp.c:207
+#: popthelp.c:206
 msgid "LONG"
 msgstr "LONG-KOKONAISLUKU"
 
-#: popthelp.c:208
+#: popthelp.c:207
 #, fuzzy
 msgid "LONGLONG"
 msgstr "LONG-KOKONAISLUKU"
 
-#: popthelp.c:209
+#: popthelp.c:208
 msgid "STRING"
 msgstr "MERKKIJONO"
 
-#: popthelp.c:210
+#: popthelp.c:209
 msgid "FLOAT"
 msgstr "FLOAT-LIUKULUKU"
 
-#: popthelp.c:211
+#: popthelp.c:210
 msgid "DOUBLE"
 msgstr "DOUBLE-LIUKULUKU"
 
-#: popthelp.c:214
+#: popthelp.c:213
 msgid "ARG"
 msgstr "ARGUMENTTI"
 
-#: popthelp.c:634
+#: popthelp.c:633
 msgid "Usage:"
 msgstr "Käyttö:"
 
-#: popthelp.c:658
+#: popthelp.c:657
 msgid "[OPTION...]"
 msgstr "[VALITSIN...]"

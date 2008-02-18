@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.13\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-02-16 19:54-0500\n"
+"POT-Creation-Date: 2008-02-18 08:21-0500\n"
 "PO-Revision-Date: 2008-01-30 22:22+0100\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -66,72 +66,72 @@ msgstr "minnesallokering misslyckades"
 msgid "unknown error"
 msgstr "okänt fel"
 
-#: popthelp.c:74 popthelp.c:86
+#: popthelp.c:74 popthelp.c:85
 msgid "Show this help message"
 msgstr "Visa denna hjälptext"
 
-#: popthelp.c:75 popthelp.c:87
+#: popthelp.c:75 popthelp.c:86
 msgid "Display brief usage message"
 msgstr "Visa en kortfattad användningstext"
 
-#: popthelp.c:76 popthelp.c:92
+#: popthelp.c:89
+msgid "Display option defaults in message"
+msgstr "Visa standardalternativ för flaggor i meddelande"
+
+#: popthelp.c:91
 #, fuzzy
 msgid "Terminate options"
 msgstr "Hjälpflaggor:"
 
-#: popthelp.c:90
-msgid "Display option defaults in message"
-msgstr "Visa standardalternativ för flaggor i meddelande"
-
-#: popthelp.c:191
+#: popthelp.c:190
 msgid "Help options:"
 msgstr "Hjälpflaggor:"
 
-#: popthelp.c:192
+#: popthelp.c:191
 msgid "Options implemented via popt alias/exec:"
 msgstr "Flaggor implementerade via popt-alias/exec:"
 
-#: popthelp.c:200
+#: popthelp.c:199
 msgid "NONE"
 msgstr "INGET"
 
-#: popthelp.c:202
+#: popthelp.c:201
 msgid "VAL"
 msgstr "VÄRDE"
 
-#: popthelp.c:206
+#: popthelp.c:205
 msgid "INT"
 msgstr "HELTAL"
 
-#: popthelp.c:207
+#: popthelp.c:206
 msgid "LONG"
 msgstr "LÅNG"
 
-#: popthelp.c:208
+#: popthelp.c:207
 #, fuzzy
 msgid "LONGLONG"
 msgstr "LÅNG"
 
-#: popthelp.c:209
+#: popthelp.c:208
 msgid "STRING"
 msgstr "STRÄNG"
 
-#: popthelp.c:210
+#: popthelp.c:209
 msgid "FLOAT"
 msgstr "FLYTTAL"
 
-#: popthelp.c:211
+#: popthelp.c:210
 msgid "DOUBLE"
 msgstr "DUBBEL"
 
-#: popthelp.c:214
+#: popthelp.c:213
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:634
+#: popthelp.c:633
 msgid "Usage:"
 msgstr "Användning:"
 
-#: popthelp.c:658
+#: popthelp.c:657
 msgid "[OPTION...]"
 msgstr "[FLAGGA...]"

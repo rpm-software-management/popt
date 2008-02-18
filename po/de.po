@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-02-16 19:54-0500\n"
+"POT-Creation-Date: 2008-02-18 08:21-0500\n"
 "PO-Revision-Date: 2007-02-17 21:00+0100\n"
 "Last-Translator: Robert Scheck <rpm@robert-scheck.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -63,72 +63,72 @@ msgstr "Speicherzuordnung fehlgeschlagen"
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
-#: popthelp.c:74 popthelp.c:86
+#: popthelp.c:74 popthelp.c:85
 msgid "Show this help message"
 msgstr "Zeigt diese Hilfe an"
 
-#: popthelp.c:75 popthelp.c:87
+#: popthelp.c:75 popthelp.c:86
 msgid "Display brief usage message"
 msgstr "Zeigt eine kurze Verwendungsinformation"
 
-#: popthelp.c:76 popthelp.c:92
+#: popthelp.c:89
+msgid "Display option defaults in message"
+msgstr "Zeigt die Standardeinstellungen an"
+
+#: popthelp.c:91
 #, fuzzy
 msgid "Terminate options"
 msgstr "Hilfe-Optionen:"
 
-#: popthelp.c:90
-msgid "Display option defaults in message"
-msgstr "Zeigt die Standardeinstellungen an"
-
-#: popthelp.c:191
+#: popthelp.c:190
 msgid "Help options:"
 msgstr "Hilfe-Optionen:"
 
-#: popthelp.c:192
+#: popthelp.c:191
 msgid "Options implemented via popt alias/exec:"
 msgstr "Optionen über popt alias/exec implementiert:"
 
-#: popthelp.c:200
+#: popthelp.c:199
 msgid "NONE"
 msgstr "NICHTS"
 
-#: popthelp.c:202
+#: popthelp.c:201
 msgid "VAL"
 msgstr "WERT"
 
-#: popthelp.c:206
+#: popthelp.c:205
 msgid "INT"
 msgstr "INTEGER"
 
-#: popthelp.c:207
+#: popthelp.c:206
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:208
+#: popthelp.c:207
 #, fuzzy
 msgid "LONGLONG"
 msgstr "LONG"
 
-#: popthelp.c:209
+#: popthelp.c:208
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:210
+#: popthelp.c:209
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:211
+#: popthelp.c:210
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:214
+#: popthelp.c:213
 msgid "ARG"
 msgstr "ARGUMENT"
 
-#: popthelp.c:634
+#: popthelp.c:633
 msgid "Usage:"
 msgstr "Verwendung:"
 
-#: popthelp.c:658
+#: popthelp.c:657
 msgid "[OPTION...]"
 msgstr "[OPTION...]"

@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: updated vi.po and zh_CN.po (Translation Project).
     - jbj: fix: keep the poptHelpOptions array exactly the same size.
     - jbj: updated pl.po (Translation Project).
     - jbj: add new fi, th, zh_TW translations (Translation Project).

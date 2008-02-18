@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-02-16 19:54-0500\n"
+"POT-Creation-Date: 2008-02-18 08:21-0500\n"
 "PO-Revision-Date: 2007-06-21 00:45+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -64,72 +64,72 @@ msgstr "a memóriafoglalás meghiúsult"
 msgid "unknown error"
 msgstr "ismeretlen hiba"
 
-#: popthelp.c:74 popthelp.c:86
+#: popthelp.c:74 popthelp.c:85
 msgid "Show this help message"
 msgstr "Ezen súgó megjelenítése"
 
-#: popthelp.c:75 popthelp.c:87
+#: popthelp.c:75 popthelp.c:86
 msgid "Display brief usage message"
 msgstr "Rövid használati utasítás megjelenítése"
 
-#: popthelp.c:76 popthelp.c:92
+#: popthelp.c:89
+msgid "Display option defaults in message"
+msgstr "Kapcsolók alapértelmezéseinek megjelenítése"
+
+#: popthelp.c:91
 #, fuzzy
 msgid "Terminate options"
 msgstr "Súgólehetőségek:"
 
-#: popthelp.c:90
-msgid "Display option defaults in message"
-msgstr "Kapcsolók alapértelmezéseinek megjelenítése"
-
-#: popthelp.c:191
+#: popthelp.c:190
 msgid "Help options:"
 msgstr "Súgólehetőségek:"
 
-#: popthelp.c:192
+#: popthelp.c:191
 msgid "Options implemented via popt alias/exec:"
 msgstr "A popt alias/exec segítségével megvalósított kapcsolók:"
 
-#: popthelp.c:200
+#: popthelp.c:199
 msgid "NONE"
 msgstr "NINCS"
 
-#: popthelp.c:202
+#: popthelp.c:201
 msgid "VAL"
 msgstr "ÉRTÉK"
 
-#: popthelp.c:206
+#: popthelp.c:205
 msgid "INT"
 msgstr "EGÉSZ"
 
-#: popthelp.c:207
+#: popthelp.c:206
 msgid "LONG"
 msgstr "HOSSZÚ"
 
-#: popthelp.c:208
+#: popthelp.c:207
 #, fuzzy
 msgid "LONGLONG"
 msgstr "HOSSZÚ"
 
-#: popthelp.c:209
+#: popthelp.c:208
 msgid "STRING"
 msgstr "SZÖVEG"
 
-#: popthelp.c:210
+#: popthelp.c:209
 msgid "FLOAT"
 msgstr "LEBEGŐ"
 
-#: popthelp.c:211
+#: popthelp.c:210
 msgid "DOUBLE"
 msgstr "DUPLA"
 
-#: popthelp.c:214
+#: popthelp.c:213
 msgid "ARG"
 msgstr "PAR"
 
-#: popthelp.c:634
+#: popthelp.c:633
 msgid "Usage:"
 msgstr "Használat:"
 
-#: popthelp.c:658
+#: popthelp.c:657
 msgid "[OPTION...]"
 msgstr "[KAPCSOLÓ...]"
