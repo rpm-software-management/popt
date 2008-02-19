@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.13\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-18 08:21-0500\n"
-"PO-Revision-Date: 2008-01-06 20:09+0700\n"
+"PO-Revision-Date: 2008-02-19 15:53+0700\n"
 "Last-Translator: Seksan Poltree <seksan.poltree@gmail.com>\n"
 "Language-Team: Thai <translation-team-th@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,9 +21,9 @@ msgid "unknown errno"
 msgstr "เกิด errno ที่ไม่รู้จัก"
 
 #: popt.c:1090
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "ตัวเลือกชนิด (%d) ยังไม่ถูกอิมพลีเมนต์ใน popt\n"
+msgstr "ตัวเลือกชนิด (%u) ไม่ถูกอิมพลีเมนต์ใน popt\n"
 
 #: popt.c:1294
 msgid "missing argument"
@@ -78,9 +78,8 @@ msgid "Display option defaults in message"
 msgstr "แสดงตัวเลือกมาตรฐานในข้อความ"
 
 #: popthelp.c:91
-#, fuzzy
 msgid "Terminate options"
-msgstr "ตัวเลือกความช่วยเหลือ:"
+msgstr "ตัวเลือกการสิ้นสุด:"
 
 #: popthelp.c:190
 msgid "Help options:"
@@ -107,9 +106,8 @@ msgid "LONG"
 msgstr "LONG"
 
 #: popthelp.c:207
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
 #: popthelp.c:208
 msgid "STRING"
