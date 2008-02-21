@@ -1,13 +1,13 @@
 # Dutch messages for popt.
 # This file is put in the public domain.
-# Tim Van Holder <tim.van.holder@telenet.be>, 2007.
+# Tim Van Holder <tim.van.holder@telenet.be>, 2007, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.12\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-18 08:21-0500\n"
-"PO-Revision-Date: 2007-12-29 16:14+0100\n"
+"PO-Revision-Date: 2008-02-20 19:26+0100\n"
 "Last-Translator: Tim Van Holder <tim.van.holder@telenet.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,9 +19,9 @@ msgid "unknown errno"
 msgstr "onbekend foutnummer (errno)"
 
 #: popt.c:1090
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "dit optietype (%d) is niet geïmplementeerd in popt\n"
+msgstr "dit optietype (%u) is niet geïmplementeerd in popt\n"
 
 #: popt.c:1294
 msgid "missing argument"
@@ -76,11 +76,9 @@ msgstr "Een korte gebruikssamenvatting tonen"
 msgid "Display option defaults in message"
 msgstr "De standaardwaarden van opties tonen in de tekst"
 
-# of "Help-opties:"?
 #: popthelp.c:91
-#, fuzzy
 msgid "Terminate options"
-msgstr "Hulp-opties:"
+msgstr "Opties beëindigen"
 
 # of "Help-opties:"?
 #: popthelp.c:190
@@ -108,9 +106,8 @@ msgid "LONG"
 msgstr "LONG"
 
 #: popthelp.c:207
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
 # TEKENREEKS lijkt me niet gepast; dus ofwel STRING behouden, ofwel TEKST
 #: popthelp.c:208
