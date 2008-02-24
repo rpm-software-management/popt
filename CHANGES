@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: updated sv.po (Translation Project).
     - jbj: updated {fi,nl}.po (Translation Project).
     - jbj: updated th.po (Translation Project).
     - rsc: avoid multilib file conflicts in generated doxygen.

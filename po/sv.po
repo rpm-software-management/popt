@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the popt package.
 # Göran Uddeborg <goeran@uddeborg.se>, 2008.
 #
-# $Revision: 1.2 $
+# $Revision: 1.4 $
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.13\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-18 08:21-0500\n"
-"PO-Revision-Date: 2008-01-30 22:22+0100\n"
+"PO-Revision-Date: 2008-02-23 20:15+0100\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -22,9 +22,9 @@ msgid "unknown errno"
 msgstr "okänt felnummer"
 
 #: popt.c:1090
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "flaggtypen (%d) är inte implementerad i popt\n"
+msgstr "flaggtypen (%u) är inte implementerad i popt\n"
 
 #: popt.c:1294
 msgid "missing argument"
@@ -79,9 +79,8 @@ msgid "Display option defaults in message"
 msgstr "Visa standardalternativ för flaggor i meddelande"
 
 #: popthelp.c:91
-#, fuzzy
 msgid "Terminate options"
-msgstr "Hjälpflaggor:"
+msgstr "Avsluta flaggor"
 
 #: popthelp.c:190
 msgid "Help options:"
@@ -108,9 +107,8 @@ msgid "LONG"
 msgstr "LÅNG"
 
 #: popthelp.c:207
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LÅNG"
+msgstr "LÅNGLÅNG"
 
 #: popthelp.c:208
 msgid "STRING"
