@@ -843,7 +843,8 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 
     if (opt != NULL)
     for (; (opt->longName || opt->shortName || opt->arg); opt++) {
-	if (opt->shortName && !poptArgType(opt)) {
+	if (!F_ISSET(opt, DOC_HIDDEN) && opt->shortName && !poptArgType(opt))
+	{
 	    /* Display shortName iff printable non-space. */
 	    if (isprint((int)opt->shortName) && opt->shortName != ' ')
 		s[strlen(s)] = opt->shortName;
