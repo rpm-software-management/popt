@@ -34,9 +34,10 @@
  */
 /*@exits@*/
 static void displayArgs(poptContext con,
-		/*@unused@*/ enum poptCallbackReason foo,
+		/*@unused@*/ UNUSED(enum poptCallbackReason foo),
 		struct poptOption * key, 
-		/*@unused@*/ const char * arg, /*@unused@*/ void * data)
+		/*@unused@*/ UNUSED(const char * arg),
+		/*@unused@*/ UNUSED(void * data))
 	/*@globals fileSystem@*/
 	/*@modifies fileSystem@*/
 {
@@ -645,7 +646,7 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
     return len;
 }
 
-void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ int flags)
+void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ UNUSED(int flags))
 {
     columns_t columns = calloc((size_t)1, sizeof(*columns));
     int xx;
@@ -866,7 +867,7 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
     return len;
 }
 
-void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ int flags)
+void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ UNUSED(int flags))
 {
     columns_t columns = calloc((size_t)1, sizeof(*columns));
     struct poptDone_s done_buf;

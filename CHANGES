@@ -1,4 +1,7 @@
 1.13 -> 1.14:
+    - jbj: test for <glob.h>, disable reading directory poptrc files if not.
+    - jbj: add __attribute__(__unused__) (Wayne Davidson<wayned@samba.org>).
+    - jbj: permit equal after short option (Wayne Davidson<wayned@samba.org>).
     - jbj: make sure that short options are printed only once with --usage.
     - jbj: don't display hidden short options with --usage.
     - jbj: updated sv.po (Translation Project).

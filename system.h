@@ -82,4 +82,9 @@ char * xstrdup (const char *str)
 #define	getenv(_s)	__secure_getenv(_s)
 #endif
 
+#ifndef __GNUC__
+#define __attribute__(x) 
+#endif
+#define UNUSED(x) x __attribute__((__unused__))
+
 #include "popt.h"

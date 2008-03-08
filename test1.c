@@ -6,8 +6,8 @@
 
 /*@unchecked@*/
 static int pass2 = 0;
-static void option_callback(/*@unused@*/ poptContext con,
-		/*@unused@*/ enum poptCallbackReason reason,
+static void option_callback(/*@unused@*/ UNUSED(poptContext con),
+		/*@unused@*/ UNUSED(enum poptCallbackReason reason),
 		const struct poptOption * opt,
 		char * arg, void * data)
 	/*@globals fileSystem @*/

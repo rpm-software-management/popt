@@ -21,7 +21,7 @@ AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 
 if test "X$CC" = Xgcc; then
-    CFLAGS="-Wall $CFLAGS"
+    CFLAGS="-Wall -W $CFLAGS"
 fi
 
 AC_GCC_TRADITIONAL
@@ -59,7 +59,7 @@ else
 fi
 AC_SUBST(TARGET)
 
-AC_CHECK_HEADERS(float.h libintl.h mcheck.h unistd.h langinfo.h)
+AC_CHECK_HEADERS(float.h glob.h libintl.h mcheck.h unistd.h langinfo.h)
 
 # For some systems we know that we have ld_version scripts.
 # Use it then as default.

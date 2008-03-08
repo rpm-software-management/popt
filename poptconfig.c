@@ -9,7 +9,10 @@
 #include "system.h"
 #include "poptint.h"
 #include <sys/stat.h>
+#if defined(HAVE_GLOB_H)
 #include <glob.h>
+#endif
+
 /*@access poptContext @*/
 
 /*@-compmempass@*/	/* FIX: item->option.longName kept, not dependent. */
@@ -170,7 +173,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
     return 0;
 }
 
-int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
+int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 {
     static const char _popt_sysconfdir[] = POPT_SYSCONFDIR "/popt";
     static const char _popt_etc[] = "/etc/popt";
@@ -188,11 +191,12 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
     rc = poptReadConfigFile(con, _popt_etc);
     if (rc) return rc;
 
+#if defined(HAVE_GLOB_H)
     if (!stat("/etc/popt.d", &s) && S_ISDIR(s.st_mode)) {
         glob_t g;
 /*@-moduncon -nullpass -type @*/ /* FIX: annotations for glob/globfree */
 	if (!glob("/etc/popt.d/*", 0, NULL, &g)) {
-            int i;
+            unsigned i;
 	    for (i=0; i<g.gl_pathc; i++) {
 		char *f=g.gl_pathv[i];
 		if (strstr(f, ".rpmnew") || strstr(f, ".rpmsave"))
@@ -210,6 +214,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ int useEnv)
 	}
 /*@=moduncon =nullpass =type @*/
     }
+#endif
 
     if ((home = getenv("HOME"))) {
 	fn = malloc(strlen(home) + 20);

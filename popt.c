@@ -644,8 +644,8 @@ static void poptStripArg(/*@special@*/ poptContext con, int which)
 /*@=compdef@*/
 }
 
-int poptSaveString(const char *** argvp, /*@unused@*/ unsigned int argInfo,
-		const char * val)
+int poptSaveString(const char *** argvp,
+		/*@unused@*/ UNUSED(unsigned int argInfo), const char * val)
 {
     poptArgv argv;
     int argc = 0;
@@ -937,6 +937,9 @@ int poptGetNextOpt(poptContext con)
 	    origOptString++;
 	    if (*origOptString != '\0')
 		con->os->nextCharArg = origOptString;
+#ifdef	NOTYET	/* XXX causes test 9 failure. */
+		con->os->nextCharArg = origOptString + (*origOptString == '=');
+#endif
 	}
 
 	if (opt == NULL) return POPT_ERROR_BADOPT;	/* XXX can't happen */
@@ -1217,7 +1220,7 @@ poptContext poptFreeContext(poptContext con)
 }
 
 int poptAddAlias(poptContext con, struct poptAlias alias,
-		/*@unused@*/ int flags)
+		/*@unused@*/ UNUSED(int flags))
 {
     struct poptItem_s item_buf;
     poptItem item = &item_buf;
