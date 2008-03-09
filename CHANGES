@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - rse: fix memcpy(3) based va_copy(3) fallbacks
     - jbj: fix: short option with "foo=bar" argument was mishandled.
 	(Wayne Davison<wayned@samba.org>).
     - jbj: rename _ABS to avoid collisions, define DBL_EPSILON if not present

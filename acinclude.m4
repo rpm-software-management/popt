@@ -82,9 +82,9 @@ AC_DEFUN([AC_CHECK_VA_COPY],[
     dnl #   6. check for assignment approach (assuming va_list is a pointer)
     __va_copy_check(ASP, [do { *(d) = *(s); } while (0)])
     dnl #   7. check for memory copying approach (assuming va_list is a struct)
-    __va_copy_check(CPS, [memcpy((void *)&(d), (void *)&(s)), sizeof((s))])
+    __va_copy_check(CPS, [memcpy((void *)&(d), (void *)&(s), sizeof((s)))])
     dnl #   8. check for memory copying approach (assuming va_list is a pointer)
-    __va_copy_check(CPP, [memcpy((void *)(d), (void *)(s)), sizeof(*(s))])
+    __va_copy_check(CPP, [memcpy((void *)(d), (void *)(s), sizeof(*(s)))])
     if test ".$ac_cv_va_copy" = .; then
         AC_ERROR([no working implementation found])
     fi
