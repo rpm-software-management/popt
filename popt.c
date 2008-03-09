@@ -901,6 +901,7 @@ int poptGetNextOpt(poptContext con)
 
 	    if (!opt) {
 		con->os->nextCharArg = origOptString + 1;
+		longArg = NULL;
 	    } else {
 		if (con->os == con->optionStack && F_ISSET(opt, STRIP))
 		{

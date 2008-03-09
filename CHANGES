@@ -1,4 +1,6 @@
 1.13 -> 1.14:
+    - jbj: fix: short option with "foo=bar" argument was mishandled.
+	(Wayne Davison<wayned@samba.org>).
     - jbj: rename _ABS to avoid collisions, define DBL_EPSILON if not present
 	(Wayne Davison<wayned@samba.org>).
     - jbj: test for <glob.h>, disable reading directory poptrc files if not.
