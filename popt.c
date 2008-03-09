@@ -932,10 +932,7 @@ int poptGetNextOpt(poptContext con)
 
 	    origOptString++;
 	    if (*origOptString != '\0')
-		con->os->nextCharArg = origOptString;
-#ifdef	NOTYET	/* XXX causes test 9 failure. */
 		con->os->nextCharArg = origOptString + (*origOptString == '=');
-#endif
 	}
 
 	if (opt == NULL) return POPT_ERROR_BADOPT;	/* XXX can't happen */

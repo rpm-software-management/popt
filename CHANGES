@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: enable equal after short option (Wayne Davison<wayned@samba.org>).
     - jbj: permit "#define POPT_fprintf fprintf" to lose the malloc'ing fprintf.
     - jbj: use vasprintf(3) when available (Wayne Davison<wayned@samba.org>).
     - jbj: study the mess with splint, remove annotations where possible.
