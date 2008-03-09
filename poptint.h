@@ -133,26 +133,9 @@ struct poptContext_s {
     pbm_set * arg_strip;
 };
 
-#ifdef HAVE_LIBINTL_H
-#include <libintl.h>
-#endif
-
-#if defined(HAVE_GETTEXT) && !defined(__LCLINT__)
-#define _(foo) gettext(foo)
+#if defined(POPT_fprintf)
+#define	POPT_dgettext	dgettext
 #else
-#define _(foo) foo
-#endif
-
-#if defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
-#define D_(dom, str) POPT_dgettext(dom, str)
-#define POPT_(foo) D_("popt", foo)
-#else
-#define D_(dom, str) str
-#define POPT_(foo) foo
-#endif
-
-#define N_(foo) foo
-
 #ifdef HAVE_ICONV
 #include <iconv.h>
 #if defined(__LCLINT__)
@@ -188,14 +171,36 @@ char *POPT_dgettext(const char * dom, const char * str)
 	/*@*/;
 #endif
 
+int   POPT_fprintf (FILE* stream, const char *format, ...)
+	/*@globals fileSystem @*/
+	/*@modifies stream, fileSystem @*/;
+#endif	/* !defined(POPT_fprintf) */
+
 const char *POPT_prev_char (/*@returned@*/ const char *str)
 	/*@*/;
 
 const char *POPT_next_char (/*@returned@*/ const char *str)
 	/*@*/;
 
-int   POPT_fprintf (FILE* stream, const char *format, ...)
-	/*@globals fileSystem @*/
-	/*@modifies stream, fileSystem @*/;
-
 #endif
+
+#ifdef HAVE_LIBINTL_H
+#include <libintl.h>
+#endif
+
+#if defined(HAVE_GETTEXT) && !defined(__LCLINT__)
+#define _(foo) gettext(foo)
+#else
+#define _(foo) foo
+#endif
+
+#if defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
+#define D_(dom, str) POPT_dgettext(dom, str)
+#define POPT_(foo) D_("popt", foo)
+#else
+#define D_(dom, str) str
+#define POPT_(foo) foo
+#endif
+
+#define N_(foo) foo
+

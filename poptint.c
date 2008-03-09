@@ -16,6 +16,33 @@ static const unsigned char utf8_skip_data[256] = {
 };
 /*@=varuse =charint =ignoresigns @*/
 
+const char *
+POPT_prev_char (const char *str)
+{
+    const char *p = str;
+
+    while (1) {
+	p--;
+	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
+	    return p;
+    }
+}
+
+const char *
+POPT_next_char (const char *str)
+{
+    const char *p = str;
+
+    while (*p != '\0') {
+	p++;
+	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
+	    break;
+    }
+    return p;
+}
+
+#if !defined(POPT_fprintf)	/* XXX lose all the goop ... */
+
 #if defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
 /*
  * Rebind a "UTF-8" codeset for popt's internal use.
@@ -123,42 +150,30 @@ strdup_locale_from_utf8 (/*@null@*/ char *buffer)
 }
 #endif
 
-const char *
-POPT_prev_char (const char *str)
-{
-    const char *p = str;
-
-    while (1) {
-	p--;
-	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
-	    return p;
-    }
-}
-
-const char *
-POPT_next_char (const char *str)
-{
-    const char *p = str;
-
-    while (*p != '\0') {
-	p++;
-	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
-	    break;
-    }
-    return p;
-}
-
 int
 POPT_fprintf (FILE * stream, const char * format, ...)
 {
     char * b = NULL, * ob = NULL;
-    size_t nb = (size_t)1;
     int rc;
     va_list ap;
 
+#if defined(HAVE_VASPRINTF)
     va_start(ap, format);
-    while ((b = realloc(b, nb)) != NULL) {
+    if ((rc = vasprintf(b, format, ap)) < 0)
+	b = NULL;
+    va_end(ap);
+#else
+    size_t nb = (size_t)1;
+
+    /* HACK: add +1 to the realloc no. of bytes "just in case". */
+    /* XXX Likely unneeded, the issues wrto vsnprintf(3) return b0rkage have
+     * to do with whether the final '\0' is counted (or not). The code
+     * below already adds +1 for the (possibly already counted) trailing NUL.
+     */
+    while ((b = realloc(b, nb+1)) != NULL) {
+	va_start(ap, format);
 	rc = vsnprintf(b, nb, format, ap);
+	va_end(ap);
 	if (rc > -1) {	/* glibc 2.1 */
 	    if ((size_t)rc < nb)
 		break;
@@ -167,7 +182,7 @@ POPT_fprintf (FILE * stream, const char * format, ...)
 	    nb += (nb < (size_t)100 ? (size_t)100 : nb);
 	ob = b;
     }
-    va_end(ap);
+#endif
 
     rc = 0;
     if (b != NULL) {
@@ -185,3 +200,5 @@ POPT_fprintf (FILE * stream, const char * format, ...)
 
     return rc;
 }
+
+#endif	/* !defined(POPT_fprintf) */
