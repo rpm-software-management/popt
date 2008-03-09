@@ -1,4 +1,6 @@
 1.13 -> 1.14:
+    - jbj: rename _ABS to avoid collisions, define DBL_EPSILON if not present
+	(Wayne Davison<wayned@samba.org>).
     - jbj: test for <glob.h>, disable reading directory poptrc files if not.
     - jbj: add __attribute__(__unused__) (Wayne Davison<wayned@samba.org>).
     - jbj: permit equal after short option (Wayne Davison<wayned@samba.org>).

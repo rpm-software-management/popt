@@ -1075,10 +1075,13 @@ int poptGetNextOpt(poptContext con)
 		    if (poptArgType(opt) == POPT_ARG_DOUBLE) {
 			arg.doublep[0] = aDouble;
 		    } else {
-#define _ABS(a)	((((a) - 0.0) < DBL_EPSILON) ? -(a) : (a))
-			if ((_ABS(aDouble) - FLT_MAX) > DBL_EPSILON)
+#ifndef DBL_EPSILON
+#define DBL_EPSILON 2.2204460492503131e-16
+#endif
+#define POPT_ABS(a)	((((a) - 0.0) < DBL_EPSILON) ? -(a) : (a))
+			if ((POPT_ABS(aDouble) - FLT_MAX) > DBL_EPSILON)
 			    return POPT_ERROR_OVERFLOW;
-			if ((FLT_MIN - _ABS(aDouble)) > DBL_EPSILON)
+			if ((FLT_MIN - POPT_ABS(aDouble)) > DBL_EPSILON)
 			    return POPT_ERROR_OVERFLOW;
 			arg.floatp[0] = (float) aDouble;
 		    }
