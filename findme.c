@@ -33,8 +33,7 @@ const char * POPT_findProgramPath(const char * argv0)
     do {
 	if ((chptr = strchr(start, ':')))
 	    *chptr = '\0';
-	sprintf(buf, "%s/%s", start, argv0);
-
+	(void) stpcpy(stpcpy(stpcpy(buf, start), "/"), argv0);
 	if (!access(buf, X_OK)) {
 	    free(pathbuf);
 	    return buf;

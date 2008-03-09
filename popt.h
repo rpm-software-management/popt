@@ -248,7 +248,8 @@ poptContext poptGetContext(
 		int argc, /*@dependent@*/ /*@keep@*/ const char ** argv,
 		/*@dependent@*/ /*@keep@*/ const struct poptOption * options,
 		unsigned int flags)
-	/*@*/;
+	/*@globals internalState @*/
+	/*@modifies internalState @*/;
 
 /** \ingroup popt
  * Reinitialize popt context.

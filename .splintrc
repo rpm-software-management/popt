@@ -14,7 +14,6 @@
 # --- in progress
 #+bounds
 -bufferoverflowhigh
-
 -branchstate
 
 # --- +partial artifacts
@@ -35,8 +34,7 @@
 # --- not-yet at checks level
 -mustfree		# 38
 -predboolptr		# 82
--usedef			# 7
 
 # --- not-yet at standard level
--boolops		# 127
--predboolint		# 42
+-boolops		# 124
+-predboolint		# 53

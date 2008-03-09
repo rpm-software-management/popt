@@ -55,7 +55,7 @@ strdup_locale_from_utf8 (/*@null@*/ char *buffer)
 /*@=type@*/
 #endif
 
-    if (codeset && strcmp(codeset, "UTF-8")
+    if (codeset != NULL && strcmp(codeset, "UTF-8") != 0
      && (fd = iconv_open(codeset, "UTF-8")) != (iconv_t)-1)
     {
 	char *pin = buffer;
@@ -74,7 +74,7 @@ strdup_locale_from_utf8 (/*@null@*/ char *buffer)
 	    *dest_str = '\0';
 	done = is_error = 0;
 	if (pout != NULL)
-	while (!done && !is_error) {
+	while (done == 0 && is_error == 0) {
 	    err = iconv(fd, &pin, &ib, &pout, &ob);
 
 	    if (err == (size_t)-1) {
@@ -123,30 +123,6 @@ strdup_locale_from_utf8 (/*@null@*/ char *buffer)
 }
 #endif
 
-/*@-mustmod@*/	/* LCL: can't see the ap modification. */
-static /*@only@*/ /*@null@*/ char *
-strdup_vprintf (const char *format, va_list ap)
-	/*@modifies ap @*/
-{
-    char *buffer;
-    char c;
-    va_list apc;
-    int xx;
-
-/*@-noeffectuncon -unrecog @*/
-    va_copy(apc, ap);	/* XXX linux amd64/ppc needs a copy. */
-/*@=noeffectuncon =unrecog @*/
-
-    buffer = calloc(sizeof(*buffer), (size_t)vsnprintf (&c, (size_t)1, format, ap) + 1);
-    if (buffer != NULL)
-	xx = vsprintf(buffer, format, apc);
-
-    va_end(apc);
-
-    return buffer;
-}
-/*@=mustmod@*/
-
 const char *
 POPT_prev_char (const char *str)
 {
@@ -173,32 +149,39 @@ POPT_next_char (const char *str)
 }
 
 int
-POPT_fprintf (FILE* stream, const char *format, ...)
+POPT_fprintf (FILE * stream, const char * format, ...)
 {
-    int retval = 0;
-    va_list args;
-    char *buffer = NULL;
-#ifdef HAVE_ICONV
-    char *locale_str = NULL;
-#endif
+    char * b = NULL, * ob = NULL;
+    size_t nb = (size_t)1;
+    int rc;
+    va_list ap;
 
-    va_start (args, format);
-    buffer = strdup_vprintf(format, args);
-    va_end (args);
-    if (buffer == NULL)
-	return retval;
-
-#ifdef HAVE_ICONV
-    locale_str = strdup_locale_from_utf8(buffer);
-    if (locale_str) {
-	retval = fprintf(stream, "%s", locale_str);
-	free(locale_str);
-    } else
-#endif
-    {
-	retval = fprintf(stream, "%s", buffer);
+    va_start(ap, format);
+    while ((b = realloc(b, nb)) != NULL) {
+	rc = vsnprintf(b, nb, format, ap);
+	if (rc > -1) {	/* glibc 2.1 */
+	    if ((size_t)rc < nb)
+		break;
+	    nb = (size_t)(rc + 1);	/* precise buffer length known */
+	} else 		/* glibc 2.0 */
+	    nb += (nb < (size_t)100 ? (size_t)100 : nb);
+	ob = b;
     }
-    free (buffer);
+    va_end(ap);
 
-    return retval;
+    rc = 0;
+    if (b != NULL) {
+#ifdef HAVE_ICONV
+	ob = strdup_locale_from_utf8(b);
+	if (ob != NULL) {
+	    rc = fprintf(stream, "%s", ob);
+	    free(ob);
+	} else
+#endif
+	    rc = fprintf(stream, "%s", b);
+	free (b);
+    } else if (ob != NULL)
+	free(ob);
+
+    return rc;
 }

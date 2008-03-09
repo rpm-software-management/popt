@@ -9,8 +9,22 @@
 #include "system.h"
 #include "poptint.h"
 #include <sys/stat.h>
+
 #if defined(HAVE_GLOB_H)
 #include <glob.h>
+
+#if defined(__LCLINT__)
+/*@-declundef -exportheader -incondefs -protoparammatch -redecl -type @*/
+extern int glob (const char *__pattern, int __flags,
+		/*@null@*/ int (*__errfunc) (const char *, int),
+		/*@out@*/ glob_t *__pglob)
+	/*@globals errno, fileSystem @*/
+	/*@modifies *__pglob, errno, fileSystem @*/;
+	/* XXX only annotation is a white lie */
+extern void globfree (/*@only@*/ glob_t *__pglob)
+	/*@modifies *__pglob @*/;
+/*@=declundef =exportheader =incondefs =protoparammatch =redecl =type @*/
+#endif
 #endif
 
 /*@access poptContext @*/
@@ -117,7 +131,8 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	return POPT_ERROR_ERRNO;
     }
 
-    file = malloc((size_t)fileLength + 1);
+    if ((file = malloc((size_t)fileLength + 1)) != NULL)
+	*file = '\0';
     if (file == NULL
      || read(fd, (char *)file, (size_t)fileLength) != (ssize_t)fileLength)
     {
@@ -137,10 +152,8 @@ int poptReadConfigFile(poptContext con, const char * fn)
     if (dst == NULL)
 	return POPT_ERROR_ERRNO;
 
-    chptr = file;
     end = (file + fileLength);
-/*@-infloops@*/	/* LCL: can't detect chptr++ */
-    while (chptr < end) {
+    for (chptr = file; chptr < end; chptr++) {
 	switch (*chptr) {
 	  case '\n':
 	    *dst = '\0';
@@ -148,24 +161,20 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    while (*dst && _isspaceptr(dst)) dst++;
 	    if (*dst && *dst != '#')
 		configLine(con, dst);
-	    chptr++;
 	    /*@switchbreak@*/ break;
 	  case '\\':
-	    *dst++ = *chptr++;
-	    if (chptr < end) {
-		if (*chptr == '\n') 
-		    dst--, chptr++;	
-		    /* \ at the end of a line does not insert a \n */
-		else
-		    *dst++ = *chptr++;
+	    *dst = *chptr++;
+	    /* \ at the end of a line does not insert a \n */
+	    if (chptr < end  && *chptr != '\n') {
+		dst++;
+		*dst++ = *chptr;
 	    }
 	    /*@switchbreak@*/ break;
 	  default:
-	    *dst++ = *chptr++;
+	    *dst++ = *chptr;
 	    /*@switchbreak@*/ break;
 	}
     }
-/*@=infloops@*/
 
     free(file);
     free(buf);
@@ -193,12 +202,11 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 
 #if defined(HAVE_GLOB_H)
     if (!stat("/etc/popt.d", &s) && S_ISDIR(s.st_mode)) {
-        glob_t g;
-/*@-moduncon -nullpass -type @*/ /* FIX: annotations for glob/globfree */
-	if (!glob("/etc/popt.d/*", 0, NULL, &g)) {
-            unsigned i;
-	    for (i=0; i<g.gl_pathc; i++) {
-		char *f=g.gl_pathv[i];
+        glob_t _g, *pglob = &_g;
+	if (!glob("/etc/popt.d/*", 0, NULL, pglob)) {
+            size_t i;
+	    for (i = 0; i < pglob->gl_pathc; i++) {
+		char * f = pglob->gl_pathv[i];
 		if (strstr(f, ".rpmnew") || strstr(f, ".rpmsave"))
 		    continue;
 		if (!stat(f, &s)) {
@@ -208,11 +216,8 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 		rc = poptReadConfigFile(con, f);
 		if (rc) return rc;
 	    }
-/*@-noeffectuncon@*/
-	    globfree(&g);
-/*@=noeffectuncon@*/
+	    globfree(pglob);
 	}
-/*@=moduncon =nullpass =type @*/
     }
 #endif
 

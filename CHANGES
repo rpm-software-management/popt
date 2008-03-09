@@ -1,4 +1,10 @@
 1.13 -> 1.14:
+    - jbj: study the mess with splint, remove annotations where possible.
+    - jbj: add -D_GNU_SOURCE for gcc to use __builtin_stpcpy when available.
+    - jbj: add static inline stpcpy for the deprived.
+    - jbj: use stpcpy to eliminate sprintf calls everywhere but popthelp.c
+    - jbj: remove (now unneeded afaik) va_copy() from POPT_fprintf().
+    - jbj: inline strdup_fprintf() => POPT_fprintf keeping (unneeded?) va_copy.
     - rse: fix memcpy(3) based va_copy(3) fallbacks
     - jbj: fix: short option with "foo=bar" argument was mishandled.
 	(Wayne Davison<wayned@samba.org>).

@@ -10,6 +10,14 @@
 
 #include "system.h"
 
+#if defined(__LCLINT__)
+/*@-declundef -exportheader @*/
+extern long long int strtoll(const char *nptr, /*@null@*/ char **endptr,
+		int base)
+	/*@modifies *endptr@*/;
+/*@=declundef =exportheader @*/
+#endif
+
 #ifdef HAVE_FLOAT_H
 #include <float.h>
 #endif
@@ -56,9 +64,7 @@ void poptSetExecPath(poptContext con, const char * path, int allowAbsolute)
     con->execPath = _free(con->execPath);
     con->execPath = xstrdup(path);
     con->execAbsolute = allowAbsolute;
-/*@-nullstate@*/ /* LCL: con->execPath not NULL */
     return;
-/*@=nullstate@*/
 }
 
 static void invokeCallbacksPRE(poptContext con, const struct poptOption * opt)
@@ -77,9 +83,9 @@ static void invokeCallbacksPRE(poptContext con, const struct poptOption * opt)
 	case POPT_ARG_CALLBACK:		/* Perform callback. */
 	    if (!CBF_ISSET(opt, PRE))
 		/*@switchbreak@*/ break;
-	    /*@-noeffectuncon @*/
+/*@-noeffectuncon @*/	/* XXX no known way to annotate (*vector) calls. */
 	    arg.cb(con, POPT_CALLBACK_REASON_PRE, NULL, NULL, opt->descrip);
-	    /*@=noeffectuncon @*/
+/*@=noeffectuncon @*/
 	    /*@switchbreak@*/ break;
 	}
     }
@@ -101,9 +107,9 @@ static void invokeCallbacksPOST(poptContext con, const struct poptOption * opt)
 	case POPT_ARG_CALLBACK:		/* Perform callback. */
 	    if (!CBF_ISSET(opt, POST))
 		/*@switchbreak@*/ break;
-	    /*@-noeffectuncon @*/
+/*@-noeffectuncon @*/	/* XXX no known way to annotate (*vector) calls. */
 	    arg.cb(con, POPT_CALLBACK_REASON_POST, NULL, NULL, opt->descrip);
-	    /*@=noeffectuncon @*/
+/*@=noeffectuncon @*/
 	    /*@switchbreak@*/ break;
 	}
     }
@@ -142,10 +148,10 @@ static void invokeCallbacksOPTION(poptContext con,
 	     || (myOpt->longName != NULL && opt->longName != NULL &&
 			!strcmp(myOpt->longName, opt->longName)))
 	    {	const void *cbData = (cbopt->descrip ? cbopt->descrip : myData);
-		/*@-noeffectuncon @*/
+/*@-noeffectuncon @*/	/* XXX no known way to annotate (*vector) calls. */
 		cbarg.cb(con, POPT_CALLBACK_REASON_OPTION,
 			myOpt, con->os->nextArg, cbData);
-		/*@=noeffectuncon @*/
+/*@=noeffectuncon @*/
 		/* Terminate (unless explcitly continuing). */
 		if (!CBF_ISSET(cbopt, CONTINUE))
 		    return;
@@ -195,9 +201,7 @@ poptContext poptGetContext(const char * name, int argc, const char ** argv,
 	if (t) con->appName = strcpy(t, name);
     }
 
-/*@-internalglobs@*/
     invokeCallbacksPRE(con, con->options);
-/*@=internalglobs@*/
 
     return con;
 }
@@ -288,13 +292,15 @@ static int handleExec(/*@special@*/ poptContext con,
 
     i = con->finalArgvCount++;
     if (con->finalArgv != NULL)	/* XXX can't happen */
-    {	char *s  = malloc((longName ? strlen(longName) : 0) + 3);
+    {	char *s  = malloc((longName ? strlen(longName) : 0) + sizeof("--"));
 	if (s != NULL) {	/* XXX can't happen */
-	    if (longName)
-		sprintf(s, "--%s", longName);
-	    else
-		sprintf(s, "-%c", shortName);
 	    con->finalArgv[i] = s;
+	    *s++ = '-';
+	    if (longName)
+		s = stpcpy( stpcpy(s, "-"), longName);
+	    else
+		*s++ = shortName;
+	    *s = '\0';
 	} else
 	    con->finalArgv[i] = NULL;
     }
@@ -403,7 +409,8 @@ static int execCommand(poptContext con)
     if (!strchr(item->argv[0], '/') && con->execPath != NULL) {
 	char *s = malloc(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
 	if (s)
-	    sprintf(s, "%s/%s", con->execPath, item->argv[0]);
+	    (void)stpcpy(stpcpy(stpcpy(s, con->execPath), "/"), item->argv[0]);
+
 	argv[argc] = s;
     } else
 	argv[argc] = POPT_findProgramPath(item->argv[0]);
@@ -629,51 +636,44 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
 }
 
 static void poptStripArg(/*@special@*/ poptContext con, int which)
-	/*@uses con->arg_strip, con->optionStack @*/
+	/*@uses con->optionStack @*/
 	/*@defines con->arg_strip @*/
 	/*@modifies con @*/
 {
-/*@-sizeoftype@*/
+/*@-compdef -sizeoftype -usedef @*/
     if (con->arg_strip == NULL)
 	con->arg_strip = PBM_ALLOC(con->optionStack[0].argc);
     if (con->arg_strip != NULL)		/* XXX can't happen */
     PBM_SET(which, con->arg_strip);
-/*@=sizeoftype@*/
-/*@-compdef@*/ /* LCL: con->arg_strip undefined? */
     return;
-/*@=compdef@*/
+/*@=compdef =sizeoftype =usedef @*/
 }
 
 int poptSaveString(const char *** argvp,
 		/*@unused@*/ UNUSED(unsigned int argInfo), const char * val)
 {
-    poptArgv argv;
     int argc = 0;
 
     if (argvp == NULL)
 	return -1;
 
     /* XXX likely needs an upper bound on argc. */
-    if (*argvp)
+    if (*argvp != NULL)
     while ((*argvp)[argc] != NULL)
 	argc++;
  
-/*@-unqualifiedtrans@*/
-    *argvp = xrealloc(*argvp, (argc + 1 + 1) * sizeof(**argvp));
-/*@=unqualifiedtrans@*/
-    if ((argv = *argvp) != NULL) {
-	argv[argc++] = xstrdup(val);
-	argv[argc  ] = NULL;
+/*@-unqualifiedtrans -nullstate@*/	/* XXX no annotation for (*argvp) */
+    if ((*argvp = xrealloc(*argvp, (argc + 1 + 1) * sizeof(**argvp))) != NULL) {
+	(*argvp)[argc++] = xstrdup(val);
+	(*argvp)[argc  ] = NULL;
     }
-/*@-nullstate@*/
     return 0;
-/*@=nullstate@*/
+/*@=unqualifiedtrans =nullstate@*/
 }
 
 /*@unchecked@*/
 static unsigned int seed = 0;
 
-/*@-bitwisesigned@*/	/* LCL: logical ops with unsigned. */
 int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 {
     if (arg == NULL
@@ -699,13 +699,13 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 	*arg = aLongLong;
 	break;
     case POPT_ARGFLAG_OR:
-	*arg |= aLongLong;
+	*(unsigned long long *)arg |= (unsigned long long)aLongLong;
 	break;
     case POPT_ARGFLAG_AND:
-	*arg &= aLongLong;
+	*(unsigned long long *)arg &= (unsigned long long)aLongLong;
 	break;
     case POPT_ARGFLAG_XOR:
-	*arg ^= aLongLong;
+	*(unsigned long long *)arg ^= (unsigned long long)aLongLong;
 	break;
     default:
 	return POPT_ERROR_BADOPERATION;
@@ -713,9 +713,7 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
     }
     return 0;
 }
-/*@=bitwisesigned@*/
 
-/*@-bitwisesigned@*/	/* LCL: logical ops with unsigned. */
 int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 {
     /* XXX Check alignment, may fail on funky platforms. */
@@ -737,13 +735,13 @@ int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 	*arg = aLong;
 	break;
     case POPT_ARGFLAG_OR:
-	*arg |= aLong;
+	*(unsigned long *)arg |= (unsigned long)aLong;
 	break;
     case POPT_ARGFLAG_AND:
-	*arg &= aLong;
+	*(unsigned long *)arg &= (unsigned long)aLong;
 	break;
     case POPT_ARGFLAG_XOR:
-	*arg ^= aLong;
+	*(unsigned long *)arg ^= (unsigned long)aLong;
 	break;
     default:
 	return POPT_ERROR_BADOPERATION;
@@ -751,9 +749,7 @@ int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
     }
     return 0;
 }
-/*@=bitwisesigned@*/
 
-/*@-bitwisesigned@*/	/* LCL: logical ops with unsigned. */
 int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
 {
     /* XXX Check alignment, may fail on funky platforms. */
@@ -775,13 +771,13 @@ int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
 	*arg = (int) aLong;
 	break;
     case POPT_ARGFLAG_OR:
-	*arg |= (int) aLong;
+	*(unsigned int *)arg |= (unsigned int) aLong;
 	break;
     case POPT_ARGFLAG_AND:
-	*arg &= (int) aLong;
+	*(unsigned int *)arg &= (unsigned int) aLong;
 	break;
     case POPT_ARGFLAG_XOR:
-	*arg ^= (int) aLong;
+	*(unsigned int *)arg ^= (unsigned int) aLong;
 	break;
     default:
 	return POPT_ERROR_BADOPERATION;
@@ -789,7 +785,6 @@ int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
     }
     return 0;
 }
-/*@=bitwisesigned@*/
 
 /* returns 'val' element, -1 on last item, POPT_ERROR_* on error */
 int poptGetNextOpt(poptContext con)
@@ -1018,12 +1013,10 @@ int poptGetNextOpt(poptContext con)
 		case POPT_ARG_LONG:
 		case POPT_ARG_LONGLONG:
 		{   long long aNUM = 0;
-		    char *end;
+		    char *end = NULL;
 
 		    if (con->os->nextArg) {
-/*@-unrecog@*/
 			aNUM = strtoll(con->os->nextArg, &end, 0);
-/*@=unrecog@*/
 			if (!(end && *end == '\0'))
 			    return POPT_ERROR_BADNUMBER;
 		    }
@@ -1076,7 +1069,7 @@ int poptGetNextOpt(poptContext con)
 		    if (poptArgType(opt) == POPT_ARG_DOUBLE) {
 			arg.doublep[0] = aDouble;
 		    } else {
-#ifndef DBL_EPSILON
+#if !defined(DBL_EPSILON) && !defined(__LCLINT__)
 #define DBL_EPSILON 2.2204460492503131e-16
 #endif
 #define POPT_ABS(a)	((((a) - 0.0) < DBL_EPSILON) ? -(a) : (a))
@@ -1114,14 +1107,18 @@ int poptGetNextOpt(poptContext con)
 	}
 
 	if (con->finalArgv != NULL)
-	{   char *s = malloc((opt->longName ? strlen(opt->longName) : 0) + 3);
+	{   char *s = malloc((opt->longName ? strlen(opt->longName) : 0) + sizeof("--"));
 	    if (s != NULL) {	/* XXX can't happen */
-		if (opt->longName)
-		    sprintf(s, "%s%s", (F_ISSET(opt, ONEDASH) ? "-" : "--"),
-			opt->longName);
-		else
-		    sprintf(s, "-%c", opt->shortName);
 		con->finalArgv[con->finalArgvCount++] = s;
+		*s++ = '-';
+		if (opt->longName) {
+		    if (!F_ISSET(opt, ONEDASH))
+			*s++ = '-';
+		    s = stpcpy(s, opt->longName);
+		} else {
+		    *s++ = opt->shortName;
+		    *s = '\0';
+		}
 	    } else
 		con->finalArgv[con->finalArgvCount++] = NULL;
 	}

@@ -120,10 +120,11 @@ struct poptContext_s {
     poptArgv finalArgv;
     int finalArgvCount;
     int finalArgvAlloced;
+/*@null@*/
     int (*maincall) (int argc, const char **argv);
 /*@dependent@*/ /*@null@*/
     poptItem doExec;
-/*@only@*/
+/*@only@*/ /*@null@*/
     const char * execPath;
     int execAbsolute;
 /*@only@*/ /*@relnull@*/

@@ -20,34 +20,13 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 
-if test "X$CC" = Xgcc; then
-    CFLAGS="-Wall -W $CFLAGS"
-fi
-
-AC_GCC_TRADITIONAL
-AC_SYS_LARGEFILE
-
-AC_ISC_POSIX
-AM_C_PROTOTYPES
-AC_CHECK_VA_COPY
-
-dnl XXX lose rpm libs
-LIBS=
-addlib() {
-  l=$1
-  shift
-  case "$target" in 
-    *-*-solaris*)	LIBS="$LIBS -L$l -R $l $*";;
-    *)		LIBS="$LIBS -L$l $*";;
-  esac
-}
-
 dnl
 dnl if CC is gcc, we can rebuild the dependencies (since the depend rule
 dnl requires gcc).  If it's not, don't rebuild dependencies -- use what was
 dnl shipped with RPM.
 dnl
 if test X"$GCC" = "Xyes" ; then
+    CFLAGS="-Wall -W -D_GNU_SOURCE -D_REENTRANT $CFLAGS"
     TARGET="depend allprogs"
 else
     TARGET="everything"
@@ -59,7 +38,14 @@ else
 fi
 AC_SUBST(TARGET)
 
-AC_CHECK_HEADERS(float.h glob.h libintl.h mcheck.h unistd.h langinfo.h)
+AC_GCC_TRADITIONAL
+AC_SYS_LARGEFILE
+
+AC_ISC_POSIX
+AM_C_PROTOTYPES
+AC_CHECK_VA_COPY
+
+AC_CHECK_HEADERS(float.h glob.h langinfo.h libintl.h mcheck.h unistd.h)
 
 # For some systems we know that we have ld_version scripts.
 # Use it then as default.
@@ -80,19 +66,10 @@ AC_ARG_ENABLE([ld-version-script],
               [ : ] )
 AM_CONDITIONAL(HAVE_LD_VERSION_SCRIPT, test "$have_ld_version_script" = "yes")
 
-if test ! -f ../rpm.c
-then
-  AC_MSG_CHECKING(for GNU xgettext)
-  xgettext --version 2>&1 | grep 'GNU gettext' >/dev/null 2>&1 || AC_MSG_ERROR([
-  *** GNU gettext is required. The latest version
-  *** is always available from ftp://ftp.gnu.org/gnu/gettext/.])
-  AC_MSG_RESULT(yes)
-fi
-
 AC_CHECK_FUNC(setreuid, [], [
     AC_CHECK_LIB(ucb, setreuid, [if echo $LIBS | grep -- -lucb >/dev/null ;then :; else LIBS="$LIBS -lc -lucb" USEUCB=y;fi])
 ])
-AC_CHECK_FUNCS(getuid geteuid mtrace __secure_getenv setregid strerror iconv)
+AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror)
 
 AM_GNU_GETTEXT([external])
 

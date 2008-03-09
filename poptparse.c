@@ -31,10 +31,12 @@ int poptDupArgv(int argc, const char **argv,
 	return POPT_ERROR_MALLOC;
     argv2 = (void *) dst;
     dst += (argc + 1) * sizeof(*argv);
+    *dst = '\0';
 
     for (i = 0; i < argc; i++) {
 	argv2[i] = dst;
-	dst += strlen(strcpy(dst, argv[i])) + 1;
+	dst = stpcpy(dst, argv[i]);
+	dst++;	/* trailing NUL */
     }
     argv2[argc] = NULL;
 

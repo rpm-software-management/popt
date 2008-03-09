@@ -64,6 +64,19 @@ char * xstrdup (const char *str)
 	/*@*/;
 /*@=incondefs@*/
 
+#if !defined(HAVE_STPCPY)
+/* Copy SRC to DEST, returning the address of the terminating '\0' in DEST.  */
+static inline char * stpcpy (char *dest, const char * src) {
+    register char *d = dest;
+    register const char *s = src;
+
+    do
+	*d++ = *s;
+    while (*s++ != '\0');
+    return d - 1;
+}
+#endif
+
 /* Memory allocation via macro defs to get meaningful locations from mtrace() */
 #if defined(HAVE_MCHECK_H) && defined(__GNUC__)
 #define	vmefail()	(fprintf(stderr, "virtual memory exhausted.\n"), exit(EXIT_FAILURE), NULL)
@@ -82,7 +95,7 @@ char * xstrdup (const char *str)
 #define	getenv(_s)	__secure_getenv(_s)
 #endif
 
-#ifndef __GNUC__
+#if !defined(__GNUC__) && !defined(__attribute__)
 #define __attribute__(x) 
 #endif
 #define UNUSED(x) x __attribute__((__unused__))
