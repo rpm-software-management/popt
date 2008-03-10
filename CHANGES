@@ -1,4 +1,7 @@
 1.13 -> 1.14:
+    - jbj: study the mess with splint. Sigh, splint is so easily confused ...
+    - jbj: rewrite findProgramPath & move to popt.c. Nuke the findme.{c,h} toys.
+    - jbj: use stpcpy several more places (Wayne Davison<wayned@samba.org>).
     - jbj: enable equal after short option (Wayne Davison<wayned@samba.org>).
     - jbj: permit "#define POPT_fprintf fprintf" to lose the malloc'ing fprintf.
     - jbj: use vasprintf(3) when available (Wayne Davison<wayned@samba.org>).

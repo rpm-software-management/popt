@@ -23,7 +23,6 @@ extern long long int strtoll(const char *nptr, /*@null@*/ char **endptr,
 #endif
 #include <math.h>
 
-#include "findme.h"
 #include "poptint.h"
 
 #ifdef	MYDEBUG
@@ -196,10 +195,8 @@ poptContext poptGetContext(const char * name, int argc, const char ** argv,
     if (getenv("POSIXLY_CORRECT") || getenv("POSIX_ME_HARDER"))
 	con->flags |= POPT_CONTEXT_POSIXMEHARDER;
 
-    if (name) {
-	char * t = malloc(strlen(name) + 1);
-	if (t) con->appName = strcpy(t, name);
-    }
+    if (name)
+	con->appName = xstrdup(name);
 
     invokeCallbacksPRE(con, con->options);
 
@@ -385,6 +382,57 @@ static int handleAlias(/*@special@*/ poptContext con,
     return (rc ? rc : 1);
 }
 
+/**
+ * Return absolute path to executable by searching PATH.
+ * @param argv0		name of executable
+ * @return		(malloc'd) absolute path to executable (or NULL)
+ */
+static /*@null@*/
+const char * findProgramPath(/*@null@*/ const char * argv0)
+	/*@*/
+{
+    char *path = NULL, *s = NULL, *se;
+    char *t = NULL;
+
+    if (argv0 == NULL) return NULL;	/* XXX can't happen */
+
+    /* If there is a / in argv[0], it has to be an absolute path. */
+    /* XXX Hmmm, why not if (argv0[0] == '/') ... instead? */
+    if (strchr(argv0, '/'))
+	return xstrdup(argv0);
+
+    if ((path = getenv("PATH")) == NULL || (path = xstrdup(path)) == NULL)
+	return NULL;
+
+    /* The return buffer in t is big enough for any path. */
+    if ((t = malloc(strlen(path) + strlen(argv0) + sizeof("/"))) != NULL)
+    for (s = path; s && *s; s = se) {
+
+	/* Snip PATH element into [s,se). */
+	if ((se = strchr(s, ':')))
+	    *se++ = '\0';
+
+	/* Append argv0 to PATH element. */
+	(void) stpcpy(stpcpy(stpcpy(t, s), "/"), argv0);
+
+	/* If file is executable, bingo! */
+	if (!access(t, X_OK))
+	    break;
+    }
+
+    /* If no executable was found in PATH, return NULL. */
+    if (!(s && *s) && t != NULL) {
+	free(t);
+	t = NULL;
+    }
+/*@-modobserver -observertrans -usedef @*/
+    if (path != NULL)
+        free(path);
+/*@=modobserver =observertrans =usedef @*/
+
+    return t;
+}
+
 static int execCommand(poptContext con)
 	/*@globals internalState @*/
 	/*@modifies internalState @*/
@@ -413,7 +461,7 @@ static int execCommand(poptContext con)
 
 	argv[argc] = s;
     } else
-	argv[argc] = POPT_findProgramPath(item->argv[0]);
+	argv[argc] = findProgramPath(item->argv[0]);
     if (argv[argc++] == NULL) {
 	ec = POPT_ERROR_NOARG;
 	goto exit;
@@ -593,13 +641,13 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
 	/*@modifies con @*/
 {
     const char * a = NULL;
-    size_t alen;
     char *t, *te;
     size_t tn = strlen(s) + 1;
     char c;
 
-    te = t = malloc(tn);;
+    te = t = malloc(tn);
     if (t == NULL) return NULL;		/* XXX can't happen */
+    *t = '\0';
     while ((c = *s++) != '\0') {
 	switch (c) {
 #if 0	/* XXX can't do this */
@@ -617,12 +665,11 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
 	    }
 	    s += 3;
 
-	    alen = strlen(a);
-	    tn += alen;
-	    *te = '\0';
-	    t = realloc(t, tn);
-	    te = t + strlen(t);
-	    strncpy(te, a, alen); te += alen;
+	    tn += strlen(a);
+	    {   size_t pos = (size_t) (te - t);
+		t = realloc(t, tn);
+		te = stpcpy(t + pos, a);
+	    }
 	    continue;
 	    /*@notreached@*/ /*@switchbreak@*/ break;
 	default:
@@ -630,8 +677,15 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
 	}
 	*te++ = c;
     }
-    *te = '\0';
-    t = realloc(t, strlen(t) + 1);	/* XXX memory leak, hard to plug */
+    *te++ = '\0';
+    /* If the new string is longer than needed, shorten. */
+    if ((t + tn) > te) {
+/*@-usereleased@*/	/* XXX splint can't follow the pointers. */
+	if ((te = realloc(t, (size_t)(te - t))) == NULL)
+	    free(t);
+	t = te;
+/*@=usereleased@*/
+    }
     return t;
 }
 
@@ -932,7 +986,7 @@ int poptGetNextOpt(poptContext con)
 
 	    origOptString++;
 	    if (*origOptString != '\0')
-		con->os->nextCharArg = origOptString + (*origOptString == '=');
+		con->os->nextCharArg = origOptString + (int)(*origOptString == '=');
 	}
 
 	if (opt == NULL) return POPT_ERROR_BADOPT;	/* XXX can't happen */

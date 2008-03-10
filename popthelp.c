@@ -237,7 +237,7 @@ singleOptionDefaultValue(size_t lineLength,
     if (le == NULL) return NULL;	/* XXX can't happen */
     *le = '\0';
     *le++ = '(';
-    strcpy(le, defstr);	le += strlen(le);
+    le = stpcpy(le, defstr);
     *le++ = ':';
     *le++ = ' ';
   if (opt->arg) {	/* XXX programmer error */
@@ -268,9 +268,9 @@ singleOptionDefaultValue(size_t lineLength,
 	break;
     case POPT_ARG_STRING:
     {	const char * s = arg.argv[0];
-	if (s == NULL) {
-	    strcpy(le, "null");	le += strlen(le);
-	} else {
+	if (s == NULL)
+	    le = stpcpy(le, "null");
+	else {
 	    size_t slen = 4*lineLength - (le - l) - sizeof("\"...\")");
 	    *le++ = '"';
 	    strncpy(le, s, slen); le[slen] = '\0'; le += strlen(le);	
@@ -332,18 +332,21 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 #define	prtlong	(opt->longName != NULL)	/* XXX splint needs a clue */
     if (!(prtshort || prtlong))
 	goto out;
-    if (prtshort && prtlong)
-	sprintf(left, "-%c, %s%s", opt->shortName,
-		(F_ISSET(opt, ONEDASH) ? "-" : "--"),
-		opt->longName);
-    else if (prtshort) 
-	sprintf(left, "-%c", opt->shortName);
-    else if (prtlong)
+    if (prtshort && prtlong) {
+	char *dash = F_ISSET(opt, ONEDASH) ? "-" : "--";
+	left[0] = '-';
+	left[1] = opt->shortName;
+	(void) stpcpy(stpcpy(stpcpy(left+2, ", "), dash), opt->longName);
+    } else if (prtshort) {
+	left[0] = '-';
+	left[1] = opt->shortName;
+	left[2] = '\0';
+    } else if (prtlong) {
 	/* XXX --long always padded for alignment with/without "-X, ". */
-	sprintf(left, "    %s%s",
-		(poptArgType(opt) == POPT_ARG_MAINCALL ? "" :
-		(F_ISSET(opt, ONEDASH) ? "-" : "--")),
-		opt->longName);
+	char *dash = poptArgType(opt) == POPT_ARG_MAINCALL ? ""
+		   : (F_ISSET(opt, ONEDASH) ? "-" : "--");
+	(void) stpcpy(stpcpy(stpcpy(left, "    "), dash), opt->longName);
+    }
 #undef	prtlong
 
     if (argDescrip) {
@@ -361,9 +364,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 		if (t) {
 		    char * te = t;
 		    *te = '\0';
-		    if (help) {
-			strcpy(te, help);	te += strlen(te);
-		    }
+		    if (help)
+			te = stpcpy(te, help);
 		    *te++ = ' ';
 		    strcpy(te, defs);
 		    defs = _free(defs);

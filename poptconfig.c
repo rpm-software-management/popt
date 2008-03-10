@@ -224,8 +224,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
     if ((home = getenv("HOME"))) {
 	fn = malloc(strlen(home) + 20);
 	if (fn != NULL) {
-	    strcpy(fn, home);
-	    strcat(fn, "/.popt");
+	    (void) stpcpy(stpcpy(fn, home), "/.popt");
 	    rc = poptReadConfigFile(con, fn);
 	    free(fn);
 	} else

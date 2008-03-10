@@ -157,7 +157,7 @@ POPT_fprintf (FILE * stream, const char * format, ...)
     int rc;
     va_list ap;
 
-#if defined(HAVE_VASPRINTF)
+#if defined(HAVE_VASPRINTF) && !defined(__LCLINT__)
     va_start(ap, format);
     if ((rc = vasprintf(&b, format, ap)) < 0)
 	b = NULL;
