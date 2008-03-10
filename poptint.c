@@ -159,7 +159,7 @@ POPT_fprintf (FILE * stream, const char * format, ...)
 
 #if defined(HAVE_VASPRINTF)
     va_start(ap, format);
-    if ((rc = vasprintf(b, format, ap)) < 0)
+    if ((rc = vasprintf(&b, format, ap)) < 0)
 	b = NULL;
     va_end(ap);
 #else
