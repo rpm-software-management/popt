@@ -1,14 +1,14 @@
 # Translation of popt to German (Deutsch)
 # This file is distributed under the same license as the popt package.
-# Robert Scheck <rpm@robert-scheck.de>, 2004-2007.
+# Robert Scheck <robert@rpm5.org>, 2004-2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2008-02-18 08:21-0500\n"
-"PO-Revision-Date: 2007-02-17 21:00+0100\n"
-"Last-Translator: Robert Scheck <rpm@robert-scheck.de>\n"
+"PO-Revision-Date: 2008-03-12 22:21+0100\n"
+"Last-Translator: Robert Scheck <robert@rpm5.org>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,9 +19,9 @@ msgid "unknown errno"
 msgstr "Unbekannte Fehler-Nummer"
 
 #: popt.c:1090
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "Optionstyp (%d) ist in popt nicht vorhanden\n"
+msgstr "Optionstyp (%u) ist nicht in popt implementiert\n"
 
 #: popt.c:1294
 msgid "missing argument"
@@ -76,9 +76,8 @@ msgid "Display option defaults in message"
 msgstr "Zeigt die Standardeinstellungen an"
 
 #: popthelp.c:91
-#, fuzzy
 msgid "Terminate options"
-msgstr "Hilfe-Optionen:"
+msgstr "Schließt die Optionen ab"
 
 #: popthelp.c:190
 msgid "Help options:"
@@ -105,9 +104,8 @@ msgid "LONG"
 msgstr "LONG"
 
 #: popthelp.c:207
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
 #: popthelp.c:208
 msgid "STRING"
