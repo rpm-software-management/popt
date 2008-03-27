@@ -72,6 +72,7 @@ AC_CHECK_FUNC(setreuid, [], [
 AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf)
 
 AM_GNU_GETTEXT([external])
+AM_ICONV_LINK
 
 popt_sysconfdir="${sysconfdir}"
 eval "popt_sysconfdir=\"${popt_sysconfdir}\"" # expand contained ${prefix}

@@ -7,6 +7,6 @@ test1 alias -O --arg1
 test1 alias --grab --arg2 "'foo !#:+'"
 test1 alias --grabbar --grab bar
 
-test1 exec --echo-args echo --
+test1 exec --echo-args echo
 test1 alias -e --echo-args
-test1 exec -a /bin/echo --
+test1 exec -a /bin/echo

@@ -1,4 +1,6 @@
 1.13 -> 1.14:
+    - jbj: add @LTLIBICONV@ when needed (Stanislav Brabec<sbrabec@suse.cz>).
+    - jbj: fix: remove the "echo --" Fedorable hack-a-round.
     - rsc: updated de.po (not from the Translation Project).
     - jbj: study the mess with splint. Sigh, splint is so easily confused ...
     - jbj: rewrite findProgramPath & move to popt.c. Nuke the findme.{c,h} toys.
