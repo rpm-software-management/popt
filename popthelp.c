@@ -271,12 +271,12 @@ singleOptionDefaultValue(size_t lineLength,
 	if (s == NULL)
 	    le = stpcpy(le, "null");
 	else {
-	    size_t slen = 4*lineLength - (le - l) - sizeof("\"...\")");
+	    size_t limit = 4*lineLength - (le - l) - sizeof("\"\")");
+	    size_t slen;
 	    *le++ = '"';
-	    strncpy(le, s, slen); le[slen] = '\0'; le += strlen(le);	
-	    if (slen < strlen(s)) {
-		strcpy(le, "...");	le += strlen(le);
-	    }
+	    strncpy(le, s, limit); le[limit] = '\0'; le += (slen = strlen(le));
+	    if (slen == limit && s[limit])
+		le[-1] = le[-2] = le[-3] = '.';
 	    *le++ = '"';
 	}
     }	break;
@@ -363,7 +363,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 				strlen(defs) + sizeof(" "));
 		if (t) {
 		    char * te = t;
-		    *te = '\0';
 		    if (help)
 			te = stpcpy(te, help);
 		    *te++ = ' ';
@@ -417,24 +416,22 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    case POPT_ARG_DOUBLE:
 	    case POPT_ARG_STRING:
 		*le++ = (opt->longName != NULL ? '=' : ' ');
-		strcpy(le, argDescrip);		le += strlen(le);
+		le = stpcpy(le, argDescrip);
 		break;
 	    default:
 		break;
 	    }
 	} else {
-	    size_t lelen;
+	    char *leo;
 
 	    /* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
 	    if (!strchr(" =(", argDescrip[0]))
 		*le++ = ((poptArgType(opt) == POPT_ARG_MAINCALL) ? ' ' :
 			 (poptArgType(opt) == POPT_ARG_ARGV) ? ' ' : '=');
-	    strcpy(le, argDescrip);
-	    lelen = strlen(le);
-	    le += lelen;
+	    le = stpcpy(leo = le, argDescrip);
 
 	    /* Adjust for (possible) wide characters. */
-	    displaypad = (int)(lelen - stringDisplayWidth(argDescrip));
+	    displaypad = (int)((le - leo) - stringDisplayWidth(argDescrip));
 	}
 	if (F_ISSET(opt, OPTIONAL))
 	    *le++ = ']';

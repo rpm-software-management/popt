@@ -1,4 +1,5 @@
 1.13 -> 1.14:
+    - jbj: use stpcpy 2 more places (Wayne Davison<wayned@samba.org>).
     - jbj: add @LTLIBICONV@ when needed (Stanislav Brabec<sbrabec@suse.cz>).
     - jbj: fix: remove the "echo --" Fedorable hack-a-round.
     - rsc: updated de.po (not from the Translation Project).
