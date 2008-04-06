@@ -1,4 +1,8 @@
+1.14 -> 1.15:
+    - start popt-1.15 development.
+
 1.13 -> 1.14:
+    - release popt-1.14.
     - jbj: remove findme.c, add poptint.c, to po/POTFILES.in.
     - jbj: use stpcpy 2 more places (Wayne Davison<wayned@samba.org>).
     - jbj: add @LTLIBICONV@ when needed (Stanislav Brabec<sbrabec@suse.cz>).
