@@ -152,7 +152,7 @@ static inline size_t stringDisplayWidth(const char *s)
 }
 
 /**
- * @param table		option(s)
+ * @param opt		option(s)
  */
 /*@observer@*/ /*@null@*/ static const char *
 getTableTranslationDomain(/*@null@*/ const struct poptOption *opt)
@@ -547,7 +547,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
  * @param fp		output file handle
  * @param items		alias/exec array
  * @param nitems	no. of alias/exec entries
- * @param left		largest argument display width
+ * @param columns	output display width control
  * @param translation_domain	translation domain
  */
 static void itemHelp(FILE * fp,
