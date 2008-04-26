@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - ldv: update INPUT tag in Doxyfile.in, fix doxygen warnings in popthelp.c.
     - start popt-1.15 development.
 
 1.13 -> 1.14:

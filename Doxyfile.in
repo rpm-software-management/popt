@@ -460,12 +460,11 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT                  = \
-                        ./findme.c \
-                        ./findme.h \
                         ./popt.c \
                         ./popt.h \
                         ./poptconfig.c \
                         ./popthelp.c \
+                        ./poptint.c \
                         ./poptint.h \
                         ./poptparse.c \
 			./system.h
