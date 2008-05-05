@@ -7,7 +7,7 @@ run() {
 
     echo Running test $name.
 
-    result=`$builddir/$prog $*`
+    result=`HOME=$builddir $builddir/$prog $*`
     if [ "$answer" != "$result" ]; then
 	echo "Test \"$prog $*\" failed with: \"$result\" != \"$answer\" "
 	exit 2
@@ -111,7 +111,7 @@ Usage: lt-test1 [-I?] [-c|--cb2=STRING] [--arg1] [-2|--arg2=ARG]
         [-f|--float=FLOAT] [-d|--double=DOUBLE] [--randint=INT]
         [--randlong=LONG] [--randlonglong=LONGLONG] [--argv] [--bitset]
         [--bitclr] [--nstr=STRING] [--lstr=STRING] [-I|--inc]
-        [-c|--cb=STRING] [--longopt] [-?|--help] [--usage]" --usage
+        [-c|--cb=STRING] [--longopt] [-?|--help] [--usage] [--simple=ARG]" --usage
 
 run test1 "test1 - 51" "\
 Usage: lt-test1 [OPTION...]
@@ -150,6 +150,9 @@ arg for cb2
 Callback arguments
   -c, --cb=STRING                 Test argument callbacks
       --longopt                   Unused option for help testing
+
+Options implemented via popt alias/exec:
+      --simple=ARG                simple description
 
 Help options:
   -?, --help                      Show this help message
