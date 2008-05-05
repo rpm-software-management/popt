@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: add tests for --usage/--help coverage.
     - jbj: add lconv/gcov targets to Makefile.am.
     - jbj: refactor automagic (*opt->arg) option arg store to poptSaveArg().
     - ldv: update INPUT tag in Doxyfile.in, fix doxygen warnings in popthelp.c.

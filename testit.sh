@@ -104,6 +104,57 @@ run test1 "test1 - 47" "arg1: 0 arg2: (none) aArgv: A B rest: C" --argv A --argv
 run test1 "test1 - 48" "arg1: 0 arg2: foo=bar" -2foo=bar
 run test1 "test1 - 49" "arg1: 0 arg2: foo=bar" -2=foo=bar
 
+run test1 "test1 - 50" "\
+Usage: lt-test1 [-I?] [-c|--cb2=STRING] [--arg1] [-2|--arg2=ARG]
+        [-3|--arg3=ANARG] [-onedash] [--optional=STRING] [--val]
+        [-i|--int=INT] [-l|--long=LONG] [-L|--longlong=LONGLONG]
+        [-f|--float=FLOAT] [-d|--double=DOUBLE] [--randint=INT]
+        [--randlong=LONG] [--randlonglong=LONGLONG] [--argv] [--bitset]
+        [--bitclr] [--nstr=STRING] [--lstr=STRING] [-I|--inc]
+        [-c|--cb=STRING] [--longopt] [-?|--help] [--usage]" --usage
+
+run test1 "test1 - 51" "\
+Usage: lt-test1 [OPTION...]
+      --arg1                      First argument with a really long
+                                  description. After all, we have to test
+                                  argument help wrapping somehow, right?
+  -2, --arg2=ARG                  Another argument (default: \"(none)\")
+  -3, --arg3=ANARG                A third argument
+      -onedash                    POPT_ARGFLAG_ONEDASH: Option takes a single -
+      --optional[=STRING]         POPT_ARGFLAG_OPTIONAL: Takes an optional
+                                  string argument
+      --val                       POPT_ARG_VAL: 125992 141421
+  -i, --int=INT                   POPT_ARG_INT: 271828 (default: 271828)
+  -l, --long=LONG                 POPT_ARG_LONG: 738905609 (default: 738905609)
+  -L, --longlong=LONGLONG         POPT_ARG_LONGLONG: 738905609 (default:
+                                  738905609)
+  -f, --float=FLOAT               POPT_ARG_FLOAT: 3.14159 (default: 3.14159)
+  -d, --double=DOUBLE             POPT_ARG_DOUBLE: 9.8696 (default: 9.8696)
+      --randint=INT               POPT_ARGFLAG_RANDOM: experimental
+      --randlong=LONG             POPT_ARGFLAG_RANDOM: experimental
+      --randlonglong=LONGLONG     POPT_ARGFLAG_RANDOM: experimental
+      --argv                      POPT_ARG_ARGV: append arg to array (can be
+                                  used multiple times)
+      --bitset                    POPT_BIT_SET: |= 0x4321
+      --bitclr                    POPT_BIT_CLR: &= ~0x1234
+      --nstr=STRING               POPT_ARG_STRING: (null) (default: null)
+      --lstr=STRING               POPT_ARG_STRING: \"123456789...\" (default:
+                                  \"This tests default strings and exceeds the
+                                  ... limit.
+                                  123456789+123456789+123456789+123456789+123456789+ 123456789+123456789+123456789+123456789+123456789+ 1234567...\")
+
+arg for cb2
+  -c, --cb2=STRING                Test argument callbacks
+  -I, --inc                       An included argument
+
+Callback arguments
+  -c, --cb=STRING                 Test argument callbacks
+      --longopt                   Unused option for help testing
+
+Help options:
+  -?, --help                      Show this help message
+      --usage                     Display brief usage message" --help
+
 #run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
 #run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer
 #run_diff test3 "test3 - 53" test3-data/03.input test3-data/03.answer
