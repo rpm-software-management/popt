@@ -161,6 +161,7 @@ static struct poptOption options[] = {
 	NULL, NULL },
   { NULL, '\0', POPT_ARG_INCLUDE_TABLE, &callbackArgs, 0,
 	"Callback arguments", NULL },
+  POPT_AUTOALIAS
   POPT_AUTOHELP
   POPT_TABLEEND
 };
@@ -230,6 +231,9 @@ int main(int argc, const char ** argv)
     optCon = poptGetContext("test1", argc, argv, options, 0);
 /*@=temptrans@*/
     (void) poptReadConfigFile(optCon, "./test-poptrc");
+    (void) poptReadDefaultConfig(optCon, 1);
+
+    poptSetExecPath(optCon, ".", 1);
 
 #if 1
     while ((rc = poptGetNextOpt(optCon)) > 0)	/* Read all the options ... */
