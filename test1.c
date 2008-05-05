@@ -299,12 +299,14 @@ int main(int argc, const char ** argv)
     if (singleDash)
 	fprintf(stdout, " -");
 
-    rest = poptGetArgs(optCon);
-    if (rest) {
-	fprintf(stdout, " rest:");
-	while (*rest) {
-	    fprintf(stdout, " %s", *rest);
-	    rest++;
+    if (poptPeekArg(optCon) != NULL) {
+	rest = poptGetArgs(optCon);
+	if (rest) {
+	    fprintf(stdout, " rest:");
+	    while (*rest) {
+		fprintf(stdout, " %s", *rest);
+		rest++;
+	    }
 	}
     }
 
