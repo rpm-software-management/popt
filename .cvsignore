@@ -21,6 +21,7 @@ doxygen
 depcomp
 install-sh
 intl
+lconv
 libtool
 ltconfig
 ltmain.sh
@@ -33,6 +34,8 @@ stamp-h.in
 test1
 test2
 test3
+*.gcda
+*.gcno
 *.la
 *.lcd
 *.lo
