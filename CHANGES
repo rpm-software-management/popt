@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: add eo.po and id.po (Translation Project).
     - jbj: updated da.po (Translation Project).
     - jbj: extend coverage to several additional setup routines.
     - jbj: add tests for --usage/--help coverage.
