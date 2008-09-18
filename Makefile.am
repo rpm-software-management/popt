@@ -96,7 +96,7 @@ lcov-report:
 	mv lcov/lcov.cleaned.info lcov/lcov.info
 	genhtml -t "$(PACKAGE_STRING)" -o lcov lcov/lcov.info
 
-#.PHONY:	lcov-reset
+#.PHONY:	lcov-upload
 #lcov-upload: lcov
 #	rsync -rvz -e ssh --delete lcov/* ???
 
