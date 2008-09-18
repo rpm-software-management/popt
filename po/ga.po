@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-04-06 09:59-0400\n"
-"PO-Revision-Date: 2007-06-19 06:21-0500\n"
+"POT-Creation-Date: 2008-09-18 14:11-0400\n"
+"PO-Revision-Date: 2008-04-10 06:21-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,48 +18,48 @@ msgstr ""
 msgid "unknown errno"
 msgstr "errno anaithnid"
 
-#: popt.c:1141
-#, fuzzy, c-format
+#: popt.c:945
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "níl an cineál rogha seo (%d) ar fáil i popt\n"
+msgstr "níl an cineál rogha seo (%u) ar fáil i popt\n"
 
-#: popt.c:1349
+#: popt.c:1364
 msgid "missing argument"
 msgstr "argóint ar iarraidh"
 
-#: popt.c:1351
+#: popt.c:1366
 msgid "unknown option"
 msgstr "rogha anaithnid"
 
-#: popt.c:1353
+#: popt.c:1368
 msgid "mutually exclusive logical operations requested"
 msgstr "iarradh oibríochtaí loighciúla comheisiacha"
 
-#: popt.c:1355
+#: popt.c:1370
 msgid "opt->arg should not be NULL"
 msgstr "níor chóir rogha->arg a bheith NULL"
 
-#: popt.c:1357
+#: popt.c:1372
 msgid "aliases nested too deeply"
 msgstr "ailiasanna neadaithe ródhomhain"
 
-#: popt.c:1359
+#: popt.c:1374
 msgid "error in parameter quoting"
 msgstr "earráid agus paraiméadar á chur faoi chomharthaí athfhriotail"
 
-#: popt.c:1361
+#: popt.c:1376
 msgid "invalid numeric value"
 msgstr "luach neamhbhailí uimhriúil"
 
-#: popt.c:1363
+#: popt.c:1378
 msgid "number too large or too small"
 msgstr "uimhir rómhór nó róbheag"
 
-#: popt.c:1365
+#: popt.c:1380
 msgid "memory allocation failed"
 msgstr "theip ar dháileadh na cuimhne"
 
-#: popt.c:1369
+#: popt.c:1384
 msgid "unknown error"
 msgstr "earráid anaithnid"
 
@@ -75,10 +75,10 @@ msgstr "Taispeáin beagán eolais faoin úsáid"
 msgid "Display option defaults in message"
 msgstr "Taispeáin luachanna réamhshocraithe na roghanna sa teachtaireacht"
 
+# Terminate not a verb here
 #: popthelp.c:92
-#, fuzzy
 msgid "Terminate options"
-msgstr "Roghanna cabhracha:"
+msgstr "Roghanna scortha"
 
 #: popthelp.c:191
 msgid "Help options:"
@@ -105,9 +105,8 @@ msgid "LONG"
 msgstr "LONG"
 
 #: popthelp.c:208
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
 #: popthelp.c:209
 msgid "STRING"
