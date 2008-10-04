@@ -43,7 +43,6 @@ AC_SYS_LARGEFILE
 
 AC_ISC_POSIX
 AM_C_PROTOTYPES
-AC_CHECK_VA_COPY
 
 AC_CHECK_HEADERS(float.h glob.h langinfo.h libintl.h mcheck.h unistd.h)
 
