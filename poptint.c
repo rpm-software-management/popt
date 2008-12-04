@@ -187,8 +187,7 @@ POPT_fprintf (FILE * stream, const char * format, ...)
 #endif
 	    rc = fprintf(stream, "%s", b);
 	free (b);
-    } else if (ob != NULL)
-	free(ob);
+    }
 
     return rc;
 }
