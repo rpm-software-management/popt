@@ -368,8 +368,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 		    *te++ = ' ';
 		    strcpy(te, defs);
 		    defs = _free(defs);
+		    defs = t;
 		}
-		defs = t;
 	    }
 	}
 
