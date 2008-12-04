@@ -65,15 +65,20 @@ POPT_dgettext(const char * dom, const char * str)
 #endif
 
 #ifdef HAVE_ICONV
+/**
+ * Return malloc'd string converted from UTF-8 to current locale.
+ * @param istr		input string (UTF-8 encoding assumed)
+ * @return		localized string
+ */
 static /*@only@*/ /*@null@*/ char *
-strdup_locale_from_utf8 (/*@null@*/ char *buffer)
+strdup_locale_from_utf8 (/*@null@*/ char * istr)
 	/*@*/
 {
-    char *codeset = NULL;
-    char *dest_str;
-    iconv_t fd;
+    char * codeset = NULL;
+    char * ostr = NULL;
+    iconv_t cd;
 
-    if (buffer == NULL)
+    if (istr == NULL)
 	return NULL;
 
 #ifdef HAVE_LANGINFO_H
@@ -83,70 +88,57 @@ strdup_locale_from_utf8 (/*@null@*/ char *buffer)
 #endif
 
     if (codeset != NULL && strcmp(codeset, "UTF-8") != 0
-     && (fd = iconv_open(codeset, "UTF-8")) != (iconv_t)-1)
+     && (cd = iconv_open(codeset, "UTF-8")) != (iconv_t)-1)
     {
-	char *pin = buffer;
-	char *pout = NULL;
-	size_t ib, ob, dest_size;
-	int done;
-	int is_error;
+	char * shift_pin = NULL;
+	size_t db = strlen(istr);
+	char * dstr = malloc((db + 1) * sizeof(*dstr));
+	char * pin = istr;
+	char * pout = dstr;
+	size_t ib = db;
+	size_t ob = db;
 	size_t err;
-	char *shift_pin = NULL;
-	int xx;
 
-	err = iconv(fd, NULL, &ib, &pout, &ob);
-	dest_size = ob = ib = strlen(buffer);
-	dest_str = pout = malloc((dest_size + 1) * sizeof(*dest_str));
-	if (dest_str)
-	    *dest_str = '\0';
-	done = is_error = 0;
-	if (pout != NULL)
-	while (done == 0 && is_error == 0) {
-	    err = iconv(fd, &pin, &ib, &pout, &ob);
-
-	    if (err == (size_t)-1) {
-		switch (errno) {
-		case EINVAL:
-		    done = 1;
-		    /*@switchbreak@*/ break;
-		case E2BIG:
-		{   size_t used = (size_t)(pout - dest_str);
-		    dest_size *= 2;
-		    dest_str = realloc(dest_str, (dest_size + 1) * sizeof(*dest_str));
-		    if (dest_str == NULL) {
-			is_error = 1;
-			continue;
-		    }
-		    pout = dest_str + used;
-		    ob = dest_size - used;
-		}   /*@switchbreak@*/ break;
-		case EILSEQ:
-		    is_error = 1;
-		    /*@switchbreak@*/ break;
-		default:
-		    is_error = 1;
-		    /*@switchbreak@*/ break;
-		}
-	    } else {
+	if (dstr == NULL)
+	    return NULL;
+	err = iconv(cd, NULL, NULL, NULL, NULL);
+	while (1) {
+	    *pout = '\0';
+	    err = iconv(cd, &pin, &ib, &pout, &ob);
+	    if (err != (size_t)-1) {
 		if (shift_pin == NULL) {
 		    shift_pin = pin;
 		    pin = NULL;
 		    ib = 0;
-		} else {
-		    done = 1;
+		    continue;
 		}
+	    } else
+	    switch (errno) {
+	    case E2BIG:
+	    {	size_t used = (size_t)(pout - dstr);
+		db *= 2;
+		dstr = realloc(dstr, (db + 1) * sizeof(*dstr));
+		if (dstr != NULL) {
+		    pout = dstr + used;
+		    ob = db - used;
+		    continue;
+		}
+	    }   /*@switchbreak@*/ break;
+	    case EINVAL:
+	    case EILSEQ:
+	    default:
+		/*@switchbreak@*/ break;
 	    }
+	    break;
 	}
-	xx = iconv_close(fd);
-	if (pout)
-	    *pout = '\0';
-	if (dest_str != NULL)
-	    dest_str = xstrdup(dest_str);
-    } else {
-	dest_str = xstrdup(buffer);
-    }
+	(void) iconv_close(cd);
+	*pout = '\0';
+	ostr = xstrdup(dstr);
+	free(dstr);
+    } else
+	ostr = xstrdup(istr);
 
-    return dest_str;
+    return ostr;
 }
 #endif
 

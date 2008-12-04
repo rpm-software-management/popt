@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: fix: rewrite (and simplify) strdup_locale_from_utf8().
     - jbj: test/use HAVE_SRANDOM to avoid portability issues.
     - jbj: fix: remove AC_CHECK_VA_COPY check, va_copy is no longer used.
     - jbj: add eo.po and id.po (Translation Project).
