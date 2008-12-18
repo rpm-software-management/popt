@@ -69,10 +69,12 @@ typedef union poptArg_u {
 } poptArg;
 /*@=exporttype =fielduse@*/
 
+/*@-exportvar@*/
 /*@unchecked@*/
 extern unsigned int _poptArgMask;
 /*@unchecked@*/
 extern unsigned int _poptGroupMask;
+/*@=exportvar@*/
 
 #define	poptArgType(_opt)	((_opt)->argInfo & _poptArgMask)
 #define	poptGroup(_opt)		((_opt)->argInfo & _poptGroupMask)
@@ -151,9 +153,9 @@ extern /*@only@*/ iconv_t iconv_open(const char *__tocode, const char *__fromcod
 	/*@*/;
 
 extern size_t iconv(iconv_t __cd, /*@null@*/ char ** __inbuf,
-		    /*@out@*/ size_t * __inbytesleft,
-		    /*@out@*/ char ** __outbuf,
-		    /*@out@*/ size_t * __outbytesleft)
+		    /*@null@*/ /*@out@*/ size_t * __inbytesleft,
+		    /*@null@*/ /*@out@*/ char ** __outbuf,
+		    /*@null@*/ /*@out@*/ size_t * __outbytesleft)
 	/*@modifies __cd,
 		*__inbuf, *__inbytesleft, *__outbuf, *__outbytesleft @*/;
 

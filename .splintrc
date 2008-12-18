@@ -12,7 +12,7 @@
 +strict			# lclint level
 
 # --- in progress
-#+bounds
+-bounds
 -bufferoverflowhigh
 -branchstate
 

@@ -207,7 +207,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
             size_t i;
 	    for (i = 0; i < pglob->gl_pathc; i++) {
 		char * f = pglob->gl_pathv[i];
-		if (strstr(f, ".rpmnew") || strstr(f, ".rpmsave"))
+		if (f == NULL || strstr(f, ".rpmnew") || strstr(f, ".rpmsave"))
 		    continue;
 		if (!stat(f, &s)) {
 		    if (!S_ISREG(s.st_mode) && !S_ISLNK(s.st_mode))
