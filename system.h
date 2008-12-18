@@ -32,7 +32,7 @@ extern __const __int32_t *__ctype_toupper;
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H) && !defined(__LCLINT__)
 #include <unistd.h>
 #endif
 

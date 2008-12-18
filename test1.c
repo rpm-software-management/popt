@@ -294,8 +294,10 @@ int main(int argc, const char ** argv)
 	while ((arg = *av++) != NULL)
 	    fprintf(stdout, " %s", arg);
     }
+/*@-nullpass@*/
     if (oStr != (char *)-1)
 	fprintf(stdout, " oStr: %s", (oStr ? oStr : "(none)"));
+/*@=nullpass@*/
     if (singleDash)
 	fprintf(stdout, " -");
 

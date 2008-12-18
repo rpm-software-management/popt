@@ -92,6 +92,7 @@ strdup_locale_from_utf8 (/*@null@*/ char * istr)
     {
 	char * shift_pin = NULL;
 	size_t db = strlen(istr);
+/*@owned@*/
 	char * dstr = malloc((db + 1) * sizeof(*dstr));
 	char * pin = istr;
 	char * pout = dstr;
