@@ -627,14 +627,12 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 	/*@modifies fp, fileSystem @*/
 {
     size_t len = (size_t)6;
-    const char * fn;
     int xx;
 
     xx = POPT_fprintf(fp, POPT_("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {
-/*@-type@*/	/* LCL: wazzup? */
-	fn = con->optionStack->argv[0];
-/*@=type@*/
+	struct optionStackEntry * os = con->optionStack;
+	const char * fn = (os->argv ? os->argv[0] : NULL);
 	if (fn == NULL) return len;
 	if (strchr(fn, '/')) fn = strrchr(fn, '/') + 1;
 	/* XXX POPT_fprintf not needed for argv[0] display. */

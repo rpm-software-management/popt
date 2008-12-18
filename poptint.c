@@ -82,9 +82,7 @@ strdup_locale_from_utf8 (/*@null@*/ char * istr)
 	return NULL;
 
 #ifdef HAVE_LANGINFO_H
-/*@-type@*/
-    codeset = nl_langinfo (CODESET);
-/*@=type@*/
+    codeset = nl_langinfo ((nl_item)CODESET);
 #endif
 
     if (codeset != NULL && strcmp(codeset, "UTF-8") != 0
