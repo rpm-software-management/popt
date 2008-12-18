@@ -69,8 +69,14 @@ typedef union poptArg_u {
 } poptArg;
 /*@=exporttype =fielduse@*/
 
-#define	poptArgType(_opt)	((_opt)->argInfo & POPT_ARG_MASK)
-#define	poptGroup(_opt)		((_opt)->argInfo & POPT_GROUP_MASK)
+/*@unchecked@*/
+extern unsigned int _poptArgMask;
+/*@unchecked@*/
+extern unsigned int _poptGroupMask;
+
+#define	poptArgType(_opt)	((_opt)->argInfo & _poptArgMask)
+#define	poptGroup(_opt)		((_opt)->argInfo & _poptGroupMask)
+
 #define	F_ISSET(_opt, _FLAG)	((_opt)->argInfo & POPT_ARGFLAG_##_FLAG)
 #define	LF_ISSET(_FLAG)		(argInfo & POPT_ARGFLAG_##_FLAG)
 #define	CBF_ISSET(_opt, _FLAG)	((_opt)->argInfo & POPT_CBFLAG_##_FLAG)

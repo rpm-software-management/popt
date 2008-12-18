@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: permit type/group bitmasks to be changed (if needed somewhen).
     - jbj: snip out 8 unused bits for argument groups.
     - jbj: fix: eliminate dead code (CID#5).
     - jbj: fix: rearrange code to better hint to coverity scan (CID#9).
