@@ -30,6 +30,11 @@ extern long long int strtoll(const char *nptr, /*@null@*/ char **endptr,
 int _popt_debug = 0;
 #endif
 
+/*@unchecked@*/
+unsigned int _poptArgMask = POPT_ARG_MASK;
+/*@unchecked@*/
+unsigned int _poptGroupMask = POPT_GROUP_MASK;
+
 #if !defined(HAVE_STRERROR) && !defined(__LCLINT__)
 static char * strerror(int errno)
 {
@@ -176,7 +181,7 @@ poptContext poptGetContext(const char * name, int argc, const char ** argv,
     con->os->argb = NULL;
 
     if (!(flags & POPT_CONTEXT_KEEP_FIRST))
-	con->os->next = 1;			/* skip argv[0] */
+	con->os->next = 1;		/* skip argv[0] */
 
     con->leftovers = calloc( (size_t)(argc + 1), sizeof(*con->leftovers) );
 /*@-dependenttrans -assignexpose@*/	/* FIX: W2DO? */
