@@ -38,7 +38,9 @@
 #define POPT_ARG_MAINCALL	16U+11U	/*!< EXPERIMENTAL: return (*arg) (argc, argv) */
 #define	POPT_ARG_ARGV		12U	/*!< dupe'd arg appended to realloc'd argv array. */
 
-#define POPT_ARG_MASK		0x0000FFFFU
+#define POPT_ARG_MASK		0x000000FFU
+#define POPT_GROUP_MASK		0x0000FF00U
+
 /*@}*/
 
 /** \ingroup popt
