@@ -113,73 +113,65 @@ static void configLine(poptContext con, char * line)
 
 int poptReadConfigFile(poptContext con, const char * fn)
 {
-    char * file = NULL, * chptr, * end;
-    char * buf = NULL;
-/*@dependent@*/ char * dst;
-    int fd, rc;
-    off_t fileLength;
+    int fdno;
+    char *b = NULL, *be;
+    off_t nb;
+    const char *se;
+    char *t, *te;
+    int rc = POPT_ERROR_ERRNO;	/* assume failure */
 
-    fd = open(fn, O_RDONLY);
-    if (fd < 0)
-	return (errno == ENOENT ? 0 : POPT_ERROR_ERRNO);
+    fdno = open(fn, O_RDONLY);
+    if (fdno < 0)
+	return (errno == ENOENT ? 0 : rc);
 
-    fileLength = lseek(fd, 0, SEEK_END);
-    if (fileLength == (off_t)-1 || lseek(fd, 0, 0) == (off_t)-1) {
-	rc = errno;
-	(void) close(fd);
-	errno = rc;
-	return POPT_ERROR_ERRNO;
-    }
-
-    if ((file = malloc((size_t)fileLength + 1)) != NULL)
-	*file = '\0';
-    if (file == NULL
-     || read(fd, (char *)file, (size_t)fileLength) != (ssize_t)fileLength)
+    if ((nb = lseek(fdno, 0, SEEK_END)) == (off_t)-1
+     || lseek(fdno, 0, SEEK_SET) == (off_t)-1
+     || (b = malloc((size_t)nb + 1)) == NULL
+     || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb)
     {
-	rc = errno;
-	(void) close(fd);
-	errno = rc;
-	if (file)
-	    free(file);
-	return POPT_ERROR_ERRNO;
+	int oerrno = errno;
+	(void) close(fdno);
+	errno = oerrno;
+	goto exit;
     }
-    if (close(fd) == -1) {
-	free(file);
-	return POPT_ERROR_ERRNO;
-    }
+    if (close(fdno) == -1)
+	goto exit;
 
-    dst = buf = malloc((size_t)fileLength + 1);
-    if (dst == NULL)
-	return POPT_ERROR_ERRNO;
+    if ((t = malloc((size_t)nb + 1)) == NULL)
+	goto exit;
+    te = t;
 
-    end = (file + fileLength);
-    for (chptr = file; chptr < end; chptr++) {
-	switch (*chptr) {
+    be = (b + nb);
+    for (se = b; se < be; se++) {
+	switch (*se) {
 	  case '\n':
-	    *dst = '\0';
-	    dst = buf;
-	    while (*dst && _isspaceptr(dst)) dst++;
-	    if (*dst && *dst != '#')
-		configLine(con, dst);
+	    *te = '\0';
+	    te = t;
+	    while (*te && _isspaceptr(te)) te++;
+	    if (*te && *te != '#')
+		configLine(con, te);
 	    /*@switchbreak@*/ break;
 	  case '\\':
-	    *dst = *chptr++;
+	    *te = *se++;
 	    /* \ at the end of a line does not insert a \n */
-	    if (chptr < end  && *chptr != '\n') {
-		dst++;
-		*dst++ = *chptr;
+	    if (se < be  && *se != '\n') {
+		te++;
+		*te++ = *se;
 	    }
 	    /*@switchbreak@*/ break;
 	  default:
-	    *dst++ = *chptr;
+	    *te++ = *se;
 	    /*@switchbreak@*/ break;
 	}
     }
 
-    free(file);
-    free(buf);
+    free(t);
+    rc = 0;
 
-    return 0;
+exit:
+    if (b)
+	free(b);
+    return rc;
 }
 
 int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
