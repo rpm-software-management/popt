@@ -1398,6 +1398,8 @@ const char * poptStrerror(const int error)
 	return POPT_("number too large or too small");
       case POPT_ERROR_MALLOC:
 	return POPT_("memory allocation failed");
+      case POPT_ERROR_BADCONFIG:
+	return POPT_("config file failed sanity test");
       case POPT_ERROR_ERRNO:
 	return strerror(errno);
       default:

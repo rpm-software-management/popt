@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: add poptInit/poptFini/poptReadConfigFiles/poptSaneFile routines.
     - jbj: rewrite poptReadConfigFile(), styling for (i.e. my) readbility.
     - jbj: reserve a bit for --[no]opt prefix toggling.
     - jbj: fix: check/print argv[0] in --help for NULL.
