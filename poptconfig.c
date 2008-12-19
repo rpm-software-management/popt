@@ -151,6 +151,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    if (*te && *te != '#')
 		configLine(con, te);
 	    /*@switchbreak@*/ break;
+/*@-usedef@*/	/* XXX *se may be uninitialized */
 	  case '\\':
 	    *te = *se++;
 	    /* \ at the end of a line does not insert a \n */
@@ -162,6 +163,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	  default:
 	    *te++ = *se;
 	    /*@switchbreak@*/ break;
+/*@=usedef@*/
 	}
     }
 
@@ -171,6 +173,90 @@ int poptReadConfigFile(poptContext con, const char * fn)
 exit:
     if (b)
 	free(b);
+    return rc;
+}
+
+int poptSaneFile(const char * fn)
+{
+    struct stat sb;
+    uid_t uid = getuid();
+
+    if (stat(fn, &sb) == -1)
+	return 1;
+    if ((uid_t)sb.st_uid != uid)
+	return 0;
+    if (!S_ISREG(sb.st_mode))
+	return 0;
+/*@-bitwisesigned@*/
+    if (sb.st_mode & (S_IWGRP|S_IWOTH))
+	return 0;
+/*@=bitwisesigned@*/
+    return 1;
+}
+
+int poptReadConfigFiles(poptContext con, const char * paths)
+{
+    char * buf = (paths ? xstrdup(paths) : NULL);
+    const char * p;
+    char * pe;
+    int rc = 0;		/* assume success */
+
+    for (p = buf; p != NULL && *p != '\0'; p = pe) {
+        const char ** av;
+        size_t ac;
+	size_t i;
+	int xx;
+
+        /* locate start of next path element */
+        pe = strchr(p, ':');
+        if (pe != NULL && *pe == ':')
+            *pe++ = '\0';
+        else
+            pe = (char *) (p + strlen(p));
+
+#ifdef	FINISHME
+        /* glob-expand the path element */
+        ac = 0;
+        av = NULL;
+        if ((i = rpmGlob(p, &ac, &av)) != 0)
+            continue;
+#else
+	ac = (size_t)1;
+	if ((av = calloc(ac + 1, sizeof(*av))) != NULL)
+	    av[0] = xstrdup(p);
+#endif
+
+        /* work-off each resulting file from the path element */
+	if (av != NULL)
+        for (i = 0; i < ac; i++) {
+            const char * fn = av[i];
+	    if (av[i] == NULL)	/* XXX can't happen */
+		/*@innercontinue@*/ continue;
+	    /* XXX should '@' attention be pushed into poptReadConfigFile? */
+            if (fn[0] == '@') {	/* attention */
+                fn++;
+                if (!poptSaneFile(fn)) {
+		    rc = POPT_ERROR_BADCONFIG;
+                    /*@innercontinue@*/ continue;
+                }
+            }
+            xx = poptReadConfigFile(con, fn);
+	    if (xx && rc == 0)
+		rc = xx;
+            free((void *)av[i]);
+	    av[i] = NULL;
+        }
+	if (av != NULL) {
+            free(av);
+	    av = NULL;
+	}
+    }
+
+/*@-usedef@*/
+    if (buf)
+	free(buf);
+/*@=usedef@*/
+
     return rc;
 }
 
@@ -225,4 +311,30 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
     }
 
     return 0;
+}
+
+poptContext
+poptFini(poptContext con)
+{
+    return poptFreeContext(con);
+}
+
+poptContext
+poptInit(int argc, char *const argv[],
+		struct poptOption * options, const char * configPaths)
+{
+    poptContext con = NULL;
+    const char * argv0;
+
+    if (argv == NULL || argv[0] == NULL || options == NULL)
+	return con;
+
+    if ((argv0 = strrchr(argv[0], '/')) != NULL) argv0++;
+    else argv0 = argv[0];
+   
+    con = poptGetContext(argv0, argc, (const char **)argv, options, 0);
+    if (con != NULL&& poptReadConfigFiles(con, configPaths))
+	con = poptFini(con);
+
+    return con;
 }

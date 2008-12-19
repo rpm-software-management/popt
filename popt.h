@@ -98,6 +98,7 @@
 #define	POPT_ERROR_BADOPERATION	-19	/*!< mutually exclusive logical operations requested */
 #define	POPT_ERROR_NULLARG	-20	/*!< opt->arg should not be NULL */
 #define	POPT_ERROR_MALLOC	-21	/*!< memory allocation failed */
+#define	POPT_ERROR_BADCONFIG	-22	/*!< config file failed sanity test */
 /*@}*/
 
 /** \ingroup popt
@@ -237,6 +238,15 @@ typedef void (*poptCallbackType) (poptContext con,
 	/*@modifies internalState @*/;
 
 /** \ingroup popt
+ * Destroy context.
+ * @param con		context
+ * @return		NULL always
+ */
+/*@null@*/
+poptContext poptFreeContext( /*@only@*/ /*@null@*/ poptContext con)
+	/*@modifies con @*/;
+
+/** \ingroup popt
  * Initialize popt context.
  * @param name		context name (usually argv[0] program name)
  * @param argc		no. of arguments
@@ -253,6 +263,31 @@ poptContext poptGetContext(
 		unsigned int flags)
 	/*@globals internalState @*/
 	/*@modifies internalState @*/;
+
+/** \ingroup popt
+ * Destroy context (alternative implementation).
+ * @param con		context
+ * @return		NULL always
+ */
+/*@null@*/
+poptContext poptFini( /*@only@*/ /*@null@*/ poptContext con)
+	/*@modifies con @*/;
+
+/** \ingroup popt
+ * Initialize popt context (alternative implementation).
+ * This routine does poptGetContext() and then poptReadConfigFiles().
+ * @param argc		no. of arguments
+ * @param argv		argument array
+ * @param options	address of popt option table
+ * @param configPaths	colon separated file path(s) to read.
+ * @return		initialized popt context (NULL on error).
+ */
+/*@only@*/ /*@null@*/ /*@unused@*/
+poptContext poptInit(int argc, /*@dependent@*/ /*@keep@*/ const char ** argv,
+		/*@dependent@*/ /*@keep@*/ const struct poptOption * options,
+		/*@null@*/ const char * configPaths)
+	/*@globals fileSystem, internalState @*/
+	/*@modifies fileSystem, internalState @*/;
 
 /** \ingroup popt
  * Reinitialize popt context.
@@ -318,15 +353,6 @@ const char * poptBadOption(/*@null@*/poptContext con, unsigned int flags)
 	/*@*/;
 
 /** \ingroup popt
- * Destroy context.
- * @param con		context
- * @return		NULL always
- */
-/*@null@*/
-poptContext poptFreeContext( /*@only@*/ /*@null@*/ poptContext con)
-	/*@modifies con @*/;
-
-/** \ingroup popt
  * Add arguments to context.
  * @param con		context
  * @param argv		argument array, NULL terminated
@@ -366,6 +392,29 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
  * @return		0 on success, POPT_ERROR_ERRNO on failure
  */
 int poptReadConfigFile(poptContext con, const char * fn)
+	/*@globals errno, fileSystem, internalState @*/
+	/*@modifies con->execs, con->numExecs,
+		errno, fileSystem, internalState @*/;
+
+/** \ingroup popt
+ * Perform sanity checks on a file path.
+ * @param fn		file path
+ * @return		0 on OK, 1 on NOTOK.
+ */
+int poptSaneFile(const char * fn)
+	/*@globals errno, internalState @*/
+	/*@modifies errno, internalState @*/;
+
+/** \ingroup popt
+ * Read configuration file(s).
+ * Colon separated files to read, looping over poptReadConfigFile().
+ * Note that an '@' character preceeding a path in the list will
+ * also perform additional sanity checks on the file before reading.
+ * @param con		context
+ * @param paths		colon separated file name(s) to read
+ * @return		0 on success, POPT_ERROR_BADCONFIG on failure
+ */
+int poptReadConfigFiles(poptContext con, /*@null@*/ const char * paths)
 	/*@globals errno, fileSystem, internalState @*/
 	/*@modifies con->execs, con->numExecs,
 		errno, fileSystem, internalState @*/;
