@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: rework the glob wrappers into something more useful. portability todo++.
     - jbj: stub in glob(3) wrappers for popt. more useful poptGlob() API next.
     - jbj: add poptInit/poptFini/poptReadConfigFiles/poptSaneFile routines.
     - jbj: rewrite poptReadConfigFile(), styling for (i.e. my) readbility.
