@@ -20,12 +20,57 @@ extern int glob (const char *__pattern, int __flags,
 		/*@out@*/ glob_t *__pglob)
 	/*@globals errno, fileSystem @*/
 	/*@modifies *__pglob, errno, fileSystem @*/;
-	/* XXX only annotation is a white lie */
+
+/* XXX only annotation is a white lie */
 extern void globfree (/*@only@*/ glob_t *__pglob)
 	/*@modifies *__pglob @*/;
 /*@=declundef =exportheader =incondefs =protoparammatch =redecl =type @*/
 #endif
-#endif
+
+/*@unchecked@*/
+static int poptGlobFlags = 0;
+
+static int poptGlob_pattern_p (const char *pattern, int quote)
+	/*@*/
+{
+    const char * pat = pattern;
+    int rc;
+    /* XXX skip the attention marker. */
+    if (pat[0] == '@' && pat[1] != '(')
+	pat++;
+    rc = glob_pattern_p(pat, quote);
+    return rc;
+}
+
+static int poptGlob_error(/*@unused@*/ UNUSED(const char * epath),
+		/*@unused@*/ UNUSED(int eerrno))
+	/*@*/
+{
+    return 1;
+}
+
+static int poptGlob(const char * pattern, int flags,
+		int errfunc(const char * epath, int eerrno),
+		/*@out@*/ glob_t * pglob)
+	/*@globals fileSystem @*/
+	/*@modifies *pglob, fileSystem @*/
+{
+    const char * pat = pattern;
+    int rc;
+    /* XXX skip the attention marker. */
+    if (pat[0] == '@' && pat[1] != '(')
+	pat++;
+    rc = glob(pat, flags, errfunc, pglob);
+    return rc;
+}
+
+static void poptGlobfree( /*@only@*/ glob_t * pglob)
+	/*@globals fileSystem @*/
+	/*@modifies *pglob, fileSystem @*/
+{
+    globfree(pglob);
+}
+#endif	/* HAVE_GLOB_H */
 
 /*@access poptContext @*/
 
@@ -202,54 +247,63 @@ int poptReadConfigFiles(poptContext con, const char * paths)
     int rc = 0;		/* assume success */
 
     for (p = buf; p != NULL && *p != '\0'; p = pe) {
-        const char ** av;
-        size_t ac;
+	const char ** av = NULL;
+	size_t ac = 0;
 	size_t i;
 	int xx;
 
-        /* locate start of next path element */
-        pe = strchr(p, ':');
-        if (pe != NULL && *pe == ':')
-            *pe++ = '\0';
-        else
-            pe = (char *) (p + strlen(p));
+	/* locate start of next path element */
+	pe = strchr(p, ':');
+	if (pe != NULL && *pe == ':')
+	    *pe++ = '\0';
+	else
+	    pe = (char *) (p + strlen(p));
 
-#ifdef	FINISHME
-        /* glob-expand the path element */
-        ac = 0;
-        av = NULL;
-        if ((i = rpmGlob(p, &ac, &av)) != 0)
-            continue;
-#else
-	ac = (size_t)1;
-	if ((av = calloc(ac + 1, sizeof(*av))) != NULL)
-	    av[0] = xstrdup(p);
+#if defined(HAVE_GLOB_H)
+	if (poptGlob_pattern_p(p, 0)) {
+	    glob_t _g, *pglob = &_g;
+
+	    if ((xx = poptGlob(p, poptGlobFlags, poptGlob_error, pglob)) != 0)
+		continue;
+	    for (i = 0; i < pglob->gl_pathc; i++) {
+		char * fn = pglob->gl_pathv[i];
+		/* XXX should '@' attention be pushed into poptReadConfigFile? */
+		if (fn[0] == '@' && fn[1] != '(')
+		    fn++;
+		xx = poptReadConfigFile(con, fn);
+		if (xx && rc == 0)
+		    rc = xx;
+	    }
+	    poptGlobfree(pglob);
+	} else
 #endif
-
-        /* work-off each resulting file from the path element */
-	if (av != NULL)
-        for (i = 0; i < ac; i++) {
-            const char * fn = av[i];
+      {
+	ac = (size_t)1;
+	if ((av = calloc(ac + 1, sizeof(*av))) == NULL)
+	    continue;	/* XXX error return */
+	av[0] = xstrdup(p);
+	/* work-off each resulting file from the path element */
+	for (i = 0; i < ac; i++) {
+	    const char * fn = av[i];
 	    if (av[i] == NULL)	/* XXX can't happen */
 		/*@innercontinue@*/ continue;
 	    /* XXX should '@' attention be pushed into poptReadConfigFile? */
-            if (fn[0] == '@') {	/* attention */
-                fn++;
-                if (!poptSaneFile(fn)) {
+	    if (fn[0] == '@' && fn[1] != '(') {
+		fn++;
+		xx = poptSaneFile(fn);
+		if (!xx && rc == 0)
 		    rc = POPT_ERROR_BADCONFIG;
-                    /*@innercontinue@*/ continue;
-                }
-            }
-            xx = poptReadConfigFile(con, fn);
+		/*@innercontinue@*/ continue;
+	    }
+	    xx = poptReadConfigFile(con, fn);
 	    if (xx && rc == 0)
 		rc = xx;
-            free((void *)av[i]);
+	    free((void *)av[i]);
 	    av[i] = NULL;
-        }
-	if (av != NULL) {
-            free(av);
-	    av = NULL;
 	}
+	free(av);
+	av = NULL;
+      }
     }
 
 /*@-usedef@*/
@@ -280,9 +334,9 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 
 #if defined(HAVE_GLOB_H)
     if (!stat("/etc/popt.d", &s) && S_ISDIR(s.st_mode)) {
-        glob_t _g, *pglob = &_g;
-	if (!glob("/etc/popt.d/*", 0, NULL, pglob)) {
-            size_t i;
+	glob_t _g, *pglob = &_g;
+	if (!glob("/etc/popt.d/*", poptGlobFlags, poptGlob_error, pglob)) {
+	    size_t i;
 	    for (i = 0; i < pglob->gl_pathc; i++) {
 		char * f = pglob->gl_pathv[i];
 		if (f == NULL || strstr(f, ".rpmnew") || strstr(f, ".rpmsave"))
@@ -320,8 +374,8 @@ poptFini(poptContext con)
 }
 
 poptContext
-poptInit(int argc, char *const argv[],
-		struct poptOption * options, const char * configPaths)
+poptInit(int argc, const char ** argv,
+		const struct poptOption * options, const char * configPaths)
 {
     poptContext con = NULL;
     const char * argv0;
