@@ -346,8 +346,18 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	/* XXX --long always padded for alignment with/without "-X, ". */
 	char *dash = poptArgType(opt) == POPT_ARG_MAINCALL ? ""
 		   : (F_ISSET(opt, ONEDASH) ? "-" : "--");
-	char *toggle = (F_ISSET(opt, TOGGLE) ? "[no]" : "");
-	(void) stpcpy(stpcpy(stpcpy(stpcpy(left, "    "), dash), toggle), opt->longName);
+	const char *longName = opt->longName;
+	const char *toggle;
+	if (F_ISSET(opt, TOGGLE)) {
+	    toggle = "[no]";
+	    if (longName[0] == 'n' && longName[1] == 'o') {
+		longName += sizeof("no") - 1;
+		if (longName[0] == '-')
+		    longName++;
+	    }
+	} else
+	    toggle = "";
+	(void) stpcpy(stpcpy(stpcpy(stpcpy(left, "    "), dash), toggle), longName);
     }
 #undef	prtlong
 

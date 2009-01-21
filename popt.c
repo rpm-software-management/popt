@@ -906,6 +906,7 @@ static unsigned int poptArgInfo(poptContext con, const struct poptOption * opt)
     if (LF_ISSET(TOGGLE)) {
 	const char * longName = con->os->argv[con->os->next-1];
 	while (*longName == '-') longName++;
+	/* XXX almost good enough but consider --[no]nofoo corner cases. */
 	if (longName[0] != opt->longName[0] || longName[1] != opt->longName[1])
 	{
 	    if (LF_ISSET(XOR))	/* XXX dont toggle with XOR */
