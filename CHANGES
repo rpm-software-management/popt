@@ -1,4 +1,7 @@
 1.14 -> 1.15:
+    - jbj: add poptArgInfo() to get argInfo, implementing POPT_ARGFLAG_TOGGLE.
+    - jbj: add longOptionStrcmp() to match w POPT_ARGFLAG_TOGGLE.
+    - jbj: change singleDash arg to a bit enum, use LF_ISSET(ONEDASH) instead.
     - jbj: rework the glob wrappers into something more useful. portability todo++.
     - jbj: stub in glob(3) wrappers for popt. more useful poptGlob() API next.
     - jbj: add poptInit/poptFini/poptReadConfigFiles/poptSaneFile routines.
