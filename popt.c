@@ -908,8 +908,8 @@ static unsigned int poptArgInfo(poptContext con, const struct poptOption * opt)
 	while (*longName == '-') longName++;
 	if (longName[0] != opt->longName[0] || longName[1] != opt->longName[1])
 	{
-	    if (LF_ISSET(XOR))	/* XXX don't toggle with XOR */
-'		;
+	    if (LF_ISSET(XOR))	/* XXX dont toggle with XOR */
+		;
 	    else {
 		/* Toggle POPT_BIT_SET <=> POPT_BIT_CLR. */
 		if (LF_ISSET(LOGICALOPS))

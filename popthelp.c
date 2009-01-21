@@ -322,6 +322,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 
     /* Make sure there's more than enough room in target buffer. */
     if (opt->longName)	nb += strlen(opt->longName);
+    if (F_ISSET(opt, TOGGLE)) nb += sizeof("[no]") - 1;
     if (argDescrip)	nb += strlen(argDescrip);
 
     left = malloc(nb);
@@ -345,7 +346,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	/* XXX --long always padded for alignment with/without "-X, ". */
 	char *dash = poptArgType(opt) == POPT_ARG_MAINCALL ? ""
 		   : (F_ISSET(opt, ONEDASH) ? "-" : "--");
-	(void) stpcpy(stpcpy(stpcpy(left, "    "), dash), opt->longName);
+	char *toggle = (F_ISSET(opt, TOGGLE) ? "[no]" : "");
+	(void) stpcpy(stpcpy(stpcpy(stpcpy(left, "    "), dash), toggle), opt->longName);
     }
 #undef	prtlong
 
