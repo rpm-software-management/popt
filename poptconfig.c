@@ -10,6 +10,10 @@
 #include "poptint.h"
 #include <sys/stat.h>
 
+#if defined(HAVE_FNMATCH_H)
+#include <fnmatch.h>
+#endif
+
 #if defined(HAVE_GLOB_H)
 #include <glob.h>
 
@@ -95,11 +99,65 @@ static int poptGlob(/*@unused@*/ UNUSED(poptContext con), const char * pattern,
 
 /*@access poptContext @*/
 
+#if defined(HAVE_GLOB_H) && !defined(_GNU_SOURCE)
+/* Return nonzero if PATTERN contains any metacharacters.
+   Metacharacters can be quoted with backslashes if QUOTE is nonzero.  */
+static int
+glob_pattern_p (const char * pattern, int quote)
+	/*@*/
+{
+    const char * p;
+    int open = 0;
+
+    for (p = pattern; *p != '\0'; ++p)
+    switch (*p) {
+    case '?':
+    case '*':
+	return 1;
+	/*@notreached@*/ /*@switchbreak@*/ break;
+    case '\\':
+	if (quote && p[1] != '\0')
+	  ++p;
+	/*@switchbreak@*/ break;
+    case '[':
+	open = 1;
+	/*@switchbreak@*/ break;
+    case ']':
+	if (open)
+	  return 1;
+	/*@switchbreak@*/ break;
+    }
+    return 0;
+}
+#endif	/* defined(HAVE_GLOB_H) && !defined(_GNU_SOURCE) */
+
+/**
+ * Check for application match.
+ * @param con		context
+ * @param s		config application name
+ * return		0 if config application matches
+ */
+static int configAppMatch(poptContext con, const char * s)
+	/*@*/
+{
+    int rc;
+
+#if defined(HAVE_GLOB_H) && defined(HAVE_FNMATCH_H)
+    if (glob_pattern_p(s, 1)) {
+	static int flags = FNM_EXTMATCH | FNM_PATHNAME | FNM_PERIOD;
+	rc = fnmatch(s, con->appName, flags);
+    } else
+#endif
+	rc = strcmp(s, con->appName);
+    return rc;
+}
+
 /*@-compmempass@*/	/* FIX: item->option.longName kept, not dependent. */
 static void configLine(poptContext con, char * line)
 	/*@modifies con @*/
 {
-    size_t nameLength;
+    char * se = line;
+    const char * appName;
     const char * entryType;
     const char * opt;
     struct poptItem_s item_buf;
@@ -108,37 +166,42 @@ static void configLine(poptContext con, char * line)
 
     if (con->appName == NULL)
 	return;
-    nameLength = strlen(con->appName);
     
     memset(item, 0, sizeof(*item));
 
-    if (strncmp(line, con->appName, nameLength)) return;
+    appName = se;
+    while (*se != '\0' && !_isspaceptr(se)) se++;
+    if (*se == '\0') return;
+    *se++ = '\0';
 
-    line += nameLength;
-    if (*line == '\0' || !_isspaceptr(line)) return;
+    if (configAppMatch(con, appName)) return;
 
-    while (*line != '\0' && _isspaceptr(line)) line++;
-    entryType = line;
-    while (*line == '\0' || !_isspaceptr(line)) line++;
-    *line++ = '\0';
+    while (*se != '\0' && _isspaceptr(se)) se++;
+    entryType = se;
+    while (*se != '\0' && !_isspaceptr(se)) se++;
+    *se++ = '\0';
 
-    while (*line != '\0' && _isspaceptr(line)) line++;
-    if (*line == '\0') return;
-    opt = line;
-    while (*line == '\0' || !_isspaceptr(line)) line++;
-    *line++ = '\0';
+    while (*se != '\0' && _isspaceptr(se)) se++;
+    if (*se == '\0') return;
+    opt = se;
+    while (*se != '\0' && !_isspaceptr(se)) se++;
+    if (*se == '\0') return;
+    *se++ = '\0';
 
-    while (*line != '\0' && _isspaceptr(line)) line++;
-    if (*line == '\0') return;
+    while (*se != '\0' && _isspaceptr(se)) se++;
+    if (opt[0] == '-' && *se == '\0') return;
 
 /*@-temptrans@*/ /* FIX: line alias is saved */
     if (opt[0] == '-' && opt[1] == '-')
 	item->option.longName = opt + 2;
     else if (opt[0] == '-' && opt[2] == '\0')
 	item->option.shortName = opt[1];
+    else {
+	/* XXX TODO: read alias from path stored in opt */
+    }
 /*@=temptrans@*/
 
-    if (poptParseArgvString(line, &item->argc, &item->argv)) return;
+    if (poptParseArgvString(se, &item->argc, &item->argv)) return;
 
 /*@-modobserver@*/
     item->option.argInfo = POPT_ARGFLAG_DOC_HIDDEN;
