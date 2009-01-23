@@ -44,7 +44,7 @@ AC_SYS_LARGEFILE
 AC_ISC_POSIX
 AM_C_PROTOTYPES
 
-AC_CHECK_HEADERS(float.h glob.h langinfo.h libintl.h mcheck.h unistd.h)
+AC_CHECK_HEADERS(float.h fnmatch.h glob.h langinfo.h libintl.h mcheck.h unistd.h)
 
 # For some systems we know that we have ld_version scripts.
 # Use it then as default.
