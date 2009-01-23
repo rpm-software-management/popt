@@ -132,6 +132,52 @@ glob_pattern_p (const char * pattern, int quote)
 #endif	/* defined(HAVE_GLOB_H) && !defined(_GNU_SOURCE) */
 
 /**
+ * Read a file into a buffer.
+ * @param con		context
+ * @param fn		file name
+ * @retval *bp		file contents
+ * @retval *nbp		no. of bytes in file contents
+ * return		0 on success
+ */
+static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
+		char ** bp, off_t * nbp)
+	/*@modifies *bp, *nbp @*/
+{
+    int fdno;
+    char * b = NULL;
+    off_t nb = 0;
+    int rc = POPT_ERROR_ERRNO;	/* assume failure */
+
+    fdno = open(fn, O_RDONLY);
+    if (fdno < 0)
+	goto exit;
+
+    if ((nb = lseek(fdno, 0, SEEK_END)) == (off_t)-1
+     || lseek(fdno, 0, SEEK_SET) == (off_t)-1
+     || (b = malloc((size_t)nb + 1)) == NULL
+     || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb)
+    {
+	int oerrno = errno;
+	(void) close(fdno);
+	errno = oerrno;
+	goto exit;
+    }
+    if (close(fdno) == -1)
+	goto exit;
+    rc = 0;
+
+exit:
+    if (rc == 0) {
+	*bp = b;
+	*nbp = nb;
+    } else {
+	*bp = NULL;
+	*nbp = 0;
+    }
+    return rc;
+}
+
+/**
  * Check for application match.
  * @param con		context
  * @param s		config application name
@@ -153,9 +199,11 @@ static int configAppMatch(poptContext con, const char * s)
 }
 
 /*@-compmempass@*/	/* FIX: item->option.longName kept, not dependent. */
-static void configLine(poptContext con, char * line)
+static int configLine(poptContext con, char * line)
 	/*@modifies con @*/
 {
+    char *b = NULL;
+    off_t nb = 0;
     char * se = line;
     const char * appName;
     const char * entryType;
@@ -163,18 +211,19 @@ static void configLine(poptContext con, char * line)
     struct poptItem_s item_buf;
     poptItem item = &item_buf;
     int i, j;
+    int rc = 1;
 
     if (con->appName == NULL)
-	return;
+	goto exit;
     
     memset(item, 0, sizeof(*item));
 
     appName = se;
     while (*se != '\0' && !_isspaceptr(se)) se++;
-    if (*se == '\0') return;
+    if (*se == '\0') goto exit;
     *se++ = '\0';
 
-    if (configAppMatch(con, appName)) return;
+    if (configAppMatch(con, appName)) goto exit;
 
     while (*se != '\0' && _isspaceptr(se)) se++;
     entryType = se;
@@ -182,14 +231,14 @@ static void configLine(poptContext con, char * line)
     *se++ = '\0';
 
     while (*se != '\0' && _isspaceptr(se)) se++;
-    if (*se == '\0') return;
+    if (*se == '\0') goto exit;
     opt = se;
     while (*se != '\0' && !_isspaceptr(se)) se++;
-    if (*se == '\0') return;
+    if (*se == '\0') goto exit;
     *se++ = '\0';
 
     while (*se != '\0' && _isspaceptr(se)) se++;
-    if (opt[0] == '-' && *se == '\0') return;
+    if (opt[0] == '-' && *se == '\0') goto exit;
 
 /*@-temptrans@*/ /* FIX: line alias is saved */
     if (opt[0] == '-' && opt[1] == '-')
@@ -197,11 +246,35 @@ static void configLine(poptContext con, char * line)
     else if (opt[0] == '-' && opt[2] == '\0')
 	item->option.shortName = opt[1];
     else {
-	/* XXX TODO: read alias from path stored in opt */
+	const char * fn = opt;
+
+	/* XXX handle globs and directories? */
+	if ((rc = poptSlurp(con, fn, &b, &nb)) != 0) goto exit;
+
+	/* Append remaining text to the interpolated file option text. */
+	if (*se != NULL) {
+	    size_t nse = strlen(se) + 1;
+	    b = realloc(b, ((size_t)nb + nse + 1));
+	    (void) stpcpy( stpcpy(b+nb, " "), se);
+	    nb += (off_t)nse;
+	}
+	se = b;
+
+	/* Use the basename of the path as the long option name. */
+	if ((item->option.longName = strrchr(fn, '/')) != NULL)
+	    item->option.longName++;
+	else
+	    item->option.longName = fn;
+
+	/* Single character basenames are treated as short options instead. */
+	if (item->option.longName[1] == '\0') {
+	    item->option.shortName = (int) item->option.longName[0];
+	    item->option.longName = NULL;
+	}
     }
 /*@=temptrans@*/
 
-    if (poptParseArgvString(se, &item->argc, &item->argv)) return;
+    if (poptParseArgvString(se, &item->argc, &item->argv)) goto exit;
 
 /*@-modobserver@*/
     item->option.argInfo = POPT_ARGFLAG_DOC_HIDDEN;
@@ -233,38 +306,29 @@ static void configLine(poptContext con, char * line)
 	
 /*@-nullstate@*/ /* FIX: item->argv[] may be NULL */
     if (!strcmp(entryType, "alias"))
-	(void) poptAddItem(con, item, 0);
+	rc = poptAddItem(con, item, 0);
     else if (!strcmp(entryType, "exec"))
-	(void) poptAddItem(con, item, 1);
+	rc = poptAddItem(con, item, 1);
 /*@=nullstate@*/
+exit:
+    rc = 0;	/* XXX for now, always return success */
+    if (b)
+	free(b);
+    return rc;
 }
 /*@=compmempass@*/
 
 int poptReadConfigFile(poptContext con, const char * fn)
 {
-    int fdno;
     char *b = NULL, *be;
-    off_t nb;
+    off_t nb = 0;
     const char *se;
     char *t, *te;
-    int rc = POPT_ERROR_ERRNO;	/* assume failure */
+    int rc;
+    int xx;
 
-    fdno = open(fn, O_RDONLY);
-    if (fdno < 0)
+    if ((rc = poptSlurp(con, fn, &b, &nb)) != 0)
 	return (errno == ENOENT ? 0 : rc);
-
-    if ((nb = lseek(fdno, 0, SEEK_END)) == (off_t)-1
-     || lseek(fdno, 0, SEEK_SET) == (off_t)-1
-     || (b = malloc((size_t)nb + 1)) == NULL
-     || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb)
-    {
-	int oerrno = errno;
-	(void) close(fdno);
-	errno = oerrno;
-	goto exit;
-    }
-    if (close(fdno) == -1)
-	goto exit;
 
     if ((t = malloc((size_t)nb + 1)) == NULL)
 	goto exit;
@@ -278,7 +342,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    te = t;
 	    while (*te && _isspaceptr(te)) te++;
 	    if (*te && *te != '#')
-		configLine(con, te);
+		xx = configLine(con, te);
 	    /*@switchbreak@*/ break;
 /*@-usedef@*/	/* XXX *se may be uninitialized */
 	  case '\\':
