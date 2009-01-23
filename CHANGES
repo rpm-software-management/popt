@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: add test cases for bit operations and toggles.
     - jbj: avoid displaying --[no]nofoo with POPT_ARGFLAG_TOGGLE.
     - jbj: add poptArgInfo() to get argInfo, implementing POPT_ARGFLAG_TOGGLE.
     - jbj: add longOptionStrcmp() to match w POPT_ARGFLAG_TOGGLE.

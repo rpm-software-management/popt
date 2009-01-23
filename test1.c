@@ -33,9 +33,9 @@ static int aVal = 141421;
 /*@unchecked@*/
 static int bVal = 141421;
 /*@unchecked@*/
-static int aFlag = 0;
+static int aFlag = 0x8ace;
 /*@unchecked@*/
-static int bFlag = 0;
+static int bFlag = 0x8ace;
 
 /*@unchecked@*/
 static int aInt = 271828;
@@ -145,10 +145,12 @@ static struct poptOption options[] = {
    { "argv", '\0', POPT_ARG_ARGV, &aArgv, 0,
 	"POPT_ARG_ARGV: append arg to array (can be used multiple times)",NULL},
 
-  { "bitset", '\0', POPT_BIT_SET | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x4321,
-	"POPT_BIT_SET: |= 0x4321", 0},
-  { "bitclr", '\0', POPT_BIT_CLR | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x1234,
-	"POPT_BIT_CLR: &= ~0x1234", 0},
+  { "bitset", '\0', POPT_BIT_SET | POPT_ARGFLAG_TOGGLE | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x7777,
+	"POPT_BIT_SET: |= 0x7777", 0},
+  { "bitclr", '\0', POPT_BIT_CLR | POPT_ARGFLAG_TOGGLE | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0xf842,
+	"POPT_BIT_CLR: &= ~0xf842", 0},
+  { "bitxor", '\0', POPT_ARG_VAL | POPT_ARGFLAG_XOR | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, (0x8ace^0xfeed),
+	"POPT_ARGFLAG_XOR: ^= (0x8ace^0xfeed)", 0},
 
   { "nstr", '\0', POPT_ARG_STRING | POPT_ARGFLAG_SHOW_DEFAULT, &nStr, 0,
 	"POPT_ARG_STRING: (null)", NULL},
@@ -274,7 +276,7 @@ int main(int argc, const char ** argv)
     if (aVal != bVal)
 	fprintf(stdout, " aVal: %d", aVal);
     if (aFlag != bFlag)
-	fprintf(stdout, " aFlag: %d", aFlag);
+	fprintf(stdout, " aFlag: 0x%x", aFlag);
     if (aInt != bInt)
 	fprintf(stdout, " aInt: %d", aInt);
     if (aLong != bLong)

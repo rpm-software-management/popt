@@ -104,16 +104,22 @@ run test1 "test1 - 47" "arg1: 0 arg2: (none) aArgv: A B rest: C" --argv A --argv
 run test1 "test1 - 48" "arg1: 0 arg2: foo=bar" -2foo=bar
 run test1 "test1 - 49" "arg1: 0 arg2: foo=bar" -2=foo=bar
 
-run test1 "test1 - 50" "\
+run test1 "test1 - 50" "arg1: 0 arg2: (none) aFlag: 0xfeed" --bitxor
+run test1 "test1 - 51" "arg1: 0 arg2: (none) aFlag: 0xffff" --bitset
+run test1 "test1 - 52" "arg1: 0 arg2: (none) aFlag: 0x28c" --bitclr
+run test1 "test1 - 53" "arg1: 0 arg2: (none) aFlag: 0x8888" --nobitset
+run test1 "test1 - 54" "arg1: 0 arg2: (none) aFlag: 0xface" --nobitclr
+
+run test1 "test1 - 55" "\
 Usage: lt-test1 [-I?] [-c|--cb2=STRING] [--arg1] [-2|--arg2=ARG]
         [-3|--arg3=ANARG] [-onedash] [--optional=STRING] [--val]
         [-i|--int=INT] [-l|--long=LONG] [-L|--longlong=LONGLONG]
         [-f|--float=FLOAT] [-d|--double=DOUBLE] [--randint=INT]
         [--randlong=LONG] [--randlonglong=LONGLONG] [--argv] [--bitset]
-        [--bitclr] [--nstr=STRING] [--lstr=STRING] [-I|--inc]
+        [--bitclr] [--bitxor] [--nstr=STRING] [--lstr=STRING] [-I|--inc]
         [-c|--cb=STRING] [--longopt] [-?|--help] [--usage] [--simple=ARG]" --usage
 
-run test1 "test1 - 51" "\
+run test1 "test1 - 56" "\
 Usage: lt-test1 [OPTION...]
       --arg1                      First argument with a really long
                                   description. After all, we have to test
@@ -135,8 +141,9 @@ Usage: lt-test1 [OPTION...]
       --randlonglong=LONGLONG     POPT_ARGFLAG_RANDOM: experimental
       --argv                      POPT_ARG_ARGV: append arg to array (can be
                                   used multiple times)
-      --bitset                    POPT_BIT_SET: |= 0x4321
-      --bitclr                    POPT_BIT_CLR: &= ~0x1234
+      --[no]bitset                POPT_BIT_SET: |= 0x7777
+      --[no]bitclr                POPT_BIT_CLR: &= ~0xf842
+      --bitxor                    POPT_ARGFLAG_XOR: ^= (0x8ace^0xfeed)
       --nstr=STRING               POPT_ARG_STRING: (null) (default: null)
       --lstr=STRING               POPT_ARG_STRING: \"123456789...\" (default:
                                   \"This tests default strings and exceeds the
