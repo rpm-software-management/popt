@@ -146,6 +146,7 @@ static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
     int fdno;
     char * b = NULL;
     off_t nb = 0;
+    char * s, * t, * se;
     int rc = POPT_ERROR_ERRNO;	/* assume failure */
 
     fdno = open(fn, O_RDONLY);
@@ -165,6 +166,25 @@ static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
     if (close(fdno) == -1)
 	goto exit;
     rc = 0;
+
+   /* Trim out escaped newlines. */
+    s = t = b;
+    se = b + nb;
+    while (*s && s < se)
+	switch (*s) {
+	case '\\':
+	    if (s[1] == '\n') {
+		s++;
+		s++;
+		continue;
+	    }
+	    /*@fallthrough@*/
+	default:
+	    *t++ = *s++;
+	    break;
+	}
+    *t++ = '\0';
+    nb = (off_t)(t - b);
 
 exit:
     if (rc == 0) {
@@ -220,22 +240,24 @@ static int configLine(poptContext con, char * line)
 
     appName = se;
     while (*se != '\0' && !_isspaceptr(se)) se++;
-    if (*se == '\0') goto exit;
-    *se++ = '\0';
+    if (*se == '\0')
+	goto exit;
+    else
+	*se++ = '\0';
 
     if (configAppMatch(con, appName)) goto exit;
 
     while (*se != '\0' && _isspaceptr(se)) se++;
     entryType = se;
     while (*se != '\0' && !_isspaceptr(se)) se++;
-    *se++ = '\0';
+    if (*se != '\0') *se++ = '\0';
 
     while (*se != '\0' && _isspaceptr(se)) se++;
     if (*se == '\0') goto exit;
     opt = se;
     while (*se != '\0' && !_isspaceptr(se)) se++;
-    if (*se == '\0') goto exit;
-    *se++ = '\0';
+    if (opt[0] == '-' && *se == '\0') goto exit;
+    if (*se != '\0') *se++ = '\0';
 
     while (*se != '\0' && _isspaceptr(se)) se++;
     if (opt[0] == '-' && *se == '\0') goto exit;
@@ -252,10 +274,10 @@ static int configLine(poptContext con, char * line)
 	if ((rc = poptSlurp(con, fn, &b, &nb)) != 0) goto exit;
 
 	/* Append remaining text to the interpolated file option text. */
-	if (*se != NULL) {
+	if (*se != '\0') {
 	    size_t nse = strlen(se) + 1;
-	    b = realloc(b, ((size_t)nb + nse + 1));
-	    (void) stpcpy( stpcpy(b+nb, " "), se);
+	    b = realloc(b, ((size_t)nb + nse));
+	    (void) stpcpy( stpcpy(&b[nb-1], " "), se);
 	    nb += (off_t)nse;
 	}
 	se = b;
@@ -348,7 +370,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	  case '\\':
 	    *te = *se++;
 	    /* \ at the end of a line does not insert a \n */
-	    if (se < be  && *se != '\n') {
+	    if (se < be && *se != '\n') {
 		te++;
 		*te++ = *se;
 	    }
