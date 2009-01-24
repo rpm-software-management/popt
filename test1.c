@@ -33,9 +33,9 @@ static int aVal = 141421;
 /*@unchecked@*/
 static int bVal = 141421;
 /*@unchecked@*/
-static int aFlag = 0x8ace;
+static unsigned int aFlag = 0x8aceU;
 /*@unchecked@*/
-static int bFlag = 0x8ace;
+static unsigned int bFlag = 0x8aceU;
 
 /*@unchecked@*/
 static int aInt = 271828;
