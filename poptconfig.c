@@ -12,6 +12,13 @@
 
 #if defined(HAVE_FNMATCH_H)
 #include <fnmatch.h>
+
+#if defined(__LCLINT__)
+/*@-declundef -exportheader -incondefs -protoparammatch -redecl -type @*/
+extern int fnmatch (const char *__pattern, const char *__name, int __flags)
+	/*@*/;
+/*@=declundef =exportheader =incondefs =protoparammatch =redecl =type @*/
+#endif	/* __LCLINT__ */
 #endif
 
 #if defined(HAVE_GLOB_H)
@@ -33,7 +40,39 @@ extern void globfree (/*@only@*/ glob_t *__pglob)
 extern int glob_pattern_p (const char *__pattern, int __quote)
         /*@*/;
 /*@=declundef =exportheader =incondefs =protoparammatch =redecl =type @*/
-#endif
+#endif	/* __LCLINT__ */
+
+#if !defined(_GNU_SOURCE)
+/* Return nonzero if PATTERN contains any metacharacters.
+   Metacharacters can be quoted with backslashes if QUOTE is nonzero.  */
+static int
+glob_pattern_p (const char * pattern, int quote)
+	/*@*/
+{
+    const char * p;
+    int open = 0;
+
+    for (p = pattern; *p != '\0'; ++p)
+    switch (*p) {
+    case '?':
+    case '*':
+	return 1;
+	/*@notreached@*/ /*@switchbreak@*/ break;
+    case '\\':
+	if (quote && p[1] != '\0')
+	  ++p;
+	/*@switchbreak@*/ break;
+    case '[':
+	open = 1;
+	/*@switchbreak@*/ break;
+    case ']':
+	if (open)
+	  return 1;
+	/*@switchbreak@*/ break;
+    }
+    return 0;
+}
+#endif	/* !defined(_GNU_SOURCE) */
 
 /*@unchecked@*/
 static int poptGlobFlags = 0;
@@ -99,38 +138,6 @@ static int poptGlob(/*@unused@*/ UNUSED(poptContext con), const char * pattern,
 
 /*@access poptContext @*/
 
-#if defined(HAVE_GLOB_H) && !defined(_GNU_SOURCE)
-/* Return nonzero if PATTERN contains any metacharacters.
-   Metacharacters can be quoted with backslashes if QUOTE is nonzero.  */
-static int
-glob_pattern_p (const char * pattern, int quote)
-	/*@*/
-{
-    const char * p;
-    int open = 0;
-
-    for (p = pattern; *p != '\0'; ++p)
-    switch (*p) {
-    case '?':
-    case '*':
-	return 1;
-	/*@notreached@*/ /*@switchbreak@*/ break;
-    case '\\':
-	if (quote && p[1] != '\0')
-	  ++p;
-	/*@switchbreak@*/ break;
-    case '[':
-	open = 1;
-	/*@switchbreak@*/ break;
-    case ']':
-	if (open)
-	  return 1;
-	/*@switchbreak@*/ break;
-    }
-    return 0;
-}
-#endif	/* defined(HAVE_GLOB_H) && !defined(_GNU_SOURCE) */
-
 /**
  * Read a file into a buffer.
  * @param con		context
@@ -141,7 +148,8 @@ glob_pattern_p (const char * pattern, int quote)
  */
 static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
 		char ** bp, off_t * nbp)
-	/*@modifies *bp, *nbp @*/
+	/*@globals errno, fileSystem, internalState @*/
+	/*@modifies *bp, *nbp, errno, fileSystem, internalState @*/
 {
     int fdno;
     char * b = NULL;
@@ -155,7 +163,7 @@ static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
 
     if ((nb = lseek(fdno, 0, SEEK_END)) == (off_t)-1
      || lseek(fdno, 0, SEEK_SET) == (off_t)-1
-     || (b = malloc((size_t)nb + 1)) == NULL
+     || (b = calloc(sizeof(*b), (size_t)nb + 1)) == NULL
      || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb)
     {
 	int oerrno = errno;
@@ -165,24 +173,26 @@ static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
     }
     if (close(fdno) == -1)
 	goto exit;
+    if (b == NULL || nb <= 0) {
+	rc = POPT_ERROR_BADCONFIG;
+	goto exit;
+    }
     rc = 0;
 
    /* Trim out escaped newlines. */
-    s = t = b;
-    se = b + nb;
-    while (*s && s < se)
+    for (t = b, s = b, se = b + nb; *s && s < se; s++) {
 	switch (*s) {
 	case '\\':
 	    if (s[1] == '\n') {
-		s++;
 		s++;
 		continue;
 	    }
 	    /*@fallthrough@*/
 	default:
-	    *t++ = *s++;
-	    break;
+	    *t++ = *s;
+	    /*@switchbreak@*/ break;
 	}
+    }
     *t++ = '\0';
     nb = (off_t)(t - b);
 
@@ -191,10 +201,14 @@ exit:
 	*bp = b;
 	*nbp = nb;
     } else {
+	if (b)
+	    free(b);
 	*bp = NULL;
 	*nbp = 0;
     }
+/*@-compdef -nullstate @*/	/* XXX cannot annotate char ** correctly */
     return rc;
+/*@=compdef =nullstate @*/
 }
 
 /**
@@ -206,11 +220,16 @@ exit:
 static int configAppMatch(poptContext con, const char * s)
 	/*@*/
 {
-    int rc;
+    int rc = 1;
+
+    if (con->appName == NULL)	/* XXX can't happen. */
+	return rc;
 
 #if defined(HAVE_GLOB_H) && defined(HAVE_FNMATCH_H)
     if (glob_pattern_p(s, 1)) {
+/*@-bitwisesigned@*/
 	static int flags = FNM_EXTMATCH | FNM_PATHNAME | FNM_PERIOD;
+/*@=bitwisesigned@*/
 	rc = fnmatch(s, con->appName, flags);
     } else
 #endif
@@ -219,8 +238,9 @@ static int configAppMatch(poptContext con, const char * s)
 }
 
 /*@-compmempass@*/	/* FIX: item->option.longName kept, not dependent. */
-static int configLine(poptContext con, char * line)
-	/*@modifies con @*/
+static int poptConfigLine(poptContext con, char * line)
+	/*@globals fileSystem, internalState @*/
+	/*@modifies con, fileSystem, internalState @*/
 {
     char *b = NULL;
     off_t nb = 0;
@@ -231,7 +251,7 @@ static int configLine(poptContext con, char * line)
     struct poptItem_s item_buf;
     poptItem item = &item_buf;
     int i, j;
-    int rc = 1;
+    int rc = POPT_ERROR_BADCONFIG;
 
     if (con->appName == NULL)
 	goto exit;
@@ -270,8 +290,11 @@ static int configLine(poptContext con, char * line)
     else {
 	const char * fn = opt;
 
-	/* XXX handle globs and directories? */
-	if ((rc = poptSlurp(con, fn, &b, &nb)) != 0) goto exit;
+	/* XXX handle globs and directories in fn? */
+	if ((rc = poptSlurp(con, fn, &b, &nb)) != 0)
+	    goto exit;
+	if (b == NULL || nb <= 0)
+	    goto exit;
 
 	/* Append remaining text to the interpolated file option text. */
 	if (*se != '\0') {
@@ -283,15 +306,18 @@ static int configLine(poptContext con, char * line)
 	se = b;
 
 	/* Use the basename of the path as the long option name. */
-	if ((item->option.longName = strrchr(fn, '/')) != NULL)
-	    item->option.longName++;
-	else
-	    item->option.longName = fn;
-
-	/* Single character basenames are treated as short options instead. */
-	if (item->option.longName[1] == '\0') {
-	    item->option.shortName = (int) item->option.longName[0];
-	    item->option.longName = NULL;
+	{   const char * longName = strrchr(fn, '/');
+	    if (longName != NULL)
+		longName++;
+	    else
+		longName = fn;
+	    if (longName == NULL)	/* XXX can't happen. */
+		goto exit;
+	    /* Single character basenames are treated as short options. */
+	    if (longName[1] != '\0')
+		item->option.longName = longName;
+	    else
+		item->option.shortName = longName[0];
 	}
     }
 /*@=temptrans@*/
@@ -351,6 +377,8 @@ int poptReadConfigFile(poptContext con, const char * fn)
 
     if ((rc = poptSlurp(con, fn, &b, &nb)) != 0)
 	return (errno == ENOENT ? 0 : rc);
+    if (b == NULL || nb <= 0)
+	return POPT_ERROR_BADCONFIG;
 
     if ((t = malloc((size_t)nb + 1)) == NULL)
 	goto exit;
@@ -364,7 +392,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    te = t;
 	    while (*te && _isspaceptr(te)) te++;
 	    if (*te && *te != '#')
-		xx = configLine(con, te);
+		xx = poptConfigLine(con, te);
 	    /*@switchbreak@*/ break;
 /*@-usedef@*/	/* XXX *se may be uninitialized */
 	  case '\\':

@@ -325,6 +325,9 @@ longOptionStrcmp(const struct poptOption * opt,
     const char * optLongName = opt->longName;
     int rc;
 
+    if (optLongName == NULL || longName == NULL)	/* XXX can't heppen */
+	return 0;
+
     if (F_ISSET(opt, TOGGLE)) {
 	if (optLongName[0] == 'n' && optLongName[1] == 'o') {
 	    optLongName += sizeof("no") - 1;
@@ -340,9 +343,9 @@ longOptionStrcmp(const struct poptOption * opt,
 	    }
 	}
     }
-    rc = (strlen(optLongName) == longNameLen);
+    rc = (int)(strlen(optLongName) == longNameLen);
     if (rc)
-	rc = !strncmp(optLongName, longName, longNameLen);
+	rc = (int)(strncmp(optLongName, longName, longNameLen) == 0);
     return rc;
 }
 
@@ -903,15 +906,15 @@ static unsigned int poptArgInfo(poptContext con, const struct poptOption * opt)
 	/*@*/
 {
     unsigned int argInfo = opt->argInfo;
+
+    if (con->os->argv != NULL && con->os->next > 0 && opt->longName != NULL)
     if (LF_ISSET(TOGGLE)) {
 	const char * longName = con->os->argv[con->os->next-1];
 	while (*longName == '-') longName++;
 	/* XXX almost good enough but consider --[no]nofoo corner cases. */
 	if (longName[0] != opt->longName[0] || longName[1] != opt->longName[1])
 	{
-	    if (LF_ISSET(XOR))	/* XXX dont toggle with XOR */
-		;
-	    else {
+	    if (!LF_ISSET(XOR)) {	/* XXX dont toggle with XOR */
 		/* Toggle POPT_BIT_SET <=> POPT_BIT_CLR. */
 		if (LF_ISSET(LOGICALOPS))
 		    argInfo ^= (POPT_ARGFLAG_OR|POPT_ARGFLAG_AND);
