@@ -138,18 +138,25 @@ static int poptGlob(/*@unused@*/ UNUSED(poptContext con), const char * pattern,
 
 /*@access poptContext @*/
 
-/**
- * Read a file into a buffer.
- * @param con		context
- * @param fn		file name
- * @retval *bp		file contents
- * @retval *nbp		no. of bytes in file contents
- * return		0 on success
- */
-static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
-		char ** bp, off_t * nbp)
-	/*@globals errno, fileSystem, internalState @*/
-	/*@modifies *bp, *nbp, errno, fileSystem, internalState @*/
+int poptSaneFile(const char * fn)
+{
+    struct stat sb;
+    uid_t uid = getuid();
+
+    if (stat(fn, &sb) == -1)
+	return 1;
+    if ((uid_t)sb.st_uid != uid)
+	return 0;
+    if (!S_ISREG(sb.st_mode))
+	return 0;
+/*@-bitwisesigned@*/
+    if (sb.st_mode & (S_IWGRP|S_IWOTH))
+	return 0;
+/*@=bitwisesigned@*/
+    return 1;
+}
+
+int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
 {
     int fdno;
     char * b = NULL;
@@ -173,36 +180,43 @@ static int poptSlurp(/*@unused@*/ UNUSED(poptContext con), const char * fn,
     }
     if (close(fdno) == -1)
 	goto exit;
-    if (b == NULL || nb <= 0) {
-	rc = POPT_ERROR_BADCONFIG;
+    if (b == NULL) {
+	rc = POPT_ERROR_MALLOC;
 	goto exit;
     }
     rc = 0;
 
    /* Trim out escaped newlines. */
-    for (t = b, s = b, se = b + nb; *s && s < se; s++) {
-	switch (*s) {
-	case '\\':
-	    if (s[1] == '\n') {
-		s++;
-		continue;
+/*@-bitwisesigned@*/
+    if (flags & POPT_READFILE_TRIMNEWLINES)
+/*@=bitwisesigned@*/
+    {
+	for (t = b, s = b, se = b + nb; *s && s < se; s++) {
+	    switch (*s) {
+	    case '\\':
+		if (s[1] == '\n') {
+		    s++;
+		    continue;
+		}
+		/*@fallthrough@*/
+	    default:
+		*t++ = *s;
+		/*@switchbreak@*/ break;
 	    }
-	    /*@fallthrough@*/
-	default:
-	    *t++ = *s;
-	    /*@switchbreak@*/ break;
 	}
+	*t++ = '\0';
+	nb = (off_t)(t - b);
     }
-    *t++ = '\0';
-    nb = (off_t)(t - b);
 
 exit:
     if (rc == 0) {
 	*bp = b;
-	*nbp = nb;
+	*nbp = (size_t) nb;
     } else {
+/*@-usedef@*/
 	if (b)
 	    free(b);
+/*@=usedef@*/
 	*bp = NULL;
 	*nbp = 0;
     }
@@ -243,7 +257,7 @@ static int poptConfigLine(poptContext con, char * line)
 	/*@modifies con, fileSystem, internalState @*/
 {
     char *b = NULL;
-    off_t nb = 0;
+    size_t nb = 0;
     char * se = line;
     const char * appName;
     const char * entryType;
@@ -291,17 +305,17 @@ static int poptConfigLine(poptContext con, char * line)
 	const char * fn = opt;
 
 	/* XXX handle globs and directories in fn? */
-	if ((rc = poptSlurp(con, fn, &b, &nb)) != 0)
+	if ((rc = poptReadFile(fn, &b, &nb, POPT_READFILE_TRIMNEWLINES)) != 0)
 	    goto exit;
-	if (b == NULL || nb <= 0)
+	if (b == NULL || nb == 0)
 	    goto exit;
 
 	/* Append remaining text to the interpolated file option text. */
 	if (*se != '\0') {
 	    size_t nse = strlen(se) + 1;
-	    b = realloc(b, ((size_t)nb + nse));
+	    b = realloc(b, (nb + nse));
 	    (void) stpcpy( stpcpy(&b[nb-1], " "), se);
-	    nb += (off_t)nse;
+	    nb += nse;
 	}
 	se = b;
 
@@ -368,19 +382,19 @@ exit:
 
 int poptReadConfigFile(poptContext con, const char * fn)
 {
-    char *b = NULL, *be;
-    off_t nb = 0;
+    char * b = NULL, *be;
+    size_t nb = 0;
     const char *se;
     char *t, *te;
     int rc;
     int xx;
 
-    if ((rc = poptSlurp(con, fn, &b, &nb)) != 0)
+    if ((rc = poptReadFile(fn, &b, &nb, POPT_READFILE_TRIMNEWLINES)) != 0)
 	return (errno == ENOENT ? 0 : rc);
-    if (b == NULL || nb <= 0)
+    if (b == NULL || nb == 0)
 	return POPT_ERROR_BADCONFIG;
 
-    if ((t = malloc((size_t)nb + 1)) == NULL)
+    if ((t = malloc(nb + 1)) == NULL)
 	goto exit;
     te = t;
 
@@ -417,24 +431,6 @@ exit:
     if (b)
 	free(b);
     return rc;
-}
-
-int poptSaneFile(const char * fn)
-{
-    struct stat sb;
-    uid_t uid = getuid();
-
-    if (stat(fn, &sb) == -1)
-	return 1;
-    if ((uid_t)sb.st_uid != uid)
-	return 0;
-    if (!S_ISREG(sb.st_mode))
-	return 0;
-/*@-bitwisesigned@*/
-    if (sb.st_mode & (S_IWGRP|S_IWOTH))
-	return 0;
-/*@=bitwisesigned@*/
-    return 1;
 }
 
 int poptReadConfigFiles(poptContext con, const char * paths)

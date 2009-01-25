@@ -1,4 +1,5 @@
 1.14 -> 1.15:
+    - jbj: add poptReadFile routine.
     - jbj: trim out escaped newline(s) from file content, other fixes.
     - jbj: permit popt alias/exec to include content from a file.
     - jbj: permit glob(3) patterns in appName field of popt alias/exec config.

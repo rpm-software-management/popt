@@ -26,6 +26,7 @@ LIBPOPT_0
     poptPeekArg;
     poptPrintHelp;
     poptPrintUsage;
+    poptReadFile;
     poptReadConfigFile;
     poptReadConfigFiles;
     poptReadDefaultConfig;
