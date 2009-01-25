@@ -209,17 +209,22 @@ int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
     }
 
 exit:
-    if (rc == 0) {
-	*bp = b;
-	*nbp = (size_t) nb;
-    } else {
+    if (rc != 0) {
 /*@-usedef@*/
 	if (b)
 	    free(b);
 /*@=usedef@*/
-	*bp = NULL;
-	*nbp = 0;
+	b = NULL;
+	nb = 0;
     }
+    if (bp)
+	*bp = b;
+/*@-usereleased@*/
+    else if (b)
+	free(b);
+/*@=usereleased@*/
+    if (nbp)
+	*nbp = (size_t)nb;
 /*@-compdef -nullstate @*/	/* XXX cannot annotate char ** correctly */
     return rc;
 /*@=compdef =nullstate @*/

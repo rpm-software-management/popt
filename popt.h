@@ -397,13 +397,13 @@ int poptSaneFile(const char * fn)
 /**
  * Read a file into a buffer.
  * @param fn		file name
- * @retval *bp		buffer (malloc'd)
- * @retval *nbp		no. of bytes in buffer (including final NUL)
+ * @retval *bp		buffer (malloc'd) (or NULL)
+ * @retval *nbp		no. of bytes in buffer (including final NUL) (or NULL)
  * @param flags		1 to trim escaped newlines
  * return		0 on success
  */
-int poptReadFile(const char * fn, /*@out@*/ char ** bp, /*@out@*/ size_t * nbp,
-		int flags)
+int poptReadFile(const char * fn, /*@null@*/ /*@out@*/ char ** bp,
+		/*@null@*/ /*@out@*/ size_t * nbp, int flags)
 	/*@globals errno, fileSystem, internalState @*/
 	/*@modifies *bp, *nbp, errno, fileSystem, internalState @*/;
 #define	POPT_READFILE_TRIMNEWLINES	1
