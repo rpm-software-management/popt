@@ -386,6 +386,29 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
 	/*@modifies con @*/;
 
 /** \ingroup popt
+ * Perform sanity checks on a file path.
+ * @param fn		file name
+ * @return		0 on OK, 1 on NOTOK.
+ */
+int poptSaneFile(const char * fn)
+	/*@globals errno, internalState @*/
+	/*@modifies errno, internalState @*/;
+
+/**
+ * Read a file into a buffer.
+ * @param fn		file name
+ * @retval *bp		buffer (malloc'd)
+ * @retval *nbp		no. of bytes in buffer (including final NUL)
+ * @param flags		1 to trim escaped newlines
+ * return		0 on success
+ */
+int poptReadFile(const char * fn, /*@out@*/ char ** bp, /*@out@*/ size_t * nbp,
+		int flags)
+	/*@globals errno, fileSystem, internalState @*/
+	/*@modifies *bp, *nbp, errno, fileSystem, internalState @*/;
+#define	POPT_READFILE_TRIMNEWLINES	1
+
+/** \ingroup popt
  * Read configuration file.
  * @param con		context
  * @param fn		file name to read
@@ -395,15 +418,6 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	/*@globals errno, fileSystem, internalState @*/
 	/*@modifies con->execs, con->numExecs,
 		errno, fileSystem, internalState @*/;
-
-/** \ingroup popt
- * Perform sanity checks on a file path.
- * @param fn		file path
- * @return		0 on OK, 1 on NOTOK.
- */
-int poptSaneFile(const char * fn)
-	/*@globals errno, internalState @*/
-	/*@modifies errno, internalState @*/;
 
 /** \ingroup popt
  * Read configuration file(s).
