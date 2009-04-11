@@ -1,65 +1,69 @@
 # Translation of popt to German (Deutsch)
 # This file is distributed under the same license as the popt package.
-# Robert Scheck <robert@rpm5.org>, 2004-2008.
+# Robert Scheck <rpm@robert-scheck.de>, 2004-2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.15\n"
+"Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-09-18 14:11-0400\n"
-"PO-Revision-Date: 2008-05-25 14:39+0200\n"
-"Last-Translator: Robert Scheck <robert@rpm5.org>\n"
+"POT-Creation-Date: 2009-04-10 17:14-0400\n"
+"PO-Revision-Date: 2007-02-17 21:00+0100\n"
+"Last-Translator: Robert Scheck <rpm@robert-scheck.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:42
+#: popt.c:47
 msgid "unknown errno"
 msgstr "Unbekannte Fehler-Nummer"
 
-#: popt.c:945
-#, c-format
+#: popt.c:1031
+#, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "Optionstyp (%u) ist nicht in popt implementiert\n"
+msgstr "Optionstyp (%d) ist in popt nicht vorhanden\n"
 
-#: popt.c:1364
+#: popt.c:1452
 msgid "missing argument"
 msgstr "Fehlendes Argument"
 
-#: popt.c:1366
+#: popt.c:1454
 msgid "unknown option"
 msgstr "Unbekannte Option"
 
-#: popt.c:1368
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
 msgstr "Gegenseitig ausschließende logische Operatoren"
 
-#: popt.c:1370
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg sollte nicht NULL sein"
 
-#: popt.c:1372
+#: popt.c:1460
 msgid "aliases nested too deeply"
 msgstr "Aliase zu tief verschachtelt"
 
-#: popt.c:1374
+#: popt.c:1462
 msgid "error in parameter quoting"
 msgstr "Fehler beim Quotieren der Parameter"
 
-#: popt.c:1376
+#: popt.c:1464
 msgid "invalid numeric value"
 msgstr "Ungültiger nummerischer Wert"
 
-#: popt.c:1378
+#: popt.c:1466
 msgid "number too large or too small"
 msgstr "Nummer zu groß oder zu klein"
 
-#: popt.c:1380
+#: popt.c:1468
 msgid "memory allocation failed"
 msgstr "Speicherzuordnung fehlgeschlagen"
 
-#: popt.c:1384
+#: popt.c:1470
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1474
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
@@ -76,8 +80,9 @@ msgid "Display option defaults in message"
 msgstr "Zeigt die Standardeinstellungen an"
 
 #: popthelp.c:92
+#, fuzzy
 msgid "Terminate options"
-msgstr "Schließt die Optionen ab"
+msgstr "Hilfe-Optionen:"
 
 #: popthelp.c:191
 msgid "Help options:"
@@ -104,8 +109,9 @@ msgid "LONG"
 msgstr "LONG"
 
 #: popthelp.c:208
+#, fuzzy
 msgid "LONGLONG"
-msgstr "LONGLONG"
+msgstr "LONG"
 
 #: popthelp.c:209
 msgid "STRING"
@@ -123,10 +129,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARGUMENT"
 
-#: popthelp.c:633
+#: popthelp.c:644
 msgid "Usage:"
 msgstr "Verwendung:"
 
-#: popthelp.c:657
+#: popthelp.c:667
 msgid "[OPTION...]"
 msgstr "[OPTION...]"

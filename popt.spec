@@ -2,7 +2,7 @@
 
 Summary: A C library for parsing command line parameters.
 Name: popt
-Version: 1.14
+Version: 1.15
 Release: 1
 License: X Consortium
 Group: System Environment/Libraries
@@ -49,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/popt.3*
 
 %changelog
+* Fri Apr 10 2009 Jeff Johnson <jbj@rpm5.org>
+- release popt-1.15 through rpm5.org.
+
 * Tue Dec 11 2007 Jeff Johnson <jbj@rpm5.org>
 - release popt-1.13 through rpm5.org.
 
