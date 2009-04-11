@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-09-18 14:11-0400\n"
+"POT-Creation-Date: 2009-04-10 17:14-0400\n"
 "PO-Revision-Date: 2008-02-21 18:19+0200\n"
 "Last-Translator: Jorma Karvonen <karvjorm@users.sf.net>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -19,52 +19,56 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #  errno - number of last error (defined by the ISO C standard)
-#: popt.c:42
+#: popt.c:47
 msgid "unknown errno"
 msgstr "tuntematon errno-virhenumeroarvo"
 
-#: popt.c:945
+#: popt.c:1031
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "valitsintyyppiä (%u) ei ole toteutettu popt-ohjelmassa\n"
 
-#: popt.c:1364
+#: popt.c:1452
 msgid "missing argument"
 msgstr "puuttuva argumentti"
 
-#: popt.c:1366
+#: popt.c:1454
 msgid "unknown option"
 msgstr "tuntematon valitsin"
 
-#: popt.c:1368
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
 msgstr "pyydettyjä loogisia toimintoja ei voi käyttää yhdessä"
 
-#: popt.c:1370
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
 msgstr "”opt->arg”-valitsinargumentti ei saa olla NULL"
 
-#: popt.c:1372
+#: popt.c:1460
 msgid "aliases nested too deeply"
 msgstr "liian monta aliasta sisäkkäin"
 
-#: popt.c:1374
+#: popt.c:1462
 msgid "error in parameter quoting"
 msgstr "virhe parametrien lainauksessa"
 
-#: popt.c:1376
+#: popt.c:1464
 msgid "invalid numeric value"
 msgstr "virheellinen numeroarvo"
 
-#: popt.c:1378
+#: popt.c:1466
 msgid "number too large or too small"
 msgstr "numero on liian iso tai liian pieni"
 
-#: popt.c:1380
+#: popt.c:1468
 msgid "memory allocation failed"
 msgstr "muistin varaus ei onnistunut"
 
-#: popt.c:1384
+#: popt.c:1470
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1474
 msgid "unknown error"
 msgstr "tuntematon virhe"
 
@@ -130,10 +134,10 @@ msgstr "DOUBLE-LIUKULUKU"
 msgid "ARG"
 msgstr "ARGUMENTTI"
 
-#: popthelp.c:633
+#: popthelp.c:644
 msgid "Usage:"
 msgstr "Käyttö:"
 
-#: popthelp.c:657
+#: popthelp.c:667
 msgid "[OPTION...]"
 msgstr "[VALITSIN...]"

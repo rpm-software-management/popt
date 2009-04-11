@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-09-18 14:11-0400\n"
+"POT-Creation-Date: 2009-04-10 17:14-0400\n"
 "PO-Revision-Date: 2008-02-23 20:15+0100\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -17,52 +17,56 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:42
+#: popt.c:47
 msgid "unknown errno"
 msgstr "okänt felnummer"
 
-#: popt.c:945
+#: popt.c:1031
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "flaggtypen (%u) är inte implementerad i popt\n"
 
-#: popt.c:1364
+#: popt.c:1452
 msgid "missing argument"
 msgstr "argument saknas"
 
-#: popt.c:1366
+#: popt.c:1454
 msgid "unknown option"
 msgstr "okänd flagga"
 
-#: popt.c:1368
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
 msgstr "ömsesidigt uteslutande logiska operationer begärdes"
 
-#: popt.c:1370
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg får inte vara NULL"
 
-#: popt.c:1372
+#: popt.c:1460
 msgid "aliases nested too deeply"
 msgstr "alias är nästade för djupt"
 
-#: popt.c:1374
+#: popt.c:1462
 msgid "error in parameter quoting"
 msgstr "fel i parametercitering"
 
-#: popt.c:1376
+#: popt.c:1464
 msgid "invalid numeric value"
 msgstr "ogiltigt numeriskt värde"
 
-#: popt.c:1378
+#: popt.c:1466
 msgid "number too large or too small"
 msgstr "talet för stort eller för litet"
 
-#: popt.c:1380
+#: popt.c:1468
 msgid "memory allocation failed"
 msgstr "minnesallokering misslyckades"
 
-#: popt.c:1384
+#: popt.c:1470
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1474
 msgid "unknown error"
 msgstr "okänt fel"
 
@@ -126,10 +130,10 @@ msgstr "DUBBEL"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:633
+#: popthelp.c:644
 msgid "Usage:"
 msgstr "Användning:"
 
-#: popthelp.c:657
+#: popthelp.c:667
 msgid "[OPTION...]"
 msgstr "[FLAGGA...]"

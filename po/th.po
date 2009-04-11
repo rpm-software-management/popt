@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-09-18 14:11-0400\n"
+"POT-Creation-Date: 2009-04-10 17:14-0400\n"
 "PO-Revision-Date: 2008-02-19 15:53+0700\n"
 "Last-Translator: Seksan Poltree <seksan.poltree@gmail.com>\n"
 "Language-Team: Thai <translation-team-th@lists.sourceforge.net>\n"
@@ -16,52 +16,56 @@ msgstr ""
 "X-Poedit-Language: Thai\n"
 "X-Poedit-Country: THAILAND\n"
 
-#: popt.c:42
+#: popt.c:47
 msgid "unknown errno"
 msgstr "เกิด errno ที่ไม่รู้จัก"
 
-#: popt.c:945
+#: popt.c:1031
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "ตัวเลือกชนิด (%u) ไม่ถูกอิมพลีเมนต์ใน popt\n"
 
-#: popt.c:1364
+#: popt.c:1452
 msgid "missing argument"
 msgstr "ไม่พบอาร์กิวเมนต์"
 
-#: popt.c:1366
+#: popt.c:1454
 msgid "unknown option"
 msgstr "ไม่รู้จักตัวเลือก"
 
-#: popt.c:1368
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
 msgstr "เกิดการร้องขอร่วมกันของการดำเนินการด้านตรรกะอย่างเดียวกัน"
 
-#: popt.c:1370
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ไม่ควรจะเป็น NULL"
 
-#: popt.c:1372
+#: popt.c:1460
 msgid "aliases nested too deeply"
 msgstr "นามแฝงซ้อนกันมากเกินไป"
 
-#: popt.c:1374
+#: popt.c:1462
 msgid "error in parameter quoting"
 msgstr "เกิดข้อผิดพลาดในการอ้างอิงพารามิเตอร์"
 
-#: popt.c:1376
+#: popt.c:1464
 msgid "invalid numeric value"
 msgstr "ค่าตัวเลขผิดพลาด"
 
-#: popt.c:1378
+#: popt.c:1466
 msgid "number too large or too small"
 msgstr "ตัวเลขมีค่ามากหรือน้อยเกินไป"
 
-#: popt.c:1380
+#: popt.c:1468
 msgid "memory allocation failed"
 msgstr "การจัดสรรหน่วยความจำผิดพลาด"
 
-#: popt.c:1384
+#: popt.c:1470
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1474
 msgid "unknown error"
 msgstr "ความผิดพลาดที่ไม่รู้จัก"
 
@@ -125,10 +129,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:633
+#: popthelp.c:644
 msgid "Usage:"
 msgstr "วิธีใช้:"
 
-#: popthelp.c:657
+#: popthelp.c:667
 msgid "[OPTION...]"
 msgstr "[ตัวเลือก...]"

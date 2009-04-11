@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-09-18 14:11-0400\n"
+"POT-Creation-Date: 2009-04-10 17:14-0400\n"
 "PO-Revision-Date: 2003--8-25 19:00+0900\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -14,52 +14,56 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:42
+#: popt.c:47
 msgid "unknown errno"
 msgstr "不明なエラー番号"
 
-#: popt.c:945
+#: popt.c:1031
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "オプションタイプ (%d) はpoptには実装されていません\n"
 
-#: popt.c:1364
+#: popt.c:1452
 msgid "missing argument"
 msgstr "引数がありません"
 
-#: popt.c:1366
+#: popt.c:1454
 msgid "unknown option"
 msgstr "不明なオプション"
 
-#: popt.c:1368
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
 msgstr "排他的な悪ぺーレーションが必要です"
 
-#: popt.c:1370
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
 msgstr "opt->argはNULLではいけません"
 
-#: popt.c:1372
+#: popt.c:1460
 msgid "aliases nested too deeply"
 msgstr "エイリアスのネストが深すぎます"
 
-#: popt.c:1374
+#: popt.c:1462
 msgid "error in parameter quoting"
 msgstr "パラメータのクオート付けでエラー"
 
-#: popt.c:1376
+#: popt.c:1464
 msgid "invalid numeric value"
 msgstr "不正な数値"
 
-#: popt.c:1378
+#: popt.c:1466
 msgid "number too large or too small"
 msgstr "数値が大きすぎるか小さすぎます"
 
-#: popt.c:1380
+#: popt.c:1468
 msgid "memory allocation failed"
 msgstr "メモリ確保に失敗しました"
 
-#: popt.c:1384
+#: popt.c:1470
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1474
 msgid "unknown error"
 msgstr "不明なエラー"
 
@@ -125,10 +129,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:633
+#: popthelp.c:644
 msgid "Usage:"
 msgstr "使い方:"
 
-#: popthelp.c:657
+#: popthelp.c:667
 msgid "[OPTION...]"
 msgstr "[オプション...]"

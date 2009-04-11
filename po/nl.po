@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-09-18 14:11-0400\n"
+"POT-Creation-Date: 2009-04-10 17:14-0400\n"
 "PO-Revision-Date: 2008-02-20 19:26+0100\n"
 "Last-Translator: Tim Van Holder <tim.van.holder@telenet.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -14,53 +14,57 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:42
+#: popt.c:47
 msgid "unknown errno"
 msgstr "onbekend foutnummer (errno)"
 
-#: popt.c:945
+#: popt.c:1031
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "dit optietype (%u) is niet geïmplementeerd in popt\n"
 
-#: popt.c:1364
+#: popt.c:1452
 msgid "missing argument"
 msgstr "ontbrekend argument"
 
-#: popt.c:1366
+#: popt.c:1454
 msgid "unknown option"
 msgstr "onbekende optie"
 
-#: popt.c:1368
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
 msgstr "elkaar uitsluitende logische operatoren werden gevraagd"
 
-#: popt.c:1370
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg zou niet NULL mogen zijn"
 
-#: popt.c:1372
+#: popt.c:1460
 msgid "aliases nested too deeply"
 msgstr "aliassen zijn te diep genest"
 
 # of toch beter "quoting" behouden?
-#: popt.c:1374
+#: popt.c:1462
 msgid "error in parameter quoting"
 msgstr "fout in de aanhaling van parameters"
 
-#: popt.c:1376
+#: popt.c:1464
 msgid "invalid numeric value"
 msgstr "ongeldige numerieke waarde"
 
-#: popt.c:1378
+#: popt.c:1466
 msgid "number too large or too small"
 msgstr "getal is te klein of te groot"
 
-#: popt.c:1380
+#: popt.c:1468
 msgid "memory allocation failed"
 msgstr "reserveren van geheugen is mislukt"
 
-#: popt.c:1384
+#: popt.c:1470
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1474
 msgid "unknown error"
 msgstr "onbekende fout"
 
@@ -127,10 +131,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:633
+#: popthelp.c:644
 msgid "Usage:"
 msgstr "Gebruik:"
 
-#: popthelp.c:657
+#: popthelp.c:667
 msgid "[OPTION...]"
 msgstr "[OPTIE...]"

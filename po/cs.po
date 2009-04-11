@@ -1,87 +1,97 @@
+# Czech translations of popt
+# Copyright (C) 2008 Free Software Foundation, Inc.
+# This file is distributed under the same license as the popt package.
+# Milan Kerslager <kerslage@linux.cz>, 2001.
+# Petr Pisar <petr.pisar@atlas.cz>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-09-18 14:11-0400\n"
-"PO-Revision-Date: 2001-07-24 00:03+0100\n"
-"Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"POT-Creation-Date: 2009-04-10 17:14-0400\n"
+"PO-Revision-Date: 2008-12-08 19:55+0100\n"
+"Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
+"Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:42
+#: popt.c:47
 msgid "unknown errno"
-msgstr "nezn·mÈ ËÌslo chyby"
+msgstr "nezn√°m√© ƒç√≠slo chyby"
 
-#: popt.c:945
-#, fuzzy, c-format
+#: popt.c:1031
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "volba (%d) nenÌ v popt implementov·na\n"
+msgstr "typ volby (%u) nen√≠ v popt implementov√°n\n"
 
-#: popt.c:1364
+#: popt.c:1452
 msgid "missing argument"
-msgstr "chybÌ argument"
+msgstr "chyb√≠ argument"
 
-#: popt.c:1366
+#: popt.c:1454
 msgid "unknown option"
-msgstr "nezn·m· volba"
+msgstr "nezn√°m√° volba"
 
-#: popt.c:1368
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
-msgstr "poæadov·ny vz·jemnÏ v˝luËnÈ logickÈ operace"
+msgstr "po≈æadov√°ny vz√°jemnƒõ v√Ωluƒçn√© logick√© operace"
 
-#: popt.c:1370
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
-msgstr "opt->arg nesmÌ b˝t NULL"
+msgstr "opt->arg nesm√≠ b√Ωt NULL"
 
-#: popt.c:1372
+#: popt.c:1460
 msgid "aliases nested too deeply"
-msgstr "aliasy vno¯enÈ p¯Ìliπ hluboko"
+msgstr "aliasy vno≈ôen√© p≈ô√≠li≈° hluboko"
 
-#: popt.c:1374
+#: popt.c:1462
 msgid "error in parameter quoting"
-msgstr "chyba v quotov·nÌ parametr˘"
+msgstr "chyba v quotov√°n√≠ parametr≈Ø"
 
-#: popt.c:1376
+#: popt.c:1464
 msgid "invalid numeric value"
-msgstr "chybn· numerick· hodnota"
+msgstr "chybn√° numerick√° hodnota"
 
-#: popt.c:1378
+#: popt.c:1466
 msgid "number too large or too small"
-msgstr "ËÌslo je p¯Ìliπ velkÈ nebo p¯Ìliπ malÈ"
+msgstr "ƒç√≠slo je p≈ô√≠li≈° velk√© nebo p≈ô√≠li≈° mal√©"
 
-#: popt.c:1380
+#: popt.c:1468
 msgid "memory allocation failed"
-msgstr "selhala alokace pamÏti"
+msgstr "selhala alokace pamƒõti"
 
-#: popt.c:1384
+#: popt.c:1470
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1474
 msgid "unknown error"
-msgstr "nezn·m· chyba"
+msgstr "nezn√°m√° chyba"
 
 #: popthelp.c:75 popthelp.c:86
 msgid "Show this help message"
-msgstr "VypÌπe tuto n·povÏdu"
+msgstr "Vyp√≠≈°e tuto n√°povƒõdu"
 
 #: popthelp.c:76 popthelp.c:87
 msgid "Display brief usage message"
-msgstr "VypÌπe kr·tk˝ n·vod k pouæitÌ"
+msgstr "Vyp√≠≈°e kr√°tk√Ω n√°vod k pou≈æit√≠"
 
 #: popthelp.c:90
 msgid "Display option defaults in message"
-msgstr "Zobrazit implicitnÌ volby ve zpr·vÏ"
+msgstr "Zobrazit implicitn√≠ volby ve zpr√°vƒõ"
 
 #: popthelp.c:92
 msgid "Terminate options"
-msgstr ""
+msgstr "Ukonƒç√≠ volby"
 
 #: popthelp.c:191
 msgid "Help options:"
-msgstr ""
+msgstr "Volby n√°povƒõdy:"
 
 #: popthelp.c:192
 msgid "Options implemented via popt alias/exec:"
-msgstr ""
+msgstr "Volby implementovan√© p≈ôes alias/exec poptu:"
 
 #: popthelp.c:200
 msgid "NONE"
@@ -100,9 +110,8 @@ msgid "LONG"
 msgstr "LONG"
 
 #: popthelp.c:208
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
 #: popthelp.c:209
 msgid "STRING"
@@ -120,10 +129,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:633
+#: popthelp.c:644
 msgid "Usage:"
-msgstr "PouæitÌ:"
+msgstr "Pou≈æit√≠:"
 
-#: popthelp.c:657
+#: popthelp.c:667
 msgid "[OPTION...]"
-msgstr "[VOLBY...]"
+msgstr "[VOLBY‚Ä¶]"
