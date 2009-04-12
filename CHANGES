@@ -1,9 +1,9 @@
-1.15 -> 1.16:
+
+1.14 -> 1.15:
+    - release popt-1.15.
     - rse: fix building under --disable-nls
     - rse: fix building under non GLIBC platforms where glob_pattern_p fallback has to be used
     - rse: fix building under platforms where FNM_EXTMATCH is not available
-
-1.14 -> 1.15:
     - jbj: poptReadFile: permit NULL if return values are not desired.
     - jbj: poptReadFile: add routine.
     - jbj: trim out escaped newline(s) from file content, other fixes.
