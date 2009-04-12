@@ -20,23 +20,21 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 
-dnl
 dnl if CC is gcc, we can rebuild the dependencies (since the depend rule
 dnl requires gcc).  If it's not, don't rebuild dependencies -- use what was
 dnl shipped with RPM.
-dnl
-if test X"$GCC" = "Xyes" ; then
-    CFLAGS="-Wall -W -D_GNU_SOURCE -D_REENTRANT $CFLAGS"
+if test X"$GCC" = "Xyes"; then
+    CFLAGS="$CFLAGS -Wall -W"
     TARGET="depend allprogs"
 else
     TARGET="everything"
-    #
-    # let the Makefile know that we're done with `depend', since we don't
-    # have gcc we're not going to rebuild our dependencies at all.
-    #
-    echo > .depend-done
+    dnl let the Makefile know that we're done with `depend', since we don't
+    dnl have gcc we're not going to rebuild our dependencies at all.
+    echo >.depend-done
 fi
 AC_SUBST(TARGET)
+
+CFLAGS="$CFLAGS -D_GNU_SOURCE -D_REENTRANT"
 
 AC_GCC_TRADITIONAL
 AC_SYS_LARGEFILE
