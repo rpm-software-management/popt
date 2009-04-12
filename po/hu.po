@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2009-04-10 17:14-0400\n"
+"POT-Creation-Date: 2009-04-12 20:00+0200\n"
 "PO-Revision-Date: 2007-06-21 00:45+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -19,121 +19,121 @@ msgstr ""
 msgid "unknown errno"
 msgstr "ismeretlen hibaszám"
 
-#: popt.c:1031
+#: popt.c:1045
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "a kapcsolótípus (%d) nincs megvalósítva a popt-ban\n"
 
-#: popt.c:1452
+#: popt.c:1466
 msgid "missing argument"
 msgstr "hiányzó paraméter"
 
-#: popt.c:1454
+#: popt.c:1468
 msgid "unknown option"
 msgstr "ismeretlen kapcsoló"
 
-#: popt.c:1456
+#: popt.c:1470
 msgid "mutually exclusive logical operations requested"
 msgstr "kölcsönösen kizáró logikai műveleteket kért"
 
-#: popt.c:1458
+#: popt.c:1472
 msgid "opt->arg should not be NULL"
 msgstr "az opt->arg nem lehet NULL"
 
-#: popt.c:1460
+#: popt.c:1474
 msgid "aliases nested too deeply"
 msgstr "az álnevek túl mélyen vannak egymásba ágyazva"
 
-#: popt.c:1462
+#: popt.c:1476
 msgid "error in parameter quoting"
 msgstr "hiba a paraméter idézésében"
 
-#: popt.c:1464
+#: popt.c:1478
 msgid "invalid numeric value"
 msgstr "érvénytelen numerikus érték"
 
-#: popt.c:1466
+#: popt.c:1480
 msgid "number too large or too small"
 msgstr "a szám túl nagy vagy túl kicsi"
 
-#: popt.c:1468
+#: popt.c:1482
 msgid "memory allocation failed"
 msgstr "a memóriafoglalás meghiúsult"
 
-#: popt.c:1470
+#: popt.c:1484
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1474
+#: popt.c:1488
 msgid "unknown error"
 msgstr "ismeretlen hiba"
 
-#: popthelp.c:75 popthelp.c:86
+#: popthelp.c:77 popthelp.c:88
 msgid "Show this help message"
 msgstr "Ezen súgó megjelenítése"
 
-#: popthelp.c:76 popthelp.c:87
+#: popthelp.c:78 popthelp.c:89
 msgid "Display brief usage message"
 msgstr "Rövid használati utasítás megjelenítése"
 
-#: popthelp.c:90
+#: popthelp.c:92
 msgid "Display option defaults in message"
 msgstr "Kapcsolók alapértelmezéseinek megjelenítése"
 
-#: popthelp.c:92
+#: popthelp.c:94
 #, fuzzy
 msgid "Terminate options"
 msgstr "Súgólehetőségek:"
 
-#: popthelp.c:191
+#: popthelp.c:193
 msgid "Help options:"
 msgstr "Súgólehetőségek:"
 
-#: popthelp.c:192
+#: popthelp.c:194
 msgid "Options implemented via popt alias/exec:"
 msgstr "A popt alias/exec segítségével megvalósított kapcsolók:"
 
-#: popthelp.c:200
+#: popthelp.c:202
 msgid "NONE"
 msgstr "NINCS"
 
-#: popthelp.c:202
+#: popthelp.c:204
 msgid "VAL"
 msgstr "ÉRTÉK"
 
-#: popthelp.c:206
+#: popthelp.c:208
 msgid "INT"
 msgstr "EGÉSZ"
 
-#: popthelp.c:207
+#: popthelp.c:209
 msgid "LONG"
 msgstr "HOSSZÚ"
 
-#: popthelp.c:208
+#: popthelp.c:210
 #, fuzzy
 msgid "LONGLONG"
 msgstr "HOSSZÚ"
 
-#: popthelp.c:209
+#: popthelp.c:211
 msgid "STRING"
 msgstr "SZÖVEG"
 
-#: popthelp.c:210
+#: popthelp.c:212
 msgid "FLOAT"
 msgstr "LEBEGŐ"
 
-#: popthelp.c:211
+#: popthelp.c:213
 msgid "DOUBLE"
 msgstr "DUPLA"
 
-#: popthelp.c:214
+#: popthelp.c:216
 msgid "ARG"
 msgstr "PAR"
 
-#: popthelp.c:644
+#: popthelp.c:646
 msgid "Usage:"
 msgstr "Használat:"
 
-#: popthelp.c:667
+#: popthelp.c:669
 msgid "[OPTION...]"
 msgstr "[KAPCSOLÓ...]"
