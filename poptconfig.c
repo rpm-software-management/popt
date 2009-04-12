@@ -42,7 +42,7 @@ extern int glob_pattern_p (const char *__pattern, int __quote)
 /*@=declundef =exportheader =incondefs =protoparammatch =redecl =type @*/
 #endif	/* __LCLINT__ */
 
-#if !defined(_GNU_SOURCE)
+#if !defined(__GLIBC__)
 /* Return nonzero if PATTERN contains any metacharacters.
    Metacharacters can be quoted with backslashes if QUOTE is nonzero.  */
 static int
@@ -72,7 +72,7 @@ glob_pattern_p (const char * pattern, int quote)
     }
     return 0;
 }
-#endif	/* !defined(_GNU_SOURCE) */
+#endif	/* !defined(__GLIBC__) */
 
 /*@unchecked@*/
 static int poptGlobFlags = 0;
@@ -247,7 +247,10 @@ static int configAppMatch(poptContext con, const char * s)
 #if defined(HAVE_GLOB_H) && defined(HAVE_FNMATCH_H)
     if (glob_pattern_p(s, 1)) {
 /*@-bitwisesigned@*/
-	static int flags = FNM_EXTMATCH | FNM_PATHNAME | FNM_PERIOD;
+	static int flags = FNM_PATHNAME | FNM_PERIOD;
+#ifdef FNM_EXTMATCH
+	flags |= FNM_EXTMATCH;
+#endif
 /*@=bitwisesigned@*/
 	rc = fnmatch(s, con->appName, flags);
     } else
