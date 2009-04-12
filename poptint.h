@@ -193,17 +193,17 @@ const char *POPT_next_char (/*@returned@*/ const char *str)
 
 #endif
 
-#ifdef HAVE_LIBINTL_H
+#if defined(ENABLE_NLS) && defined(HAVE_LIBINTL_H)
 #include <libintl.h>
 #endif
 
-#if defined(HAVE_GETTEXT) && !defined(__LCLINT__)
+#if defined(ENABLE_NLS) && defined(HAVE_GETTEXT) && !defined(__LCLINT__)
 #define _(foo) gettext(foo)
 #else
 #define _(foo) foo
 #endif
 
-#if defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
+#if defined(ENABLE_NLS) && defined(HAVE_DCGETTEXT) && !defined(__LCLINT__)
 #define D_(dom, str) POPT_dgettext(dom, str)
 #define POPT_(foo) D_("popt", foo)
 #else

@@ -1,4 +1,5 @@
 1.15 -> 1.16:
+    - rse: fix building under --disable-nls
     - rse: fix building under non GLIBC platforms where glob_pattern_p fallback has to be used
     - rse: fix building under platforms where FNM_EXTMATCH is not available
 
