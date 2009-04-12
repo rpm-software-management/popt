@@ -1,3 +1,7 @@
+1.15 -> 1.16:
+    - rse: fix building under non GLIBC platforms where glob_pattern_p fallback has to be used
+    - rse: fix building under platforms where FNM_EXTMATCH is not available
+
 1.14 -> 1.15:
     - jbj: poptReadFile: permit NULL if return values are not desired.
     - jbj: poptReadFile: add routine.
