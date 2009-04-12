@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2009-04-12 20:00+0200\n"
+"POT-Creation-Date: 2009-04-12 20:14+0200\n"
 "PO-Revision-Date: 2008-02-21 18:19+0200\n"
 "Last-Translator: Jorma Karvonen <karvjorm@users.sf.net>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -23,121 +23,121 @@ msgstr ""
 msgid "unknown errno"
 msgstr "tuntematon errno-virhenumeroarvo"
 
-#: popt.c:1045
+#: popt.c:1031
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "valitsintyyppiä (%u) ei ole toteutettu popt-ohjelmassa\n"
 
-#: popt.c:1466
+#: popt.c:1452
 msgid "missing argument"
 msgstr "puuttuva argumentti"
 
-#: popt.c:1468
+#: popt.c:1454
 msgid "unknown option"
 msgstr "tuntematon valitsin"
 
-#: popt.c:1470
+#: popt.c:1456
 msgid "mutually exclusive logical operations requested"
 msgstr "pyydettyjä loogisia toimintoja ei voi käyttää yhdessä"
 
-#: popt.c:1472
+#: popt.c:1458
 msgid "opt->arg should not be NULL"
 msgstr "”opt->arg”-valitsinargumentti ei saa olla NULL"
 
-#: popt.c:1474
+#: popt.c:1460
 msgid "aliases nested too deeply"
 msgstr "liian monta aliasta sisäkkäin"
 
-#: popt.c:1476
+#: popt.c:1462
 msgid "error in parameter quoting"
 msgstr "virhe parametrien lainauksessa"
 
-#: popt.c:1478
+#: popt.c:1464
 msgid "invalid numeric value"
 msgstr "virheellinen numeroarvo"
 
-#: popt.c:1480
+#: popt.c:1466
 msgid "number too large or too small"
 msgstr "numero on liian iso tai liian pieni"
 
-#: popt.c:1482
+#: popt.c:1468
 msgid "memory allocation failed"
 msgstr "muistin varaus ei onnistunut"
 
-#: popt.c:1484
+#: popt.c:1470
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1488
+#: popt.c:1474
 msgid "unknown error"
 msgstr "tuntematon virhe"
 
-#: popthelp.c:77 popthelp.c:88
+#: popthelp.c:75 popthelp.c:86
 msgid "Show this help message"
 msgstr "Näytä tämä ohje"
 
-#: popthelp.c:78 popthelp.c:89
+#: popthelp.c:76 popthelp.c:87
 msgid "Display brief usage message"
 msgstr "Näytä lyhyt käyttöohje"
 
-#: popthelp.c:92
+#: popthelp.c:90
 msgid "Display option defaults in message"
 msgstr "Näytä valitsinoletukset ohjeessa"
 
-#: popthelp.c:94
+#: popthelp.c:92
 msgid "Terminate options"
 msgstr "Lopettamisvalitsimet"
 
-#: popthelp.c:193
+#: popthelp.c:191
 msgid "Help options:"
 msgstr "Ohjevalitsimet:"
 
-#: popthelp.c:194
+#: popthelp.c:192
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 "Valitsimet toteutettu ”popt alias”-määrittelyillä tai ”popt exec”-"
 "määrittelyillä:"
 
-#: popthelp.c:202
+#: popthelp.c:200
 msgid "NONE"
 msgstr "EI MITÄÄN"
 
-#: popthelp.c:204
+#: popthelp.c:202
 msgid "VAL"
 msgstr "ARVO"
 
-#: popthelp.c:208
+#: popthelp.c:206
 msgid "INT"
 msgstr "INT-KOKONAISLUKU"
 
-#: popthelp.c:209
+#: popthelp.c:207
 msgid "LONG"
 msgstr "LONG-KOKONAISLUKU"
 
-#: popthelp.c:210
+#: popthelp.c:208
 msgid "LONGLONG"
 msgstr "LONGLONG-KOKONAISLUKU"
 
-#: popthelp.c:211
+#: popthelp.c:209
 msgid "STRING"
 msgstr "MERKKIJONO"
 
-#: popthelp.c:212
+#: popthelp.c:210
 msgid "FLOAT"
 msgstr "FLOAT-LIUKULUKU"
 
-#: popthelp.c:213
+#: popthelp.c:211
 msgid "DOUBLE"
 msgstr "DOUBLE-LIUKULUKU"
 
-#: popthelp.c:216
+#: popthelp.c:214
 msgid "ARG"
 msgstr "ARGUMENTTI"
 
-#: popthelp.c:646
+#: popthelp.c:644
 msgid "Usage:"
 msgstr "Käyttö:"
 
-#: popthelp.c:669
+#: popthelp.c:667
 msgid "[OPTION...]"
 msgstr "[VALITSIN...]"
