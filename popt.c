@@ -704,11 +704,12 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
 		if ((a = findNextArg(con, 1U, 1)) == NULL)
 		    /*@switchbreak@*/ break;
 	    }
-	    s += 3;
+	    s += sizeof("#:+") - 1;
 
 	    tn += strlen(a);
 	    {   size_t pos = (size_t) (te - t);
-		t = realloc(t, tn);
+		if ((t = realloc(t, tn)) == NULL)	/* XXX can't happen */
+		    return NULL;
 		te = stpcpy(t + pos, a);
 	    }
 	    continue;
