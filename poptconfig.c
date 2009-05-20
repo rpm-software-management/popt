@@ -321,7 +321,8 @@ static int poptConfigLine(poptContext con, char * line)
 	/* Append remaining text to the interpolated file option text. */
 	if (*se != '\0') {
 	    size_t nse = strlen(se) + 1;
-	    b = realloc(b, (nb + nse));
+	    if ((b = realloc(b, (nb + nse))) == NULL)	/* XXX can't happen */
+		goto exit;
 	    (void) stpcpy( stpcpy(&b[nb-1], " "), se);
 	    nb += nse;
 	}
