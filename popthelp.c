@@ -204,6 +204,7 @@ getArgDescrip(const struct poptOption * opt,
     case POPT_ARG_VAL:		return NULL;
 #endif
     case POPT_ARG_INT:		return POPT_("INT");
+    case POPT_ARG_SHORT:	return POPT_("SHORT");
     case POPT_ARG_LONG:		return POPT_("LONG");
     case POPT_ARG_LONGLONG:	return POPT_("LONGLONG");
     case POPT_ARG_STRING:	return POPT_("STRING");
@@ -246,6 +247,9 @@ singleOptionDefaultValue(size_t lineLength,
     case POPT_ARG_VAL:
     case POPT_ARG_INT:
 	le += sprintf(le, "%d", arg.intp[0]);
+	break;
+    case POPT_ARG_SHORT:
+	le += sprintf(le, "%hd", arg.shortp[0]);
 	break;
     case POPT_ARG_LONG:
 	le += sprintf(le, "%ld", arg.longp[0]);
@@ -422,6 +426,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 #endif
 		break;
 	    case POPT_ARG_INT:
+	    case POPT_ARG_SHORT:
 	    case POPT_ARG_LONG:
 	    case POPT_ARG_LONGLONG:
 	    case POPT_ARG_FLOAT:

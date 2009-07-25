@@ -37,6 +37,7 @@
 
 #define POPT_ARG_MAINCALL	16U+11U	/*!< EXPERIMENTAL: return (*arg) (argc, argv) */
 #define	POPT_ARG_ARGV		12U	/*!< dupe'd arg appended to realloc'd argv array. */
+#define	POPT_ARG_SHORT		13U	/*!< arg ==> short */
 
 #define POPT_ARG_MASK		0x000000FFU
 #define POPT_GROUP_MASK		0x0000FF00U
@@ -605,7 +606,7 @@ int poptStrippedArgv(poptContext con, int argc, char ** argv)
  * @retval *argvp	argv array
  * @param argInfo	(unused)
  * @param val		string arg to add (using strdup)
- * @return		0 always
+ * @return		0 on success, POPT_ERROR_NULLARG/POPT_ERROR_BADOPERATION
  */
 /*@unused@*/
 int poptSaveString(/*@null@*/ const char *** argvp, unsigned int argInfo,
@@ -640,6 +641,22 @@ int poptSaveLongLong(/*@null@*/ long long * arg, unsigned int argInfo,
 /*@-incondefs@*/
 /*@unused@*/
 int poptSaveLong(/*@null@*/ long * arg, unsigned int argInfo, long aLong)
+	/*@globals internalState @*/
+	/*@modifies *arg, internalState @*/
+	/*@requires maxSet(arg) >= 0 /\ maxRead(arg) == 0 @*/;
+/*@=incondefs@*/
+
+/**
+ * Save a short integer, performing logical operation with value.
+ * @warning Alignment check may be too strict on certain platorms.
+ * @param arg		short pointer, aligned on short boundary.
+ * @param argInfo	logical operation (see POPT_ARGFLAG_*)
+ * @param aLong		value to use
+ * @return		0 on success, POPT_ERROR_NULLARG/POPT_ERROR_BADOPERATION
+ */
+/*@-incondefs@*/
+/*@unused@*/
+int poptSaveShort(/*@null@*/ short * arg, unsigned int argInfo, long aLong)
 	/*@globals internalState @*/
 	/*@modifies *arg, internalState @*/
 	/*@requires maxSet(arg) >= 0 /\ maxRead(arg) == 0 @*/;

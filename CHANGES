@@ -1,4 +1,5 @@
 1.15 -> 1.16:
+    - add POPT_ARG_SHORT handling.
     - handle all callback traversals within a C switch (for extendability ease).
     - add popt.pc.
 
