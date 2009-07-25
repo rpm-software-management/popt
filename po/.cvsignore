@@ -7,6 +7,8 @@ POTFILES
 Rules-quot
 stamp-cat-id
 stamp-po
+archive.tar.gz
+libintl.jar
 cat-id-tbl.c
 *.header
 *.mo
