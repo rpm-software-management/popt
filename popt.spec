@@ -47,6 +47,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpopt.*
 %{_includedir}/popt.h
 %{_mandir}/man3/popt.3*
+%{_prefix}/%{_lib}/pkgconfig/libpopt-%{version}.pc
 
 %changelog
 * Fri Apr 10 2009 Jeff Johnson <jbj@rpm5.org>

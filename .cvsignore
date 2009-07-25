@@ -40,4 +40,5 @@ test3
 *.lcd
 *.lo
 *.swp
+popt.pc
 popt-*.tar.gz
