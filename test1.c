@@ -38,9 +38,9 @@ static unsigned int aFlag = 0x8aceU;
 static unsigned int bFlag = 0x8aceU;
 
 /*@unchecked@*/
-static short aShort = 4523;
+static short aShort = (short)4523;
 /*@unchecked@*/
-static short bShort = 4523;
+static short bShort = (short)4523;
 /*@unchecked@*/
 static int aInt = 271828;
 /*@unchecked@*/
@@ -61,8 +61,11 @@ static float bFloat = 3.1415926535;
 static double aDouble = 9.86960440108935861883;
 /*@unchecked@*/
 static double bDouble = 9.86960440108935861883;
+
 /*@unchecked@*/ /*@only@*/ /*@null@*/
 static const char ** aArgv = NULL;
+/*@unchecked@*/ /*@only@*/ /*@null@*/
+static void * aBits = NULL;
 
 /*@unchecked@*/ /*@null@*/
 static char * oStr = (char *) -1;
@@ -151,7 +154,9 @@ static struct poptOption options[] = {
 	"POPT_ARGFLAG_RANDOM: experimental", NULL },
 
    { "argv", '\0', POPT_ARG_ARGV, &aArgv, 0,
-	"POPT_ARG_ARGV: append arg to array (can be used multiple times)",NULL},
+	"POPT_ARG_ARGV: append string to argv array (can be used multiple times)","STRING"},
+   { "bits", '\0', POPT_ARG_BITSET|POPT_ARGFLAG_DOC_HIDDEN, &aBits, 0,
+	"POPT_ARG_BITSET: add string to bit set (can be used multiple times)","STRING"},
 
   { "bitset", '\0', POPT_BIT_SET | POPT_ARGFLAG_TOGGLE | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x7777,
 	"POPT_BIT_SET: |= 0x7777", 0},
@@ -179,10 +184,10 @@ static struct poptOption options[] = {
 static void resetVars(void)
 	/*@globals arg1, arg2, arg3, inc, shortopt,
 		aVal, aFlag, aShort, aInt, aLong, aLongLong, aFloat, aDouble,
-		aArgv, oStr, singleDash, pass2 @*/
+		aArgv, aBits, oStr, singleDash, pass2 @*/
 	/*@modifies arg1, arg2, arg3, inc, shortopt,
 		aVal, aFlag, aShort, aInt, aLong, aLongLong, aFloat, aDouble,
-		aArgv, oStr, singleDash, pass2 @*/
+		aArgv, aBits, oStr, singleDash, pass2 @*/
 {
     arg1 = 0;
     arg2 = "(none)";
@@ -210,6 +215,10 @@ static void resetVars(void)
 	}
 	free(aArgv);
 	aArgv = NULL;
+    }
+    if (aBits) {
+	free(aBits);
+	aBits = NULL;
     }
 
     oStr = (char *) -1;
@@ -287,7 +296,7 @@ int main(int argc, const char ** argv)
     if (aFlag != bFlag)
 	fprintf(stdout, " aFlag: 0x%x", aFlag);
     if (aShort != bShort)
-	fprintf(stdout, " aShort: %d", aShort);
+	fprintf(stdout, " aShort: %hd", aShort);
     if (aInt != bInt)
 	fprintf(stdout, " aInt: %d", aInt);
     if (aLong != bLong)
@@ -306,6 +315,9 @@ int main(int argc, const char ** argv)
 	fprintf(stdout, " aArgv:");
 	while ((arg = *av++) != NULL)
 	    fprintf(stdout, " %s", arg);
+    }
+    if (aBits) {
+	fprintf(stdout, " aBits: non-null");
     }
 /*@-nullpass@*/
     if (oStr != (char *)-1)

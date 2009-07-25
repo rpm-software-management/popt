@@ -462,8 +462,10 @@ const char * findProgramPath(/*@null@*/ const char * argv0)
     }
 
     /* If no executable was found in PATH, return NULL. */
+/*@-compdef@*/
     if (!(s && *s) && t != NULL)
 	t = _free(t);
+/*@=compdef@*/
 /*@-modobserver -observertrans -usedef @*/
     path = _free(path);
 /*@=modobserver =observertrans =usedef @*/
@@ -750,6 +752,111 @@ static void poptStripArg(/*@special@*/ poptContext con, int which)
 /*@=compdef =sizeoftype =usedef @*/
 }
 
+/*@unchecked@*/
+unsigned int _poptBitsN = _POPT_BITS_N;
+/*@unchecked@*/
+unsigned int _poptBitsM = _POPT_BITS_M;
+/*@unchecked@*/
+unsigned int _poptBitsK = _POPT_BITS_K;
+
+/*@-sizeoftype@*/
+int poptBitsAdd(poptBits bits, const char * s)
+{
+    size_t ns = (s ? strlen(s) : 0);
+    uint32_t h0 = 0;
+    uint32_t h1 = 0;
+
+    if (bits == NULL || ns == 0)
+	return POPT_ERROR_NULLARG;
+
+    /* XXX parse CSV? */
+    jlu32lpair(s, ns, &h0, &h1);
+
+    for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
+        uint32_t h = h0 + ns * h1;
+        uint32_t ix = (h % _poptBitsM);
+        PBM_SET(ix, bits);
+    }
+    return 0;
+}
+
+int poptBitsChk(poptBits bits, const char * s)
+{
+    size_t ns = (s ? strlen(s) : 0);
+    uint32_t h0 = 0;
+    uint32_t h1 = 0;
+    int rc = 1;
+
+    if (bits == NULL || ns == 0)
+	return POPT_ERROR_NULLARG;
+
+    /* XXX parse CSV? */
+    jlu32lpair(s, ns, &h0, &h1);
+
+    for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
+        uint32_t h = h0 + ns * h1;
+        uint32_t ix = (h % _poptBitsM);
+        if (PBM_ISSET(ix, bits))
+            continue;
+        rc = 0;
+        break;
+    }
+    return rc;
+}
+
+int poptBitsClr(poptBits bits)
+{
+    static size_t nbw = (__PBM_NBITS/8);
+    size_t nw = (__PBM_IX(_poptBitsM-1) + 1);
+
+    if (bits == NULL)
+	return POPT_ERROR_NULLARG;
+    memset(bits, 0, nw * nbw);
+    return 0;
+}
+
+int poptBitsDel(poptBits bits, const char * s)
+{
+    size_t ns = (s ? strlen(s) : 0);
+    uint32_t h0 = 0;
+    uint32_t h1 = 0;
+
+    if (bits == NULL || ns == 0)
+	return POPT_ERROR_NULLARG;
+
+    /* XXX parse CSV? */
+    jlu32lpair(s, ns, &h0, &h1);
+
+    for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
+        uint32_t h = h0 + ns * h1;
+        uint32_t ix = (h % _poptBitsM);
+        PBM_CLR(ix, bits);
+    }
+    return 0;
+}
+
+int poptSaveBits(poptBits * bitsp,
+		/*@unused@*/ UNUSED(unsigned int argInfo), const char * s)
+{
+    if (bitsp == NULL)
+	return POPT_ERROR_NULLARG;
+
+    /* XXX handle negated initialization. */
+    if (*bitsp == NULL) {
+	if (_poptBitsN == 0) {
+	    _poptBitsN = _POPT_BITS_N;
+	    _poptBitsM = _POPT_BITS_M;
+	}
+	if (_poptBitsM == 0U) _poptBitsM = (3 * _poptBitsN) / 2;
+	if (_poptBitsK == 0U || _poptBitsK > 32U) _poptBitsK = _POPT_BITS_K;
+	*bitsp = PBM_ALLOC(_poptBitsM-1);
+    }
+/*@-nullstate@*/
+    return poptBitsAdd(*bitsp, s);
+/*@=nullstate@*/
+}
+/*@=sizeoftype@*/
+
 int poptSaveString(const char *** argvp,
 		/*@unused@*/ UNUSED(unsigned int argInfo), const char * val)
 {
@@ -952,6 +1059,31 @@ static unsigned int poptArgInfo(poptContext con, const struct poptOption * opt)
 }
 
 /**
+ * Parse an integer expression.
+ * @retval *llp		integer expression value
+ * @param argInfo	integer expression type
+ * @param val		integer expression string
+ * @return		0 on success, otherwise POPT_* error.
+ */
+static int poptParseInteger(long long * llp,
+		/*@unused@*/ UNUSED(unsigned int argInfo),
+		/*@null@*/ const char * val)
+	/*@modifies *llp @*/
+{
+    if (val) {
+	char *end = NULL;
+	*llp = strtoll(val, &end, 0);
+
+	/* XXX parse scaling suffixes here. */
+
+	if (!(end && *end == '\0'))
+	    return POPT_ERROR_BADNUMBER;
+    } else
+	*llp = 0;
+    return 0;
+}
+
+/**
  * Save the option argument through the (*opt->arg) pointer.
  * @param con		context
  * @param opt           option
@@ -965,6 +1097,10 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
     int rc = 0;		/* assume success */
 
     switch (poptArgType(opt)) {
+    case POPT_ARG_BITSET:
+	/* XXX memory leak, application is responsible for free. */
+	rc = poptSaveBits(arg.ptr, opt->argInfo, con->os->nextArg);
+	/*@switchbreak@*/ break;
     case POPT_ARG_ARGV:
 	/* XXX memory leak, application is responsible for free. */
 	rc = poptSaveString(arg.ptr, opt->argInfo, con->os->nextArg);
@@ -979,16 +1115,10 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
     case POPT_ARG_LONG:
     case POPT_ARG_LONGLONG:
     {	unsigned int argInfo = poptArgInfo(con, opt);
-	char *end = NULL;
 	long long aNUM = 0;
 
-	if (con->os->nextArg) {
-	    aNUM = strtoll(con->os->nextArg, &end, 0);
-	    if (!(end && *end == '\0')) {
-		rc = POPT_ERROR_BADNUMBER;
-		break;
-	    }
-	}
+	if ((rc = poptParseInteger(&aNUM, argInfo, con->os->nextArg)) != 0)
+	    break;
 
 	switch (poptArgType(opt)) {
 	case POPT_ARG_LONGLONG:

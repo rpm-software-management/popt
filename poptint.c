@@ -2,6 +2,10 @@
 #include <stdarg.h>
 #include "poptint.h"
 
+/* Any pair of 32 bit hashes can be used. lookup3.c generates pairs, will do. */
+#define _JLU3_jlu32lpair        1
+#include "lookup3.c"
+
 /*@-varuse +charint +ignoresigns @*/
 /*@unchecked@*/ /*@observer@*/
 static const unsigned char utf8_skip_data[256] = {
