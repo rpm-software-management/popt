@@ -594,26 +594,33 @@ findOption(const struct poptOption * opt,
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
 	poptArg arg = { .ptr = opt->arg };
 
-	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
-	    const struct poptOption * opt2;
+	switch (poptArgType(opt)) {
+	case POPT_ARG_INCLUDE_TABLE:	/* Recurse on included sub-tables. */
+	{   const struct poptOption * opt2;
 
 	    poptSubstituteHelpI18N(arg.opt);	/* XXX side effects */
-	    /* Recurse on included sub-tables. */
 	    if (arg.ptr == NULL) continue;	/* XXX program error */
 	    opt2 = findOption(arg.opt, longName, longNameLen, shortName, callback,
 			      callbackData, argInfo);
 	    if (opt2 == NULL) continue;
 	    /* Sub-table data will be inheirited if no data yet. */
-	    if (!(callback && *callback)) return opt2;
-	    if (!(callbackData && *callbackData == NULL)) return opt2;
 /*@-observertrans -dependenttrans @*/
-	    *callbackData = opt->descrip;
+	    if (callback && *callback
+	     && callbackData && *callbackData == NULL)
+		*callbackData = opt->descrip;
 /*@=observertrans =dependenttrans @*/
 	    return opt2;
-	} else if (poptArgType(opt) == POPT_ARG_CALLBACK) {
+	}   /*@notreached@*/ /*@switchbreak@*/ break;
+	case POPT_ARG_CALLBACK:
 	    cb = opt;
 	    cbarg.ptr = opt->arg;
-	} else if (longName != NULL && opt->longName != NULL &&
+	    continue;
+	    /*@notreached@*/ /*@switchbreak@*/ break;
+	default:
+	    /*@switchbreak@*/ break;
+	}
+
+	if (longName != NULL && opt->longName != NULL &&
 		   (!LF_ISSET(ONEDASH) || F_ISSET(opt, ONEDASH)) &&
 		   longOptionStrcmp(opt, longName, longNameLen))
 	{
