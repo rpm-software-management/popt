@@ -58,6 +58,7 @@ typedef union poptArg_u {
 /*@shared@*/
     void * ptr;
     int * intp;
+    short * shortp;
     long * longp;
     long long * longlongp;
     float * floatp;

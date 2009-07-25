@@ -35,6 +35,7 @@ LIBPOPT_0
     poptSaveInt;
     poptSaveLong;
     poptSaveLongLong;
+    poptSaveShort;
     poptSaveString;
     poptSetExecPath;
     poptSetOtherOptionHelp;

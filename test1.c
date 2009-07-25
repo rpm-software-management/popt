@@ -38,6 +38,10 @@ static unsigned int aFlag = 0x8aceU;
 static unsigned int bFlag = 0x8aceU;
 
 /*@unchecked@*/
+static short aShort = 4523;
+/*@unchecked@*/
+static short bShort = 4523;
+/*@unchecked@*/
 static int aInt = 271828;
 /*@unchecked@*/
 static int bInt = 271828;
@@ -126,6 +130,8 @@ static struct poptOption options[] = {
 
   { "int", 'i', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &aInt, 0,
 	"POPT_ARG_INT: 271828", NULL },
+  { "short", 's', POPT_ARG_SHORT | POPT_ARGFLAG_SHOW_DEFAULT, &aShort, 0,
+	"POPT_ARG_SHORT: 4523", NULL },
   { "long", 'l', POPT_ARG_LONG | POPT_ARGFLAG_SHOW_DEFAULT, &aLong, 0,
 	"POPT_ARG_LONG: 738905609", NULL },
   { "longlong", 'L', POPT_ARG_LONGLONG | POPT_ARGFLAG_SHOW_DEFAULT, &aLongLong, 0,
@@ -136,6 +142,8 @@ static struct poptOption options[] = {
 	"POPT_ARG_DOUBLE: 9.8696", NULL },
 
    { "randint", '\0', POPT_ARG_INT|POPT_ARGFLAG_RANDOM, &aInt, 0,
+	"POPT_ARGFLAG_RANDOM: experimental", NULL },
+   { "randshort", '\0', POPT_ARG_SHORT|POPT_ARGFLAG_RANDOM, &aShort, 0,
 	"POPT_ARGFLAG_RANDOM: experimental", NULL },
    { "randlong", '\0', POPT_ARG_LONG|POPT_ARGFLAG_RANDOM, &aLong, 0,
 	"POPT_ARGFLAG_RANDOM: experimental", NULL },
@@ -170,11 +178,11 @@ static struct poptOption options[] = {
 
 static void resetVars(void)
 	/*@globals arg1, arg2, arg3, inc, shortopt,
-		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble, aArgv,
-		oStr, singleDash, pass2 @*/
+		aVal, aFlag, aShort, aInt, aLong, aLongLong, aFloat, aDouble,
+		aArgv, oStr, singleDash, pass2 @*/
 	/*@modifies arg1, arg2, arg3, inc, shortopt,
-		aVal, aFlag, aInt, aLong, aLongLong, aFloat, aDouble, aArgv,
-		oStr, singleDash, pass2 @*/
+		aVal, aFlag, aShort, aInt, aLong, aLongLong, aFloat, aDouble,
+		aArgv, oStr, singleDash, pass2 @*/
 {
     arg1 = 0;
     arg2 = "(none)";
@@ -185,6 +193,7 @@ static void resetVars(void)
     aVal = bVal;
     aFlag = bFlag;
 
+    aShort = bShort;
     aInt = bInt;
     aLong = bLong;
     aLongLong = bLongLong;
@@ -277,6 +286,8 @@ int main(int argc, const char ** argv)
 	fprintf(stdout, " aVal: %d", aVal);
     if (aFlag != bFlag)
 	fprintf(stdout, " aFlag: 0x%x", aFlag);
+    if (aShort != bShort)
+	fprintf(stdout, " aShort: %d", aShort);
     if (aInt != bInt)
 	fprintf(stdout, " aInt: %d", aInt);
     if (aLong != bLong)

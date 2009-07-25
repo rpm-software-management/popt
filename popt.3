@@ -126,6 +126,7 @@ Value	Description	arg Type
 POPT_ARG_NONE	No argument expected	int
 POPT_ARG_STRING	No type checking to be performed	char *
 POPT_ARG_ARGV	No type checking to be performed	char **
+POPT_ARG_SHORT	An short argument is expected	short
 POPT_ARG_INT	An integer argument is expected	int
 POPT_ARG_LONG	A long integer is expected	long
 POPT_ARG_LONGLONG	A long long integer is expected	long long
@@ -164,7 +165,7 @@ will perhaps not escape the attention of hunt-and-peck typists that
 an argument, the variable that 
 .IR arg " points to is updated to reflect the value of the argument." 
 .RB "Any string is acceptable for " POPT_ARG_STRING " and " POPT_ARG_ARGV " arguments, but "
-.BR POPT_ARG_INT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", " POPT_ARG_FLOAT ", and "
+.BR POPT_ARG_INT ", " POPT_ARG_SHORT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", " POPT_ARG_FLOAT ", and "
 .BR POPT_ARG_DOUBLE " are converted to the appropriate type, and an "
 error returned if the conversion fails.
 .sp
@@ -474,7 +475,7 @@ A parsed string has a quotation mismatch (such as a single quotation
 A conversion from a string to a number (int or long) failed due
 to the string containing nonnumeric characters. This occurs when
 .BR poptGetNextOpt() " is processing an argument of type " 
-.BR POPT_ARG_INT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", "
+.BR POPT_ARG_INT ", " POPT_ARG_SHORT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", "
 .RB POPT_ARG_FLOAT ", or " POPT_ARG_DOUBLE "."  
 .sp
 .TP
@@ -482,7 +483,7 @@ to the string containing nonnumeric characters. This occurs when
 A string-to-number conversion failed because the number was too
 .RB "large or too small. Like " POPT_ERROR_BADNUMBER ", this error 
 .RB "can occur only when " poptGetNextOpt() " is processing an "
-.RB "argument of type " POPT_ARG_INT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", "
+.RB "argument of type " POPT_ARG_INT ", " POPT_ARG_SHORT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", "
 .RB POPT_ARG_FLOAT ", or " POPT_ARG_DOUBLE "."  
 .sp
 .TP
