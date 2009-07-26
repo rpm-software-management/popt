@@ -42,6 +42,7 @@ LIBPOPT_0
     poptReadDefaultConfig;
     poptResetContext;
     poptSaneFile;
+    poptSaveBits;
     poptSaveInt;
     poptSaveLong;
     poptSaveLongLong;
