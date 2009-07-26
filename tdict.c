@@ -94,6 +94,13 @@ int main(int argc, const char ** argv)
     av = poptGetArgs(optCon);
     if ((rc = poptBitsArgs(optCon, &avbits)) != 0)
 	goto exit;
+    if (avbits) {
+	poptBits Ibits = NULL;
+	(void) poptBitsUnion(&Ibits, dictbits);
+	rc = poptBitsIntersect(&Ibits, avbits);
+	fprintf(stdout, "===== %s words are in %s\n", (rc ? "Some" : "No"), dictfn);
+	if (Ibits) free(Ibits);
+    }
     if (av && avbits)
     while (*av) {
 	rc = poptBitsChk(dictbits, *av);
