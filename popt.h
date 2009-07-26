@@ -699,16 +699,20 @@ extern  unsigned int _poptBitsM;
 extern  unsigned int _poptBitsK;
 /*@=exportlocal =exportvar@*/
 
-/*@-exportlocal@*/
 int poptBitsAdd(/*@null@*/poptBits bits, /*@null@*/const char * s)
 	/*@modifies bits @*/;
-/*@-fcnuse@*/
 int poptBitsChk(/*@null@*/poptBits bits, /*@null@*/const char * s)
 	/*@*/;
 int poptBitsClr(/*@null@*/poptBits bits)
 	/*@modifies bits @*/;
 int poptBitsDel(/*@null@*/poptBits bits, /*@null@*/const char * s)
 	/*@modifies bits @*/;
+/*@-exportlocal@*/
+/*@-fcnuse@*/
+int poptBitsIntersect(/*@null@*/ poptBits * ap, /*@null@*/ const poptBits b)
+	/*@modifies *ap @*/;
+int poptBitsUnion(/*@null@*/ poptBits * ap, /*@null@*/ const poptBits b)
+	/*@modifies *ap @*/;
 /*@=fcnuse@*/
 /*@=exportlocal@*/
 

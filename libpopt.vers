@@ -9,6 +9,15 @@ LIBPOPT_0
     poptAddItem;
     poptAliasOptions;
     poptBadOption;
+    _poptBitsN;
+    _poptBitsM;
+    _poptBitsK;
+    poptBitsAdd;
+    poptBitsChk;
+    poptBitsClr;
+    poptBitsDel;
+    poptBitsIntersect;
+    poptBitsUnion;
     poptConfigFileToString;
     poptDupArgv;
     poptFinit;

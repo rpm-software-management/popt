@@ -112,7 +112,7 @@ run test1 "test1 - 54" "arg1: 0 arg2: (none) aFlag: 0x28c" --bitclr
 run test1 "test1 - 55" "arg1: 0 arg2: (none) aFlag: 0x8888" --nobitset
 run test1 "test1 - 56" "arg1: 0 arg2: (none) aFlag: 0xface" --nobitclr
 
-run test1 "test1 - 57" "arg1: 0 arg2: (none) aBits: non-null" --bits foo --bits bar
+run test1 "test1 - 57" "arg1: 0 arg2: (none) aBits: foo,baz" --bits foo,bar,baz,!bar
 
 run test1 "test1 - 58" "\
 Usage: lt-test1 [-I?] [-c|--cb2=STRING] [--arg1] [-2|--arg2=ARG]
