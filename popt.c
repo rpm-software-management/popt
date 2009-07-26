@@ -759,7 +759,10 @@ unsigned int _poptBitsM = _POPT_BITS_M;
 /*@unchecked@*/
 unsigned int _poptBitsK = _POPT_BITS_K;
 
-static int _poptBitsNew(poptBits *bitsp)
+/*@-sizeoftype@*/
+static int _poptBitsNew(/*@null@*/ poptBits *bitsp)
+	/*@globals _poptBitsN, _poptBitsM, _poptBitsK @*/
+	/*@modifies *bitsp, _poptBitsN, _poptBitsM, _poptBitsK @*/
 {
     if (bitsp == NULL)
 	return POPT_ERROR_NULLARG;
@@ -774,10 +777,11 @@ static int _poptBitsNew(poptBits *bitsp)
 	if (_poptBitsK == 0U || _poptBitsK > 32U) _poptBitsK = _POPT_BITS_K;
 	*bitsp = PBM_ALLOC(_poptBitsM-1);
     }
+/*@-nullstate@*/
     return 0;
+/*@=nullstate@*/
 }
 
-/*@-sizeoftype@*/
 int poptBitsAdd(poptBits bits, const char * s)
 {
     size_t ns = (s ? strlen(s) : 0);
@@ -858,7 +862,7 @@ int poptBitsIntersect(poptBits *ap, const poptBits b)
     size_t nw = (__PBM_IX(_poptBitsM-1) + 1);
     size_t i;
 
-    if (_poptBitsNew(ap) || b == NULL)
+    if (ap == NULL || b == NULL || _poptBitsNew(ap))
 	return POPT_ERROR_NULLARG;
     abits = __PBM_BITS(*ap);
     bbits = __PBM_BITS(b);
@@ -878,7 +882,7 @@ int poptBitsUnion(poptBits *ap, const poptBits b)
     size_t nw = (__PBM_IX(_poptBitsM-1) + 1);
     size_t i;
 
-    if (_poptBitsNew(ap) || b == NULL)
+    if (ap == NULL || b == NULL || _poptBitsNew(ap))
 	return POPT_ERROR_NULLARG;
     abits = __PBM_BITS(*ap);
     bbits = __PBM_BITS(b);
@@ -897,7 +901,7 @@ int poptSaveBits(poptBits * bitsp,
     char *t, *te;
     int rc = 0;
 
-    if (_poptBitsNew(bitsp) || s == NULL || *s == '\0')
+    if (bitsp == NULL || s == NULL || *s == '\0' || _poptBitsNew(bitsp))
 	return POPT_ERROR_NULLARG;
 
     /* Parse comma separated attributes. */
@@ -905,7 +909,7 @@ int poptSaveBits(poptBits * bitsp,
     while ((t = te) != NULL && *t) {
 	while (*te != '\0' && *te != ',')
 	    te++;
-	if (*te)
+	if (*te != '\0')
 	    *te++ = '\0';
 	/* XXX Ignore empty strings. */
 	if (*t == '\0')
@@ -917,10 +921,8 @@ int poptSaveBits(poptBits * bitsp,
 		rc = poptBitsDel(*bitsp, t);
 	} else
 	    rc = poptBitsAdd(*bitsp, t);
-/*@-nullstate@*/
 	if (rc)
 	    break;
-/*@=nullstate@*/
     }
     tbuf = _free(tbuf);
     return rc;

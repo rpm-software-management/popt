@@ -66,7 +66,7 @@ static double bDouble = 9.86960440108935861883;
 static const char ** aArgv = NULL;
 /*@unchecked@*/ /*@only@*/ /*@null@*/
 static void * aBits = NULL;
-/*@unchecked@*/
+/*@unchecked@*/ /*@observer@*/
 static const char *attributes[] = {
     "foo", "bar", "baz", "bing", "bang", "boom"
 };
@@ -223,7 +223,7 @@ static void resetVars(void)
 	aArgv = NULL;
     }
     if (aBits)
-	poptBitsClr(aBits);
+	(void) poptBitsClr(aBits);
 
     oStr = (char *) -1;
 

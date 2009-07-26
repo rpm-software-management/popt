@@ -690,24 +690,26 @@ typedef struct poptBits_s {
 #define _POPT_BITS_M    ((3U * _POPT_BITS_N) / 2U)
 #define _POPT_BITS_K    16U      /* no. of linear hash combinations */
 
-/*@-exportlocal -exportvar@*/
+/*@-exportlocal -exportvar -globuse @*/
 /*@unchecked@*/
 extern unsigned int _poptBitsN;
 /*@unchecked@*/
 extern  unsigned int _poptBitsM;
 /*@unchecked@*/
 extern  unsigned int _poptBitsK;
-/*@=exportlocal =exportvar@*/
+/*@=exportlocal =exportvar =globuse @*/
 
+/*@-exportlocal@*/
 int poptBitsAdd(/*@null@*/poptBits bits, /*@null@*/const char * s)
 	/*@modifies bits @*/;
+/*@=exportlocal@*/
 int poptBitsChk(/*@null@*/poptBits bits, /*@null@*/const char * s)
 	/*@*/;
 int poptBitsClr(/*@null@*/poptBits bits)
 	/*@modifies bits @*/;
+/*@-exportlocal@*/
 int poptBitsDel(/*@null@*/poptBits bits, /*@null@*/const char * s)
 	/*@modifies bits @*/;
-/*@-exportlocal@*/
 /*@-fcnuse@*/
 int poptBitsIntersect(/*@null@*/ poptBits * ap, /*@null@*/ const poptBits b)
 	/*@modifies *ap @*/;
