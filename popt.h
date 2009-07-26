@@ -715,6 +715,8 @@ int poptBitsIntersect(/*@null@*/ poptBits * ap, /*@null@*/ const poptBits b)
 	/*@modifies *ap @*/;
 int poptBitsUnion(/*@null@*/ poptBits * ap, /*@null@*/ const poptBits b)
 	/*@modifies *ap @*/;
+int poptBitsArgs(/*@null@*/ poptContext con, /*@null@*/ poptBits * ap)
+	/*@modifies con, *ap @*/;
 /*@=fcnuse@*/
 /*@=exportlocal@*/
 

@@ -13,6 +13,7 @@ LIBPOPT_0
     _poptBitsM;
     _poptBitsK;
     poptBitsAdd;
+    poptBitsArgs;
     poptBitsChk;
     poptBitsClr;
     poptBitsDel;

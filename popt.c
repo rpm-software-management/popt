@@ -894,6 +894,27 @@ int poptBitsUnion(poptBits *ap, const poptBits b)
     return (rc ? 1 : 0);
 }
 
+int poptBitsArgs(poptContext con, poptBits *ap)
+{
+    const char ** av;
+    int rc = 0;
+
+    if (con == NULL || ap == NULL || _poptBitsNew(ap) ||
+	con->leftovers == NULL || con->numLeftovers == con->nextLeftover)
+	return POPT_ERROR_NULLARG;
+
+    /* some apps like [like RPM ;-) ] need this NULL terminated */
+    con->leftovers[con->numLeftovers] = NULL;
+
+    for (av = con->leftovers + con->nextLeftover; *av != NULL; av++) {
+	if ((rc = poptBitsAdd(*ap, *av)) != 0)
+	    break;
+    }
+/*@-nullstate@*/
+    return rc;
+/*@=nullstate@*/
+}
+
 int poptSaveBits(poptBits * bitsp,
 		/*@unused@*/ UNUSED(unsigned int argInfo), const char * s)
 {

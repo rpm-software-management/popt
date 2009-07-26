@@ -1,4 +1,5 @@
 1.15 -> 1.16:
+    - add poptBitsArgs() method to generate args bit set.
     - add methods for bit set union and intersection.
     - permit comma separated attribute lists, handle negated attributes.
     - better test for POPT_ARG_BITSET.
