@@ -1,4 +1,7 @@
 1.15 -> 1.16:
+    - add methods for bit set union and intersection.
+    - permit comma separated attribute lists, handle negated attributes.
+    - better test for POPT_ARG_BITSET.
     - add POPT_ARG_BITSET handling.
     - add POPT_ARG_SHORT handling.
     - handle all callback traversals within a C switch (for extendability ease).

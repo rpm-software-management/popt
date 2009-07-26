@@ -759,6 +759,24 @@ unsigned int _poptBitsM = _POPT_BITS_M;
 /*@unchecked@*/
 unsigned int _poptBitsK = _POPT_BITS_K;
 
+static int _poptBitsNew(poptBits *bitsp)
+{
+    if (bitsp == NULL)
+	return POPT_ERROR_NULLARG;
+
+    /* XXX handle negated initialization. */
+    if (*bitsp == NULL) {
+	if (_poptBitsN == 0) {
+	    _poptBitsN = _POPT_BITS_N;
+	    _poptBitsM = _POPT_BITS_M;
+	}
+	if (_poptBitsM == 0U) _poptBitsM = (3 * _poptBitsN) / 2;
+	if (_poptBitsK == 0U || _poptBitsK > 32U) _poptBitsK = _POPT_BITS_K;
+	*bitsp = PBM_ALLOC(_poptBitsM-1);
+    }
+    return 0;
+}
+
 /*@-sizeoftype@*/
 int poptBitsAdd(poptBits bits, const char * s)
 {
@@ -769,7 +787,6 @@ int poptBitsAdd(poptBits bits, const char * s)
     if (bits == NULL || ns == 0)
 	return POPT_ERROR_NULLARG;
 
-    /* XXX parse CSV? */
     jlu32lpair(s, ns, &h0, &h1);
 
     for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
@@ -790,7 +807,6 @@ int poptBitsChk(poptBits bits, const char * s)
     if (bits == NULL || ns == 0)
 	return POPT_ERROR_NULLARG;
 
-    /* XXX parse CSV? */
     jlu32lpair(s, ns, &h0, &h1);
 
     for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
@@ -824,7 +840,6 @@ int poptBitsDel(poptBits bits, const char * s)
     if (bits == NULL || ns == 0)
 	return POPT_ERROR_NULLARG;
 
-    /* XXX parse CSV? */
     jlu32lpair(s, ns, &h0, &h1);
 
     for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
@@ -835,25 +850,80 @@ int poptBitsDel(poptBits bits, const char * s)
     return 0;
 }
 
+int poptBitsIntersect(poptBits *ap, const poptBits b)
+{
+    __pbm_bits *abits;
+    __pbm_bits *bbits;
+    __pbm_bits rc = 0;
+    size_t nw = (__PBM_IX(_poptBitsM-1) + 1);
+    size_t i;
+
+    if (_poptBitsNew(ap) || b == NULL)
+	return POPT_ERROR_NULLARG;
+    abits = __PBM_BITS(*ap);
+    bbits = __PBM_BITS(b);
+
+    for (i = 0; i < nw; i++) {
+        abits[i] &= bbits[i];
+	rc |= abits[i];
+    }
+    return (rc ? 1 : 0);
+}
+
+int poptBitsUnion(poptBits *ap, const poptBits b)
+{
+    __pbm_bits *abits;
+    __pbm_bits *bbits;
+    __pbm_bits rc = 0;
+    size_t nw = (__PBM_IX(_poptBitsM-1) + 1);
+    size_t i;
+
+    if (_poptBitsNew(ap) || b == NULL)
+	return POPT_ERROR_NULLARG;
+    abits = __PBM_BITS(*ap);
+    bbits = __PBM_BITS(b);
+
+    for (i = 0; i < nw; i++) {
+        abits[i] |= bbits[i];
+	rc |= abits[i];
+    }
+    return (rc ? 1 : 0);
+}
+
 int poptSaveBits(poptBits * bitsp,
 		/*@unused@*/ UNUSED(unsigned int argInfo), const char * s)
 {
-    if (bitsp == NULL)
+    char *tbuf = NULL;
+    char *t, *te;
+    int rc = 0;
+
+    if (_poptBitsNew(bitsp) || s == NULL || *s == '\0')
 	return POPT_ERROR_NULLARG;
 
-    /* XXX handle negated initialization. */
-    if (*bitsp == NULL) {
-	if (_poptBitsN == 0) {
-	    _poptBitsN = _POPT_BITS_N;
-	    _poptBitsM = _POPT_BITS_M;
-	}
-	if (_poptBitsM == 0U) _poptBitsM = (3 * _poptBitsN) / 2;
-	if (_poptBitsK == 0U || _poptBitsK > 32U) _poptBitsK = _POPT_BITS_K;
-	*bitsp = PBM_ALLOC(_poptBitsM-1);
-    }
+    /* Parse comma separated attributes. */
+    te = tbuf = xstrdup(s);
+    while ((t = te) != NULL && *t) {
+	while (*te != '\0' && *te != ',')
+	    te++;
+	if (*te)
+	    *te++ = '\0';
+	/* XXX Ignore empty strings. */
+	if (*t == '\0')
+	    continue;
+	/* XXX Permit negated attributes. caveat emptor: false negatives. */
+	if (*t == '!') {
+	    t++;
+	    if ((rc = poptBitsChk(*bitsp, t)) > 0)
+		rc = poptBitsDel(*bitsp, t);
+	} else
+	    rc = poptBitsAdd(*bitsp, t);
 /*@-nullstate@*/
-    return poptBitsAdd(*bitsp, s);
+	if (rc)
+	    break;
 /*@=nullstate@*/
+    }
+    tbuf = _free(tbuf);
+    return rc;
 }
 /*@=sizeoftype@*/
 

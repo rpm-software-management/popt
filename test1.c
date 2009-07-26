@@ -66,6 +66,12 @@ static double bDouble = 9.86960440108935861883;
 static const char ** aArgv = NULL;
 /*@unchecked@*/ /*@only@*/ /*@null@*/
 static void * aBits = NULL;
+/*@unchecked@*/
+static const char *attributes[] = {
+    "foo", "bar", "baz", "bing", "bang", "boom"
+};
+/*@unchecked@*/
+static size_t nattributes = (sizeof(attributes) / sizeof(attributes[0]));
 
 /*@unchecked@*/ /*@null@*/
 static char * oStr = (char *) -1;
@@ -216,10 +222,8 @@ static void resetVars(void)
 	free(aArgv);
 	aArgv = NULL;
     }
-    if (aBits) {
-	free(aBits);
-	aBits = NULL;
-    }
+    if (aBits)
+	poptBitsClr(aBits);
 
     oStr = (char *) -1;
 
@@ -317,7 +321,15 @@ int main(int argc, const char ** argv)
 	    fprintf(stdout, " %s", arg);
     }
     if (aBits) {
-	fprintf(stdout, " aBits: non-null");
+	const char * separator = " ";
+	size_t i;
+	fprintf(stdout, " aBits:");
+ 	for (i = 0; i < nattributes; i++) {
+	    if (!poptBitsChk(aBits, attributes[i]))
+		continue;
+	    fprintf(stdout, "%s%s", separator, attributes[i]);
+	    separator = ",";
+	}
     }
 /*@-nullpass@*/
     if (oStr != (char *)-1)
