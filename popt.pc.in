@@ -6,5 +6,5 @@ includedir=@includedir@
 Name: popt
 Version: @VERSION@
 Description: popt library.
-Libs: -lpopt
+Libs: @POPT_PKGCONFIG_LIBS@
 Cflags: -I${includedir}
