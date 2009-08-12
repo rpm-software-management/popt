@@ -82,13 +82,27 @@ AC_DEFINE_UNQUOTED([POPT_SYSCONFDIR], ["$popt_sysconfdir"], [Full path to defaul
 # - Don't require a not upstream patch to pkgconfig
 #   (https://bugs.freedesktop.org/show_bug.cgi?id=16095)
 popt_pkgconfig_libs='-L${libdir} -lpopt'
-case "${libdir}" in
-    /usr/lib|/usr/lib64|/lib|/lib64)
-          popt_pkgconfig_libs='-lpopt'
-        ;;
-    *)
-          popt_pkgconfig_libs='-L${libdir} -lpopt'
-        ;;
+case "${host}" in
+    *-*-linux*)
+	case "${libdir}" in
+	    /usr/lib|/usr/lib64|/lib|/lib64)
+       		   popt_pkgconfig_libs='-lpopt'
+		;;
+    		*)
+		popt_pkgconfig_libs='-L${libdir} -lpopt'
+	;;
+	esac
+      ;;
+    *-*-gnu*)
+	case "${libdir}" in
+	    /usr/lib|/usr/lib64|/lib|/lib64)
+       		   popt_pkgconfig_libs='-lpopt'
+		;;
+    		*)
+		popt_pkgconfig_libs='-L${libdir} -lpopt'
+	;;
+	esac
+      ;;
 esac
 AC_SUBST([POPT_PKGCONFIG_LIBS],"$popt_pkgconfig_libs")
 
