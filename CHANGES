@@ -8,7 +8,8 @@
     - add POPT_ARG_SHORT handling.
     - handle all callback traversals within a C switch (for extendability ease).
     - add popt.pc.
-
+    - devzero2000: add AC_CONFIG_AUX_DIR, AC_CONFIG_MACRO_DIR to configure. Create build-aux 
+    - devzero2000: del acinclude.m4 : AC_CHECK_VA_COPY is not used
 1.14 -> 1.15:
     - release popt-1.15.
     - rse: fix building under --disable-nls
