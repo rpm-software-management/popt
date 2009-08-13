@@ -12,7 +12,10 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
 
+dnl Must come before AM_INIT_AUTOMAKE.
+AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([foreign -Wall])
+AC_CONFIG_MACRO_DIR([m4])
 
 ALL_LINGUAS="cs da de eo es fi fr ga gl hu id is it ja ko nb nl pl pt ro ru sk sl sv th tr uk vi wa zh_TW zh_CN"
 
