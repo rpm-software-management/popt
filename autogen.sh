@@ -22,7 +22,7 @@ perl -p -i~ -e 's/(po\/Makefile\.in)\s+po\/Makefile\.in/$1/' configure.ac
 perl -p -i~ -e 's/(SUBDIRS\s+=\s+po)\s+po/$1/' Makefile.am
 aclocal -I m4
 autoheader
-automake -a -c
+automake -Wall -Wno-override -a -c
 autoconf
 
 if [ "$1" = "--noconfigure" ]; then 
