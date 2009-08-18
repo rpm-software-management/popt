@@ -4,7 +4,7 @@ AUTOMAKE_OPTIONS = 1.4 foreign
 
 LINT = splint
 
-EXTRA_DIST = build-aux/config.rpath autogen.sh CHANGES $(man_MANS) popt.spec \
+EXTRA_DIST = config.rpath  autogen.sh CHANGES $(man_MANS) popt.spec \
 	footer_no_timestamp.html libpopt.vers \
 	testit.sh test-poptrc test3-data/0* \
 	po/*.in po/*.po po/popt.pot \
@@ -12,7 +12,7 @@ EXTRA_DIST = build-aux/config.rpath autogen.sh CHANGES $(man_MANS) popt.spec \
 
 SUBDIRS = po
 
-INCLUDES = -I. -I$(top_srcdir)
+AM_CPPFLAGS = -I. -I$(top_srcdir)
 
 noinst_HEADERS = poptint.h system.h
 

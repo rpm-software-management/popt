@@ -31,6 +31,7 @@ mkinstalldirs
 stamp-h
 stamp-h1
 stamp-h.in
+tdict
 test1
 test2
 test3
