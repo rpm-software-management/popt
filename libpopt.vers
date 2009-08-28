@@ -21,7 +21,7 @@ LIBPOPT_0
     poptBitsUnion;
     poptConfigFileToString;
     poptDupArgv;
-    poptFinit;
+    poptFini;
     poptFreeContext;
     poptGetArg;
     poptGetArgs;

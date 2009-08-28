@@ -144,7 +144,7 @@ static inline size_t stringDisplayWidth(const char *s)
     n = mbsrtowcs (NULL, &s, n, &t);
 #else
     n = 0;
-    for (; *s; s = POPT_next_char(s));
+    for (; *s; s = POPT_next_char(s))
 	n++;
 #endif
 
