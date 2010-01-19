@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2009-04-12 20:14+0200\n"
+"POT-Creation-Date: 2009-09-13 11:40-0400\n"
 "PO-Revision-Date: 2008-02-18 16:20+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -21,52 +21,52 @@ msgstr ""
 msgid "unknown errno"
 msgstr "số hiệu lỗi không rõ"
 
-#: popt.c:1031
+#: popt.c:1290
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "kiểu tùy chọn (%u) chưa được thực hiện trong popt\n"
 
-#: popt.c:1452
+#: popt.c:1711
 msgid "missing argument"
 msgstr "thiếu đối số"
 
-#: popt.c:1454
+#: popt.c:1713
 msgid "unknown option"
 msgstr "tùy chọn không rõ"
 
-#: popt.c:1456
+#: popt.c:1715
 msgid "mutually exclusive logical operations requested"
 msgstr "các thao tác hợp lý loại từ lẫn nhau được yêu cầu"
 
-#: popt.c:1458
+#: popt.c:1717
 msgid "opt->arg should not be NULL"
 msgstr "« tùy chọn->đối số » không thể vô giá trị"
 
-#: popt.c:1460
+#: popt.c:1719
 msgid "aliases nested too deeply"
 msgstr "các bí danh lồng nhau quá sâu"
 
-#: popt.c:1462
+#: popt.c:1721
 msgid "error in parameter quoting"
 msgstr "gặp lỗi trong lời trích dẫn tham số"
 
-#: popt.c:1464
+#: popt.c:1723
 msgid "invalid numeric value"
 msgstr "giá trị thuộc số không hợp lệ"
 
-#: popt.c:1466
+#: popt.c:1725
 msgid "number too large or too small"
 msgstr "con số quá lớn hay quá nhỏ"
 
-#: popt.c:1468
+#: popt.c:1727
 msgid "memory allocation failed"
 msgstr "lỗi cấp phát bộ nhớ"
 
-#: popt.c:1470
+#: popt.c:1729
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1474
+#: popt.c:1733
 msgid "unknown error"
 msgstr "lỗi không rõ"
 
@@ -107,33 +107,37 @@ msgid "INT"
 msgstr "SỐ NGUYÊN"
 
 #: popthelp.c:207
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:208
 msgid "LONG"
 msgstr "DÀI"
 
-#: popthelp.c:208
+#: popthelp.c:209
 msgid "LONGLONG"
 msgstr "DÀIDÀI"
 
-#: popthelp.c:209
+#: popthelp.c:210
 msgid "STRING"
 msgstr "CHUỖI"
 
-#: popthelp.c:210
+#: popthelp.c:211
 msgid "FLOAT"
 msgstr "NỔI"
 
-#: popthelp.c:211
+#: popthelp.c:212
 msgid "DOUBLE"
 msgstr "ĐÔI"
 
-#: popthelp.c:214
+#: popthelp.c:215
 msgid "ARG"
 msgstr "ĐỐI SỐ"
 
-#: popthelp.c:644
+#: popthelp.c:649
 msgid "Usage:"
 msgstr "Sử dụng:"
 
-#: popthelp.c:667
+#: popthelp.c:672
 msgid "[OPTION...]"
 msgstr "[TÙY_CHỌN...]"

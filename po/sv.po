@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2009-04-12 20:14+0200\n"
+"POT-Creation-Date: 2009-09-13 11:40-0400\n"
 "PO-Revision-Date: 2008-02-23 20:15+0100\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -21,52 +21,52 @@ msgstr ""
 msgid "unknown errno"
 msgstr "okänt felnummer"
 
-#: popt.c:1031
+#: popt.c:1290
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "flaggtypen (%u) är inte implementerad i popt\n"
 
-#: popt.c:1452
+#: popt.c:1711
 msgid "missing argument"
 msgstr "argument saknas"
 
-#: popt.c:1454
+#: popt.c:1713
 msgid "unknown option"
 msgstr "okänd flagga"
 
-#: popt.c:1456
+#: popt.c:1715
 msgid "mutually exclusive logical operations requested"
 msgstr "ömsesidigt uteslutande logiska operationer begärdes"
 
-#: popt.c:1458
+#: popt.c:1717
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg får inte vara NULL"
 
-#: popt.c:1460
+#: popt.c:1719
 msgid "aliases nested too deeply"
 msgstr "alias är nästade för djupt"
 
-#: popt.c:1462
+#: popt.c:1721
 msgid "error in parameter quoting"
 msgstr "fel i parametercitering"
 
-#: popt.c:1464
+#: popt.c:1723
 msgid "invalid numeric value"
 msgstr "ogiltigt numeriskt värde"
 
-#: popt.c:1466
+#: popt.c:1725
 msgid "number too large or too small"
 msgstr "talet för stort eller för litet"
 
-#: popt.c:1468
+#: popt.c:1727
 msgid "memory allocation failed"
 msgstr "minnesallokering misslyckades"
 
-#: popt.c:1470
+#: popt.c:1729
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1474
+#: popt.c:1733
 msgid "unknown error"
 msgstr "okänt fel"
 
@@ -107,33 +107,37 @@ msgid "INT"
 msgstr "HELTAL"
 
 #: popthelp.c:207
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:208
 msgid "LONG"
 msgstr "LÅNG"
 
-#: popthelp.c:208
+#: popthelp.c:209
 msgid "LONGLONG"
 msgstr "LÅNGLÅNG"
 
-#: popthelp.c:209
+#: popthelp.c:210
 msgid "STRING"
 msgstr "STRÄNG"
 
-#: popthelp.c:210
+#: popthelp.c:211
 msgid "FLOAT"
 msgstr "FLYTTAL"
 
-#: popthelp.c:211
+#: popthelp.c:212
 msgid "DOUBLE"
 msgstr "DUBBEL"
 
-#: popthelp.c:214
+#: popthelp.c:215
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:644
+#: popthelp.c:649
 msgid "Usage:"
 msgstr "Användning:"
 
-#: popthelp.c:667
+#: popthelp.c:672
 msgid "[OPTION...]"
 msgstr "[FLAGGA...]"

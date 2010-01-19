@@ -4,6 +4,7 @@
 
 /* Any pair of 32 bit hashes can be used. lookup3.c generates pairs, will do. */
 #define _JLU3_jlu32lpair        1
+#define	jlu32lpair	poptJlu32lpair
 #include "lookup3.c"
 
 /*@-varuse +charint +ignoresigns @*/
