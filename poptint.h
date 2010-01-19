@@ -44,7 +44,7 @@ typedef struct {
 #define PBM_CLR(d, s)   (__PBM_BITS (s)[__PBM_IX (d)] &= ~__PBM_MASK (d))
 #define PBM_ISSET(d, s) ((__PBM_BITS (s)[__PBM_IX (d)] & __PBM_MASK (d)) != 0)
 
-void jlu32lpair(/*@null@*/ const void *key, size_t size,
+extern void poptJlu32lpair(/*@null@*/ const void *key, size_t size,
                 uint32_t *pc, uint32_t *pb)
         /*@modifies *pc, *pb@*/;
 

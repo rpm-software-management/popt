@@ -791,7 +791,7 @@ int poptBitsAdd(poptBits bits, const char * s)
     if (bits == NULL || ns == 0)
 	return POPT_ERROR_NULLARG;
 
-    jlu32lpair(s, ns, &h0, &h1);
+    poptJlu32lpair(s, ns, &h0, &h1);
 
     for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
         uint32_t h = h0 + ns * h1;
@@ -811,7 +811,7 @@ int poptBitsChk(poptBits bits, const char * s)
     if (bits == NULL || ns == 0)
 	return POPT_ERROR_NULLARG;
 
-    jlu32lpair(s, ns, &h0, &h1);
+    poptJlu32lpair(s, ns, &h0, &h1);
 
     for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
         uint32_t h = h0 + ns * h1;
@@ -844,7 +844,7 @@ int poptBitsDel(poptBits bits, const char * s)
     if (bits == NULL || ns == 0)
 	return POPT_ERROR_NULLARG;
 
-    jlu32lpair(s, ns, &h0, &h1);
+    poptJlu32lpair(s, ns, &h0, &h1);
 
     for (ns = 0; ns < (size_t)_poptBitsK; ns++) {
         uint32_t h = h0 + ns * h1;

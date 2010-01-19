@@ -1,4 +1,5 @@
 1.15 -> 1.16:
+    - prefix bit set routines with popt to avoid symbol coolisions w rpm.
     - add tdict.c to exercise popt bit sets against /usr/dict/words.
     - add poptBitsArgs() method to generate args bit set.
     - add methods for bit set union and intersection.

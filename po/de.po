@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.15\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2009-04-12 20:14+0200\n"
+"POT-Creation-Date: 2009-09-13 11:40-0400\n"
 "PO-Revision-Date: 2009-04-17 14:05+0200\n"
 "Last-Translator: Robert Scheck <robert@rpm5.org>\n"
 "Language-Team: German <de@li.org>\n"
@@ -18,52 +18,52 @@ msgstr ""
 msgid "unknown errno"
 msgstr "Unbekannte Fehler-Nummer"
 
-#: popt.c:1031
+#: popt.c:1290
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "Optionstyp (%u) ist nicht in popt implementiert\n"
 
-#: popt.c:1452
+#: popt.c:1711
 msgid "missing argument"
 msgstr "Fehlendes Argument"
 
-#: popt.c:1454
+#: popt.c:1713
 msgid "unknown option"
 msgstr "Unbekannte Option"
 
-#: popt.c:1456
+#: popt.c:1715
 msgid "mutually exclusive logical operations requested"
 msgstr "Gegenseitig ausschließende logische Operatoren"
 
-#: popt.c:1458
+#: popt.c:1717
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg sollte nicht NULL sein"
 
-#: popt.c:1460
+#: popt.c:1719
 msgid "aliases nested too deeply"
 msgstr "Aliase zu tief verschachtelt"
 
-#: popt.c:1462
+#: popt.c:1721
 msgid "error in parameter quoting"
 msgstr "Fehler beim Quotieren der Parameter"
 
-#: popt.c:1464
+#: popt.c:1723
 msgid "invalid numeric value"
 msgstr "Ungültiger nummerischer Wert"
 
-#: popt.c:1466
+#: popt.c:1725
 msgid "number too large or too small"
 msgstr "Nummer zu groß oder zu klein"
 
-#: popt.c:1468
+#: popt.c:1727
 msgid "memory allocation failed"
 msgstr "Speicherzuordnung fehlgeschlagen"
 
-#: popt.c:1470
+#: popt.c:1729
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1474
+#: popt.c:1733
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
@@ -104,33 +104,37 @@ msgid "INT"
 msgstr "INTEGER"
 
 #: popthelp.c:207
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:208
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:208
+#: popthelp.c:209
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:209
+#: popthelp.c:210
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:210
+#: popthelp.c:211
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:211
+#: popthelp.c:212
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:214
+#: popthelp.c:215
 msgid "ARG"
 msgstr "ARGUMENT"
 
-#: popthelp.c:644
+#: popthelp.c:649
 msgid "Usage:"
 msgstr "Verwendung:"
 
-#: popthelp.c:667
+#: popthelp.c:672
 msgid "[OPTION...]"
 msgstr "[OPTION...]"
