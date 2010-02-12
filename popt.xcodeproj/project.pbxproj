@@ -72,7 +72,7 @@
 		0D006A061125FADD00A2FA32 /* testit.sh */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.sh; path = testit.sh; sourceTree = "<group>"; };
 		0D3BACFC1125FF5300B3E80C /* popt.ps */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = popt.ps; sourceTree = "<group>"; };
 		0D3EA3C31125E529001C69E6 /* lookup3.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; path = lookup3.c; sourceTree = "<group>"; };
-		0D3EA3C51125E537001C69E6 /* popt.c */ = {isa = PBXFileReference; explicitFileType = compiled; fileEncoding = 7; path = popt.c; sourceTree = "<group>"; };
+		0D3EA3C51125E537001C69E6 /* popt.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 7; path = popt.c; sourceTree = "<group>"; };
 		0D3EA3C71125E53F001C69E6 /* popt.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = popt.h; sourceTree = "<group>"; };
 		0D3EA3C91125E54B001C69E6 /* poptconfig.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; path = poptconfig.c; sourceTree = "<group>"; };
 		0D3EA3CB1125E553001C69E6 /* popthelp.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; path = popthelp.c; sourceTree = "<group>"; };
@@ -344,6 +344,7 @@
 				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = HAVE_CONFIG_H;
 				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "-liconv";
 				PREBINDING = NO;
 				PRODUCT_NAME = popt;
 			};
@@ -377,7 +378,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = HAVE_CONFIG_H;
 				INSTALL_PATH = /usr/local/bin;
 				MACH_O_TYPE = mh_execute;
-				OTHER_LDFLAGS = "-lpopt";
+				OTHER_LDFLAGS = (
+					"-lpopt",
+					"-liconv",
+				);
 				PREBINDING = NO;
 				PRODUCT_NAME = test1;
 			};
