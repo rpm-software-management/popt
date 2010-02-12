@@ -61,6 +61,13 @@
 			remoteGlobalIDString = 0D0069E91125F80A00A2FA32;
 			remoteInfo = test1;
 		};
+		0DB9209B112616A9000277F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D0069911125F03400A2FA32;
+			remoteInfo = libpopt.dylib;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -214,6 +221,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0DB9209C112616A9000277F8 /* PBXTargetDependency */,
 				0D0069F01125F83000A2FA32 /* PBXTargetDependency */,
 			);
 			name = test1;
@@ -328,6 +336,11 @@
 			isa = PBXTargetDependency;
 			target = 0D0069E91125F80A00A2FA32 /* test1 */;
 			targetProxy = 0D006A131125FBFD00A2FA32 /* PBXContainerItemProxy */;
+		};
+		0DB9209C112616A9000277F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D0069911125F03400A2FA32 /* libpopt.dylib */;
+			targetProxy = 0DB9209B112616A9000277F8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
