@@ -44,6 +44,7 @@
 		0D3EA3D21125E584001C69E6 /* poptparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 0D3EA3D11125E584001C69E6 /* poptparse.c */; };
 		0D3EA3D41125E58E001C69E6 /* system.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D3EA3D31125E58E001C69E6 /* system.h */; };
 		0D3EA3D61125E5A6001C69E6 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D3EA3D51125E5A6001C69E6 /* config.h */; };
+		0DB920BA1126181E000277F8 /* libpopt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0069921125F03400A2FA32 /* libpopt.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D0069C61125F60200A2FA32 /* libiconv.dylib in Frameworks */,
+				0DB920BA1126181E000277F8 /* libpopt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +376,7 @@
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
-				PRODUCT_NAME = libpopt.dylib;
+				PRODUCT_NAME = popt;
 				ZERO_LINK = NO;
 			};
 			name = Release;
