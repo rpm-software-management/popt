@@ -1,8 +1,14 @@
 AC_PREREQ(2.57)
-AC_INIT(popt, 1.15, popt-devel@rpm5.org)
-AC_CANONICAL_TARGET
+AC_INIT(popt, 1.16, popt-devel@rpm5.org)
 AC_CONFIG_SRCDIR([popt.h])
 AC_CONFIG_HEADERS([config.h])
+AC_CANONICAL_TARGET
+
+dnl Must come before AM_INIT_AUTOMAKE.
+dnl AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
+AM_INIT_AUTOMAKE([foreign -Wall])
+AM_MAINTAINER_MODE
 
 # Library code modified:                              REVISION++
 # Interfaces changed/added/removed:   CURRENT++       REVISION=0
@@ -12,14 +18,11 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
 
-dnl Must come before AM_INIT_AUTOMAKE.
-dnl AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([foreign -Wall])
-AC_CONFIG_MACRO_DIR([m4])
-
 ALL_LINGUAS="cs da de eo es fi fr ga gl hu id is it ja ko nb nl pl pt ro ru sk sl sv th tr uk vi wa zh_TW zh_CN"
 
+AC_PROG_CC_STDC
 AC_PROG_CC
+
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 
@@ -65,6 +68,16 @@ AC_ARG_ENABLE([ld-version-script],
               [have_ld_version_script=$enableval],
               [ : ] )
 AM_CONDITIONAL(HAVE_LD_VERSION_SCRIPT, test "$have_ld_version_script" = "yes")
+
+AC_ARG_ENABLE(build-gcov,
+    AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov]), [dnl
+    if test ".$enableval" = .yes; then
+        if test ".`$CC --version 2>&1 | grep 'GCC'`" != .; then
+            dnl # GNU GCC (usually "gcc")
+            CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
+        fi
+    fi
+])
 
 AC_CHECK_FUNC(setreuid, [], [
     AC_CHECK_LIB(ucb, setreuid, [if echo $LIBS | grep -- -lucb >/dev/null ;then :; else LIBS="$LIBS -lc -lucb" USEUCB=y;fi])
@@ -114,4 +127,9 @@ AC_DEFINE_UNQUOTED(POPT_SOURCE_PATH, "$POPT_SOURCE_PATH",
 	[Full path to popt top_srcdir.])
 AC_SUBST(POPT_SOURCE_PATH)
 
-AC_OUTPUT([Doxyfile Makefile popt.pc po/Makefile.in])
+AC_CONFIG_SUBDIRS()
+AC_CONFIG_FILES([ po/Makefile.in
+    Doxyfile Makefile popt.pc popt.spec test-poptrc
+    auto/Makefile auto/popt.desc auto/popt.types
+])
+AC_OUTPUT

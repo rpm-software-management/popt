@@ -1,3 +1,4 @@
+.ccache
 .deps
 .depend
 .libs
@@ -9,6 +10,7 @@ Makefile.in
 aclocal.m4
 autom4te*
 build
+clang
 config.cache
 config.guess
 config.h
@@ -29,10 +31,12 @@ ltmain.sh
 m4
 missing
 mkinstalldirs
+popt.spec
 stamp-h
 stamp-h1
 stamp-h.in
 tdict
+test-poptrc
 test1
 test2
 test3
