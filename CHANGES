@@ -1,4 +1,5 @@
 1.15 -> 1.16:
+    - include xcode project files in distributed popt tar ball.
     - make distcheck is now squeaky clean.
     - permit VPATH builds.
     - add shallow tests using ISP/RAS api-sanity-autotest.pl.
