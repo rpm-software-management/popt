@@ -1,15 +1,16 @@
 # Translation of popt to German (Deutsch)
 # This file is distributed under the same license as the popt package.
-# Robert Scheck <robert@rpm5.org>, 2004-2009.
+# Robert Scheck <rpm@robert-scheck.de>, 2004-2007.
+# Roland Illig <roland.illig@gmx.de>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.15\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2010-02-17 13:35-0500\n"
-"PO-Revision-Date: 2009-04-17 14:05+0200\n"
-"Last-Translator: Robert Scheck <robert@rpm5.org>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2009-11-10 19:58+0100\n"
+"Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
+"Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,7 +22,7 @@ msgstr "Unbekannte Fehler-Nummer"
 #: popt.c:1290
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "Optionstyp (%u) ist nicht in popt implementiert\n"
+msgstr "Optionstyp (%u) ist in popt nicht vorhanden\n"
 
 #: popt.c:1711
 msgid "missing argument"
@@ -81,7 +82,7 @@ msgstr "Zeigt die Standardeinstellungen an"
 
 #: popthelp.c:92
 msgid "Terminate options"
-msgstr "Schließt die Optionen ab"
+msgstr "Optionen beenden"
 
 #: popthelp.c:191
 msgid "Help options:"
