@@ -1,3 +1,4 @@
+%{expand:%%global _pkgconfigdir	%{_libdir}/pkgconfig}
 %define	_libdir	/%{_lib}
 
 Summary: A C library for parsing command line parameters.
@@ -47,7 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpopt.*
 %{_includedir}/popt.h
 %{_mandir}/man3/popt.3*
-%{_prefix}/%{_lib}/pkgconfig/libpopt-%{version}.pc
+%{_pkgconfigdir}/popt.pc
 
 %changelog
 * Fri Apr 10 2009 Jeff Johnson <jbj@rpm5.org>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+
+<spec_type>
+  <kind>
+    common_param
+  </kind>
+  <name>
+    poptBits
+  </name>
+  <data_type>
+    poptBits
+  </data_type>
+  <value>
+    create_poptBits()
+  </value>
+  <global_code>
+    poptBits create_poptBits()
+    {
+	poptBits a = NULL;
+	(void) poptSaveBits(&a, 0, "foo");
+	(void) poptSaveBits(&a, 0, "bar");
+	(void) poptSaveBits(&a, 0, "baz");
+	return a;
+    }
+  </global_code>
+</spec_type>
+
+<spec_type>
+  <kind>
+    normal
+  </kind>
+  <data_type>
+    const char ***
+  </data_type>
+  <value>
+    &av
+  </value>
+  <global_code>
+    #include <malloc.h>
+  </global_code>
+  <init_code>
+    const char ** av = NULL;
+  </init_code>
+  <final_code>
+    free(av[0]);
+    free(av);
+  </final_code>
+  <associating>
+    <interfaces>
+      poptSaveString
+    </interfaces>
+    <links>
+      param1
+    </links>
+  </associating>
+</spec_type>
+
+</collection>
+
