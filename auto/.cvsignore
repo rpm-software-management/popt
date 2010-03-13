@@ -2,7 +2,7 @@ descriptors_storage
 header_compile_errors
 Makefile
 Makefile.in
-popt.desc
-popt.types
+desc
+types
 test_results
 tests

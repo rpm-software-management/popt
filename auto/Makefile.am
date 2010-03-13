@@ -8,5 +8,5 @@ clean-local:
 	rm -rf $(TDIRS)
 
 check-local:
-	-[ -d tests ] && ${AUTOTEST} -l popt -d popt.desc -clean
-	-${AUTOTEST} -l popt -d popt.desc -st popt.types -gen -build -run
+	-[ -d tests ] && ${AUTOTEST} -l popt -d desc -clean
+	-${AUTOTEST} -l popt -d desc -st types -gen -build -run
