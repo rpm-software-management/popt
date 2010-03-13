@@ -130,6 +130,6 @@ AC_SUBST(POPT_SOURCE_PATH)
 AC_CONFIG_SUBDIRS()
 AC_CONFIG_FILES([ po/Makefile.in
     Doxyfile Makefile popt.pc popt.spec test-poptrc
-    auto/Makefile auto/popt.desc auto/popt.types
+    auto/Makefile auto/desc auto/types
 ])
 AC_OUTPUT
