@@ -49,9 +49,38 @@
   <associating>
     <except>
       poptAddItem	<!-- FIXME -->
+    </except>
+  </associating>
+</spec_type>
+<spec_type>
+  <kind> normal </kind>
+  <data_type> poptContext </data_type>
+  <value> poptGetContext(argv[0], argc, argv, optionsTable, 0) </value>
+  <associating>
+    <interfaces>
       poptFreeContext
       poptFini
-    </except>
+    </interfaces>
+    <links> param1 </links>
+  </associating>
+</spec_type>
+<spec_type>
+  <kind> normal </kind>
+  <data_type> poptItem </data_type>
+  <value> NULL </value>
+  <global_code>
+    #include <malloc.h>
+  </global_code>
+  <init_code>
+    $0 = calloc(1, sizeof(*$0));
+    $0->option = *poptHelpOptionsI18N;
+    $0->argc = 1;
+    $0->argv = calloc(2, sizeof(*$0->argv));
+    $0->argv[0] = strdup("arg1");
+  </init_code>
+  <associating>
+    <interfaces> poptAddItem </interfaces>
+    <links> param2 </links>
   </associating>
 </spec_type>
 
