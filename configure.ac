@@ -128,7 +128,7 @@ AC_DEFINE_UNQUOTED(POPT_SOURCE_PATH, "$POPT_SOURCE_PATH",
 AC_SUBST(POPT_SOURCE_PATH)
 
 AC_CONFIG_SUBDIRS()
-AC_CONFIG_FILES([ po/Makefile.in
+AC_CONFIG_FILES([ po/Makefile.in m4/Makefile
     Doxyfile Makefile popt.pc popt.spec test-poptrc
     auto/Makefile auto/desc auto/types
 ])

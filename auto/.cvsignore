@@ -3,6 +3,7 @@ header_compile_errors
 Makefile
 Makefile.in
 desc
+logs
 types
 test_results
 tests
