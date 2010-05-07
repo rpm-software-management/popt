@@ -6,6 +6,7 @@ LINT =		splint
 MCCABE =	pmccabe
 
 EXTRA_DIST = config.rpath lookup3.c autogen.sh CHANGES $(man_MANS) \
+	m4/Makefile.in \
 	footer_no_timestamp.html libpopt.vers \
 	testit.sh test-poptrc \
 	popt.xcodeproj/project.pbxproj \
