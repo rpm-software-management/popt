@@ -1,1 +1,4 @@
 *.m4
+Makefile
+Makefile.am
+Makefile.in
