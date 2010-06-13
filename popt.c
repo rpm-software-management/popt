@@ -973,153 +973,154 @@ int poptSaveString(const char *** argvp,
 }
 
 /*@unchecked@*/
-static unsigned int seed = 0;
+static unsigned seed = 0;
+
+typedef int64_t * poptStack_t;
+
+static int64_t poptCalculator(int64_t arg0, unsigned argInfo, int64_t arg1,
+		int * rcp)
+{
+int ac = 20;	/* XXX overkill */
+poptStack_t stack = memset(alloca(ac*sizeof(*stack)), 0, (ac*sizeof(*stack)));
+    int ix = 0;
+    int op;
+    int rc = 0;		/* assume success */
+    int64_t retval = 0;
+
+    stack[ix++] = arg0;
+
+    if (arg1 != 0 && LF_ISSET(RANDOM)) {
+#if defined(HAVE_SRANDOM)
+	if (!seed) {
+	    srandom((unsigned)getpid());
+	    srandom((unsigned)random());
+	}
+	arg1 = random() % (arg1 > 0 ? arg1 : -arg1);
+	arg1++;
+#else
+	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
+	rc = POPT_ERROR_BADOPERATION;
+	goto exit;
+#endif
+    }
+    if (!LF_ISSET(CALCULATOR) && LF_ISSET(NOT))
+	arg1 = ~arg1;
+
+    stack[ix++] = arg1;
+
+    switch (LF_ISSET(LOGICALOPS)) {
+    case POPT_ARGFLAG_OR:	op = '|';	break;
+    case POPT_ARGFLAG_AND:	op = '&';	break;
+    case POPT_ARGFLAG_XOR:	op = '^';	break;
+    default:
+	if (LF_ISSET(CALCULATOR))	/* XXX hotwire +/- operations. */
+	    op = LF_ISSET(NOT) ? '-' : '+';
+	else if (!LF_ISSET(LOGICALOPS))
+	    op = '=';
+	else {
+	    rc = POPT_ERROR_BADOPERATION;
+	    goto exit;
+	}
+	break;
+    }
+
+    if (ix-- < 2) {
+	rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
+	goto exit;
+    }
+    switch (op) {
+    case '=':	stack[ix-1]  = stack[ix];	break;
+    case '|':	stack[ix-1] |= stack[ix];	break;
+    case '&':	stack[ix-1] &= stack[ix];	break;
+    case '^':	stack[ix-1] ^= stack[ix];	break;
+    case '+':	stack[ix-1] += stack[ix];	break;
+    case '-':	stack[ix-1] -= stack[ix];	break;
+    case '*':	stack[ix-1] *= stack[ix];	break;
+    case '/':	stack[ix-1] /= stack[ix];	break;
+    case '%':	stack[ix-1] %= stack[ix];	break;
+    default:
+	rc = POPT_ERROR_BADOPERATION;
+	goto exit;
+	/*@notreached@*/ break;
+    }
+
+    if (ix-- < 1) {
+	rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
+	goto exit;
+    }
+    retval = stack[ix];
+
+exit:
+    *rcp = rc;
+    return retval;
+}
 
 int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 {
+    int64_t retval = 0;
+    int rc = 0;
+
     if (arg == NULL
 #ifdef	NOTYET
     /* XXX Check alignment, may fail on funky platforms. */
-     || (((unsigned long long)arg) & (sizeof(*arg)-1))
+     || (((unsigned long)arg) & (sizeof(*arg)-1))
 #endif
     )
 	return POPT_ERROR_NULLARG;
 
-    if (aLongLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	}
-	aLongLong = (long long)(random() % (aLongLong > 0 ? aLongLong : -aLongLong));
-	aLongLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
-    }
-    if (LF_ISSET(NOT))
-	aLongLong = ~aLongLong;
-    switch (LF_ISSET(LOGICALOPS)) {
-    case 0:
-	*arg = aLongLong;
-	break;
-    case POPT_ARGFLAG_OR:
-	*(unsigned long long *)arg |= (unsigned long long)aLongLong;
-	break;
-    case POPT_ARGFLAG_AND:
-	*(unsigned long long *)arg &= (unsigned long long)aLongLong;
-	break;
-    case POPT_ARGFLAG_XOR:
-	*(unsigned long long *)arg ^= (unsigned long long)aLongLong;
-	break;
-    default:
-	return POPT_ERROR_BADOPERATION;
-	/*@notreached@*/ break;
-    }
-    return 0;
+    retval = poptCalculator(*arg, argInfo, aLongLong, &rc);
+    if (!rc)
+	*arg = (long long) retval;
+
+    return rc;
 }
 
 int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 {
+    int64_t retval = 0;
+    int rc = 0;
+
     /* XXX Check alignment, may fail on funky platforms. */
     if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
-    if (aLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	}
-	aLong = random() % (aLong > 0 ? aLong : -aLong);
-	aLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
-    }
-    if (LF_ISSET(NOT))
-	aLong = ~aLong;
-    switch (LF_ISSET(LOGICALOPS)) {
-    case 0:		   *arg = aLong; break;
-    case POPT_ARGFLAG_OR:  *(unsigned long *)arg |= (unsigned long)aLong; break;
-    case POPT_ARGFLAG_AND: *(unsigned long *)arg &= (unsigned long)aLong; break;
-    case POPT_ARGFLAG_XOR: *(unsigned long *)arg ^= (unsigned long)aLong; break;
-    default:
-	return POPT_ERROR_BADOPERATION;
-	/*@notreached@*/ break;
-    }
-    return 0;
+    retval = poptCalculator(*arg, argInfo, aLong, &rc);
+    if (!rc)
+	*arg = (long) retval;
+
+    return rc;
 }
 
 int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
 {
+    int64_t retval = 0;
+    int rc = 0;
+
     /* XXX Check alignment, may fail on funky platforms. */
     if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
-    if (aLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	}
-	aLong = random() % (aLong > 0 ? aLong : -aLong);
-	aLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
-    }
-    if (LF_ISSET(NOT))
-	aLong = ~aLong;
-    switch (LF_ISSET(LOGICALOPS)) {
-    case 0:		   *arg = (int) aLong;				break;
-    case POPT_ARGFLAG_OR:  *(unsigned int *)arg |= (unsigned int) aLong; break;
-    case POPT_ARGFLAG_AND: *(unsigned int *)arg &= (unsigned int) aLong; break;
-    case POPT_ARGFLAG_XOR: *(unsigned int *)arg ^= (unsigned int) aLong; break;
-    default:
-	return POPT_ERROR_BADOPERATION;
-	/*@notreached@*/ break;
-    }
-    return 0;
+    retval = poptCalculator(*arg, argInfo, aLong, &rc);
+    if (!rc)
+	*arg = (int) retval;
+
+    return rc;
 }
 
 int poptSaveShort(/*@null@*/ short * arg, unsigned int argInfo, long aLong)
 {
+    int64_t retval = 0;
+    int rc = 0;
+
     /* XXX Check alignment, may fail on funky platforms. */
     if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
-    if (aLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	}
-	aLong = random() % (aLong > 0 ? aLong : -aLong);
-	aLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
-    }
-    if (LF_ISSET(NOT))
-	aLong = ~aLong;
-    switch (LF_ISSET(LOGICALOPS)) {
-    case 0:		   *arg = (short) aLong;
-	break;
-    case POPT_ARGFLAG_OR:  *(unsigned short *)arg |= (unsigned short) aLong;
-	break;
-    case POPT_ARGFLAG_AND: *(unsigned short *)arg &= (unsigned short) aLong;
-	break;
-    case POPT_ARGFLAG_XOR: *(unsigned short *)arg ^= (unsigned short) aLong;
-	break;
-    default: return POPT_ERROR_BADOPERATION;
-	/*@notreached@*/ break;
-    }
-    return 0;
+    retval = poptCalculator(*arg, argInfo, aLong, &rc);
+    if (!rc)
+	*arg = (short) retval;
+
+    return rc;
 }
 
 /**

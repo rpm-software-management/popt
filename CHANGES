@@ -1,5 +1,8 @@
-1.15 -> 1.16:
+1.16 -> 1.17:
+    - jbj: add an RPN calculator to do logical and add/subtract operations.
     - devzero2000: update to new autofu/automagic. Do make distcheck work.
+
+1.15 -> 1.16:
     - add lv.po, update translations (Translation Project).
     - include xcode project files in distributed popt tar ball.
     - make distcheck is now squeaky clean.

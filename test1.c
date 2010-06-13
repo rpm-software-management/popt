@@ -62,6 +62,11 @@ static double aDouble = 9.86960440108935861883;
 /*@unchecked@*/
 static double bDouble = 9.86960440108935861883;
 
+/*@unchecked@*/
+static int aCounter = 34543;
+/*@unchecked@*/
+static int bCounter = 34543;
+
 /*@unchecked@*/ /*@only@*/ /*@null@*/
 static const char ** aArgv = NULL;
 /*@unchecked@*/ /*@only@*/ /*@null@*/
@@ -164,6 +169,15 @@ static struct poptOption options[] = {
    { "bits", '\0', POPT_ARG_BITSET|POPT_ARGFLAG_DOC_HIDDEN, &aBits, 0,
 	"POPT_ARG_BITSET: add string to bit set (can be used multiple times)","STRING"},
 
+   { "verbose", 'v', POPT_ARG_VAL|POPT_ARGFLAG_CALCULATOR|POPT_ARGFLAG_DOC_HIDDEN, &aCounter, 1,
+	"POPT_ARGFLAG_CALCULATOR: increment a counter", "+" },
+   { "quiet", 'q', POPT_ARG_VAL|POPT_ARGFLAG_NOT|POPT_ARGFLAG_CALCULATOR|POPT_ARGFLAG_DOC_HIDDEN, &aCounter, 1,
+	"POPT_ARGFLAG_CALCULATOR: decrement a counter", "-" },
+   { "add", '\0', POPT_ARG_VAL|POPT_ARGFLAG_CALCULATOR|POPT_ARGFLAG_DOC_HIDDEN, &aCounter, 24,
+	"POPT_ARGFLAG_CALCULATOR: add a value to a counter", "24 +" },
+   { "sub", '\0', POPT_ARG_VAL|POPT_ARGFLAG_NOT|POPT_ARGFLAG_CALCULATOR|POPT_ARGFLAG_DOC_HIDDEN, &aCounter, 24,
+	"POPT_ARGFLAG_CALCULATOR: subtract a value from a counter", "24 -" },
+
   { "bitset", '\0', POPT_BIT_SET | POPT_ARGFLAG_TOGGLE | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x7777,
 	"POPT_BIT_SET: |= 0x7777", 0},
   { "bitclr", '\0', POPT_BIT_CLR | POPT_ARGFLAG_TOGGLE | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0xf842,
@@ -210,6 +224,7 @@ static void resetVars(void)
     aLongLong = bLongLong;
     aFloat = bFloat;
     aDouble = bDouble;
+    aCounter = bCounter;
 
     if (aArgv) {
 	int i;
@@ -315,6 +330,10 @@ int main(int argc, const char ** argv)
     if (aDouble != bDouble)
 	fprintf(stdout, " aDouble: %g", aDouble);
 /*@=realcompare@*/
+
+    if (aCounter != bCounter)
+	fprintf(stdout, " aCounter: %d", aCounter);
+
     if (aArgv != NULL) {
 	const char **av = aArgv;
 	const char * arg;
