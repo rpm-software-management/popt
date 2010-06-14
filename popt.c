@@ -996,17 +996,24 @@ static unsigned seed = 0;
 
 typedef int64_t * poptStack_t;
 
-static int64_t poptCalculator(int64_t arg0, unsigned argInfo, int64_t arg1,
-		int * rcp)
+static long long poptCalculator(long long arg0, unsigned argInfo, long long arg1,
+		/*@null@*/ const char * expr, int * rcp)
 {
-int ac = 20;	/* XXX overkill */
-poptStack_t stack = memset(alloca(ac*sizeof(*stack)), 0, (ac*sizeof(*stack)));
+int ixmax = 20;	/* XXX overkill */
+poptStack_t stk = memset(alloca(ixmax*sizeof(*stk)), 0, (ixmax*sizeof(*stk)));
     int ix = 0;
-    int op;
+size_t nt = 64;	/* XXX overkill */
+char * t = alloca(nt);
+char * te = t;
+const char * s;
     int rc = 0;		/* assume success */
-    int64_t retval = 0;
+    long long retval = 0;
+const char ** av = NULL;
+int ac = 0;
+int xx;
+int i;
 
-    stack[ix++] = arg0;
+    stk[ix++] = arg0;
 
     if (arg1 != 0 && LF_ISSET(RANDOM)) {
 #if defined(HAVE_SRANDOM)
@@ -1025,58 +1032,99 @@ poptStack_t stack = memset(alloca(ac*sizeof(*stack)), 0, (ac*sizeof(*stack)));
     if (!LF_ISSET(CALCULATOR) && LF_ISSET(NOT))
 	arg1 = ~arg1;
 
-    stack[ix++] = arg1;
+    stk[ix++] = arg1;
 
+    /* XXX hotwire a RPN program. */
+    if (expr == NULL) {
     switch (LF_ISSET(LOGICALOPS)) {
-    case POPT_ARGFLAG_OR:	op = '|';	break;
-    case POPT_ARGFLAG_AND:	op = '&';	break;
-    case POPT_ARGFLAG_XOR:	op = '^';	break;
+	case POPT_ARGFLAG_OR:	*te++ = '|';	break;
+	case POPT_ARGFLAG_AND:	*te++ = '&';	break;
+	case POPT_ARGFLAG_XOR:	*te++ = '^';	break;
     default:
 	if (LF_ISSET(CALCULATOR))	/* XXX hotwire +/- operations. */
-	    op = LF_ISSET(NOT) ? '-' : '+';
+		*te++ = LF_ISSET(NOT) ? '-' : '+';
 	else if (!LF_ISSET(LOGICALOPS))
-	    op = '=';
+		*te++ = '=';
 	else {
 	    rc = POPT_ERROR_BADOPERATION;
 	    goto exit;
 	}
 	break;
     }
+	*te = '\0';
+    }
 
+s = (expr ? expr : t);
+xx = poptParseArgvString(s, &ac, &av);	/* XXX split on CSV character set. */
+assert(!xx && av);
+
+    if (av)
+    for (i = 0; av[i] != NULL; i++) {
+	const char * arg = av[i];
+	size_t len = strlen(arg);
+	int c = (int) *arg;
+
+	if (len == 0)
+	    continue;
+	if (len > 1) {
+	    char * end = NULL;
+	    if (ix >= ixmax) {
+		rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_OVERFLOW */
+		goto exit;
+	    }
+	    stk[ix++] = strtoll(arg, &end, 0);
+	    if (end && *end != '\0') {
+		rc = POPT_ERROR_BADNUMBER;
+		goto exit;
+	    }
+	} else {
     if (ix-- < 2) {
 	rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
 	goto exit;
     }
-    switch (op) {
-    case '=':	stack[ix-1]  = stack[ix];	break;
-    case '|':	stack[ix-1] |= stack[ix];	break;
-    case '&':	stack[ix-1] &= stack[ix];	break;
-    case '^':	stack[ix-1] ^= stack[ix];	break;
-    case '+':	stack[ix-1] += stack[ix];	break;
-    case '-':	stack[ix-1] -= stack[ix];	break;
-    case '*':	stack[ix-1] *= stack[ix];	break;
-    case '/':	stack[ix-1] /= stack[ix];	break;
-    case '%':	stack[ix-1] %= stack[ix];	break;
+	    switch (c) {
+	    case '=':	stk[ix-1]  = stk[ix];	break;
+	    case '|':	stk[ix-1] |= stk[ix];	break;
+	    case '&':	stk[ix-1] &= stk[ix];	break;
+	    case '^':	stk[ix-1] ^= stk[ix];	break;
+	    case '+':	stk[ix-1] += stk[ix];	break;
+	    case '-':	stk[ix-1] -= stk[ix];	break;
+	    case '*':	stk[ix-1] *= stk[ix];	break;
+	    case '/':
+	    case '%':
+		if (stk[ix] == 0) {
+		    rc = POPT_ERROR_BADOPERATION; /* XXX POPT_ERROR_DIVZERO */
+		    goto exit;
+		}
+		if (c == (int)'%')
+		    stk[ix-1] %= stk[ix];
+		else
+		    stk[ix-1] /= stk[ix];
+		break;
     default:
 	rc = POPT_ERROR_BADOPERATION;
 	goto exit;
 	/*@notreached@*/ break;
+    }
+	}
     }
 
     if (ix-- < 1) {
 	rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
 	goto exit;
     }
-    retval = stack[ix];
+    retval = stk[ix];
 
 exit:
+    if (av)
+	av = _free(av);
     *rcp = rc;
     return retval;
 }
 
 int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 {
-    int64_t retval = 0;
+    long long retval = 0;
     int rc = 0;
 
     if (arg == NULL
@@ -1087,7 +1135,7 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
     )
 	return POPT_ERROR_NULLARG;
 
-    retval = poptCalculator(*arg, argInfo, aLongLong, &rc);
+    retval = poptCalculator(*arg, argInfo, (long long)aLongLong, NULL, &rc);
     if (!rc)
 	*arg = (long long) retval;
 
@@ -1096,14 +1144,14 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 
 int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 {
-    int64_t retval = 0;
+    long long retval = 0;
     int rc = 0;
 
     /* XXX Check alignment, may fail on funky platforms. */
     if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
-    retval = poptCalculator(*arg, argInfo, aLong, &rc);
+    retval = poptCalculator(*arg, argInfo, (long long)aLong, NULL, &rc);
     if (!rc)
 	*arg = (long) retval;
 
@@ -1112,14 +1160,14 @@ int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 
 int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
 {
-    int64_t retval = 0;
+    long long retval = 0;
     int rc = 0;
 
     /* XXX Check alignment, may fail on funky platforms. */
     if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
-    retval = poptCalculator(*arg, argInfo, aLong, &rc);
+    retval = poptCalculator(*arg, argInfo, (long long)aLong, NULL, &rc);
     if (!rc)
 	*arg = (int) retval;
 
@@ -1128,14 +1176,14 @@ int poptSaveInt(/*@null@*/ int * arg, unsigned int argInfo, long aLong)
 
 int poptSaveShort(/*@null@*/ short * arg, unsigned int argInfo, long aLong)
 {
-    int64_t retval = 0;
+    long long retval = 0;
     int rc = 0;
 
     /* XXX Check alignment, may fail on funky platforms. */
     if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
-    retval = poptCalculator(*arg, argInfo, aLong, &rc);
+    retval = poptCalculator(*arg, argInfo, (long long)aLong, NULL, &rc);
     if (!rc)
 	*arg = (short) retval;
 
@@ -1223,12 +1271,13 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	arg.argv[0] = (con->os->nextArg) ? xstrdup(con->os->nextArg) : NULL;
 	/*@switchbreak@*/ break;
 
-    case POPT_ARG_INT:
     case POPT_ARG_SHORT:
+    case POPT_ARG_INT:
     case POPT_ARG_LONG:
     case POPT_ARG_LONGLONG:
-    {	unsigned int argInfo = poptArgInfo(con, opt);
+    {	unsigned argInfo = poptArgInfo(con, opt);
 	long long aNUM = 0;
+	const char * expr = LF_ISSET(CALCULATOR) ? opt->argDescrip : NULL;
 
 	if ((rc = poptParseInteger(&aNUM, argInfo, con->os->nextArg)) != 0)
 	    break;
@@ -1240,24 +1289,32 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 #   define LLONG_MAX    9223372036854775807LL
 #   define LLONG_MIN    (-LLONG_MAX - 1LL)
 #endif
-	    rc = !(aNUM == LLONG_MIN || aNUM == LLONG_MAX)
-		? poptSaveLongLong(arg.longlongp, argInfo, aNUM)
-		: POPT_ERROR_OVERFLOW;
+	    if (aNUM == LLONG_MIN || aNUM == LLONG_MAX) {
+		rc = POPT_ERROR_OVERFLOW;
+		goto exit;
+	    }
+	    rc = poptSaveLongLong(arg.longlongp, argInfo, aNUM);
 	    /*@innerbreak@*/ break;
 	case POPT_ARG_LONG:
-	    rc = !(aNUM < (long long)LONG_MIN || aNUM > (long long)LONG_MAX)
-		? poptSaveLong(arg.longp, argInfo, (long)aNUM)
-		: POPT_ERROR_OVERFLOW;
+	    if (aNUM < (long long)LONG_MIN || aNUM > (long long)LONG_MAX) {
+		rc = POPT_ERROR_OVERFLOW;
+		goto exit;
+	    }
+	    rc = poptSaveLong(arg.longp, argInfo, (long)aNUM);
 	    /*@innerbreak@*/ break;
 	case POPT_ARG_INT:
-	    rc = !(aNUM < (long long)INT_MIN || aNUM > (long long)INT_MAX)
-		? poptSaveInt(arg.intp, argInfo, (long)aNUM)
-		: POPT_ERROR_OVERFLOW;
+	    if (aNUM < (long long)INT_MIN || aNUM > (long long)INT_MAX) {
+		rc = POPT_ERROR_OVERFLOW;
+		goto exit;
+	    }
+	    rc = poptSaveInt(arg.intp, argInfo, (long)aNUM);
 	    /*@innerbreak@*/ break;
 	case POPT_ARG_SHORT:
-	    rc = !(aNUM < (long long)SHRT_MIN || aNUM > (long long)SHRT_MAX)
-		? poptSaveShort(arg.shortp, argInfo, (long)aNUM)
-		: POPT_ERROR_OVERFLOW;
+	    if (aNUM < (long long)SHRT_MIN || aNUM > (long long)SHRT_MAX) {
+		rc = POPT_ERROR_OVERFLOW;
+		goto exit;
+	    }
+	    rc = poptSaveShort(arg.shortp, argInfo, (long)aNUM);
 	    /*@innerbreak@*/ break;
 	}
     }   /*@switchbreak@*/ break;
@@ -1280,7 +1337,7 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 /*@=mods@*/
 	    if (*end != '\0') {
 		rc = POPT_ERROR_BADNUMBER;
-		break;
+		goto exit;
 	    }
 	}
 
@@ -1294,10 +1351,11 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 #endif
 #define POPT_ABS(a)	((((a) - 0.0) < DBL_EPSILON) ? -(a) : (a))
 	    if ((FLT_MIN - POPT_ABS(aDouble)) > DBL_EPSILON
-	     || (POPT_ABS(aDouble) - FLT_MAX) > DBL_EPSILON)
+	     || (POPT_ABS(aDouble) - FLT_MAX) > DBL_EPSILON) {
 		rc = POPT_ERROR_OVERFLOW;
-	    else
-		arg.floatp[0] = (float) aDouble;
+		goto exit;
+	    }
+	    arg.floatp[0] = (float) aDouble;
 	    /*@innerbreak@*/ break;
 	}
     }   /*@switchbreak@*/ break;
@@ -1312,6 +1370,7 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	exit(EXIT_FAILURE);
 	/*@notreached@*/ /*@switchbreak@*/ break;
     }
+exit:
     return rc;
 }
 
