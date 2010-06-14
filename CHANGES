@@ -1,3 +1,6 @@
+1.17 -> 2.0:
+    - jbj: change error returns to assert failures for development.
+
 1.16 -> 1.17:
     - jbj: add an RPN calculator to do logical and add/subtract operations.
     - devzero2000: update to new autofu/automagic. Do make distcheck work.

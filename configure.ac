@@ -22,9 +22,7 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
 
-
 CFLAGS="$CFLAGS -D_GNU_SOURCE -D_REENTRANT"
-
 
 # Checks for programs.
 AC_PROG_CC
@@ -91,11 +89,10 @@ AC_CHECK_PROG(HAVE_MCCABE,pmccabe,"yes","no" )
 
 AM_CONDITIONAL([HAVE_MCCABE], test x$HAVE_MCCABE != xno )
 
-
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([fcntl.h float.h langinfo.h libintl.h limits.h stdint.h stdlib.h string.h sys/ioctl.h unistd.h wchar.h])
+AC_CHECK_HEADERS([assert.h fcntl.h float.h langinfo.h libintl.h limits.h sys/ioctl.h wchar.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
@@ -134,8 +131,6 @@ AC_ARG_ENABLE([ld-version-script],
               [ : ] )
 AM_CONDITIONAL(HAVE_LD_VERSION_SCRIPT, test "$have_ld_version_script" = "yes")
 
-
-
 # Autofu for pkgconfig 
 # Define a (hope) portable Libs pkgconfig directive that 
 # - Don't harm if the default library search path include ${libdir}
@@ -166,7 +161,6 @@ case "${host}" in
       ;;
 esac
 AC_SUBST([POPT_PKGCONFIG_LIBS],"$popt_pkgconfig_libs")
-
 
 AC_CONFIG_FILES([Makefile Doxyfile popt.pc popt.spec po/Makefile.in
     auto/Makefile auto/desc ])

@@ -24,6 +24,11 @@ extern long long int strtoll(const char *nptr, /*@null@*/ char **endptr,
 #include <math.h>
 
 #include "poptint.h"
+#if defined(HAVE_ASSERT_H)
+#include <assert.h>
+#else
+#define	assert(_x)
+#endif
 
 #ifdef	MYDEBUG
 /*@unchecked@*/
@@ -170,7 +175,8 @@ poptContext poptGetContext(const char * name, int argc, const char ** argv,
 {
     poptContext con = malloc(sizeof(*con));
 
-    if (con == NULL) return NULL;	/* XXX can't happen */
+assert(con);	/* XXX can't happen */
+    if (con == NULL) return NULL;
     memset(con, 0, sizeof(*con));
 
     con->os = con->optionStack;
@@ -261,7 +267,8 @@ static int handleExec(/*@special@*/ poptContext con,
     poptItem item;
     int i;
 
-    if (con->execs == NULL || con->numExecs <= 0) /* XXX can't happen */
+assert(con->execs && con->numExecs > 0);	/* XXX can't happen */
+    if (con->execs == NULL || con->numExecs <= 0)
 	return 0;
 
     for (i = con->numExecs - 1; i >= 0; i--) {
@@ -293,9 +300,11 @@ static int handleExec(/*@special@*/ poptContext con,
     }
 
     i = con->finalArgvCount++;
-    if (con->finalArgv != NULL)	/* XXX can't happen */
+assert(con->finalArgv);		/* XXX can't happen */
+    if (con->finalArgv != NULL)
     {	char *s  = malloc((longName ? strlen(longName) : 0) + sizeof("--"));
-	if (s != NULL) {	/* XXX can't happen */
+assert(s);	/* XXX can't happen */
+	if (s != NULL) {
 	    con->finalArgv[i] = s;
 	    *s++ = '-';
 	    if (longName)
@@ -325,7 +334,8 @@ longOptionStrcmp(const struct poptOption * opt,
     const char * optLongName = opt->longName;
     int rc;
 
-    if (optLongName == NULL || longName == NULL)	/* XXX can't heppen */
+assert(optLongName && longName);	/* XXX can't heppen */
+    if (optLongName == NULL || longName == NULL)
 	return 0;
 
     if (F_ISSET(opt, TOGGLE)) {
@@ -371,7 +381,8 @@ static int handleAlias(/*@special@*/ poptContext con,
 	    return 0;
     }
 
-    if (con->aliases == NULL || con->numAliases <= 0) /* XXX can't happen */
+assert(con->aliases && con->numAliases > 0);	/* XXX can't happen */
+    if (con->aliases == NULL || con->numAliases <= 0)
 	return 0;
 
     for (i = con->numAliases - 1; i >= 0; i--) {
@@ -404,7 +415,8 @@ static int handleAlias(/*@special@*/ poptContext con,
 	/* Append --foo=bar arg to alias argv array (if present). */ 
 	if (longName && nextArg != NULL && *nextArg != '\0') {
 	    av = malloc((ac + 1 + 1) * sizeof(*av));
-	    if (av != NULL) {	/* XXX won't happen. */
+assert(av);	/* XXX won't happen. */
+	    if (av != NULL) {
 		for (i = 0; i < ac; i++) {
 		    av[i] = con->os->currAlias->argv[i];
 		}
@@ -435,7 +447,8 @@ const char * findProgramPath(/*@null@*/ const char * argv0)
     char *path = NULL, *s = NULL, *se;
     char *t = NULL;
 
-    if (argv0 == NULL) return NULL;	/* XXX can't happen */
+assert(argv0);	/* XXX can't happen */
+    if (argv0 == NULL) return NULL;
 
     /* If there is a / in argv[0], it has to be an absolute path. */
     /* XXX Hmmm, why not if (argv0[0] == '/') ... instead? */
@@ -483,7 +496,8 @@ static int execCommand(poptContext con)
     int rc;
     int ec = POPT_ERROR_ERRNO;
 
-    if (item == NULL) /*XXX can't happen*/
+assert(item);	/*XXX can't happen*/
+    if (item == NULL)
 	return POPT_ERROR_NOARG;
 
     if (item->argv == NULL || item->argc < 1 ||
@@ -671,7 +685,8 @@ static const char * findNextArg(/*@special@*/ poptContext con,
 	    arg = os->argv[i];
 	    if (delete_arg) {
 		if (os->argb == NULL) os->argb = PBM_ALLOC(os->argc);
-		if (os->argb != NULL)	/* XXX can't happen */
+assert(os->argb);	/* XXX can't happen */
+		if (os->argb != NULL)
 		    PBM_SET(i, os->argb);
 	    }
 	    /*@innerbreak@*/ break;
@@ -694,7 +709,8 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
     char c;
 
     te = t = malloc(tn);
-    if (t == NULL) return NULL;		/* XXX can't happen */
+assert(t);	/* XXX can't happen */
+    if (t == NULL) return NULL;	
     *t = '\0';
     while ((c = *s++) != '\0') {
 	switch (c) {
@@ -715,7 +731,9 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
 
 	    tn += strlen(a);
 	    {   size_t pos = (size_t) (te - t);
-		if ((t = realloc(t, tn)) == NULL)	/* XXX can't happen */
+		t = realloc(t, tn);
+assert(t);	/* XXX can't happen */
+		if (t == NULL)
 		    return NULL;
 		te = stpcpy(t + pos, a);
 	    }
@@ -746,7 +764,8 @@ static void poptStripArg(/*@special@*/ poptContext con, int which)
 /*@-compdef -sizeoftype -usedef @*/
     if (con->arg_strip == NULL)
 	con->arg_strip = PBM_ALLOC(con->optionStack[0].argc);
-    if (con->arg_strip != NULL)		/* XXX can't happen */
+assert(con->arg_strip);		/* XXX can't happen */
+    if (con->arg_strip != NULL)
     PBM_SET(which, con->arg_strip);
     return;
 /*@=compdef =sizeoftype =usedef @*/
@@ -1301,9 +1320,12 @@ int poptGetNextOpt(poptContext con)
 {
     const struct poptOption * opt = NULL;
     int done = 0;
+    int rc;
 
-    if (con == NULL)
-	return -1;
+    if (con == NULL) {
+	rc = -1;
+	goto exit;
+    }
     while (!done) {
 	const char * origOptString = NULL;
 	poptCallbackType cb = NULL;
@@ -1323,11 +1345,12 @@ int poptGetNextOpt(poptContext con)
 		/*@-noeffectuncon @*/
 		(void) (*con->maincall) (con->finalArgvCount, con->finalArgv);
 		/*@=noeffectuncon @*/
-		return -1;
+		rc = -1;
+		goto exit;
 	    }
 
-	    if (con->doExec) return execCommand(con);
-	    return -1;
+	    rc = (con->doExec) ? execCommand(con) : -1;
+	    goto exit;
 	}
 
 	/* Process next long option */
@@ -1343,11 +1366,15 @@ int poptGetNextOpt(poptContext con)
 	    }
 /*@=sizeoftype@*/
 	    thisopt = con->os->next;
-	    if (con->os->argv != NULL)	/* XXX can't happen */
+assert(con->os->argv);	/* XXX can't happen */
+	    if (con->os->argv != NULL)
 	    origOptString = con->os->argv[con->os->next++];
 
-	    if (origOptString == NULL)	/* XXX can't happen */
-		return POPT_ERROR_BADOPT;
+assert(origOptString);	/* XXX can't happen */
+	    if (origOptString == NULL) {
+		rc = POPT_ERROR_BADOPT;
+		goto exit;
+	    }
 
 	    if (con->restLeftover || *origOptString != '-' ||
 		(*origOptString == '-' && origOptString[1] == '\0'))
@@ -1356,9 +1383,11 @@ int poptGetNextOpt(poptContext con)
 		    con->restLeftover = 1;
 		if (con->flags & POPT_CONTEXT_ARG_OPTS) {
 		    con->os->nextArg = xstrdup(origOptString);
-		    return 0;
+		    rc = 0;
+		    goto exit;
 		}
-		if (con->leftovers != NULL)	/* XXX can't happen */
+assert(con->leftovers);		/* XXX can't happen */
+		if (con->leftovers != NULL)
 		    con->leftovers[con->numLeftovers++] = origOptString;
 		continue;
 	    }
@@ -1366,8 +1395,10 @@ int poptGetNextOpt(poptContext con)
 	    /* Make a copy we can hack at */
 	    optString = origOptString;
 
-	    if (optString[0] == '\0')
-		return POPT_ERROR_BADOPT;
+	    if (optString[0] == '\0') {
+		rc = POPT_ERROR_BADOPT;
+		goto exit;
+	    }
 
 	    if (optString[1] == '-' && !optString[2]) {
 		con->restLeftover = 1;
@@ -1400,8 +1431,10 @@ int poptGetNextOpt(poptContext con)
 
 		opt = findOption(con->options, optString, optStringLen, '\0', &cb, &cbData,
 				 argInfo);
-		if (!opt && !LF_ISSET(ONEDASH))
-		    return POPT_ERROR_BADOPT;
+		if (!opt && !LF_ISSET(ONEDASH)) {
+		    rc = POPT_ERROR_BADOPT;
+		    goto exit;
+		}
 	    }
 
 	    if (!opt) {
@@ -1436,8 +1469,10 @@ int poptGetNextOpt(poptContext con)
 
 	    opt = findOption(con->options, NULL, 0, *nextCharArg, &cb,
 			     &cbData, 0);
-	    if (!opt)
-		return POPT_ERROR_BADOPT;
+	    if (!opt) {
+		rc = POPT_ERROR_BADOPT;
+		goto exit;
+	    }
 	    shorty = 1;
 
 	    nextCharArg++;
@@ -1445,19 +1480,24 @@ int poptGetNextOpt(poptContext con)
 		con->os->nextCharArg = nextCharArg + (int)(*nextCharArg == '=');
 	}
 
-	if (opt == NULL) return POPT_ERROR_BADOPT;	/* XXX can't happen */
+assert(opt != NULL);	/* XXX can't happen */
+	if (opt == NULL) {
+	    rc = POPT_ERROR_BADOPT;
+	    goto exit;
+	}
 	if (opt->arg && poptArgType(opt) == POPT_ARG_NONE) {
 	    unsigned int argInfo = poptArgInfo(con, opt);
-	    if (poptSaveInt((int *)opt->arg, argInfo, 1L))
-		return POPT_ERROR_BADOPERATION;
+	    rc = poptSaveInt((int *)opt->arg, argInfo, 1L);
+	    if (rc)
+		goto exit;
 	} else if (poptArgType(opt) == POPT_ARG_VAL) {
 	    if (opt->arg) {
 		unsigned int argInfo = poptArgInfo(con, opt);
-		if (poptSaveInt((int *)opt->arg, argInfo, (long)opt->val))
-		    return POPT_ERROR_BADOPERATION;
+		rc = poptSaveInt((int *)opt->arg, argInfo, (long)opt->val);
+		if (rc)
+		    goto exit;
 	    }
 	} else if (poptArgType(opt) != POPT_ARG_NONE) {
-	    int rc;
 
 	    con->os->nextArg = _free(con->os->nextArg);
 	    if (longArg) {
@@ -1474,8 +1514,10 @@ int poptGetNextOpt(poptContext con)
 		    cleanOSE(con->os--);
 		}
 		if (con->os->next == con->os->argc) {
-		    if (!F_ISSET(opt, OPTIONAL))
-			return POPT_ERROR_NOARG;
+		    if (!F_ISSET(opt, OPTIONAL)) {
+			rc = POPT_ERROR_NOARG;
+			goto exit;
+		    }
 		    con->os->nextArg = NULL;
 		} else {
 
@@ -1489,7 +1531,8 @@ int poptGetNextOpt(poptContext con)
 			poptStripArg(con, con->os->next);
 		    }
 		
-		    if (con->os->argv != NULL) {	/* XXX can't happen */
+assert(con->os->argv);	/* XXX can't happen */
+		    if (con->os->argv != NULL) {
 			if (F_ISSET(opt, OPTIONAL) &&
 			    con->os->argv[con->os->next][0] == '-') {
 			    con->os->nextArg = NULL;
@@ -1506,7 +1549,7 @@ int poptGetNextOpt(poptContext con)
 
 	   /* Save the option argument through a (*opt->arg) pointer. */
 	    if (opt->arg != NULL && (rc = poptSaveArg(con, opt)) != 0)
-		return rc;
+		goto exit;
 	}
 
 	if (cb)
@@ -1522,7 +1565,8 @@ int poptGetNextOpt(poptContext con)
 
 	if (con->finalArgv != NULL)
 	{   char *s = malloc((opt->longName ? strlen(opt->longName) : 0) + sizeof("--"));
-	    if (s != NULL) {	/* XXX can't happen */
+assert(s);	/* XXX can't happen */
+	    if (s != NULL) {
 		con->finalArgv[con->finalArgvCount++] = s;
 		*s++ = '-';
 		if (opt->longName) {
@@ -1547,8 +1591,11 @@ int poptGetNextOpt(poptContext con)
 			xstrdup(con->os->nextArg);
 	}
     }
+assert(opt);
+    rc = (opt ? opt->val : -1);	/* XXX can't happen */
 
-    return (opt ? opt->val : -1);	/* XXX can't happen */
+exit:
+    return rc;
 }
 
 char * poptGetOptArg(poptContext con)
