@@ -10,6 +10,7 @@ Makefile.in
 aclocal.m4
 autom4te*
 build
+build-aux
 clang
 config.cache
 config.guess

@@ -652,7 +652,8 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 	const char * fn = (os->argv ? os->argv[0] : NULL);
 	if (fn == NULL) return len;
 	if (strchr(fn, '/')) fn = strrchr(fn, '/') + 1;
-	if (fn[0] == 'l' && fn[1] == 't' && fn[2] == '-') fn += 3;
+	if (fn[0] == 'l' && fn[1] == 't' && fn[2] == '-')
+	    fn += sizeof("lt-") - 1;
 	/* XXX POPT_fprintf not needed for argv[0] display. */
 	fprintf(fp, " %s", fn);
 	len += strlen(fn) + 1;
