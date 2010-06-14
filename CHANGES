@@ -1,6 +1,7 @@
 1.16 -> 1.17:
     - jbj: add an RPN calculator to do logical and add/subtract operations.
     - devzero2000: update to new autofu/automagic. Do make distcheck work.
+    - test1: fix test 59, libtool/argv[0] conventions differ various platforms.
 
 1.15 -> 1.16:
     - add lv.po, update translations (Translation Project).
