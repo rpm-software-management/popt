@@ -174,9 +174,9 @@ static struct poptOption options[] = {
    { "quiet", 'q', POPT_ARG_VAL|POPT_ARGFLAG_NOT|POPT_ARGFLAG_CALCULATOR|POPT_ARGFLAG_DOC_HIDDEN, &aCounter, 1,
 	"POPT_ARGFLAG_CALCULATOR: decrement a counter", "-" },
    { "add", '\0', POPT_ARG_VAL|POPT_ARGFLAG_CALCULATOR|POPT_ARGFLAG_DOC_HIDDEN, &aCounter, 24,
-	"POPT_ARGFLAG_CALCULATOR: add a value to a counter", "24 +" },
+	"POPT_ARGFLAG_CALCULATOR: add a value to a counter", "P 24 +" },
    { "sub", '\0', POPT_ARG_VAL|POPT_ARGFLAG_NOT|POPT_ARGFLAG_CALCULATOR|POPT_ARGFLAG_DOC_HIDDEN, &aCounter, 24,
-	"POPT_ARGFLAG_CALCULATOR: subtract a value from a counter", "24 -" },
+	"POPT_ARGFLAG_CALCULATOR: subtract a value from a counter", "P 24 -" },
 
   { "bitset", '\0', POPT_BIT_SET | POPT_ARGFLAG_TOGGLE | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0x7777,
 	"POPT_BIT_SET: |= 0x7777", 0},
