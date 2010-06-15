@@ -1078,11 +1078,24 @@ assert(!xx && av);
 		goto exit;
 	    }
 	} else {
-    if (ix-- < 2) {
-	rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
-	goto exit;
-    }
+	    if (ix-- < 2) {
+		rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
+		goto exit;
+	    }
 	    switch (c) {
+	    case 'd':		/* duplicate */
+		ix++;
+		stk[ix] = stk[ix-1];
+		ix++;
+		break;		/* XXX FIXME: initial arg0 cannot be dupe'd. */
+	    case 'P':		/* pop */
+		break;		/* XXX FIXME: initial arg0 cannot be pop'd. */
+	    case 'r':		/* reverse */
+		ix++;
+		stk[ix] = stk[ix-2];
+		stk[ix-2] = stk[ix-1];
+		stk[ix-1] = stk[ix];
+		break;
 	    case '=':	stk[ix-1]  = stk[ix];	break;
 	    case '|':	stk[ix-1] |= stk[ix];	break;
 	    case '&':	stk[ix-1] &= stk[ix];	break;
@@ -1101,11 +1114,11 @@ assert(!xx && av);
 		else
 		    stk[ix-1] /= stk[ix];
 		break;
-    default:
-	rc = POPT_ERROR_BADOPERATION;
-	goto exit;
-	/*@notreached@*/ break;
-    }
+	    default:
+		rc = POPT_ERROR_BADOPERATION;
+		goto exit;
+		/*@notreached@*/ break;
+	    }
 	}
     }
 
@@ -1271,15 +1284,18 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	arg.argv[0] = (con->os->nextArg) ? xstrdup(con->os->nextArg) : NULL;
 	/*@switchbreak@*/ break;
 
-    case POPT_ARG_SHORT:
-    case POPT_ARG_INT:
-    case POPT_ARG_LONG:
     case POPT_ARG_LONGLONG:
+    case POPT_ARG_LONG:
+    case POPT_ARG_INT:
+    case POPT_ARG_SHORT:
+    case POPT_ARG_VAL:
     {	unsigned argInfo = poptArgInfo(con, opt);
 	long long aNUM = 0;
 	const char * expr = LF_ISSET(CALCULATOR) ? opt->argDescrip : NULL;
 
-	if ((rc = poptParseInteger(&aNUM, argInfo, con->os->nextArg)) != 0)
+	if (poptArgType(opt) == POPT_ARG_VAL)
+	    aNUM = (long long) opt->val;
+	else if ((rc = poptParseInteger(&aNUM, argInfo, con->os->nextArg)) != 0)
 	    break;
 
 	switch (poptArgType(opt)) {
@@ -1293,28 +1309,41 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 		rc = POPT_ERROR_OVERFLOW;
 		goto exit;
 	    }
-	    rc = poptSaveLongLong(arg.longlongp, argInfo, aNUM);
+	    /* XXX pointer alignment check? */
+	    aNUM = poptCalculator(arg.longlongp[0], argInfo, aNUM, expr, &rc);
+	    if (!rc)
+		arg.longlongp[0] = (long long) aNUM;
 	    /*@innerbreak@*/ break;
 	case POPT_ARG_LONG:
 	    if (aNUM < (long long)LONG_MIN || aNUM > (long long)LONG_MAX) {
 		rc = POPT_ERROR_OVERFLOW;
 		goto exit;
 	    }
-	    rc = poptSaveLong(arg.longp, argInfo, (long)aNUM);
+	    /* XXX pointer alignment check? */
+	    aNUM = poptCalculator(arg.longp[0], argInfo, aNUM, expr, &rc);
+	    if (!rc)
+		arg.longp[0] = (long) aNUM;
 	    /*@innerbreak@*/ break;
+	case POPT_ARG_VAL:
 	case POPT_ARG_INT:
 	    if (aNUM < (long long)INT_MIN || aNUM > (long long)INT_MAX) {
 		rc = POPT_ERROR_OVERFLOW;
 		goto exit;
 	    }
-	    rc = poptSaveInt(arg.intp, argInfo, (long)aNUM);
+	    /* XXX pointer alignment check? */
+	    aNUM = poptCalculator(arg.intp[0], argInfo, aNUM, expr, &rc);
+	    if (!rc)
+		arg.intp[0] = (int) aNUM;
 	    /*@innerbreak@*/ break;
 	case POPT_ARG_SHORT:
 	    if (aNUM < (long long)SHRT_MIN || aNUM > (long long)SHRT_MAX) {
 		rc = POPT_ERROR_OVERFLOW;
 		goto exit;
 	    }
-	    rc = poptSaveShort(arg.shortp, argInfo, (long)aNUM);
+	    /* XXX pointer alignment check? */
+	    aNUM = poptCalculator(arg.shortp[0], argInfo, aNUM, expr, &rc);
+	    if (!rc)
+		arg.shortp[0] = (short) aNUM;
 	    /*@innerbreak@*/ break;
 	}
     }   /*@switchbreak@*/ break;
@@ -1331,7 +1360,7 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	    aDouble = strtod(con->os->nextArg, &end);
 	    if (errno == ERANGE) {
 		rc = POPT_ERROR_OVERFLOW;
-		break;
+		goto exit;
 	    }
 	    errno = saveerrno;
 /*@=mods@*/
@@ -1370,6 +1399,7 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	exit(EXIT_FAILURE);
 	/*@notreached@*/ /*@switchbreak@*/ break;
     }
+
 exit:
     return rc;
 }
@@ -1552,7 +1582,11 @@ assert(opt != NULL);	/* XXX can't happen */
 	} else if (poptArgType(opt) == POPT_ARG_VAL) {
 	    if (opt->arg) {
 		unsigned int argInfo = poptArgInfo(con, opt);
+#ifdef	DYING
 		rc = poptSaveInt((int *)opt->arg, argInfo, (long)opt->val);
+#else
+		rc = poptSaveArg(con, opt);
+#endif
 		if (rc)
 		    goto exit;
 	    }
