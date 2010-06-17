@@ -173,13 +173,19 @@ static void invokeCallbacksOPTION(poptContext con,
 poptContext poptGetContext(const char * name, int argc, const char ** argv,
 			const struct poptOption * options, unsigned int flags)
 {
-    poptContext con = malloc(sizeof(*con));
+    poptContext con = xcalloc(1, sizeof(*con));
 
 assert(con);	/* XXX can't happen */
     if (con == NULL) return NULL;
-    memset(con, 0, sizeof(*con));
 
+    con->optionDepth = POPTINT_OPTION_DEPTH;
     con->os = con->optionStack;
+
+#ifdef	SUPPORT_GLOBAL_CALCULATOR
+    con->calcDepth = POPTINT_CALC_DEPTH;
+    con->stk = con->calcStack;
+#endif
+
     con->os->argc = argc;
 /*@-dependenttrans -assignexpose@*/	/* FIX: W2DO? */
     con->os->argv = argv;
@@ -189,17 +195,22 @@ assert(con);	/* XXX can't happen */
     if (!(flags & POPT_CONTEXT_KEEP_FIRST))
 	con->os->next = 1;		/* skip argv[0] */
 
-    con->leftovers = calloc( (size_t)(argc + 1), sizeof(*con->leftovers) );
+    con->leftovers = xcalloc( (size_t)(argc + 1), sizeof(*con->leftovers) );
+
 /*@-dependenttrans -assignexpose@*/	/* FIX: W2DO? */
     con->options = options;
 /*@=dependenttrans =assignexpose@*/
+
     con->aliases = NULL;
     con->numAliases = 0;
+
     con->flags = flags;
     con->execs = NULL;
     con->numExecs = 0;
+
     con->finalArgvAlloced = argc * 2;
-    con->finalArgv = calloc( (size_t)con->finalArgvAlloced, sizeof(*con->finalArgv) );
+    con->finalArgv =
+	xcalloc( (size_t)con->finalArgvAlloced, sizeof(*con->finalArgv) );
     con->execAbsolute = 1;
     con->arg_strip = NULL;
 
@@ -398,7 +409,7 @@ assert(con->aliases && con->numAliases > 0);	/* XXX can't happen */
     }
     if (i < 0) return 0;
 
-    if ((con->os - con->optionStack + 1) == POPT_OPTION_DEPTH)
+    if ((con->os - con->optionStack + 1) == con->optionDepth)
 	return POPT_ERROR_OPTSTOODEEP;
 
     if (longName == NULL && nextArg != NULL && *nextArg != '\0')
@@ -1530,8 +1541,7 @@ assert(con->leftovers);		/* XXX can't happen */
 		con->os->nextCharArg = origOptString + 1;
 		longArg = NULL;
 	    } else {
-		if (con->os == con->optionStack && F_ISSET(opt, STRIP))
-		{
+		if (con->os == con->optionStack && F_ISSET(opt, STRIP)) {
 		    canstrip = 1;
 		    poptStripArg(con, thisopt);
 		}
@@ -1880,7 +1890,7 @@ int poptStuffArgs(poptContext con, const char ** argv)
     int argc;
     int rc;
 
-    if ((con->os - con->optionStack) == POPT_OPTION_DEPTH)
+    if ((con->os - con->optionStack) == con->optionDepth)
 	return POPT_ERROR_OPTSTOODEEP;
 
     for (argc = 0; argv[argc]; argc++)

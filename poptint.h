@@ -112,10 +112,34 @@ struct optionStackEntry {
     int stuffed;
 };
 
+typedef /*@refcounted@*/ struct poptLink_s * poptLink;
+struct poptLink_s {
+/*@null@*/
+    void *use;                  /*!< use count -- return to pool when zero */
+/*@kept@*/ /*@null@*/
+    void *pool;                 /*!< pool (or NULL if malloc'd) */
+#if defined(__LCLINT__)
+/*@refs@*/
+    int nrefs;                  /*!< (unused) keep splint happy */
+#endif
+};
+
+#define	POPTINT_OPTION_DEPTH	10
+#define	POPTINT_CALC_DEPTH	20	/* XXX overkill */
+
 struct poptContext_s {
-    struct optionStackEntry optionStack[POPT_OPTION_DEPTH];
+    struct poptLink_s _item;	/*!< usage mutex and pool identifier. */
+    struct optionStackEntry optionStack[POPTINT_OPTION_DEPTH];
 /*@dependent@*/
     struct optionStackEntry * os;
+    size_t optionDepth;
+
+#ifdef	SUPPORT_GLOBAL_CALCULATOR
+    int64_t calcStack[POPTINT_CALC_DEPTH];
+    int64_t * stk;
+    size_t calcDepth;
+#endif
+
 /*@owned@*/ /*@null@*/
     poptArgv leftovers;
     int numLeftovers;
