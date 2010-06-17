@@ -8,6 +8,12 @@
 
 #include "system.h"
 
+#if defined(HAVE_ASSERT_H)
+#include <assert.h>
+#else
+#define assert(_x)
+#endif
+
 #define POPT_ARGV_ARRAY_GROW_DELTA 5
 
 int poptDupArgv(int argc, const char **argv,
@@ -20,30 +26,45 @@ int poptDupArgv(int argc, const char **argv,
 
     if (argc <= 0 || argv == NULL)	/* XXX can't happen */
 	return POPT_ERROR_NOARG;
+
+#if defined(SUPPORT_CONTIGUOUS_ARGV)
     for (i = 0; i < argc; i++) {
 	if (argv[i] == NULL)
 	    return POPT_ERROR_NOARG;
 	nb += strlen(argv[i]) + 1;
     }
+#endif
 	
-    dst = malloc(nb);
-    if (dst == NULL)			/* XXX can't happen */
+    dst = xmalloc(nb);
+assert(dst);	/* XXX can't happen */
+    if (dst == NULL)
 	return POPT_ERROR_MALLOC;
     argv2 = (void *) dst;
+#if defined(SUPPORT_CONTIGUOUS_ARGV)
     dst += (argc + 1) * sizeof(*argv);
     *dst = '\0';
+#endif
 
     for (i = 0; i < argc; i++) {
+#if defined(SUPPORT_CONTIGUOUS_ARGV)
 	argv2[i] = dst;
 	dst = stpcpy(dst, argv[i]);
 	dst++;	/* trailing NUL */
+#else
+	argv2[i] = xstrdup(argv[i]);
+#endif
     }
     argv2[argc] = NULL;
 
     if (argvPtr) {
 	*argvPtr = argv2;
     } else {
-	free(argv2);
+#if !defined(SUPPORT_CONTIGUOUS_ARGV)
+	if (argv2)
+	for (i = 0; i < argc; i++)
+	    if (argv2[i]) free((void *)argv2[i]);	/* XXX _free */
+#endif
+	free((void *)argv2);	/* XXX _free */
 	argv2 = NULL;
     }
     if (argcPtr)
@@ -56,16 +77,19 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     const char * src;
     char quote = '\0';
     int argvAlloced = POPT_ARGV_ARRAY_GROW_DELTA;
-    const char ** argv = malloc(sizeof(*argv) * argvAlloced);
+    const char ** argv = xmalloc(sizeof(*argv) * argvAlloced);
     int argc = 0;
     size_t buflen = strlen(s) + 1;
     char * buf, * bufOrig = NULL;
     int rc = POPT_ERROR_MALLOC;
 
+assert(argv);	/* XXX can't happen */
     if (argv == NULL) return rc;
-    buf = bufOrig = calloc((size_t)1, buflen);
+
+    buf = bufOrig = xcalloc((size_t)1, buflen);
+assert(buf);	/* XXX can't happen */
     if (buf == NULL) {
-	free(argv);
+	free(argv);		/* XXX _free */
 	return rc;
     }
     argv[argc] = buf;
@@ -88,7 +112,8 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
 		buf++, argc++;
 		if (argc == argvAlloced) {
 		    argvAlloced += POPT_ARGV_ARRAY_GROW_DELTA;
-		    argv = realloc(argv, sizeof(*argv) * argvAlloced);
+		    argv = xrealloc(argv, sizeof(*argv) * argvAlloced);
+assert(argv);	/* XXX can't happen */
 		    if (argv == NULL) goto exit;
 		}
 		argv[argc] = buf;
@@ -118,8 +143,8 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     rc = poptDupArgv(argc, argv, argcPtr, argvPtr);
 
 exit:
-    if (bufOrig) free(bufOrig);
-    if (argv) free(argv);
+    if (bufOrig) free(bufOrig);		/* XXX _free */
+    if (argv) free(argv);		/* XXX _free */
     return rc;
 }
 
@@ -131,7 +156,7 @@ exit:
 int poptConfigFileToString(FILE *fp, char ** argstrp,
 		/*@unused@*/ UNUSED(int flags))
 {
-    char line[999];
+    char line[8192];	/* XXX configurable? */
     char * argstr;
     char * p;
     char * q;
@@ -142,7 +167,8 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
     size_t linelen;
     size_t maxargvlen = (size_t)480;
 
-    *argstrp = NULL;
+    if (argstrp)
+	*argstrp = NULL;
 
     /*   |   this_is   =   our_line
      *	     p             q      x
@@ -151,8 +177,10 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
     if (fp == NULL)
 	return POPT_ERROR_NULLARG;
 
-    argstr = calloc(maxargvlen, sizeof(*argstr));
+    argstr = xmalloc(maxargvlen * sizeof(*argstr));
+assert(argstr);	/* XXX can't happen */
     if (argstr == NULL) return POPT_ERROR_MALLOC;
+    argstr[0] = '\0';
 
     while (fgets(line, (int)maxlinelen, fp) != NULL) {
 	p = line;
@@ -163,7 +191,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
 
 	linelen = strlen(p);
 	if (linelen >= maxlinelen-1) {
-	    free(argstr);
+	    free(argstr);	/* XXX _free */
 	    return POPT_ERROR_OVERFLOW;	/* XXX line too long */
 	}
 
@@ -186,11 +214,12 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
 	    argvlen += (t = (size_t)(q - p)) + (sizeof(" --")-1);
 	    if (argvlen >= maxargvlen) {
 		maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
-		argstr = realloc(argstr, maxargvlen);
+		argstr = xrealloc(argstr, maxargvlen);
+assert(argstr);	/* XXX can't happen */
 		if (argstr == NULL) return POPT_ERROR_MALLOC;
 	    }
-	    strcat(argstr, " --");
-	    strcat(argstr, p);
+	    strcat(argstr, " --");	/* XXX stpcpy */
+	    strcat(argstr, p);		/* XXX stpcpy */
 	    continue;
 	}
 	if (*q != '=')
@@ -215,14 +244,15 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
 	argvlen += t + (sizeof("' --='")-1);
 	if (argvlen >= maxargvlen) {
 	    maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
-	    argstr = realloc(argstr, maxargvlen);
+	    argstr = xrealloc(argstr, maxargvlen);
+assert(argstr);	/* XXX can't happen */
 	    if (argstr == NULL) return POPT_ERROR_MALLOC;
 	}
-	strcat(argstr, " --");
-	strcat(argstr, p);
-	strcat(argstr, "=\"");
-	strcat(argstr, q);
-	strcat(argstr, "\"");
+	strcat(argstr, " --");	/* XXX stpcpy */
+	strcat(argstr, p);	/* XXX stpcpy */
+	strcat(argstr, "=\"");	/* XXX stpcpy */
+	strcat(argstr, q);	/* XXX stpcpy */
+	strcat(argstr, "\"");	/* XXX stpcpy */
     }
 
     *argstrp = argstr;
