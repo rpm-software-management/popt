@@ -1299,12 +1299,15 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
     case POPT_ARG_LONG:
     case POPT_ARG_INT:
     case POPT_ARG_SHORT:
+    case POPT_ARG_NONE:
     case POPT_ARG_VAL:
     {	unsigned argInfo = poptArgInfo(con, opt);
 	long long aNUM = 0;
 	const char * expr = LF_ISSET(CALCULATOR) ? opt->argDescrip : NULL;
 
-	if (poptArgType(opt) == POPT_ARG_VAL)
+	if (poptArgType(opt) == POPT_ARG_NONE)
+	    aNUM = 1LL;
+	else if (poptArgType(opt) == POPT_ARG_VAL)
 	    aNUM = (long long) opt->val;
 	else if ((rc = poptParseInteger(&aNUM, argInfo, con->os->nextArg)) != 0)
 	    break;
@@ -1335,12 +1338,14 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	    if (!rc)
 		arg.longp[0] = (long) aNUM;
 	    /*@innerbreak@*/ break;
-	case POPT_ARG_VAL:
 	case POPT_ARG_INT:
 	    if (aNUM < (long long)INT_MIN || aNUM > (long long)INT_MAX) {
 		rc = POPT_ERROR_OVERFLOW;
 		goto exit;
 	    }
+	    /*@fallthrough@*/
+	case POPT_ARG_NONE:
+	case POPT_ARG_VAL:
 	    /* XXX pointer alignment check? */
 	    aNUM = poptCalculator(arg.intp[0], argInfo, aNUM, expr, &rc);
 	    if (!rc)
@@ -1420,12 +1425,11 @@ int poptGetNextOpt(poptContext con)
 {
     const struct poptOption * opt = NULL;
     int done = 0;
-    int rc;
+    int rc = -1;
 
-    if (con == NULL) {
-	rc = -1;
+    if (con == NULL)
 	goto exit;
-    }
+
     while (!done) {
 	const char * origOptString = NULL;
 	poptCallbackType cb = NULL;
@@ -1588,6 +1592,12 @@ assert(opt != NULL);	/* XXX can't happen */
 
 	rc = 0;		/* assume success */
 	switch (poptArgType(opt)) {
+	case POPT_ARG_NONE:
+	case POPT_ARG_VAL:
+	    if (longArg
+	     || (con->os->nextCharArg && con->os->nextCharArg[0] == '='))
+		rc = POPT_ERROR_UNWANTEDARG;
+	    break;
 	default:
 	    con->os->nextArg = _free(con->os->nextArg);
 	    if (longArg) {
@@ -1607,11 +1617,10 @@ assert(opt != NULL);	/* XXX can't happen */
 		if (con->os->next == con->os->argc) {
 		    if (!F_ISSET(opt, OPTIONAL)) {
 			rc = POPT_ERROR_NOARG;
-			goto exit;
+			break;
 		    }
 		    con->os->nextArg = NULL;
 		} else {
-
 		    /* Avoid short args and alias expansions. */
 		    if (con->os == con->optionStack
 		     && F_ISSET(opt, STRIP) && canstrip)
@@ -1631,30 +1640,10 @@ assert(con->os->argv);	/* XXX can't happen */
 		    }
 		}
 	    }
-	    if (opt->arg)
-		rc = poptSaveArg(con, opt);
-	    break;
-	case POPT_ARG_VAL:
-	    if (longArg
-	     || (con->os->nextCharArg && con->os->nextCharArg[0] == '=')) {
-		rc = POPT_ERROR_UNWANTEDARG;
-		break;
-	    }
-	    if (opt->arg)
-		rc = poptSaveArg(con, opt);
-	    break;
-	case POPT_ARG_NONE:
-	    if (longArg
-	     || (con->os->nextCharArg && con->os->nextCharArg[0] == '=')) {
-		rc = POPT_ERROR_UNWANTEDARG;
-		break;
-	    }
-	    if (opt->arg)
-		rc = poptSaveInt((int *)opt->arg, poptArgInfo(con, opt), 1L);
 	    break;
 	}
 	longArg = NULL;
-	if (rc)
+	if (rc || (opt->arg && (rc = poptSaveArg(con, opt)) != 0))
 	    goto exit;
 
 	if (cb)
@@ -1668,8 +1657,10 @@ assert(con->os->argv);	/* XXX can't happen */
 			    sizeof(*con->finalArgv) * con->finalArgvAlloced);
 	}
 
-	if (con->finalArgv != NULL)
-	{   char *s = malloc((opt->longName ? strlen(opt->longName) : 0) + sizeof("--"));
+assert(con->finalArgv);
+	if (con->finalArgv) {
+	    size_t nb = (opt->longName ? strlen(opt->longName) : 0) + sizeof("--");
+	    char *s = xmalloc(nb);
 assert(s);	/* XXX can't happen */
 	    if (s != NULL) {
 		con->finalArgv[con->finalArgvCount++] = s;
@@ -1686,18 +1677,19 @@ assert(s);	/* XXX can't happen */
 		con->finalArgv[con->finalArgvCount++] = NULL;
 	}
 
-	if (opt->arg && poptArgType(opt) == POPT_ARG_NONE)
-	    /*@-ifempty@*/ ; /*@=ifempty@*/
-	else if (poptArgType(opt) == POPT_ARG_VAL)
-	    /*@-ifempty@*/ ; /*@=ifempty@*/
-	else if (poptArgType(opt) != POPT_ARG_NONE) {
-	    if (con->finalArgv != NULL && con->os->nextArg != NULL)
-	        con->finalArgv[con->finalArgvCount++] =
-			xstrdup(con->os->nextArg);
+	switch (poptArgType(opt)) {
+	case POPT_ARG_NONE:
+	case POPT_ARG_VAL:
+	    break;
+	default:
+	    if (con->os->nextArg)
+	        con->finalArgv[con->finalArgvCount++] = xstrdup(con->os->nextArg);
+	    break;
 	}
+
     }
-assert(opt);
-    rc = (opt ? opt->val : -1);	/* XXX can't happen */
+assert(opt);	/* XXX can't happen */
+    rc = (opt ? opt->val : -1);
 
 exit:
     return rc;
@@ -1731,11 +1723,10 @@ const char * poptPeekArg(poptContext con)
 
 const char ** poptGetArgs(poptContext con)
 {
-    if (con == NULL ||
-	con->leftovers == NULL || con->numLeftovers == con->nextLeftover)
+    if (!(con && con->leftovers && con->numLeftovers != con->nextLeftover))
 	return NULL;
 
-    /* some apps like [like RPM ;-) ] need this NULL terminated */
+    /* some apps like [like RPM ] need this NULL terminated */
     con->leftovers[con->numLeftovers] = NULL;
 
 /*@-nullret -nullstate @*/	/* FIX: typedef double indirection. */
