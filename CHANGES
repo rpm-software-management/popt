@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: allocate argv array as expected, not contiguously.
     - jbj: uncouple popt internals from poptSaveFoo(), use poptSaveArg().
     - jbj: return statck under/overflow errors.
     - jbj: fix: return POPT_ERROR_UNWANTEDARG with extraneous argument.
