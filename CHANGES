@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: uncouple popt internalls from poptSaveFoo, use poptSaveArg().
     - jbj: return statck under/overflow errors.
     - jbj: fix: return POPT_ERROR_UNWANTEDARG with extraneous argument.
     - jbj: internalize POPT_OPTION_DEPTH for dynamic re-config.
