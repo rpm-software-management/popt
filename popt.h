@@ -11,8 +11,6 @@
 
 #include <stdio.h>			/* for FILE * */
 
-#define POPT_OPTION_DEPTH	10
-
 /** \ingroup popt
  * \name Arg type identifiers
  */

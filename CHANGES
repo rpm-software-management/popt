@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: internalize POPT_OPTION_DEPTH for dynamic re-config.
     - jbj: use the RPN calculator with more-or-less dc(1) syntax.
     - jbj: wire up a multi-token RPN input stack using opt->argDescrip.
     - jbj: change error returns to assert failures for development.
