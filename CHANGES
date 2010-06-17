@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - jbj: return statck under/overflow errors.
+    - jbj: fix: return POPT_ERROR_UNWANTEDARG with extraneous argument.
     - jbj: internalize POPT_OPTION_DEPTH for dynamic re-config.
     - jbj: use the RPN calculator with more-or-less dc(1) syntax.
     - jbj: wire up a multi-token RPN input stack using opt->argDescrip.
@@ -10,6 +12,7 @@
     - test1: fix test 59, libtool/argv[0] conventions differ various platforms.
 
 1.15 -> 1.16:
+    - release popt-1.16.
     - add lv.po, update translations (Translation Project).
     - include xcode project files in distributed popt tar ball.
     - make distcheck is now squeaky clean.

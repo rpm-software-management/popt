@@ -100,6 +100,9 @@
 #define	POPT_ERROR_NULLARG	-20	/*!< opt->arg should not be NULL */
 #define	POPT_ERROR_MALLOC	-21	/*!< memory allocation failed */
 #define	POPT_ERROR_BADCONFIG	-22	/*!< config file failed sanity test */
+#define	POPT_ERROR_UNWANTEDARG	-23	/*!< option does not take an argument */
+#define	POPT_ERROR_STACKUNDERFLOW	-24	/*!< stack underflow */
+#define	POPT_ERROR_STACKOVERFLOW	-25	/*!< stack overflow */
 /*@}*/
 
 /** \ingroup popt
