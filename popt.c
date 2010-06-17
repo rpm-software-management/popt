@@ -1080,7 +1080,7 @@ assert(!xx && av);
 	if (len > 1) {
 	    char * end = NULL;
 	    if (ix >= ixmax) {
-		rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_OVERFLOW */
+		rc = POPT_ERROR_STACKOVERFLOW;
 		goto exit;
 	    }
 	    stk[ix++] = strtoll(arg, &end, 0);
@@ -1090,7 +1090,7 @@ assert(!xx && av);
 	    }
 	} else {
 	    if (ix-- < 2) {
-		rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
+		rc = POPT_ERROR_STACKUNDERFLOW;
 		goto exit;
 	    }
 	    switch (c) {
@@ -1134,7 +1134,7 @@ assert(!xx && av);
     }
 
     if (ix-- < 1) {
-	rc = POPT_ERROR_OVERFLOW;	/* XXX POPT_ERROR_UNDERFLOW */
+	rc = POPT_ERROR_STACKUNDERFLOW;
 	goto exit;
     }
     retval = stk[ix];
@@ -1438,6 +1438,7 @@ int poptGetNextOpt(poptContext con)
 		&& con->os > con->optionStack) {
 	    cleanOSE(con->os--);
 	}
+
 	if (!con->os->nextCharArg && con->os->next == con->os->argc) {
 	    invokeCallbacksPOST(con, con->options);
 
@@ -1584,30 +1585,17 @@ assert(opt != NULL);	/* XXX can't happen */
 	    rc = POPT_ERROR_BADOPT;
 	    goto exit;
 	}
-	if (opt->arg && poptArgType(opt) == POPT_ARG_NONE) {
-	    unsigned int argInfo = poptArgInfo(con, opt);
-	    rc = poptSaveInt((int *)opt->arg, argInfo, 1L);
-	    if (rc)
-		goto exit;
-	} else if (poptArgType(opt) == POPT_ARG_VAL) {
-	    if (opt->arg) {
-		unsigned int argInfo = poptArgInfo(con, opt);
-#ifdef	DYING
-		rc = poptSaveInt((int *)opt->arg, argInfo, (long)opt->val);
-#else
-		rc = poptSaveArg(con, opt);
-#endif
-		if (rc)
-		    goto exit;
-	    }
-	} else if (poptArgType(opt) != POPT_ARG_NONE) {
 
+	rc = 0;		/* assume success */
+	switch (poptArgType(opt)) {
+	default:
 	    con->os->nextArg = _free(con->os->nextArg);
 	    if (longArg) {
 		longArg = expandNextArg(con, longArg);
 		con->os->nextArg = (char *) longArg;
 	    } else if (con->os->nextCharArg) {
-		longArg = expandNextArg(con, con->os->nextCharArg);
+		int skip = (con->os->nextCharArg[0] == '=');
+		longArg = expandNextArg(con, con->os->nextCharArg + skip);
 		con->os->nextArg = (char *) longArg;
 		con->os->nextCharArg = NULL;
 	    } else {
@@ -1624,15 +1612,10 @@ assert(opt != NULL);	/* XXX can't happen */
 		    con->os->nextArg = NULL;
 		} else {
 
-		    /*
-		     * Make sure this isn't part of a short arg or the
-		     * result of an alias expansion.
-		     */
+		    /* Avoid short args and alias expansions. */
 		    if (con->os == con->optionStack
 		     && F_ISSET(opt, STRIP) && canstrip)
-		    {
 			poptStripArg(con, con->os->next);
-		    }
 		
 assert(con->os->argv);	/* XXX can't happen */
 		    if (con->os->argv != NULL) {
@@ -1648,12 +1631,31 @@ assert(con->os->argv);	/* XXX can't happen */
 		    }
 		}
 	    }
-	    longArg = NULL;
-
-	   /* Save the option argument through a (*opt->arg) pointer. */
-	    if (opt->arg != NULL && (rc = poptSaveArg(con, opt)) != 0)
-		goto exit;
+	    if (opt->arg)
+		rc = poptSaveArg(con, opt);
+	    break;
+	case POPT_ARG_VAL:
+	    if (longArg
+	     || (con->os->nextCharArg && con->os->nextCharArg[0] == '=')) {
+		rc = POPT_ERROR_UNWANTEDARG;
+		break;
+	    }
+	    if (opt->arg)
+		rc = poptSaveArg(con, opt);
+	    break;
+	case POPT_ARG_NONE:
+	    if (longArg
+	     || (con->os->nextCharArg && con->os->nextCharArg[0] == '=')) {
+		rc = POPT_ERROR_UNWANTEDARG;
+		break;
+	    }
+	    if (opt->arg)
+		rc = poptSaveInt((int *)opt->arg, poptArgInfo(con, opt), 1L);
+	    break;
 	}
+	longArg = NULL;
+	if (rc)
+	    goto exit;
 
 	if (cb)
 	    invokeCallbacksOPTION(con, con->options, opt, cbData, shorty);
@@ -1878,6 +1880,12 @@ const char * poptStrerror(const int error)
 	return POPT_("memory allocation failed");
       case POPT_ERROR_BADCONFIG:
 	return POPT_("config file failed sanity test");
+      case POPT_ERROR_UNWANTEDARG:
+	return POPT_("option does not take an argument");
+      case POPT_ERROR_STACKUNDERFLOW:
+	return POPT_("stack underflow");
+      case POPT_ERROR_STACKOVERFLOW:
+	return POPT_("stack overflow");
       case POPT_ERROR_ERRNO:
 	return strerror(errno);
       default:

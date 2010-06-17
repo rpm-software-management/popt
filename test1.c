@@ -124,7 +124,7 @@ static struct poptOption moreArgs[] = {
 static struct poptOption options[] = {
   { NULL, '\0', POPT_ARG_INCLUDE_TABLE, &moreCallbackArgs, 0,
 	"arg for cb2", NULL },
-  { "arg1", '\0', 0, &arg1, 0, "First argument with a really long"
+  { "arg1", '\0', POPT_ARG_NONE, &arg1, 0, "First argument with a really long"
 	    " description. After all, we have to test argument help"
 	    " wrapping somehow, right?", NULL },
   { "arg2", '2', POPT_ARG_STRING | POPT_ARGFLAG_SHOW_DEFAULT, &arg2, 0,
