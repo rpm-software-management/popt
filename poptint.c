@@ -2,6 +2,12 @@
 #include <stdarg.h>
 #include "poptint.h"
 
+#if defined(HAVE_ASSERT_H)
+#include <assert.h>
+#else
+#define assert(_x)
+#endif
+
 /* Any pair of 32 bit hashes can be used. lookup3.c generates pairs, will do. */
 #define _JLU3_jlu32lpair        1
 #define	jlu32lpair	poptJlu32lpair
@@ -96,13 +102,14 @@ strdup_locale_from_utf8 (/*@null@*/ char * istr)
 	char * shift_pin = NULL;
 	size_t db = strlen(istr);
 /*@owned@*/
-	char * dstr = malloc((db + 1) * sizeof(*dstr));
+	char * dstr = xmalloc((db + 1) * sizeof(*dstr));
 	char * pin = istr;
 	char * pout = dstr;
 	size_t ib = db;
 	size_t ob = db;
 	size_t err;
 
+assert(dstr);	/* XXX can't happen */
 	if (dstr == NULL)
 	    return NULL;
 	err = iconv(cd, NULL, NULL, NULL, NULL);
@@ -121,7 +128,8 @@ strdup_locale_from_utf8 (/*@null@*/ char * istr)
 	    case E2BIG:
 	    {	size_t used = (size_t)(pout - dstr);
 		db *= 2;
-		dstr = realloc(dstr, (db + 1) * sizeof(*dstr));
+		dstr = xrealloc(dstr, (db + 1) * sizeof(*dstr));
+assert(dstr);	/* XXX can't happen */
 		if (dstr != NULL) {
 		    pout = dstr + used;
 		    ob = db - used;
@@ -166,7 +174,7 @@ POPT_fprintf (FILE * stream, const char * format, ...)
      * to do with whether the final '\0' is counted (or not). The code
      * below already adds +1 for the (possibly already counted) trailing NUL.
      */
-    while ((b = realloc(b, nb+1)) != NULL) {
+    while ((b = xrealloc(b, nb+1)) != NULL) {
 	va_start(ap, format);
 	rc = vsnprintf(b, nb, format, ap);
 	va_end(ap);

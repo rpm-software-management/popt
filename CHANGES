@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: wire-up almost all *alloc's with assertions.
     - jbj: rename (to shorten) internal con->av[con->ac:con->nav] variables.
     - jbj: fix: rescusitate --enable-build-gcov AutoFu.
     - jbj: start rewriting/simplifying argv routines.
