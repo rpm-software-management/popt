@@ -738,7 +738,7 @@ assert(t);	/* XXX can't happen */
 
 	    tn += strlen(a);
 	    {   size_t pos = (size_t) (te - t);
-		t = realloc(t, tn);
+		t = xrealloc(t, tn);
 assert(t);	/* XXX can't happen */
 		if (t == NULL)
 		    return NULL;
@@ -755,7 +755,7 @@ assert(t);	/* XXX can't happen */
     /* If the new string is longer than needed, shorten. */
     if ((t + tn) > te) {
 /*@-usereleased@*/	/* XXX splint can't follow the pointers. */
-	if ((te = realloc(t, (size_t)(te - t))) == NULL)
+	if ((te = xrealloc(t, (size_t)(te - t))) == NULL)
 	    free(t);
 	t = te;
 /*@=usereleased@*/
@@ -1795,7 +1795,7 @@ int poptAddAlias(poptContext con, struct poptAlias alias,
 int poptAddItem(poptContext con, poptItem newItem, int flags)
 {
     poptItem * items, item;
-    int * nitems;
+    size_t * nitems;
 
     switch (flags) {
     case 1:
@@ -1811,7 +1811,8 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
 	/*@notreached@*/ break;
     }
 
-    *items = realloc((*items), ((*nitems) + 1) * sizeof(**items));
+    *items = xrealloc((*items), ((*nitems) + 1) * sizeof(**items));
+assert(*items);	/* XXX can't happen */
     if ((*items) == NULL)
 	return 1;
 
