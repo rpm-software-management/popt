@@ -11,4 +11,4 @@ esac
 find . -name "autom4te.cache" | xargs rm -rf 
 [ ! -d m4 ]        && mkdir m4
 [ ! -d build-aux ] && mkdir build-aux
-autopoint -f && autoreconf -vfi
+autoreconf -vfi
