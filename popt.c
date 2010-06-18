@@ -277,7 +277,6 @@ static int handleExec(/*@special@*/ poptContext con,
     poptItem item;
     int i;
 
-assert(con->execs && con->numExecs > 0);	/* XXX can't happen */
     if (con->execs == NULL || con->numExecs <= 0)
 	return 0;
 
@@ -390,7 +389,6 @@ static int handleAlias(/*@special@*/ poptContext con,
 	    return 0;
     }
 
-assert(con->aliases && con->numAliases > 0);	/* XXX can't happen */
     if (con->aliases == NULL || con->numAliases <= 0)
 	return 0;
 
