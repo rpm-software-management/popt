@@ -41,6 +41,7 @@ test-poptrc
 test1
 test2
 test3
+test?-test?.o
 *.gcda
 *.gcno
 *.la
@@ -48,4 +49,5 @@ test3
 *.lo
 *.swp
 popt.pc
+po
 popt-*.tar.gz
