@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - jbj: fix: rescusitate --enable-build-gcov AutoFu.
+    - jbj: start rewriting/simplifying argv routines.
     - jbj: allocate argv array as expected, not contiguously.
     - jbj: uncouple popt internals from poptSaveFoo(), use poptSaveArg().
     - jbj: return statck under/overflow errors.
