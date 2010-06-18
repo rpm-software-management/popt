@@ -1429,7 +1429,6 @@ int poptGetNextOpt(poptContext con)
 	goto exit;
 
     while (!done) {
-	const char * origOptString = NULL;
 	poptCallbackType cb = NULL;
 	const void * cbData = NULL;
 	const char * longArg = NULL;
@@ -1458,6 +1457,7 @@ int poptGetNextOpt(poptContext con)
 
 	/* Process next long option */
 	if (!con->os->nextCharArg) {
+	    const char * origOptString = NULL;
 	    const char * optString;
             size_t optStringLen;
 	    int thisopt;
@@ -1507,8 +1507,8 @@ assert(con->leftovers);		/* XXX can't happen */
 		con->restLeftover = 1;
 		continue;
 	    } else {
-		const char *oe;
 		unsigned int argInfo = 0;
+		const char *oe;
 
 		optString++;
 		if (*optString == '-')
@@ -1532,8 +1532,8 @@ assert(con->leftovers);		/* XXX can't happen */
 		if (handleExec(con, optString, '\0'))
 		    continue;
 
-		opt = findOption(con->options, optString, optStringLen, '\0', &cb, &cbData,
-				 argInfo);
+		opt = findOption(con->options, optString, optStringLen,
+				'\0', &cb, &cbData, argInfo);
 		if (!opt && !LF_ISSET(ONEDASH)) {
 		    rc = POPT_ERROR_BADOPT;
 		    goto exit;
@@ -1569,8 +1569,8 @@ assert(con->leftovers);		/* XXX can't happen */
 		continue;
 	    }
 
-	    opt = findOption(con->options, NULL, 0, *nextCharArg, &cb,
-			     &cbData, 0);
+	    opt = findOption(con->options, NULL, 0,
+				*nextCharArg, &cb, &cbData, 0);
 	    if (!opt) {
 		rc = POPT_ERROR_BADOPT;
 		goto exit;

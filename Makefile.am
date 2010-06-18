@@ -71,10 +71,8 @@ lint:
 	$(LINT) ${DEFS} ${INCLUDES} test1.c ${libpopt_la_SOURCES}
 endif HAVE_SPLINT 
 
-if HAVE_MCCABE
 mccabe:
 	$(MCCABE) $(libpopt_la_SOURCES) | sort -n -r | head -n 10
-endif HAVE_MCCABE
 
 if DOXYGEN_ENABLE
 doxygen: Doxyfile
