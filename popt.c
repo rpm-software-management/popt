@@ -953,6 +953,7 @@ int poptSaveBits(poptBits * bitsp,
 
     /* Parse comma separated attributes. */
     te = tbuf = xstrdup(s);
+    assert(te); 
     while ((t = te) != NULL && *t) {
 	while (*te != '\0' && *te != ',')
 	    te++;
@@ -1213,7 +1214,7 @@ int poptSaveShort(/*@null@*/ short * arg, unsigned int argInfo, long aLong)
 /**
  * Return argInfo field, handling POPT_ARGFLAG_TOGGLE overrides.
  * @param con		context
- * @param opt           option
+ * @param *opt           option
  * @return		argInfo
  */
 static unsigned int poptArgInfo(poptContext con, const struct poptOption * opt)
