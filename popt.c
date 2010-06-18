@@ -208,9 +208,8 @@ assert(con);	/* XXX can't happen */
     con->execs = NULL;
     con->numExecs = 0;
 
-    con->finalArgvAlloced = argc * 2;
-    con->finalArgv =
-	xcalloc( (size_t)con->finalArgvAlloced, sizeof(*con->finalArgv) );
+    con->nav = argc * 2;
+    con->av = xcalloc( (size_t)con->nav, sizeof(*con->av) );
     con->execAbsolute = 1;
     con->arg_strip = NULL;
 
@@ -254,16 +253,16 @@ void poptResetContext(poptContext con)
     con->restLeftover = 0;
     con->doExec = NULL;
 
-    if (con->finalArgv != NULL)
-    for (i = 0; i < con->finalArgvCount; i++) {
+    if (con->av != NULL)
+    for (i = 0; i < con->ac; i++) {
 /*@-unqualifiedtrans@*/		/* FIX: typedef double indirection. */
-	con->finalArgv[i] = _free(con->finalArgv[i]);
+	con->av[i] = _free(con->av[i]);
 /*@=unqualifiedtrans@*/
     }
 
-    con->finalArgvCount = 0;
+    con->ac = 0;
     con->arg_strip = PBM_FREE(con->arg_strip);
-/*@-nullstate@*/	/* FIX: con->finalArgv != NULL */
+/*@-nullstate@*/	/* FIX: con->av != NULL */
     return;
 /*@=nullstate@*/
 }
@@ -272,7 +271,7 @@ void poptResetContext(poptContext con)
 static int handleExec(/*@special@*/ poptContext con,
 		/*@null@*/ const char * longName, char shortName)
 	/*@uses con->execs, con->numExecs, con->flags, con->doExec,
-		con->finalArgv, con->finalArgvAlloced, con->finalArgvCount @*/
+		con->av, con->nav, con->ac @*/
 	/*@modifies con @*/
 {
     poptItem item;
@@ -304,19 +303,18 @@ assert(con->execs && con->numExecs > 0);	/* XXX can't happen */
 
     /* We already have an exec to do; remember this option for next
        time 'round */
-    if ((con->finalArgvCount + 1) >= (con->finalArgvAlloced)) {
-	con->finalArgvAlloced += 10;
-	con->finalArgv = realloc(con->finalArgv,
-			sizeof(*con->finalArgv) * con->finalArgvAlloced);
+    if ((con->ac + 1) >= (con->nav)) {
+	con->nav += 10;
+	con->av = xrealloc(con->av, sizeof(*con->av) * con->nav);
     }
 
-    i = con->finalArgvCount++;
-assert(con->finalArgv);		/* XXX can't happen */
-    if (con->finalArgv != NULL)
+    i = con->ac++;
+assert(con->av);		/* XXX can't happen */
+    if (con->av != NULL)
     {	char *s  = malloc((longName ? strlen(longName) : 0) + sizeof("--"));
 assert(s);	/* XXX can't happen */
 	if (s != NULL) {
-	    con->finalArgv[i] = s;
+	    con->av[i] = s;
 	    *s++ = '-';
 	    if (longName)
 		s = stpcpy( stpcpy(s, "-"), longName);
@@ -324,7 +322,7 @@ assert(s);	/* XXX can't happen */
 		*s++ = shortName;
 	    *s = '\0';
 	} else
-	    con->finalArgv[i] = NULL;
+	    con->av[i] = NULL;
     }
 
     return 1;
@@ -515,8 +513,9 @@ assert(item);	/*XXX can't happen*/
 	(!con->execAbsolute && strchr(item->argv[0], '/')))
 	    return POPT_ERROR_NOARG;
 
-    argv = malloc(sizeof(*argv) *
-			(6 + item->argc + con->numLeftovers + con->finalArgvCount));
+    argv = xmalloc(sizeof(*argv) *
+			(6 + item->argc + con->numLeftovers + con->ac));
+assert(argv);	/* XXX can't happen */
     if (argv == NULL) return POPT_ERROR_MALLOC;
 
     if (!strchr(item->argv[0], '/') && con->execPath != NULL) {
@@ -537,10 +536,9 @@ assert(item);	/*XXX can't happen*/
 	argc += (item->argc - 1);
     }
 
-    if (con->finalArgv != NULL && con->finalArgvCount > 0) {
-	memcpy(argv + argc, con->finalArgv,
-		sizeof(*argv) * con->finalArgvCount);
-	argc += con->finalArgvCount;
+    if (con->av != NULL && con->ac > 0) {
+	memcpy(argv + argc, con->av, sizeof(*argv) * con->ac);
+	argc += con->ac;
     }
 
     if (con->leftovers != NULL && con->numLeftovers > 0) {
@@ -1448,7 +1446,7 @@ int poptGetNextOpt(poptContext con)
 
 	    if (con->maincall) {
 		/*@-noeffectuncon @*/
-		(void) (*con->maincall) (con->finalArgvCount, con->finalArgv);
+		(void) (*con->maincall) (con->ac, con->av);
 		/*@=noeffectuncon @*/
 		rc = -1;
 		goto exit;
@@ -1651,19 +1649,19 @@ assert(con->os->argv);	/* XXX can't happen */
 	else if (opt->val && (poptArgType(opt) != POPT_ARG_VAL))
 	    done = 1;
 
-	if ((con->finalArgvCount + 2) >= (con->finalArgvAlloced)) {
-	    con->finalArgvAlloced += 10;
-	    con->finalArgv = realloc(con->finalArgv,
-			    sizeof(*con->finalArgv) * con->finalArgvAlloced);
+	if ((con->ac + 2) >= (con->nav)) {
+	    con->nav += 10;
+	    con->av = xrealloc(con->av,
+			    sizeof(*con->av) * con->nav);
 	}
 
-assert(con->finalArgv);
-	if (con->finalArgv) {
+assert(con->av);
+	if (con->av) {
 	    size_t nb = (opt->longName ? strlen(opt->longName) : 0) + sizeof("--");
 	    char *s = xmalloc(nb);
 assert(s);	/* XXX can't happen */
 	    if (s != NULL) {
-		con->finalArgv[con->finalArgvCount++] = s;
+		con->av[con->ac++] = s;
 		*s++ = '-';
 		if (opt->longName) {
 		    if (!F_ISSET(opt, ONEDASH))
@@ -1674,7 +1672,7 @@ assert(s);	/* XXX can't happen */
 		    *s = '\0';
 		}
 	    } else
-		con->finalArgv[con->finalArgvCount++] = NULL;
+		con->av[con->ac++] = NULL;
 	}
 
 	switch (poptArgType(opt)) {
@@ -1683,7 +1681,7 @@ assert(s);	/* XXX can't happen */
 	    break;
 	default:
 	    if (con->os->nextArg)
-	        con->finalArgv[con->finalArgvCount++] = xstrdup(con->os->nextArg);
+	        con->av[con->ac++] = xstrdup(con->os->nextArg);
 	    break;
 	}
 
@@ -1767,7 +1765,7 @@ poptContext poptFreeContext(poptContext con)
     con->numExecs = 0;
 
     con->leftovers = _free(con->leftovers);
-    con->finalArgv = _free(con->finalArgv);
+    con->av = _free(con->av);
     con->appName = _free(con->appName);
     con->otherHelp = _free(con->otherHelp);
     con->execPath = _free(con->execPath);

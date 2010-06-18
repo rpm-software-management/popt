@@ -155,11 +155,11 @@ struct poptContext_s {
     unsigned int flags;
 /*@owned@*/ /*@null@*/
     poptItem execs;
-    int numExecs;
+    size_t numExecs;
 /*@only@*/ /*@null@*/
-    poptArgv finalArgv;
-    int finalArgvCount;
-    int finalArgvAlloced;
+    poptArgv av;
+    size_t ac;
+    size_t nav;
 /*@null@*/
     int (*maincall) (int argc, const char **argv);
 /*@dependent@*/ /*@null@*/
