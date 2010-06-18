@@ -311,7 +311,7 @@ assert(con->execs && con->numExecs > 0);	/* XXX can't happen */
     i = con->ac++;
 assert(con->av);		/* XXX can't happen */
     if (con->av != NULL)
-    {	char *s  = malloc((longName ? strlen(longName) : 0) + sizeof("--"));
+    {	char *s  = xmalloc((longName ? strlen(longName) : 0) + sizeof("--"));
 assert(s);	/* XXX can't happen */
 	if (s != NULL) {
 	    con->av[i] = s;
@@ -423,7 +423,7 @@ assert(con->aliases && con->numAliases > 0);	/* XXX can't happen */
 	int ac = con->os->currAlias->argc;
 	/* Append --foo=bar arg to alias argv array (if present). */ 
 	if (longName && nextArg != NULL && *nextArg != '\0') {
-	    av = malloc((ac + 1 + 1) * sizeof(*av));
+	    av = xmalloc((ac + 1 + 1) * sizeof(*av));
 assert(av);	/* XXX won't happen. */
 	    if (av != NULL) {
 		for (i = 0; i < ac; i++) {
@@ -468,7 +468,7 @@ assert(argv0);	/* XXX can't happen */
 	return NULL;
 
     /* The return buffer in t is big enough for any path. */
-    if ((t = malloc(strlen(path) + strlen(argv0) + sizeof("/"))) != NULL)
+    if ((t = xmalloc(strlen(path) + strlen(argv0) + sizeof("/"))) != NULL)
     for (s = path; s && *s; s = se) {
 
 	/* Snip PATH element into [s,se). */
@@ -519,7 +519,7 @@ assert(argv);	/* XXX can't happen */
     if (argv == NULL) return POPT_ERROR_MALLOC;
 
     if (!strchr(item->argv[0], '/') && con->execPath != NULL) {
-	char *s = malloc(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
+	char *s = xmalloc(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
 	if (s)
 	    (void)stpcpy(stpcpy(stpcpy(s, con->execPath), "/"), item->argv[0]);
 
@@ -717,7 +717,7 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
     size_t tn = strlen(s) + 1;
     char c;
 
-    te = t = malloc(tn);
+    te = t = xmalloc(tn);
 assert(t);	/* XXX can't happen */
     if (t == NULL) return NULL;	
     *t = '\0';

@@ -22,6 +22,12 @@
 #endif
 #include "poptint.h"
 
+#if defined(HAVE_ASSERT_H)
+#include <assert.h>
+#else
+#define assert(_x)
+#endif
+
 /*@access poptContext@*/
 
 /**
@@ -232,10 +238,11 @@ singleOptionDefaultValue(size_t lineLength,
 	/*@*/
 {
     const char * defstr = D_(translation_domain, "default");
-    char * le = malloc(4*lineLength + 1);
+    char * le = xmalloc(4*lineLength + 1);
     char * l = le;
 
-    if (le == NULL) return NULL;	/* XXX can't happen */
+assert(le);	/* XXX can't happen */
+    if (le == NULL) return NULL;
     *le = '\0';
     *le++ = '(';
     le = stpcpy(le, defstr);
@@ -329,8 +336,9 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     if (F_ISSET(opt, TOGGLE)) nb += sizeof("[no]") - 1;
     if (argDescrip)	nb += strlen(argDescrip);
 
-    left = malloc(nb);
-    if (left == NULL) return;	/* XXX can't happen */
+    left = xmalloc(nb);
+assert(left);	/* XXX can't happen */
+    if (left == NULL) return;
     left[0] = '\0';
     left[maxLeftCol] = '\0';
 
@@ -375,8 +383,9 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	if (F_ISSET(opt, SHOW_DEFAULT)) {
 	    defs = singleOptionDefaultValue(lineLength, opt, translation_domain);
 	    if (defs) {
-		char * t = malloc((help ? strlen(help) : 0) +
+		char * t = xmalloc((help ? strlen(help) : 0) +
 				strlen(defs) + sizeof(" "));
+assert(t);	/* XXX can't happen */
 		if (t) {
 		    char * te = t;
 		    if (help)
@@ -664,9 +673,10 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 
 void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ UNUSED(int flags))
 {
-    columns_t columns = calloc((size_t)1, sizeof(*columns));
+    columns_t columns = xcalloc((size_t)1, sizeof(*columns));
     int xx;
 
+assert(columns);	/* XXX can't happen */
     (void) showHelpIntro(con, fp);
     if (con->otherHelp)
 	xx = POPT_fprintf(fp, " %s\n", con->otherHelp);
@@ -855,6 +865,7 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
     char * s = (str != NULL ? str : calloc((size_t)1, nb));
     size_t len = (size_t)0;
 
+assert(s);	/* XXX can't happen */
     if (s == NULL)
 	return 0;
 
@@ -885,17 +896,19 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 
 void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ UNUSED(int flags))
 {
-    columns_t columns = calloc((size_t)1, sizeof(*columns));
+    columns_t columns = xcalloc((size_t)1, sizeof(*columns));
     struct poptDone_s done_buf;
     poptDone done = &done_buf;
 
+assert(columns);	/* XXX can't happen */
     memset(done, 0, sizeof(*done));
     done->nopts = 0;
     done->maxopts = 64;
   if (columns) {
     columns->cur = done->maxopts * sizeof(*done->opts);
     columns->max = maxColumnWidth(fp);
-    done->opts = calloc((size_t)1, columns->cur);
+    done->opts = xcalloc((size_t)1, columns->cur);
+assert(done->opts);	/* XXX can't happen */
     /*@-keeptrans@*/
     if (done->opts != NULL)
 	done->opts[done->nopts++] = (const void *) con->options;
