@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: remove llvm warning from s/int/size_t/.
     - jbj: bump version to 1.17.DEVEL.
     - jbj: tests: test-cases for UNWANTEDARGS (Wayne Davison<wayned@samba.org>).
     - jbj: wire-up almost all *alloc's with assertions.
