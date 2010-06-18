@@ -62,13 +62,12 @@ AC_DEFINE_UNQUOTED([POPT_SYSCONFDIR], ["$popt_sysconfdir"], [Full path to defaul
 # Check for lcov  Makefile conditional
 HAVE_LCOV=no
 AC_ARG_ENABLE(build-gcov,
-   AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov]), 
-   BUILD_GCOV_ENABLE=$enableval,
-   [if test ".$BUILD_GCOV_ENABLE" = .yes; then
+    AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov]), [dnl
+    if test ".$enableval" = .yes; then
         if test ".`$CC --version 2>&1 | grep 'GCC'`" != .; then
             dnl # GNU GCC (usually "gcc")
             CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
-            AC_CHECK_PROG(HAVE_LCOV,lcov,"yes","no" )
+	    AC_CHECK_PROG(HAVE_LCOV,lcov,"yes","no" )
         fi
     fi
 ])

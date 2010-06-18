@@ -69,7 +69,6 @@ sources:
 if HAVE_SPLINT
 lint:
 	$(LINT) ${DEFS} ${INCLUDES} test1.c ${libpopt_la_SOURCES}
-
 endif HAVE_SPLINT 
 
 if HAVE_MCCABE
@@ -78,15 +77,12 @@ mccabe:
 endif HAVE_MCCABE
 
 if DOXYGEN_ENABLE
-
 doxygen: Doxyfile
 	rm -rf doxygen
 	mkdir -p doxygen
 	doxygen
-
 endif DOXYGEN_ENABLE
 
-if HAVE_LCOV
 # run lcov from scratch, always
 lcov-reset:
 	make lcov-run
@@ -111,5 +107,3 @@ lcov-report:
 	rm lcov/remove
 	mv lcov/lcov.cleaned.info lcov/lcov.info
 	genhtml -t "$(PACKAGE_STRING)" -o lcov lcov/lcov.info
-
-endif HAVE_LCOV
