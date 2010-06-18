@@ -7,7 +7,7 @@ run() {
 
     echo Running test $name.
 
-    result=`HOME=$builddir $builddir/$prog $*`
+    result=`HOME=$builddir $builddir/$prog $* 2>&1`
     if [ "$answer" != "$result" ]; then
 	echo "Test \"$prog $*\" failed with: \"$result\" != \"$answer\" "
 	exit 2
@@ -114,7 +114,10 @@ run test1 "test1 - 56" "arg1: 0 arg2: (none) aFlag: 0xface" --nobitclr
 
 run test1 "test1 - 57" "arg1: 0 arg2: (none) aBits: foo,baz" --bits foo,bar,baz,!bar
 
-run test1 "test1 - 58" "\
+run test1 "test1 - 58" "test1: bad argument --arg1=illegal: option does not take an argument" --arg1=illegal
+run test1 "test1 - 59" "test1: bad argument --=illegal: option does not take an argument" --=illegal
+
+run test1 "test1 - 60" "\
 Usage: test1 [-I?] [-c|--cb2=STRING] [--arg1] [-2|--arg2=ARG]
         [-3|--arg3=ANARG] [-onedash] [--optional=STRING] [--val]
         [-i|--int=INT] [-s|--short=SHORT] [-l|--long=LONG]
@@ -123,7 +126,7 @@ Usage: test1 [-I?] [-c|--cb2=STRING] [--arg1] [-2|--arg2=ARG]
         [--randlonglong=LONGLONG] [--argv=STRING] [--bitset] [--bitclr]
         [--bitxor] [--nstr=STRING] [--lstr=STRING] [-I|--inc]
         [-c|--cb=STRING] [--longopt] [-?|--help] [--usage] [--simple=ARG]" --usage
-run test1 "test1 - 59" "\
+run test1 "test1 - 61" "\
 Usage: test1 [OPTION...]
       --arg1                      First argument with a really long
                                   description. After all, we have to test
