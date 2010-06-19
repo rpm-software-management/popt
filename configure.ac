@@ -22,6 +22,8 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
 
+ALL_LINGUAS="cs da de eo es fi fr ga gl hu id is it ja ko lv nb nl pl pt ro ru sk sl sv th tr uk vi wa zh_TW zh_CN"
+
 CFLAGS="$CFLAGS -D_GNU_SOURCE -D_REENTRANT"
 
 # Checks for programs.
