@@ -107,6 +107,7 @@ AC_TYPE_UID_T
 AC_TYPE_UINT16_T
 AC_TYPE_UINT32_T
 AC_TYPE_UINT8_T
+AC_TYPE_INT64_T
 
 # Checks for library functions.
 AC_CHECK_FUNC(setreuid, [], [
