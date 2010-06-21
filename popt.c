@@ -1796,27 +1796,29 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
 {
     poptItem * items, item;
     size_t * nitems;
+    int    * naliases; 
 
     switch (flags) {
     case 1:
 	items = &con->execs;
 	nitems = &con->numExecs;
+        *items = xrealloc((*items), ((*nitems) + 1) * sizeof(**items));
 	break;
     case 0:
 	items = &con->aliases;
-	nitems = &con->numAliases;
+	naliases = &con->numAliases;
+        *items = xrealloc((*items), ((*naliases) + 1) * sizeof(**items));
 	break;
     default:
 	return 1;
 	/*@notreached@*/ break;
     }
 
-    *items = xrealloc((*items), ((*nitems) + 1) * sizeof(**items));
 assert(*items);	/* XXX can't happen */
     if ((*items) == NULL)
 	return 1;
 
-    item = (*items) + (*nitems);
+    item =(flags ? (*items) + (*nitems) : (*items) + (*naliases) );
 
     item->option.longName =
 	(newItem->option.longName ? xstrdup(newItem->option.longName) : NULL);
@@ -1831,7 +1833,7 @@ assert(*items);	/* XXX can't happen */
     item->argc = newItem->argc;
     item->argv = newItem->argv;
 
-    (*nitems)++;
+    (flags ? (*nitems)++ : (*naliases)++ );
 
     return 0;
 }
