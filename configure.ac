@@ -1,19 +1,22 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.63)
+AC_PREREQ([2.63])
 AC_INIT([popt],[1.17.DEVEL],[popt-devel@rpm5.org])
+
 AC_CONFIG_SRCDIR([lookup3.c])
 AC_CONFIG_HEADERS([config.h])
-AC_CANONICAL_TARGET
-AM_MAINTAINER_MODE
+AC_CONFIG_MACRO_DIR([m4])
+
 # Must come before AM_INIT_AUTOMAKE.
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CONFIG_MACRO_DIR([m4])
+AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+#
 AM_GNU_GETTEXT_VERSION([0.17])
 AM_GNU_GETTEXT([external])
 AM_ICONV
+AM_MAINTAINER_MODE
 # Library code modified:                              REVISION++
 # Interfaces changed/added/removed:   CURRENT++       REVISION=0
 # Interfaces added:                             AGE++
