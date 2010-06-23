@@ -56,7 +56,7 @@ fi
 if test "$DOXYGEN_ENABLE" = "no"; then
 	DOXYGEN=NO_DOXYGEN
 fi
-AM_CONDITIONAL([DOXYGEN_ENABLE], test x$DOXYGEN != xNO_DOXYGEN )
+AM_CONDITIONAL([DOXYGEN_ENABLE], [test x$DOXYGEN != xNO_DOXYGEN])
 
 # Define for popt_sysconfig 
 popt_sysconfdir="${sysconfdir}"
@@ -65,33 +65,35 @@ AC_DEFINE_UNQUOTED([POPT_SYSCONFDIR], ["$popt_sysconfdir"], [Full path to defaul
 
 # Check for gcov support.
 # Check for lcov  Makefile conditional
-HAVE_LCOV=no
 AC_ARG_ENABLE(build-gcov,
-    AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov]), [dnl
-    if test ".$enableval" = .yes; then
-        if test ".`$CC --version 2>&1 | grep 'GCC'`" != .; then
-            dnl # GNU GCC (usually "gcc")
+    AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov @<:@default=no@:>@.  ]), 
+    [enable_build_gcov=${enableval}],
+    [enable_build_gcov=no])
+
+AS_IF([test "x$enable_build_gcov" != xno],
+       [
+        if test "x$GCC" != x ; then
             CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
 	    AC_CHECK_PROG(HAVE_LCOV,lcov,"yes","no" )
         fi
-    fi
-])
-AM_CONDITIONAL([HAVE_LCOV], test x$LCOV != xno )
+       ])
+
+AM_CONDITIONAL([HAVE_LCOV], [test x$LCOV != xno])
 
 # Check for api-sanity-autotest.pl Makefile conditional support for check-local
 AC_CHECK_PROG(HAVE_API_SANITY_AUTOTEST,api-sanity-autotest.pl,"yes","no" )
 
-AM_CONDITIONAL([HAVE_API_SANITY_AUTOTEST], test x$HAVE_API_SANITY_AUTOTEST != xno )
+AM_CONDITIONAL([HAVE_API_SANITY_AUTOTEST], [test x$HAVE_API_SANITY_AUTOTEST != xno])
 
 # Check for splint Makefile conditional support 
 AC_CHECK_PROG(HAVE_SPLINT,splint,"yes","no" )
 
-AM_CONDITIONAL([HAVE_SPLINT], test x$HAVE_SPLINT != xno )
+AM_CONDITIONAL([HAVE_SPLINT],[test x$HAVE_SPLINT != xno])
 
 # Check for pmccabe Makefile conditional support 
 AC_CHECK_PROG(HAVE_MCCABE,pmccabe,"yes","no" )
 
-AM_CONDITIONAL([HAVE_MCCABE], test x$HAVE_MCCABE != xno )
+AM_CONDITIONAL([HAVE_MCCABE],[test x$HAVE_MCCABE != xno])
 
 # Checks for libraries.
 
@@ -113,7 +115,7 @@ AC_TYPE_INT64_T
 AC_CHECK_FUNC(setreuid, [], [
     AC_CHECK_LIB(ucb, setreuid, [if echo $LIBS | grep -- -lucb >/dev/null ;then :; else LIBS="$LIBS -lc -lucb" USEUCB=y;fi])
 ])
-AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf srandom)
+AC_CHECK_FUNCS([getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf srandom])
 # drop AC_FUNC_MALLOC, REALLOC and STRTOD
 AC_CHECK_FUNCS([malloc realloc strtod memset nl_langinfo stpcpy strchr strerror strrchr])
 
@@ -134,7 +136,7 @@ AC_ARG_ENABLE([ld-version-script],
                               (default is system dependent)]),
               [have_ld_version_script=$enableval],
               [ : ] )
-AM_CONDITIONAL(HAVE_LD_VERSION_SCRIPT, test "$have_ld_version_script" = "yes")
+AM_CONDITIONAL([HAVE_LD_VERSION_SCRIPT],[test "$have_ld_version_script" = "yes"])
 
 # Autofu for pkgconfig 
 # Define a (hope) portable Libs pkgconfig directive that 
