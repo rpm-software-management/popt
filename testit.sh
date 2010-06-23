@@ -1,4 +1,18 @@
 #!/bin/sh
+###############################################
+# malloc voo-doo
+###############################################
+# see http://lists.gnupg.org/pipermail/gcrypt-devel/2010-June/001605.html
+export MALLOC_CHECK_=3
+# http://udrepper.livejournal.com/11429.html
+export MALLOC_PERTURB_=`expr \( $RANDOM % 255 \) + 1 `
+#
+if [ -z "${MALLOC_PERTURB_}" ]  # XXX: some shell don't have RANDOM ?
+then
+	r=`ps -ef | cksum | cut -f1 -d" " 2>/dev/null`
+	[ -z "${r}" ] && r=1234567890
+        export MALLOC_PERTURB_=`expr \( $r % 255 \) + 1 `
+fi
 
 run() {
     prog=$1; shift
