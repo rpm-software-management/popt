@@ -3,9 +3,6 @@
 ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I. -I$(top_srcdir)
 
-LINT =		splint
-MCCABE =	pmccabe
-
 EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
 	footer_no_timestamp.html libpopt.vers \
 	$(TESTS) test-poptrc\
@@ -50,37 +47,36 @@ endif
 
 dist_man_MANS = popt.3
 
-BUILT_SOURCES = popt.pc # popt.lcd
+BUILT_SOURCES = popt.pc 
 
 distclean-local:
-	rm -rf .ccache
+	rm -rf .ccache 
 
-.PHONY:	updatepo
-updatepo:
-	rsync -Lrtvz  translationproject.org::tp/latest/popt/  po
-
-popt.lcd: Makefile.am ${libpopt_la_SOURCES} ${include_HEADERS} ${noinst_HEADERS}
-	lclint -dump $@ ${libpopt_la_SOURCES}
-
-.PHONY:	sources
-sources:
-	@echo $(libpopt_la_SOURCES:%=popt/%)
+clean-local:
+	rm -rf doxygen *.gcda *.gcno lcov-result
 
 if HAVE_SPLINT
 lint:
-	$(LINT) ${DEFS} ${INCLUDES} test1.c ${libpopt_la_SOURCES}
-endif HAVE_SPLINT 
+	$(SPLINT) ${DEFS} ${INCLUDES} test1.c ${libpopt_la_SOURCES}
 
+popt.lcd: Makefile.am ${libpopt_la_SOURCES} ${include_HEADERS} ${noinst_HEADERS}
+	$(SPLINT) -dump $@ ${libpopt_la_SOURCES}
+endif 
+
+if HAVE_MCCABE
 mccabe:
 	$(MCCABE) $(libpopt_la_SOURCES) | sort -n -r | head -n 10
+
+endif
 
 if DOXYGEN_ENABLE
 doxygen: Doxyfile
 	rm -rf doxygen
 	mkdir -p doxygen
-	doxygen
-endif DOXYGEN_ENABLE
+	$(DOXYGEN)
+endif 
 
+if HAVE_LCOV
 # run lcov from scratch, always
 lcov-reset:
 	make lcov-run
@@ -98,10 +94,24 @@ lcov-run:
 
 # generate report based on current coverage data
 lcov-report:
-	mkdir lcov
-	lcov --directory . --capture --output-file lcov/lcov.info
-	lcov -l lcov/lcov.info | grep -v "`cd $(top_srcdir) && pwd`" | cut -d: -f1 > lcov/remove
-	lcov -r lcov/lcov.info `cat lcov/remove` > lcov/lcov.cleaned.info
-	rm lcov/remove
-	mv lcov/lcov.cleaned.info lcov/lcov.info
-	genhtml -t "$(PACKAGE_STRING)" -o lcov lcov/lcov.info
+	rm -rf lcov-result
+	mkdir lcov-result
+	$(LCOV) --directory . --capture --output-file lcov-result/lcov.info
+	$(LCOV) -l lcov-result/lcov.info | grep -v "`cd $(top_srcdir) && pwd`" | cut -d: -f1 > lcov-result/remove
+	$(LCOV) -r lcov-result/lcov.info `cat lcov-result/remove` > lcov-result/lcov.cleaned.info
+	rm lcov-result/remove
+	mv lcov-result/lcov.cleaned.info lcov-result/lcov.info
+	genhtml -t "$(PACKAGE_STRING)" -o lcov lcov-result/lcov.info
+endif
+
+.PHONY:	updatepo
+updatepo:
+	rsync -Lrtvz  translationproject.org::tp/latest/popt/  po
+	po_dir=./po
+	LANG=C
+	ls "$po_dir"/*.po 2>/dev/null | sed 's|.*/||; s|\.po$||' > "$po_dir/LINGUAS"
+
+.PHONY:	sources
+sources:
+	@echo $(libpopt_la_SOURCES:%=popt/%)
+

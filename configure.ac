@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.63])
+AC_PREREQ(2.63)
 AC_INIT([popt],[1.17.DEVEL],[popt-devel@rpm5.org])
 
 AC_CONFIG_SRCDIR([lookup3.c])
@@ -13,10 +13,15 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 #
+# Checks for programs.
+# Set common system defines for POSIX extensions, such as GNU_SOURCE
+# Must be called before any macros that run the compiler (like AC-PROG-LIBTOOL)
+AC_USE_SYSTEM_EXTENSIONS
 AM_GNU_GETTEXT_VERSION([0.17])
 AM_GNU_GETTEXT([external])
 AM_ICONV
 AM_MAINTAINER_MODE
+# Libtool library interface versions 
 # Library code modified:                              REVISION++
 # Interfaces changed/added/removed:   CURRENT++       REVISION=0
 # Interfaces added:                             AGE++
@@ -25,38 +30,36 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
 
-ALL_LINGUAS="cs da de eo es fi fr ga gl hu id is it ja ko lv nb nl pl pt ro ru sk sl sv th tr uk vi wa zh_TW zh_CN"
 
-CFLAGS="$CFLAGS -D_GNU_SOURCE -D_REENTRANT"
+CFLAGS="$CFLAGS -D_REENTRANT"
 
-# Checks for programs.
 AC_PROG_CC
 AC_PROG_CC_STDC
 AC_SYS_LARGEFILE
 AC_PROG_MAKE_SET
 AC_PROG_INSTALL
-AC_PROG_LIBTOOL
+LT_INIT
 
-#  Checks for doxygen.
+
+
+#  Checks for doxygen support. 
 AC_PATH_PROG(DOXYGEN, doxygen, NO_DOXYGEN)
-
 AC_ARG_ENABLE(doxygen,
-    AS_HELP_STRING([--enable-doxygen],[enable doxygen API docs generation]),
-    DOXYGEN_ENABLE=$enableval,
-   [if test "$DOXYGEN" != NO_DOXYGEN; then
-        DOXYGEN_ENABLE=yes
-    else
-        DOXYGEN_ENABLE=no
-    fi]
-)
-
-if test "$DOXYGEN_ENABLE" = "yes" && test "$DOXYGEN" = "NO_DOXYGEN"; then
-	AC_MSG_WARN([You have asked doxygen docs generation but doxygen isn't in the PATH])
-fi
-if test "$DOXYGEN_ENABLE" = "no"; then
-	DOXYGEN=NO_DOXYGEN
-fi
+    AS_HELP_STRING([--disable-doxygen],[disable doxygen API docs generation ]),
+    [DOXYGEN_ENABLE=$enableval,
+    if test x$DOXYGEN_ENABLE != xno 
+    then 
+        if test "$DOXYGEN" != NO_DOXYGEN 
+        then
+           DOXYGEN_ENABLE=yes
+        else
+           DOXYGEN_ENABLE=no
+	   AC_MSG_WARN([You have asked doxygen docs generation but doxygen isn't in the PATH])
+        fi
+    fi],
+    [DOXYGEN_ENABLE=yes])
 AM_CONDITIONAL([DOXYGEN_ENABLE], [test x$DOXYGEN != xNO_DOXYGEN])
+AM_COND_IF([DOXYGEN_ENABLE],[AC_SUBST([DOXYGEN],"$DOXYGEN")])
 
 # Define for popt_sysconfig 
 popt_sysconfdir="${sysconfdir}"
@@ -65,40 +68,40 @@ AC_DEFINE_UNQUOTED([POPT_SYSCONFDIR], ["$popt_sysconfdir"], [Full path to defaul
 
 # Check for gcov support.
 # Check for lcov  Makefile conditional
+AC_PATH_PROG(LCOV,lcov, NO_LCOV)
 AC_ARG_ENABLE(build-gcov,
-    AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov @<:@default=no@:>@.  ]), 
+    AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov @<:@default=no@:>@.]), 
     [enable_build_gcov=${enableval}],
     [enable_build_gcov=no])
 
 AS_IF([test "x$enable_build_gcov" != xno],
        [
-        if test "x$GCC" != x ; then
+        if  test "x$GCC" != x
+        then
             CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
-	    AC_CHECK_PROG(HAVE_LCOV,lcov,"yes","no" )
-        fi
+        else
+            LCOV=NO_LCOV
+        fi 
        ])
-
-AM_CONDITIONAL([HAVE_LCOV], [test x$LCOV != xno])
+AM_CONDITIONAL([HAVE_LCOV], [test x$LCOV != xNO_LCOV])
+AM_COND_IF([HAVE_LCOV],[AC_SUBST([LCOV],"$LCOV")])
 
 # Check for api-sanity-autotest.pl Makefile conditional support for check-local
-AC_CHECK_PROG(HAVE_API_SANITY_AUTOTEST,api-sanity-autotest.pl,"yes","no" )
-
-AM_CONDITIONAL([HAVE_API_SANITY_AUTOTEST], [test x$HAVE_API_SANITY_AUTOTEST != xno])
-
+AC_PATH_PROG(API_SANITY_AUTOTEST,api-sanity-autotest.pl,NO_API_SANITY_AUTOTEST)
+AM_CONDITIONAL([HAVE_API_SANITY_AUTOTEST], [test "x$API_SANITY_AUTOTEST" != xNO_API_SANITY_AUTOTEST])
+AM_COND_IF([HAVE_API_SANITY_AUTOTEST],[AC_SUBST([API_SANITY_AUTOTEST],"$API_SANITY_AUTOTEST")])
 # Check for splint Makefile conditional support 
-AC_CHECK_PROG(HAVE_SPLINT,splint,"yes","no" )
-
-AM_CONDITIONAL([HAVE_SPLINT],[test x$HAVE_SPLINT != xno])
-
-# Check for pmccabe Makefile conditional support 
-AC_CHECK_PROG(HAVE_MCCABE,pmccabe,"yes","no" )
-
-AM_CONDITIONAL([HAVE_MCCABE],[test x$HAVE_MCCABE != xno])
-
+AC_PATH_PROG(SPLINT,splint,NO_SPLINT)
+AM_CONDITIONAL([HAVE_SPLINT],[test "x$SPLINT" != xNO_SPLINT])
+AM_COND_IF([HAVE_SPLINT],[AC_SUBST([SPLINT],"$SPLINT")])
+# Check for mccabe makefile conditional support
+AC_PATH_PROG(MCCABE,pmccabe,NO_MCCABE)
+AM_CONDITIONAL([HAVE_MCCABE],[test "x$MCCABE" != xNO_MCCABE])
+AM_COND_IF([HAVE_MCCABE],[AC_SUBST([MCCABE],"$MCCABE")])
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([assert.h fcntl.h float.h langinfo.h libintl.h limits.h sys/ioctl.h wchar.h])
+AC_CHECK_HEADERS([assert.h fcntl.h float.h langinfo.h libintl.h limits.h sys/ioctl.h wchar.h alloca.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
