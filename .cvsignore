@@ -49,5 +49,4 @@ test?-test?.o
 *.lo
 *.swp
 popt.pc
-po
 popt-*.tar.gz

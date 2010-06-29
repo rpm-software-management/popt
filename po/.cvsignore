@@ -15,3 +15,4 @@ cat-id-tbl.c
 *.gmo
 *.sed
 *.sin
+LINGUAS
