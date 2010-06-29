@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - devzero2000: some minor fix to autofu and also a minor portability problem on AIX
+      with the native compiler
     - devzero2000: add malloc vodo to testit.sh
     - devzero2000: define build-gcov disabled by default
     - devzero2000: fix:  make check work again

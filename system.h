@@ -17,6 +17,20 @@ extern __const __int32_t *__ctype_toupper;
 
 #include <ctype.h>
 
+#ifdef __GNUC__
+# undef alloca
+# define alloca __builtin_alloca
+#else
+# ifdef HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifndef _AIX
+/* AIX alloca decl has to be the first thing in the file, bletch! */
+char *alloca ();
+#  endif
+# endif
+#endif
+
 /* XXX isspace(3) has i18n encoding signednesss issues on Solaris. */
 #define	_isspaceptr(_chp)	isspace((int)(*(unsigned char *)(_chp)))
 
