@@ -270,8 +270,17 @@ int main(int argc, const char ** argv)
     optCon = poptGetContext("test1", argc, argv, options, 0);
 /*@=temptrans@*/
     (void) poptReadConfigFile(optCon, "./test-poptrc");
+#ifdef HAVE_STDLIB_H
+    char * testpoptrc;
+    testpoptrc = getenv ("testpoptrc");
+    if (testpoptrc != NULL ) 
+    (void) poptReadConfigFile(optCon, testpoptrc);
+    else
+    printf("something go wrong\n");
+#else
 /* XXXX: make distcheck succed : test1 is in popt-<version>/_build */
     (void) poptReadConfigFile(optCon, "../../test-poptrc");
+#endif
     (void) poptReadDefaultConfig(optCon, 1);
 
     poptSetExecPath(optCon, ".", 1);

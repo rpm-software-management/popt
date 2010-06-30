@@ -26,7 +26,7 @@ test1_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 test2_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 tdict_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 
-TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) PATH=.:../src:$$PATH \
+TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) testpoptrc="$(top_srcdir)/test-poptrc" PATH=.:../src:$$PATH \
        $(SHELL) 
 TESTS = $(top_builddir)/testit.sh
 
