@@ -1,4 +1,4 @@
-TDIRS =	descriptors_storage header_compile_errors test_results tests
+TDIRS =	descriptors_storage header_compile_errors test_results tests logs
 
 EXTRA_DIST = types
 
