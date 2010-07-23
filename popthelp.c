@@ -530,11 +530,11 @@ static size_t maxArgWidth(const struct poptOption * opt,
 	/*@*/
 {
     size_t max = 0;
-    size_t len = 0;
     const char * argDescrip;
     
     if (opt != NULL)
     while (opt->longName || opt->shortName || opt->arg) {
+	size_t len = 0;
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
 	    if (opt->arg)	/* XXX program error */
 	        len = maxArgWidth(opt->arg, translation_domain);
@@ -584,15 +584,16 @@ static void itemHelp(FILE * fp,
 	/*@modifies fp, fileSystem @*/
 {
     poptItem item;
-    int i;
 
-    if (items != NULL)
+    if (items != NULL) {
+    int i;
     for (i = 0, item = items; i < nitems; i++, item++) {
 	const struct poptOption * opt;
 	opt = &item->option;
 	if ((opt->longName || opt->shortName) && !F_ISSET(opt, DOC_HIDDEN))
 	    singleOptionHelp(fp, columns, opt, translation_domain);
     }
+   }
 }
 
 /**
@@ -612,7 +613,6 @@ static void singleTableHelp(poptContext con, FILE * fp,
 {
     const struct poptOption * opt;
     const char *sub_transdom;
-    int xx;
 
     if (table == poptAliasOptions) {
 	itemHelp(fp, con->aliases, con->numAliases, columns, NULL);
@@ -637,8 +637,10 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	/* If no popt aliases/execs, skip poptAliasOption processing. */
 	if (opt->arg == poptAliasOptions && !(con->numAliases || con->numExecs))
 	    continue;
-	if (opt->descrip)
-	    xx = POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
+	if (opt->descrip) {
+            int xx;
+	    xx = POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip)); /* XXX: unchecked */
+        }
 
 	singleTableHelp(con, fp, opt->arg, columns, sub_transdom);
     }
@@ -770,17 +772,18 @@ static size_t itemUsage(FILE * fp, columns_t columns,
 	/*@globals fileSystem @*/
 	/*@modifies fp, columns->cur, fileSystem @*/
 {
-    int i;
 
-    if (item != NULL)
-    for (i = 0; i < nitems; i++, item++) {
+    if (item != NULL) {
+    int i;
+	for (i = 0; i < nitems; i++, item++) {
 	const struct poptOption * opt;
 	opt = &item->option;
-        if (poptArgType(opt) == POPT_ARG_INTL_DOMAIN) {
-	    translation_domain = (const char *)opt->arg;
+	if (poptArgType(opt) == POPT_ARG_INTL_DOMAIN) {
+	translation_domain = (const char *)opt->arg;
 	} else
-	if ((opt->longName || opt->shortName) && !F_ISSET(opt, DOC_HIDDEN)) {
-	    columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
+		if ((opt->longName || opt->shortName) && !F_ISSET(opt, DOC_HIDDEN)) {
+  		 columns->cur = singleOptionUsage(fp, columns, opt, translation_domain);
+		}
 	}
     }
 
