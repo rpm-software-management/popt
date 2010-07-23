@@ -40,6 +40,33 @@ AC_PROG_MAKE_SET
 AC_PROG_INSTALL
 LT_INIT
 
+# Turn gcc warning
+
+AC_ARG_ENABLE([gcc-warnings],
+  [AS_HELP_STRING([--enable-gcc-warnings],
+                  [turn on GCC warnings (for developers)@<:@default=no@:>@])],
+  [case $enableval in
+     yes|no) ;;
+     *)      AC_MSG_ERROR([bad value $enableval for gcc-warnings option]) ;;
+   esac
+   popt_gcc_warnings=$enableval],
+  [popt_gcc_warnings=no]
+)
+
+if test "$popt_gcc_warnings" = yes; then
+  # Add/Delete as needed
+  popt_CFLAGS_ADD([-Wall], [POPT_CFLAGS])
+  popt_CFLAGS_ADD([-pedantic], [POPT_CFLAGS])
+  popt_CFLAGS_ADD([-Wextra], [POPT_CFLAGS])
+  popt_CFLAGS_ADD([-Wformat-y2k], [POPT_CFLAGS])
+  popt_CFLAGS_ADD([-fdiagnostics-show-option],[POPT_CFLAGS])
+  popt_CFLAGS_ADD([-funit-at-a-time],[POPT_CFLAGS])
+  popt_CFLAGS_ADD([-fstrict-aliasing],[POPT_CFLAGS])
+  popt_CFLAGS_ADD([-Wstrict-overflow],[POPT_CFLAGS])
+  popt_CFLAGS_ADD([-fstrict-overflow],[POPT_CFLAGS])
+  popt_CFLAGS_ADD([-Wpointer-arith],[POPT_CFLAGS])
+  AC_SUBST([POPT_CFLAGS])
+fi
 
 
 #  Checks for doxygen support. 

@@ -2,6 +2,7 @@
 
 ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I. -I$(top_srcdir)
+AM_CFLAGS = $(POPT_CFLAGS)
 
 EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
 	footer_no_timestamp.html libpopt.vers \
@@ -22,6 +23,9 @@ check_SCRIPTS	= $(TESTS)
 test1_CPPFLAGS  = -I $(top_builddir) 
 test2_CPPFLAGS  = -I $(top_builddir) 
 tdict_CPPFLAGS  = -I $(top_builddir) 
+test1_CFLAGS  = $(AM_CFLAGS) 
+test2_CFLAGS  = $(AM_CFLAGS) 
+tdict_CFLAGS  = $(AM_CFLAGS) 
 test1_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 test2_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 tdict_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
