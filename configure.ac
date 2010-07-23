@@ -31,7 +31,6 @@ AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
 
 
-CFLAGS="$CFLAGS -D_REENTRANT"
 
 AC_PROG_CC
 AC_PROG_CC_STDC
@@ -53,8 +52,8 @@ AC_ARG_ENABLE([gcc-warnings],
   [popt_gcc_warnings=no]
 )
 
-if test "$popt_gcc_warnings" = yes; then
-  # Add/Delete as needed
+AS_IF([test "x$popt_gcc_warnings" = xyes],
+  [ # Add/Delete as needed
   popt_CFLAGS_ADD([-Wall], [POPT_CFLAGS])
   popt_CFLAGS_ADD([-pedantic], [POPT_CFLAGS])
   popt_CFLAGS_ADD([-Wextra], [POPT_CFLAGS])
@@ -65,19 +64,22 @@ if test "$popt_gcc_warnings" = yes; then
   popt_CFLAGS_ADD([-Wstrict-overflow],[POPT_CFLAGS])
   popt_CFLAGS_ADD([-fstrict-overflow],[POPT_CFLAGS])
   popt_CFLAGS_ADD([-Wpointer-arith],[POPT_CFLAGS])
-  AC_SUBST([POPT_CFLAGS])
-fi
+  ])
 
-# build RPM instrumented for extra optimization/security (GCC only)
+
+# build popt instrumented for extra optimization/security (GCC only)
 # -fno-delete-null-pointer as the kernel does http://patchwork.kernel.org/patch/36060/
-if test ".`$CC --version 2>&1 | grep 'GCC'`" != .; then
-dnl # GNU GCC (usually "gcc")
- for c in -fno-delete-null-pointer-checks -D_FORTIFY_SOURCE=2 -fstack-protector -fexceptions
- do
-  popt_CFLAGS_ADD([$c], [POPT_CFLAGS])
- done
- AC_SUBST([POPT_CFLAGS])
-fi
+# GNU GCC (usually "gcc")
+AS_IF([test "x$GCC" != x],
+ [ for c in -fno-delete-null-pointer-checks -D_FORTIFY_SOURCE=2 -fstack-protector -fexceptions
+   do
+  	popt_CFLAGS_ADD([$c], [POPT_CFLAGS])
+   done
+ ])
+# Misc CFLAGS 
+popt_CFLAGS_ADD([-D_REENTRANT], [POPT_CFLAGS])
+# Finally put an AC_SUBST for all the CFLAGS above
+AC_SUBST([POPT_CFLAGS])
 
 #  Checks for doxygen support. 
 AC_PATH_PROG(DOXYGEN, doxygen, NO_DOXYGEN)
@@ -115,7 +117,8 @@ AS_IF([test "x$enable_build_gcov" != xno],
        [
         if  test "x$GCC" != x
         then
-            CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
+            popt_CFLAGS_ADD([-fprofile-arcs -ftest-coverage], [POPT_CFLAGS])
+            AC_SUBST([POPT_CFLAGS])
         else
             LCOV=NO_LCOV
         fi 
