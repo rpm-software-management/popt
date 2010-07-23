@@ -68,6 +68,16 @@ if test "$popt_gcc_warnings" = yes; then
   AC_SUBST([POPT_CFLAGS])
 fi
 
+# build RPM instrumented for extra optimization/security (GCC only)
+# -fno-delete-null-pointer as the kernel does http://patchwork.kernel.org/patch/36060/
+if test ".`$CC --version 2>&1 | grep 'GCC'`" != .; then
+dnl # GNU GCC (usually "gcc")
+ for c in -fno-delete-null-pointer-checks -D_FORTIFY_SOURCE=2 -fstack-protector -fexceptions
+ do
+  popt_CFLAGS_ADD([$c], [POPT_CFLAGS])
+ done
+ AC_SUBST([POPT_CFLAGS])
+fi
 
 #  Checks for doxygen support. 
 AC_PATH_PROG(DOXYGEN, doxygen, NO_DOXYGEN)
