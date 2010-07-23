@@ -3,6 +3,7 @@
 ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I. -I$(top_srcdir)
 AM_CFLAGS = $(POPT_CFLAGS)
+AM_LDFLAGS = $(POPT_LDFLAGS)
 
 EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
 	footer_no_timestamp.html libpopt.vers \
@@ -40,7 +41,7 @@ usrlibdir = $(libdir)
 usrlib_LTLIBRARIES = libpopt.la
 
 libpopt_la_SOURCES = popt.c poptparse.c poptconfig.c popthelp.c poptint.c
-libpopt_la_LDFLAGS = -no-undefined @LTLIBINTL@ @LTLIBICONV@
+libpopt_la_LDFLAGS = -no-undefined @LTLIBINTL@ @LTLIBICONV@ $(AM_LDFLAGS)
 
 pkgconfigdir = $(prefix)/lib/pkgconfig
 pkgconfig_DATA = popt.pc

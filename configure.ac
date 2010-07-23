@@ -67,6 +67,28 @@ AS_IF([test "x$popt_gcc_warnings" = xyes],
   ])
 
 
+# build popt instrumented for -fPIE (GCC only)
+AC_ARG_ENABLE([build-pie],
+  [AS_HELP_STRING([--enable-build-pie],
+                  [build POPT as Position Independent Executable (PIE) (@<:@default=yes@:>@ with GCC only)])],
+  [case $enableval in
+     yes|no) ;;
+     *)      AC_MSG_ERROR([bad value $enableval for build-pie option]) ;;
+   esac
+   popt_gcc_pie=$enableval],
+  [popt_gcc_pie=yes]
+)
+AS_IF([test "x$popt_gcc_pie" = xyes],
+      [
+        AS_IF([test "x$GCC" != x],
+              [ popt_CFLAGS_ADD([-fpie], [POPT_CFLAGS])
+                popt_LDFLAGS_ADD([-pie], [POPT_LDFLAGS])
+              ],
+              [ AC_MSG_WARN([--enable-build-pie requires GCC])]
+        )
+      ])
+AC_SUBST([POPT_LDFLAGS])
+
 # build popt instrumented for extra optimization/security (GCC only)
 # -fno-delete-null-pointer as the kernel does http://patchwork.kernel.org/patch/36060/
 # GNU GCC (usually "gcc")
