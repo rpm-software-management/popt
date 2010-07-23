@@ -236,8 +236,6 @@ static void cleanOSE(/*@special@*/ struct optionStackEntry *os)
 
 void poptResetContext(poptContext con)
 {
-    int i;
-
     if (con == NULL) return;
     while (con->os > con->optionStack) {
 	cleanOSE(con->os--);
@@ -253,11 +251,13 @@ void poptResetContext(poptContext con)
     con->restLeftover = 0;
     con->doExec = NULL;
 
-    if (con->av != NULL)
-    for (i = 0; i < con->ac; i++) {
+    if (con->av != NULL) {
+    int i;
+     for (i = 0; i < con->ac; i++) {
 /*@-unqualifiedtrans@*/		/* FIX: typedef double indirection. */
-	con->av[i] = _free(con->av[i]);
+ 	con->av[i] = _free(con->av[i]);
 /*@=unqualifiedtrans@*/
+     }
     }
 
     con->ac = 0;
@@ -1019,7 +1019,6 @@ const char * s;
 const char ** av = NULL;
 int ac = 0;
 int xx;
-int i;
 
     stk[ix++] = arg0;
 
@@ -1066,7 +1065,8 @@ s = (expr ? expr : t);
 xx = poptParseArgvString(s, &ac, &av);	/* XXX split on CSV character set. */
 assert(!xx && av);
 
-    if (av)
+    if (av) {
+    int i;
     for (i = 0; av[i] != NULL; i++) {
 	const char * arg = av[i];
 	size_t len = strlen(arg);
@@ -1129,6 +1129,7 @@ assert(!xx && av);
 	    }
 	}
     }
+   }
 
     if (ix-- < 1) {
 	rc = POPT_ERROR_STACKUNDERFLOW;
@@ -1458,7 +1459,6 @@ int poptGetNextOpt(poptContext con)
 	if (!con->os->nextCharArg) {
 	    const char * origOptString = NULL;
 	    const char * optString;
-            size_t optStringLen;
 	    int thisopt;
 
 /*@-sizeoftype@*/
@@ -1508,6 +1508,7 @@ assert(con->leftovers);		/* XXX can't happen */
 	    } else {
 		unsigned int argInfo = 0;
 		const char *oe;
+                size_t optStringLen;
 
 		optString++;
 		if (*optString == '-')
