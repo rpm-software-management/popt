@@ -211,10 +211,8 @@ int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
 exit:
     if (rc != 0) {
 /*@-usedef@*/
-	if (b)
-	    free(b);
+	b=_free(b);
 /*@=usedef@*/
-	b = NULL;
 	nb = 0;
     }
     if (bp)
@@ -383,8 +381,7 @@ static int poptConfigLine(poptContext con, char * line)
 /*@=nullstate@*/
 exit:
     rc = 0;	/* XXX for now, always return success */
-    if (b)
-	free(b);
+    b=_free(b);
     return rc;
 }
 /*@=compmempass@*/
@@ -433,12 +430,11 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	}
     }
 
-    free(t);
+    t=_free(t);
     rc = 0;
 
 exit:
-    if (b)
-	free(b);
+     b=_free(b);
     return rc;
 }
 
@@ -481,16 +477,13 @@ int poptReadConfigFiles(poptContext con, const char * paths)
 	    xx = poptReadConfigFile(con, fn);
 	    if (xx && rc == 0)
 		rc = xx;
-	    free((void *)av[i]);
-	    av[i] = NULL;
+	    av[i]=_free((void *)av[i]);
 	}
-	free(av);
-	av = NULL;
+	av=_free(av);
     }
 
 /*@-usedef@*/
-    if (buf)
-	free(buf);
+    buf=_free(buf);
 /*@=usedef@*/
 
     return rc;
@@ -530,11 +523,9 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 			continue;
 		}
 		rc = poptReadConfigFile(con, fn);
-		free((void *)av[i]);
-		av[i] = NULL;
+		av[i]=_free((void *)av[i]);
 	    }
-	    free(av);
-	    av = NULL;
+	    av=_free(av);
 	}
     }
     if (rc) goto exit;
@@ -545,7 +536,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 	if (fn != NULL) {
 	    (void) stpcpy(stpcpy(fn, home), "/.popt");
 	    rc = poptReadConfigFile(con, fn);
-	    free(fn);
+	    fn=_free(fn);
 	} else
 	    rc = POPT_ERROR_ERRNO;
 	if (rc) goto exit;
