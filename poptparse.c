@@ -19,10 +19,11 @@
 static const char ** poptArgvFree(/*@only@*/ const char ** av)
 {
 #if !defined(SUPPORT_CONTIGUOUS_ARGV)
+    if (av) {
     int i;
-    if (av)
     for (i = 0; av[i]; i++)
 	av[i] = _free(av[i]);
+    }
 #endif
     av = _free(av);
     return NULL;
