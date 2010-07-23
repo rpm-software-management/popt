@@ -393,7 +393,6 @@ int poptReadConfigFile(poptContext con, const char * fn)
     const char *se;
     char *t, *te;
     int rc;
-    int xx;
 
     if ((rc = poptReadFile(fn, &b, &nb, POPT_READFILE_TRIMNEWLINES)) != 0)
 	return (errno == ENOENT ? 0 : rc);
@@ -411,8 +410,10 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    *te = '\0';
 	    te = t;
 	    while (*te && _isspaceptr(te)) te++;
-	    if (*te && *te != '#')
-		xx = poptConfigLine(con, te);
+	    if (*te && *te != '#') {
+                int xx;
+		xx = poptConfigLine(con, te); /* XXX: unchecked */
+            }
 	    /*@switchbreak@*/ break;
 /*@-usedef@*/	/* XXX *se may be uninitialized */
 	  case '\\':
@@ -511,9 +512,9 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
     if (!stat("/etc/popt.d", &sb) && S_ISDIR(sb.st_mode)) {
 	const char ** av = NULL;
 	int ac = 0;
-	int i;
 
 	if ((rc = poptGlob(con, "/etc/popt.d/*", &ac, &av)) == 0) {
+	    int i;
 	    for (i = 0; rc == 0 && i < ac; i++) {
 		const char * fn = av[i];
 		if (fn == NULL || strstr(fn, ".rpmnew") || strstr(fn, ".rpmsave"))
