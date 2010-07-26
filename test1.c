@@ -273,6 +273,11 @@ int main(int argc, const char ** argv)
     testpoptrc = getenv ("testpoptrc");
     if (testpoptrc != NULL ) 
     (void) poptReadConfigFile(optCon, testpoptrc);
+    else {
+    (void) poptReadConfigFile(optCon, "./test-poptrc");
+/* XXXX: make distcheck succed : test1 is in popt-<version>/_build */
+    (void) poptReadConfigFile(optCon, "../../test-poptrc");
+    }
 #else
     (void) poptReadConfigFile(optCon, "./test-poptrc");
 /* XXXX: make distcheck succed : test1 is in popt-<version>/_build */
