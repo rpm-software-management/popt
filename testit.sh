@@ -57,7 +57,6 @@ srcdir=$builddir
 cd ${srcdir}
 test1=${builddir}/test1
 echo "Running tests in `pwd`"
-[ x${VALGRIND_ENVIRONMENT} != x ] &&  echo "Under Valgrind with parameter $VALGRIND_ENVIRONMENT"
 
 #make -q testcases
 
