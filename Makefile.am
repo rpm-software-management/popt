@@ -32,7 +32,10 @@ test2_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 tdict_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 
 TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) testpoptrc="$(top_srcdir)/test-poptrc" PATH=.:../src:$$PATH \
-       $(SHELL) 
+                        $(VALGRIND_ENVIRONMENT) \
+			$(SHELL)
+
+
 TESTS = $(top_builddir)/testit.sh
 
 include_HEADERS = popt.h
@@ -58,7 +61,7 @@ distclean-local:
 	rm -rf .ccache 
 
 clean-local:
-	rm -rf doxygen *.gcda *.gcno lcov-result
+	rm -rf doxygen *.gcda *.gcno lcov-result popt-valgrind-result
 
 if HAVE_SPLINT
 lint:

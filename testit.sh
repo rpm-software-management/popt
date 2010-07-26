@@ -57,6 +57,7 @@ srcdir=$builddir
 cd ${srcdir}
 test1=${builddir}/test1
 echo "Running tests in `pwd`"
+[ x${VALGRIND_ENVIRONMENT} != x ] &&  echo "Under Valgrind with parameter $VALGRIND_ENVIRONMENT"
 
 #make -q testcases
 
@@ -190,7 +191,11 @@ Help options:
 
 #run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
 #run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer
-#run_diff test3 "test3 - 53" test3-data/03.input test3-data/03.answer
+#run_diff test3 "test3 - 53" test3-data/03.input test3-data/03.answe
 
-echo ""
+# If called from VALGRIND_ENVIRONMENT 
+[ -s $builddir/popt-valgrind-result ] && { echo "Some test fail under Valgrind. Check $builddir/popt-valgrind-result" && exit 1 ; }
+
+rm -f $builddir/popt-valgrind-result 
+
 echo "Passed."

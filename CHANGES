@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: added --enable-valgrind autoconf option
     - Fixed VPATH building with arbitrary directory structure
     - devzero2000: some minor fix to autofu and also a minor portability problem on AIX
       with the native compiler

@@ -103,6 +103,34 @@ popt_CFLAGS_ADD([-D_REENTRANT], [POPT_CFLAGS])
 # Finally put an AC_SUBST for all the CFLAGS above
 AC_SUBST([POPT_CFLAGS])
 
+# Support for running test cases using valgrind:
+
+use_valgrind=false
+VALGRIND_ENVIRONMENT=""
+AC_ARG_ENABLE(valgrind,
+[  --enable-valgrind       Use valgrind when running unit tests. ],
+[ use_valgrind=true ])
+
+AS_IF([ test x"$use_valgrind" = x"true" ], 
+      [
+        AC_CHECK_PROG(HAVE_VALGRIND, valgrind, yes, no)
+        AS_IF([ test x$HAVE_VALGRIND = no ],
+              [
+                AC_MSG_ERROR([You have asked for Valgrind support but Valgrind not found in PATH. ])
+              ],
+              [ 
+              AS_IF([ test x$enable_shared = xyes ],
+                    [ 
+              		VALGRIND_ENVIRONMENT="libtool --mode=execute "
+                    ]
+              )
+              VALGRIND_ENVIRONMENT="$VALGRIND_ENVIRONMENT valgrind -q --error-exitcode=3 --leak-check=yes --leak-check=full --log-file=popt-valgrind-result --suppressions=\$(srcdir)/popt-vg.supp "
+              AC_SUBST([VALGRIND_ENVIRONMENT])
+              ])
+      ])
+     
+AM_CONDITIONAL([USE_VALGRIND], [test x$use_valgrind != no])
+
 #  Checks for doxygen support. 
 AC_PATH_PROG(DOXYGEN, doxygen, NO_DOXYGEN)
 AC_ARG_ENABLE(doxygen,
