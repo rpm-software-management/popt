@@ -124,7 +124,7 @@ AS_IF([ test x"$use_valgrind" = x"true" ],
               		VALGRIND_ENVIRONMENT="libtool --mode=execute "
                     ]
               )
-              VALGRIND_ENVIRONMENT="$VALGRIND_ENVIRONMENT valgrind -q --error-exitcode=3 --leak-check=yes --leak-check=full --log-file=popt-valgrind-result --suppressions=\$(srcdir)/popt-vg.supp "
+              VALGRIND_ENVIRONMENT="$VALGRIND_ENVIRONMENT valgrind -q --error-exitcode=3 --leak-check=yes --leak-check=full --log-file=\$(builddir)/popt-valgrind-result --suppressions=\$(srcdir)/popt-vg.supp "
               AC_SUBST([VALGRIND_ENVIRONMENT])
               ])
       ])
