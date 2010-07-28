@@ -46,7 +46,7 @@ usrlib_LTLIBRARIES = libpopt.la
 libpopt_la_SOURCES = popt.c poptparse.c poptconfig.c popthelp.c poptint.c
 libpopt_la_LDFLAGS = -no-undefined @LTLIBINTL@ @LTLIBICONV@ $(AM_LDFLAGS)
 
-pkgconfigdir = $(prefix)/lib/pkgconfig
+pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = popt.pc
 
 if HAVE_LD_VERSION_SCRIPT
