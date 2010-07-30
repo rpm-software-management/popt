@@ -1,7 +1,6 @@
 config.guess
 config.rpath
 config.sub
-CVS
 depcomp
 install-sh
 ltmain.sh
