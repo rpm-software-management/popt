@@ -36,7 +36,7 @@ TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) testpoptrc="$(top_srcdir)/test-popt
 			$(SHELL)
 
 
-TESTS = $(top_builddir)/testit.sh
+TESTS = testit.sh
 
 include_HEADERS = popt.h
 
