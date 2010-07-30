@@ -11,7 +11,6 @@ aclocal.m4
 autom4te*
 build
 build-aux
-build-aux
 clang
 config.cache
 config.guess
@@ -51,5 +50,4 @@ test?-test?.o
 *.swp
 popt.pc
 popt-*.tar.gz
-.git
-.gitignore
+.cvsignore
