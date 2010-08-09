@@ -145,7 +145,7 @@ assert(dstr);	/* XXX can't happen */
 	}
 	(void) iconv_close(cd);
 	*pout = '\0';
-	ostr = xstrdup(dstr);
+	ostr = xstrdup(dstr ? dstr : istr);
 	free(dstr);
     } else
 	ostr = xstrdup(istr);
