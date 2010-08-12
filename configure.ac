@@ -148,7 +148,6 @@ AC_ARG_ENABLE(doxygen,
     fi],
     [DOXYGEN_ENABLE=yes])
 AM_CONDITIONAL([DOXYGEN_ENABLE], [test x$DOXYGEN != xNO_DOXYGEN])
-AM_COND_IF([DOXYGEN_ENABLE],[AC_SUBST([DOXYGEN],"$DOXYGEN")])
 
 # Define for popt_sysconfig 
 popt_sysconfdir="${sysconfdir}"
@@ -174,20 +173,16 @@ AS_IF([test "x$enable_build_gcov" != xno],
         fi 
        ])
 AM_CONDITIONAL([HAVE_LCOV], [test x$LCOV != xNO_LCOV])
-AM_COND_IF([HAVE_LCOV],[AC_SUBST([LCOV],"$LCOV")])
 
 # Check for api-sanity-autotest.pl Makefile conditional support for check-local
 AC_PATH_PROG(API_SANITY_AUTOTEST,api-sanity-autotest.pl,NO_API_SANITY_AUTOTEST)
 AM_CONDITIONAL([HAVE_API_SANITY_AUTOTEST], [test "x$API_SANITY_AUTOTEST" != xNO_API_SANITY_AUTOTEST])
-AM_COND_IF([HAVE_API_SANITY_AUTOTEST],[AC_SUBST([API_SANITY_AUTOTEST],"$API_SANITY_AUTOTEST")])
 # Check for splint Makefile conditional support 
 AC_PATH_PROG(SPLINT,splint,NO_SPLINT)
 AM_CONDITIONAL([HAVE_SPLINT],[test "x$SPLINT" != xNO_SPLINT])
-AM_COND_IF([HAVE_SPLINT],[AC_SUBST([SPLINT],"$SPLINT")])
 # Check for mccabe makefile conditional support
 AC_PATH_PROG(MCCABE,pmccabe,NO_MCCABE)
 AM_CONDITIONAL([HAVE_MCCABE],[test "x$MCCABE" != xNO_MCCABE])
-AM_COND_IF([HAVE_MCCABE],[AC_SUBST([MCCABE],"$MCCABE")])
 # Checks for libraries.
 
 # Checks for header files.
