@@ -10,7 +10,7 @@ AC_CONFIG_MACRO_DIR([m4])
 
 # Must come before AM_INIT_AUTOMAKE.
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CANONICAL_TARGET
+AC_CANONICAL_HOST
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 #
 # Checks for programs.
