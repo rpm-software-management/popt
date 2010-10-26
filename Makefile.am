@@ -112,12 +112,11 @@ lcov-report:
 	genhtml -t "$(PACKAGE_STRING)" -o lcov lcov-result/lcov.info
 endif
 
+po_dir=./po
 .PHONY:	updatepo
 updatepo:
 	rsync -Lrtvz  translationproject.org::tp/latest/popt/  po
-	po_dir=./po
-	LANG=C
-	ls "$po_dir"/*.po 2>/dev/null | sed 's|.*/||; s|\.po$||' > "$po_dir/LINGUAS"
+	ls "$(po_dir)"/*.po 2>/dev/null | LANG=C sed 's|.*/||; s|\.po$$||' > "$(po_dir)/LINGUAS"
 
 .PHONY:	sources
 sources:

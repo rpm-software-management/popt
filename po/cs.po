@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2010-02-17 13:35-0500\n"
+"POT-Creation-Date: 2008-02-16 19:54-0500\n"
 "PO-Revision-Date: 2008-12-08 19:55+0100\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -16,74 +16,70 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:47
+#: popt.c:35
 msgid "unknown errno"
 msgstr "neznámé číslo chyby"
 
-#: popt.c:1290
+#: popt.c:1090
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "typ volby (%u) není v popt implementován\n"
 
-#: popt.c:1711
+#: popt.c:1294
 msgid "missing argument"
 msgstr "chybí argument"
 
-#: popt.c:1713
+#: popt.c:1296
 msgid "unknown option"
 msgstr "neznámá volba"
 
-#: popt.c:1715
+#: popt.c:1298
 msgid "mutually exclusive logical operations requested"
 msgstr "požadovány vzájemně výlučné logické operace"
 
-#: popt.c:1717
+#: popt.c:1300
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg nesmí být NULL"
 
-#: popt.c:1719
+#: popt.c:1302
 msgid "aliases nested too deeply"
 msgstr "aliasy vnořené příliš hluboko"
 
-#: popt.c:1721
+#: popt.c:1304
 msgid "error in parameter quoting"
 msgstr "chyba v quotování parametrů"
 
-#: popt.c:1723
+#: popt.c:1306
 msgid "invalid numeric value"
 msgstr "chybná numerická hodnota"
 
-#: popt.c:1725
+#: popt.c:1308
 msgid "number too large or too small"
 msgstr "číslo je příliš velké nebo příliš malé"
 
-#: popt.c:1727
+#: popt.c:1310
 msgid "memory allocation failed"
 msgstr "selhala alokace paměti"
 
-#: popt.c:1729
-msgid "config file failed sanity test"
-msgstr ""
-
-#: popt.c:1733
+#: popt.c:1314
 msgid "unknown error"
 msgstr "neznámá chyba"
 
-#: popthelp.c:75 popthelp.c:86
+#: popthelp.c:74 popthelp.c:86
 msgid "Show this help message"
 msgstr "Vypíše tuto nápovědu"
 
-#: popthelp.c:76 popthelp.c:87
+#: popthelp.c:75 popthelp.c:87
 msgid "Display brief usage message"
 msgstr "Vypíše krátký návod k použití"
+
+#: popthelp.c:76 popthelp.c:92
+msgid "Terminate options"
+msgstr "Ukončí volby"
 
 #: popthelp.c:90
 msgid "Display option defaults in message"
 msgstr "Zobrazit implicitní volby ve zprávě"
-
-#: popthelp.c:92
-msgid "Terminate options"
-msgstr "Ukončí volby"
 
 #: popthelp.c:191
 msgid "Help options:"
@@ -106,37 +102,33 @@ msgid "INT"
 msgstr "INT"
 
 #: popthelp.c:207
-msgid "SHORT"
-msgstr ""
-
-#: popthelp.c:208
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:209
+#: popthelp.c:208
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:210
+#: popthelp.c:209
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:211
+#: popthelp.c:210
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:212
+#: popthelp.c:211
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:215
+#: popthelp.c:214
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:649
+#: popthelp.c:634
 msgid "Usage:"
 msgstr "Použití:"
 
-#: popthelp.c:672
+#: popthelp.c:658
 msgid "[OPTION...]"
 msgstr "[VOLBY…]"
