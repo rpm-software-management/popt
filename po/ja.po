@@ -1,88 +1,84 @@
-# rpm ja.po
-# Copyright (C) 2003 Free Software Foundation, Inc.
+# Japanese messages for popt
+# This file is put in the public domain.
 # Yukihiro Nakai <ynakai@redhat.com>, 2003
-#
+# Yasuaki Taniguchi <yasuakit@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2010-02-17 13:35-0500\n"
-"PO-Revision-Date: 2003--8-25 19:00+0900\n"
-"Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"POT-Creation-Date: 2008-02-16 19:54-0500\n"
+"PO-Revision-Date: 2010-10-19 12:01+0900\n"
+"Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
+"Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: popt.c:47
+#: popt.c:35
 msgid "unknown errno"
 msgstr "不明なエラー番号"
 
-#: popt.c:1290
-#, fuzzy, c-format
+#: popt.c:1090
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "オプションタイプ (%d) はpoptには実装されていません\n"
+msgstr "オプションタイプ (%u) はpoptには実装されていません\n"
 
-#: popt.c:1711
+#: popt.c:1294
 msgid "missing argument"
 msgstr "引数がありません"
 
-#: popt.c:1713
+#: popt.c:1296
 msgid "unknown option"
 msgstr "不明なオプション"
 
-#: popt.c:1715
+#: popt.c:1298
 msgid "mutually exclusive logical operations requested"
-msgstr "排他的な悪ぺーレーションが必要です"
+msgstr "相互排他的な論理操作が必要です"
 
-#: popt.c:1717
+#: popt.c:1300
 msgid "opt->arg should not be NULL"
 msgstr "opt->argはNULLではいけません"
 
-#: popt.c:1719
+#: popt.c:1302
 msgid "aliases nested too deeply"
 msgstr "エイリアスのネストが深すぎます"
 
-#: popt.c:1721
+#: popt.c:1304
 msgid "error in parameter quoting"
 msgstr "パラメータのクオート付けでエラー"
 
-#: popt.c:1723
+#: popt.c:1306
 msgid "invalid numeric value"
 msgstr "不正な数値"
 
-#: popt.c:1725
+#: popt.c:1308
 msgid "number too large or too small"
 msgstr "数値が大きすぎるか小さすぎます"
 
-#: popt.c:1727
+#: popt.c:1310
 msgid "memory allocation failed"
 msgstr "メモリ確保に失敗しました"
 
-#: popt.c:1729
-msgid "config file failed sanity test"
-msgstr ""
-
-#: popt.c:1733
+#: popt.c:1314
 msgid "unknown error"
 msgstr "不明なエラー"
 
-#: popthelp.c:75 popthelp.c:86
+#: popthelp.c:74 popthelp.c:86
 msgid "Show this help message"
 msgstr "このヘルプメッセージを表示します"
 
-#: popthelp.c:76 popthelp.c:87
+#: popthelp.c:75 popthelp.c:87
 msgid "Display brief usage message"
 msgstr "使い方の概要を表示します"
+
+#: popthelp.c:76 popthelp.c:92
+msgid "Terminate options"
+msgstr "終了オプション"
 
 #: popthelp.c:90
 msgid "Display option defaults in message"
 msgstr "オプションのデフォルト値をメッセージに表示します"
-
-#: popthelp.c:92
-#, fuzzy
-msgid "Terminate options"
-msgstr "ヘルプオプション:"
 
 #: popthelp.c:191
 msgid "Help options:"
@@ -105,38 +101,33 @@ msgid "INT"
 msgstr "INT"
 
 #: popthelp.c:207
-msgid "SHORT"
-msgstr ""
-
-#: popthelp.c:208
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:209
-#, fuzzy
+#: popthelp.c:208
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
-#: popthelp.c:210
+#: popthelp.c:209
 msgid "STRING"
 msgstr "文字列"
 
-#: popthelp.c:211
+#: popthelp.c:210
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:212
+#: popthelp.c:211
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:215
+#: popthelp.c:214
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:649
+#: popthelp.c:634
 msgid "Usage:"
-msgstr "使い方:"
+msgstr "使用法:"
 
-#: popthelp.c:672
+#: popthelp.c:658
 msgid "[OPTION...]"
 msgstr "[オプション...]"
