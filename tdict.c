@@ -44,7 +44,7 @@ exit:
 static struct poptOption options[] = {
   { "debug", 'd', POPT_BIT_SET|POPT_ARGFLAG_TOGGLE, &_debug, 1,
         "Set debugging.", NULL },
-  { "verbose", 'v', POPT_BIT_SET|POPT_ARGFLAG_TOGGLE, &_verbose, 1,
+  { "verbose", 'v', POPT_BIT_SET|POPT_ARGFLAG_TOGGLE, &_verbose, 0,
         "Set verbosity.", NULL },
 
   POPT_AUTOALIAS
@@ -121,8 +121,14 @@ int main(int argc, const char ** argv)
     ec = 0;
 
 exit:
-    fprintf(stdout, "===== poptBits N:%u M:%u K:%u (%uKb) total(%u) = hits(%u) + misses(%u)\n",
-	_poptBitsN, _poptBitsM, _poptBitsK, (((_poptBitsM/8)+1)+1023)/1024, e.total, e.hits, e.misses);
+    /* XXX : depends on the /usr/share/dict/words contents so no default*/
+   if (rc >= 0) {
+    if (_debug) {
+    fprintf(stdout, "===== poptBits N:%u M:%u K:%u (%uKb) ",
+	_poptBitsN, _poptBitsM, _poptBitsK, (((_poptBitsM/8)+1)+1023)/1024);
+    }
+    fprintf(stdout, "total(%u) = hits(%u) + misses(%u)\n", e.total, e.hits, e.misses);
+   }
     if (avbits) free(avbits);
     optCon = poptFreeContext(optCon);
 #if defined(HAVE_MCHECK_H) && defined(HAVE_MTRACE)

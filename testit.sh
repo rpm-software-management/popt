@@ -22,6 +22,7 @@ run() {
     echo Running test $name.
 
     result=`HOME=$builddir $builddir/$prog $* 2>&1`
+
     if [ "$answer" != "$result" ]; then
 	echo "Test \"$prog $*\" failed with: \"$result\" != \"$answer\" "
 	exit 2
@@ -59,7 +60,9 @@ test1=${builddir}/test1
 echo "Running tests in `pwd`"
 
 #make -q testcases
-
+###################
+# Begin test1 test
+###################
 run test1 "test1 - 1" "arg1: 1 arg2: (none)" --arg1
 run test1 "test1 - 2" "arg1: 0 arg2: foo" --arg2 foo
 run test1 "test1 - 3" "arg1: 1 arg2: something" --arg1 --arg2 something
@@ -188,6 +191,12 @@ Help options:
   -?, --help                      Show this help message
       --usage                     Display brief usage message" --help
 
+###################
+# End test1 test
+###################
+###################
+# Begin test2 test
+###################
 run test2 "test2 - 1" "\
 dbusername popt-DBUserName	dbpassword (null)
 txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
@@ -495,6 +504,36 @@ username (null)	password poptsecret	firstname (null)	lastname (null)
 addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
 country (null)	email (null)	dayphone popt-dayphone	fax popt-fax" --pwd poptsecret --twotest2 -Z popt-fax -V popt-dayphone
 run test2 "test2 - 52" "Have your way. Have Fun" -Y "Have your way. Have Fun"
+###################
+# End test2 test
+###################
+###################
+# Begin tdict test
+###################
+if [ -f /usr/share/dict/words ]
+then
+run tdict "tdict - 1" "\
+===== Some words are in /usr/share/dict/words
+a:	YES
+b:	YES
+rpm:	YES
+dpkg:	YES
+ipkg:	NO
+total(5) = hits(4) + misses(1)" a b rpm dpkg ipkg
+run tdict "tdict - 2" "\
+Usage: tdict [-?] [-d|--debug] [-v|--verbose] [-?|--help] [--usage]" --usage
+run tdict "tdict - 3" "\
+Usage: tdict [OPTION...]
+  -d, --debug       Set debugging.
+  -v, --verbose     Set verbosity.
+
+Help options:
+  -?, --help        Show this help message
+      --usage       Display brief usage message" --help
+fi
+###################
+# End tdict test
+###################
 
 #run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
 #run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer
