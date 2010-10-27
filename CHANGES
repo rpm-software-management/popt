@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: add test2 to the unit test: augment make check with some test2 tests
     - devzero2000: fix: add missing automake per target test* LDFLAGS
     - devzero2000: require, as in autogen.sh, a minimal automake version for bootstrap 
     - devzero2000: added --enable-valgrind autoconf option
