@@ -26,7 +26,7 @@ char *contentPath		= NULL;
 char *dbPassword		= NULL;
 char *dbUserName		= NULL;
 
-char *rcfile = "createuser-defaults";
+char *rcfile = "test-poptrc";
 char *username=NULL;
 
 char *password			= NULL;
@@ -127,8 +127,22 @@ main(int argc, const char ** argv) {
     mtrace();   /* Trace malloc only if MALLOC_TRACE=mtrace-output-file. */
 #endif
 
-    optCon = poptGetContext("createuser", argc, argv, optionsTable, 0);
-    poptReadConfigFile(optCon, rcfile );
+    optCon = poptGetContext("test2", argc, argv, optionsTable, 0);
+#ifdef HAVE_STDLIB_H
+    rcfile = getenv ("testpoptrc");
+    if (rcfile != NULL ) { 
+    (void) poptReadConfigFile(optCon, rcfile );
+    }
+    else {
+    (void) poptReadConfigFile(optCon, "./test-poptrc");
+/* XXXX: make distcheck succed : test2 is in popt-<version>/_build */
+    (void) poptReadConfigFile(optCon, "../../test-poptrc");
+    }
+#else
+    (void) poptReadConfigFile(optCon, "./test-poptrc");
+/* XXXX: make distcheck succed : test2 is in popt-<version>/_build */
+    (void) poptReadConfigFile(optCon, "../../test-poptrc");
+#endif
 
     /* although there are no options to be parsed, check for --help */
     poptGetNextOpt(optCon);

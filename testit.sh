@@ -188,6 +188,314 @@ Help options:
   -?, --help                      Show this help message
       --usage                     Display brief usage message" --help
 
+run test2 "test2 - 1" "\
+dbusername popt-DBUserName	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname popt-first	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --keyfile=popt-key-file --cnpath=popt-content-path --dbusername=popt-DBUserName --first=popt-first  -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -C=popt-country -d=popt-dayphone
+run test2 "test2 - 2" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --offerfile=popt-offer-file --storeid=popt-store-id  -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax
+run test2 "test2 - 3" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --offerfile=popt-offer-file --storeid=popt-store-id --cnpath=popt-content-path --dbusername=popt-DBUserName  -u=popt-user -p=popt-password -1=popt-addr1 -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -2=popt-addr2 -s=popt-state -P=postal -C=popt-country -d=popt-dayphone -F=popt-fax -p=popt-password -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -e=popt-email -F=popt-fax -c=popt-city -s=popt-state -C=popt-country -e=popt-email
+run test2 "test2 - 4" "\
+dbusername popt-DBUserName	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname popt-first	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --keyfile=popt-key-file --offerfile=popt-offer-file --rcfile=popt-rcfile --cnhost=popt-content-host --cnpath=popt-content-path --dbusername=popt-DBUserName --first=popt-first  -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -c=popt-city -s=popt-state -P=postal -C=popt-country -e=popt-email -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -u=popt-user -1=popt-addr1 -s=popt-state -P=postal -z=popt-postal -C=popt-country -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -c=popt-city -z=popt-postal -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 5" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --offerfile=popt-offer-file --storeid=popt-store-id --txhost=popt-transact-host --first=popt-first --last=popt-last  -u=popt-user -p=popt-password -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax -u=popt-user -c=popt-city -s=popt-state -P=postal -e=popt-email -F=popt-fax -u=popt-user -p=popt-password -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -F=popt-fax -u=popt-user -1=popt-addr1 -s=popt-state -P=postal -C=popt-country -e=popt-email -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -C=popt-country -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 6" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --offerfile=popt-offer-file --cnhost=popt-content-host --cnpath=popt-content-path  -p=popt-password -1=popt-addr1 -c=popt-city -s=popt-state -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 7" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax (null)" --keyfile=popt-key-file --cnhost=popt-content-host  -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -e=popt-email -u=popt-user -p=popt-password -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone
+run test2 "test2 - 8" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password (null)	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 (null)	city popt-city	state popt-state	postal postal
+country popt-country	email (null)	dayphone popt-dayphone	fax (null)" --txhost=popt-transact-host  -u=popt-user -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -C=popt-country -d=popt-dayphone
+run test2 "test2 - 9" "\
+dbusername popt-DBUserName	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password (null)	firstname popt-first	lastname popt-last
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --cnpath=popt-content-path --dbusername=popt-DBUserName --first=popt-first --last=popt-last  -u=popt-user -1=popt-addr1 -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -z=popt-postal -e=popt-email -1=popt-addr1 -2=popt-addr2 -c=popt-city -z=popt-postal -C=popt-country -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -z=popt-postal -C=popt-country -F=popt-fax
+run test2 "test2 - 10" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal postal
+country popt-country	email (null)	dayphone popt-dayphone	fax popt-fax" --offerfile=popt-offer-file  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -C=popt-country -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 11" "\
+dbusername (null)	dbpassword popt-DBpassword
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 (null)	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --keyfile=popt-key-file --txhost=popt-transact-host --cnhost=popt-content-host --dbpassword=popt-DBpassword  -u=popt-user -p=popt-password -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax -p=popt-password -1=popt-addr1 -c=popt-city -1=popt-addr1 -c=popt-city -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax -u=popt-user -p=popt-password -c=popt-city -s=popt-state -z=popt-postal -C=popt-country
+run test2 "test2 - 12" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --storeid=popt-store-id --txsslport=popt-transact-ssl-port  -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -d=popt-dayphone -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 13" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state (null)	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax (null)" --txhost=popt-transact-host --cnhost=popt-content-host  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -d=popt-dayphone -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone
+run test2 "test2 - 14" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone (null)	fax popt-fax" --keyfile=popt-key-file --offerfile=popt-offer-file --rcfile=popt-rcfile --txhost=popt-transact-host  -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -z=popt-postal -e=popt-email -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -C=popt-country -u=popt-user -p=popt-password -s=popt-state
+run test2 "test2 - 15" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --storeid=popt-store-id --dbpassword=popt-DBpassword --last=popt-last  -p=popt-password -c=popt-city -s=popt-state -F=popt-fax -p=popt-password -1=popt-addr1 -P=postal -C=popt-country -e=popt-email -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -P=postal -z=popt-postal -d=popt-dayphone -u=popt-user -p=popt-password -c=popt-city -s=popt-state -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 16" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname popt-first	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --cnhost=popt-content-host --first=popt-first  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 17" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --storeid=popt-store-id --txhost=popt-transact-host --dbusername=popt-DBUserName  -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -2=popt-addr2 -s=popt-state -P=postal -z=popt-postal -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -z=popt-postal -C=popt-country
+run test2 "test2 - 18" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --txsslport=popt-transact-ssl-port --cnpath=popt-content-path --dbpassword=popt-DBpassword --last=popt-last  -u=popt-user -p=popt-password -1=popt-addr1 -c=popt-city -P=postal -z=popt-postal -u=popt-user -1=popt-addr1 -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -u=popt-user -2=popt-addr2 -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -p=popt-password -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax
+run test2 "test2 - 19" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city (null)	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --keyfile=popt-key-file --rcfile=popt-rcfile  -1=popt-addr1 -s=popt-state -P=postal -C=popt-country -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 20" "\
+dbusername popt-DBUserName	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname popt-first	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --cnhost=popt-content-host --dbusername=popt-DBUserName --first=popt-first  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -P=postal -z=popt-postal
+run test2 "test2 - 21" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --storeid=popt-store-id --txhost=popt-transact-host --dbpassword=popt-DBpassword --first=popt-first --last=popt-last  -p=popt-password -c=popt-city -s=popt-state -P=postal -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -C=popt-country -d=popt-dayphone -u=popt-user -c=popt-city -z=popt-postal -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -e=popt-email -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -C=popt-country -d=popt-dayphone
+run test2 "test2 - 22" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" 
+run test2 "test2 - 23" "\
+dbusername (null)	dbpassword popt-DBpassword
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname (null)	lastname popt-last
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --keyfile=popt-key-file --txhost=popt-transact-host --dbpassword=popt-DBpassword --last=popt-last  -u=popt-user -p=popt-password -2=popt-addr2 -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 24" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --txsslport=popt-transact-ssl-port  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 25" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --storeid=popt-store-id --rcfile=popt-rcfile --last=popt-last  -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -C=popt-country -d=popt-dayphone
+run test2 "test2 - 26" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password (null)	firstname (null)	lastname popt-last
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state (null)	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --txhost=popt-transact-host --cnpath=popt-content-path --last=popt-last  -u=popt-user -1=popt-addr1 -2=popt-addr2 -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -1=popt-addr1 -2=popt-addr2 -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -c=popt-city -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone
+run test2 "test2 - 27" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --txsslport=popt-transact-ssl-port --cnhost=popt-content-host  -u=popt-user -2=popt-addr2 -s=popt-state -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -C=popt-country -d=popt-dayphone
+run test2 "test2 - 28" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --storeid=popt-store-id --txsslport=popt-transact-ssl-port --cnpath=popt-content-path  -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -1=popt-addr1 -c=popt-city -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax
+run test2 "test2 - 29" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname popt-first	lastname popt-last
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal postal
+country (null)	email popt-email	dayphone popt-dayphone	fax popt-fax" --rcfile=popt-rcfile --txhost=popt-transact-host --first=popt-first --last=popt-last  -u=popt-user -2=popt-addr2 -c=popt-city -e=popt-email -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -s=popt-state -P=postal -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -c=popt-city -s=popt-state -z=popt-postal -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -d=popt-dayphone
+run test2 "test2 - 30" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --rcfile=popt-rcfile --txsslport=popt-transact-ssl-port --cnpath=popt-content-path  -u=popt-user -2=popt-addr2 -z=popt-postal -e=popt-email -F=popt-fax -p=popt-password -1=popt-addr1 -c=popt-city -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 31" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --storeid=popt-store-id  -u=popt-user -p=popt-password -2=popt-addr2 -c=popt-city -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -1=popt-addr1 -s=popt-state -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 32" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --txhost=popt-transact-host --txsslport=popt-transact-ssl-port --cnhost=popt-content-host --cnpath=popt-content-path --first=popt-first --last=popt-last  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -z=popt-postal -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -P=postal -z=popt-postal -d=popt-dayphone -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -z=popt-postal -e=popt-email -p=popt-password -c=popt-city -s=popt-state -C=popt-country -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 33" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --keyfile=popt-key-file --rcfile=popt-rcfile --txhost=popt-transact-host --cnhost=popt-content-host  -1=popt-addr1 -s=popt-state -P=postal -z=popt-postal -p=popt-password -c=popt-city -s=popt-state -P=postal -z=popt-postal -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax
+run test2 "test2 - 34" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --storeid=popt-store-id --cnpath=popt-content-path --dbpassword=popt-DBpassword --last=popt-last  -u=popt-user -1=popt-addr1 -2=popt-addr2 -P=postal -C=popt-country -p=popt-password -1=popt-addr1 -2=popt-addr2 -P=postal -z=popt-postal -e=popt-email -d=popt-dayphone -F=popt-fax -p=popt-password -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -e=popt-email -F=popt-fax -p=popt-password -c=popt-city -s=popt-state -z=popt-postal -e=popt-email -F=popt-fax
+run test2 "test2 - 35" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --storeid=popt-store-id --rcfile=popt-rcfile --last=popt-last  -u=popt-user -p=popt-password -c=popt-city -s=popt-state -P=postal -z=popt-postal -e=popt-email -d=popt-dayphone -u=popt-user -1=popt-addr1 -s=popt-state -P=postal -z=popt-postal -C=popt-country -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax
+run test2 "test2 - 36" "\
+dbusername popt-DBUserName	dbpassword popt-DBpassword
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax (null)" --keyfile=popt-key-file --rcfile=popt-rcfile --dbpassword=popt-DBpassword --dbusername=popt-DBUserName  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -1=popt-addr1 -c=popt-city -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -u=popt-user -p=popt-password -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone
+run test2 "test2 - 37" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --offerfile=popt-offer-file --storeid=popt-store-id --cnhost=popt-content-host  -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -C=popt-country -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -c=popt-city -s=popt-state -C=popt-country -F=popt-fax -u=popt-user -2=popt-addr2 -c=popt-city -s=popt-state -e=popt-email -d=popt-dayphone
+run test2 "test2 - 38" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --txsslport=popt-transact-ssl-port --dbpassword=popt-DBpassword --dbusername=popt-DBUserName --last=popt-last  -p=popt-password -2=popt-addr2 -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -p=popt-password -1=popt-addr1 -s=popt-state -z=popt-postal -C=popt-country -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -z=popt-postal -e=popt-email -d=popt-dayphone -u=popt-user -1=popt-addr1 -P=postal -z=popt-postal -e=popt-email -d=popt-dayphone
+run test2 "test2 - 39" "\
+dbusername (null)	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --txhost=popt-transact-host --txsslport=popt-transact-ssl-port  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 40" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --offerfile=popt-offer-file --storeid=popt-store-id --cnhost=popt-content-host --cnpath=popt-content-path --dbusername=popt-DBUserName --last=popt-last  -p=popt-password -2=popt-addr2 -c=popt-city -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -p=popt-password -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -e=popt-email -u=popt-user -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -d=popt-dayphone -u=popt-user -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -s=popt-state -z=popt-postal
+run test2 "test2 - 41" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country (null)	email popt-email	dayphone (null)	fax popt-fax" --cnpath=popt-content-path  -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -e=popt-email -F=popt-fax
+run test2 "test2 - 42" "\
+dbusername (null)	dbpassword popt-DBpassword
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username popt-user	password popt-password	firstname popt-first	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --keyfile=popt-key-file --offerfile=popt-offer-file --rcfile=popt-rcfile --cnhost=popt-content-host --dbpassword=popt-DBpassword --first=popt-first  -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -p=popt-password -2=popt-addr2 -P=postal -C=popt-country -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -z=popt-postal -C=popt-country -F=popt-fax
+run test2 "test2 - 43" "\
+dbusername (null)	dbpassword popt-DBpassword
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname popt-first	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city popt-city	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone (null)	fax (null)" --offerfile=popt-offer-file --dbpassword=popt-DBpassword --first=popt-first  -u=popt-user -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -u=popt-user -p=popt-password -2=popt-addr2 -c=popt-city -s=popt-state -z=popt-postal -e=popt-email -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -s=popt-state -z=popt-postal
+run test2 "test2 - 44" "\
+dbusername popt-DBUserName	dbpassword (null)
+txhost popt-transact-host	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname (null)	lastname (null)
+addr1 popt-addr1	addr2 popt-addr2	city (null)	state (null)	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --offerfile=popt-offer-file --txhost=popt-transact-host --cnpath=popt-content-path --dbusername=popt-DBUserName  -p=popt-password -2=popt-addr2 -d=popt-dayphone -u=popt-user -1=popt-addr1 -P=postal -e=popt-email -F=popt-fax -p=popt-password -1=popt-addr1 -2=popt-addr2 -z=popt-postal -e=popt-email -F=popt-fax -u=popt-user -1=popt-addr1 -C=popt-country -e=popt-email -F=popt-fax
+run test2 "test2 - 45" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname popt-first	lastname (null)
+addr1 (null)	addr2 popt-addr2	city (null)	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone (null)	fax popt-fax" --cnpath=popt-content-path --first=popt-first  -p=popt-password -s=popt-state -P=postal -C=popt-country -e=popt-email -F=popt-fax -u=popt-user -p=popt-password -2=popt-addr2 -s=popt-state -z=popt-postal -C=popt-country -e=popt-email
+run test2 "test2 - 46" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --offerfile=popt-offer-file --storeid=popt-store-id --txsslport=popt-transact-ssl-port --first=popt-first  -p=popt-password -1=popt-addr1 -2=popt-addr2 -e=popt-email -d=popt-dayphone -F=popt-fax -1=popt-addr1 -c=popt-city -s=popt-state -C=popt-country -e=popt-email -d=popt-dayphone -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -P=postal -d=popt-dayphone -F=popt-fax -u=popt-user -1=popt-addr1 -2=popt-addr2 -c=popt-city -s=popt-state -e=popt-email -u=popt-user -1=popt-addr1 -c=popt-city -s=popt-state -z=popt-postal -F=popt-fax
+run test2 "test2 - 47" "\
+dbusername (null)	dbpassword popt-DBpassword
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username popt-user	password popt-password	firstname (null)	lastname popt-last
+addr1 popt-addr1	addr2 popt-addr2	city (null)	state popt-state	postal popt-postal
+country popt-country	email popt-email	dayphone popt-dayphone	fax popt-fax" --dbpassword=popt-DBpassword --last=popt-last  -1=popt-addr1 -2=popt-addr2 -s=popt-state -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email -F=popt-fax
+run test2 "test2 - 48" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --storeid=popt-store-id --dbpassword=popt-DBpassword --dbusername=popt-DBUserName --last=popt-last  -u=popt-user -p=popt-password -2=popt-addr2 -s=popt-state -P=postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -F=popt-fax -P=postal -z=popt-postal -e=popt-email -d=popt-dayphone -F=popt-fax -p=popt-password -1=popt-addr1 -s=popt-state -z=popt-postal -e=popt-email -d=popt-dayphone -F=popt-fax
+run test2 "test2 - 49" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --keyfile=popt-key-file --storeid=popt-store-id --dbusername=popt-DBUserName  -p=popt-password -1=popt-addr1 -2=popt-addr2 -c=popt-city -P=postal -z=popt-postal -C=popt-country -e=popt-email -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -c=popt-city -z=popt-postal -C=popt-country -F=popt-fax -p=popt-password -1=popt-addr1 -s=popt-state -P=postal -C=popt-country -e=popt-email
+run test2 "test2 - 50" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile (null)
+username (null)	password (null)	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone (null)	fax (null)" --txsslport=popt-transact-ssl-port --cnhost=popt-content-host --cnpath=popt-content-path  -u=popt-user -2=popt-addr2 -P=postal -C=popt-country -d=popt-dayphone -F=popt-fax -u=popt-user -p=popt-password -1=popt-addr1 -2=popt-addr2 -P=postal -z=popt-postal -d=popt-dayphone -F=popt-fax -p=popt-password -1=popt-addr1 -c=popt-city -s=popt-state -P=postal -z=popt-postal -C=popt-country -e=popt-email
+run test2 "test2 - 51" "\
+dbusername (null)	dbpassword (null)
+txhost (null)	txsslport 443	txstoreid 0	pathofkeyfile popt-key-file
+username (null)	password poptsecret	firstname (null)	lastname (null)
+addr1 (null)	addr2 (null)	city (null)	state (null)	postal (null)
+country (null)	email (null)	dayphone popt-dayphone	fax popt-fax" --pwd poptsecret --twotest2 -Z popt-fax -V popt-dayphone
+run test2 "test2 - 52" "Have your way. Have Fun" -Y "Have your way. Have Fun"
+
 #run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
 #run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer
 #run_diff test3 "test3 - 53" test3-data/03.input test3-data/03.answe
