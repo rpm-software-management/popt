@@ -34,7 +34,7 @@ test1_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 test2_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 tdict_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 
-TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) testpoptrc="$(top_srcdir)/test-poptrc" PATH=.:../src:$$PATH \
+TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) MUDFLAP_OPTIONS="$(MUDFLAP_OPTIONS)" testpoptrc="$(top_srcdir)/test-poptrc" PATH=.:../src:$$PATH \
                         $(VALGRIND_ENVIRONMENT) \
 			$(SHELL)
 
