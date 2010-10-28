@@ -66,6 +66,46 @@ AS_IF([test "x$popt_gcc_warnings" = xyes],
   popt_CFLAGS_ADD([-Wpointer-arith],[POPT_CFLAGS])
   ])
 
+# build popt with mudflap instrumentation (GCC only)
+popt_gcc_mudflap=no
+AC_ARG_ENABLE([mudflap],
+ [AS_HELP_STRING([--enable-mudflap],
+                  [build POPT with mudflap instrumentation (@<:@default=no@:>@) (with GCC only) (EXPERIMENTAL)])],
+ [case $enableval in
+     yes|no) ;;
+     *)      AC_MSG_ERROR([bad value $enableval for mudflap option]) ;;
+   esac
+   popt_gcc_mudflap=$enableval],
+[ popt_gcc_mudflap=no ])
+
+AS_IF([ test x"$popt_gcc_mudflap" = x"yes" ], 
+      [
+        AS_IF([test "x$GCC" != x],
+              [ 
+		old_CFLAGS="$CFLAGS"
+		CFLAGS="$CFLAGS -fmudflap"
+		old_LDFLAGS="$LDFLAGS"
+		LDFLAGS="$LDFLAGS -lmudflap"
+		AC_LINK_IFELSE([AC_LANG_PROGRAM([[]], [[]])],[popt_gcc_mudflap=yes],[popt_gcc_mudflap=fail])
+		CFLAGS="$old_CFLAGS"
+		LDFLAGS="$old_LDFLAGS"
+		AS_IF([ test "$popt_gcc_mudflap" = fail ],
+                      [
+ 	  	       AC_MSG_WARN([--enable-mudflap requires a compiler which understands this option.])
+                      ],
+                      [
+                        popt_CFLAGS_ADD([-fmudflap], [POPT_CFLAGS])
+                	popt_LDFLAGS_ADD([-lmudflap], [POPT_LDFLAGS])
+                        # XXX: memory leak ?
+                        #MUDFLAP_OPTIONS="-mode-check -abbreviate -viol-abort -check-initialization -print-leaks"
+                        MUDFLAP_OPTIONS="-mode-check -abbreviate -check-initialization"
+			AC_SUBST([MUDFLAP_OPTIONS])
+                      ])
+              ],
+              [ AC_MSG_WARN([--enable-mudflap requires GCC])]
+        )
+      ])
+     
 
 # build popt instrumented for -fPIE (GCC only)
 AC_ARG_ENABLE([build-pie],
@@ -102,6 +142,8 @@ AS_IF([test "x$GCC" != x],
 popt_CFLAGS_ADD([-D_REENTRANT], [POPT_CFLAGS])
 # Finally put an AC_SUBST for all the CFLAGS above
 AC_SUBST([POPT_CFLAGS])
+
+# 
 
 # Support for running test cases using valgrind:
 
