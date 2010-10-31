@@ -1,120 +1,150 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
-"Report-Msgid-Bugs-To: <rpm-devel@lists.dulug.duke.edu>\n"
-"POT-Creation-Date: 2007-06-14 15:31+0200\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2010-10-31 14:57-0400\n"
 "PO-Revision-Date: 2001-09-06 20:06+0900\n"
 "Last-Translator: Jong-Hoon Ryu <redhat4u@netian.com>\n"
 "Language-Team: GNU Translation project <ko@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=EUC-KR\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: popt.c:35
+#: popt.c:52
 msgid "unknown errno"
 msgstr "알 수 없는 오류코드(errno) 입니다"
 
-#: popt.c:1002
-#, c-format
-msgid "option type (%d) not implemented in popt\n"
+#: popt.c:1411
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt\n"
 msgstr "옵션 유형 (%d)은 popt에서 사용할 수 없습니다\n"
 
-#: popt.c:1215
+#: popt.c:1856
 msgid "missing argument"
 msgstr "인수가 지정되지 않았습니다"
 
-#: popt.c:1217
+#: popt.c:1858
 msgid "unknown option"
 msgstr "알 수 없는 옵션입니다"
 
-#: popt.c:1219
+#: popt.c:1860
 msgid "mutually exclusive logical operations requested"
 msgstr "양쪽에 배타적 논리 연산이 지정되었습니다"
 
-#: popt.c:1221
+#: popt.c:1862
 msgid "opt->arg should not be NULL"
 msgstr "옵션->인수가 NULL이 되어서는 안됩니다"
 
-#: popt.c:1223
+#: popt.c:1864
 msgid "aliases nested too deeply"
 msgstr "별칭(alias)이 복잡하게 설정되었습니다"
 
-#: popt.c:1225
+#: popt.c:1866
 msgid "error in parameter quoting"
 msgstr "매개변수에 오류가 있습니다"
 
-#: popt.c:1227
+#: popt.c:1868
 msgid "invalid numeric value"
 msgstr "잘못된 수치 값입니다"
 
-#: popt.c:1229
+#: popt.c:1870
 msgid "number too large or too small"
 msgstr "숫자가 너무 크거나 너무 적습니다"
 
-#: popt.c:1231
+#: popt.c:1872
 msgid "memory allocation failed"
 msgstr "메모리 할당에 실패했습니다"
 
-#: popt.c:1235
+#: popt.c:1874
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1876
+msgid "option does not take an argument"
+msgstr ""
+
+#: popt.c:1878
+msgid "stack underflow"
+msgstr ""
+
+#: popt.c:1880
+msgid "stack overflow"
+msgstr ""
+
+#: popt.c:1884
 msgid "unknown error"
 msgstr "알 수 없는 오류입니다"
 
-#: popt.h:172
-msgid "Options implemented via popt alias/exec:"
-msgstr ""
-
-#: popt.h:188
-msgid "Help options:"
-msgstr ""
-
-#: popthelp.c:68 popthelp.c:79
+#: popthelp.c:81 popthelp.c:92
 msgid "Show this help message"
 msgstr "이 도움말을 보여줍니다"
 
-#: popthelp.c:69 popthelp.c:80
+#: popthelp.c:82 popthelp.c:93
 msgid "Display brief usage message"
 msgstr "간단한 사용법을 보여줍니다"
 
-#: popthelp.c:83
+#: popthelp.c:96
 msgid "Display option defaults in message"
 msgstr "기본적인 옵션을 보여줍니다"
 
-#: popthelp.c:128
+#: popthelp.c:98
+msgid "Terminate options"
+msgstr ""
+
+#: popthelp.c:197
+msgid "Help options:"
+msgstr ""
+
+#: popthelp.c:198
+msgid "Options implemented via popt alias/exec:"
+msgstr ""
+
+#: popthelp.c:206
 msgid "NONE"
 msgstr "없음(NONE)"
 
-#: popthelp.c:130
+#: popthelp.c:208
 msgid "VAL"
 msgstr "값(VAL)"
 
-#: popthelp.c:134
+#: popthelp.c:212
 msgid "INT"
 msgstr "정수(INT)"
 
-#: popthelp.c:135
+#: popthelp.c:213
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:214
 msgid "LONG"
 msgstr "정수(LONG)"
 
-#: popthelp.c:136
+#: popthelp.c:215
+#, fuzzy
+msgid "LONGLONG"
+msgstr "정수(LONG)"
+
+#: popthelp.c:216
 msgid "STRING"
 msgstr "문자열(STRING)"
 
-#: popthelp.c:137
+#: popthelp.c:217
 msgid "FLOAT"
 msgstr "소수(FLOAT)"
 
-#: popthelp.c:138
+#: popthelp.c:218
 msgid "DOUBLE"
 msgstr "소수(DOUBLE)"
 
-#: popthelp.c:139
+#: popthelp.c:221
 msgid "ARG"
 msgstr "인수(ARG)"
 
-#: popthelp.c:552
+#: popthelp.c:660
 msgid "Usage:"
 msgstr "사용법:"
 
-#: popthelp.c:576
+#: popthelp.c:686
 msgid "[OPTION...]"
 msgstr "[옵션...]"
