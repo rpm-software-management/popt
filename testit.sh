@@ -54,10 +54,10 @@ run_diff() {
 }
 
 builddir=`pwd`
-srcdir=$builddir
+#srcdir=$builddir
 cd ${srcdir}
 test1=${builddir}/test1
-echo "Running tests in `pwd`"
+echo "Running tests in $builddir" 
 
 #make -q testcases
 ###################
@@ -535,9 +535,17 @@ fi
 # End tdict test
 ###################
 
-#run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
-#run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer
-#run_diff test3 "test3 - 53" test3-data/03.input test3-data/03.answe
+###################
+# Begin test3 test
+###################
+
+run_diff test3 "test3 - 1" $srcdir/test3-data/01.input $srcdir/test3-data/01.answer
+run_diff test3 "test3 - 2" $srcdir/test3-data/02.input $srcdir/test3-data/02.answer
+run_diff test3 "test3 - 3" $srcdir/test3-data/03.input $srcdir/test3-data/03.answer
+
+###################
+# End   test3 test
+###################
 
 # If called from VALGRIND_ENVIRONMENT 
 [ -s $builddir/popt-valgrind-result ] && { echo "Some test fail under Valgrind. Check $builddir/popt-valgrind-result" && exit 1 ; }

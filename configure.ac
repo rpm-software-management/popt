@@ -11,7 +11,7 @@ AC_CONFIG_MACRO_DIR([m4])
 # Must come before AM_INIT_AUTOMAKE.
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CANONICAL_HOST
-AM_INIT_AUTOMAKE([1.11 -Wall -Werror foreign])
+AM_INIT_AUTOMAKE([1.11 color-tests -Wall -Werror foreign])
 #
 # Checks for programs.
 # Set common system defines for POSIX extensions, such as GNU_SOURCE
