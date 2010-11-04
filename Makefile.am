@@ -9,14 +9,19 @@ EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
 	footer_no_timestamp.html libpopt.vers \
 	$(TESTS) test-poptrc\
 	popt.xcodeproj/project.pbxproj \
-	popt.ps Doxyfile
+	popt.ps Doxyfile 	test3-data/01.answer \
+				test3-data/01.input \
+				test3-data/02.answer \
+				test3-data/02.input \
+				test3-data/03.answer \
+				test3-data/03.input
 
 SUBDIRS = po . auto
 
 
 noinst_HEADERS = poptint.h system.h
 
-check_PROGRAMS  = test1 test2 tdict 
+check_PROGRAMS  = test1 test2 tdict test3
 
 check_SCRIPTS	= $(TESTS)
 
@@ -24,15 +29,19 @@ check_SCRIPTS	= $(TESTS)
 test1_CPPFLAGS  = -I $(top_builddir) 
 test2_CPPFLAGS  = -I $(top_builddir) 
 tdict_CPPFLAGS  = -I $(top_builddir) 
+test3_CPPFLAGS  = -I $(top_builddir) 
 test1_CFLAGS  = $(AM_CFLAGS) 
 test2_CFLAGS  = $(AM_CFLAGS) 
 tdict_CFLAGS  = $(AM_CFLAGS) 
+test3_CFLAGS  = $(AM_CFLAGS) 
 test1_LDFLAGS  = $(AM_LDFLAGS) 
 test2_LDFLAGS  = $(AM_LDFLAGS) 
 tdict_LDFLAGS  = $(AM_LDFLAGS) 
+test3_LDFLAGS  = $(AM_LDFLAGS) 
 test1_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 test2_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 tdict_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
+test3_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 
 TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) MUDFLAP_OPTIONS="$(MUDFLAP_OPTIONS)" testpoptrc="$(top_srcdir)/test-poptrc" PATH=.:../src:$$PATH \
                         $(VALGRIND_ENVIRONMENT) \
@@ -64,7 +73,7 @@ distclean-local:
 	rm -rf .ccache 
 
 clean-local:
-	rm -rf doxygen *.gcda *.gcno lcov-result popt-valgrind-result
+	rm -rf doxygen *.gcda *.gcno lcov-result popt-valgrind-result 
 
 if HAVE_SPLINT
 lint:
