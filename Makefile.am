@@ -62,7 +62,7 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = popt.pc
 
 if HAVE_LD_VERSION_SCRIPT
-libpopt_la_LDFLAGS += -Wl,--version-script=$(top_srcdir)/libpopt.vers
+libpopt_la_LDFLAGS += -Wl,@LD_VERSION_SCRIPT_FLAG@,@top_srcdir@/libpopt.vers
 endif
 
 dist_man_MANS = popt.3
