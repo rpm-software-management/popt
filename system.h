@@ -31,6 +31,37 @@ char *alloca ();
 # endif
 #endif
 
+#if defined(_MSC_VER) || defined(__STDC__)
+#  define inline __inline
+#endif /* _MSC_VER */
+
+#ifdef _MSC_VER
+/* missing unistd.h stuff */
+
+#define F_OK 0
+#define R_OK 4
+#define W_OK 2
+#define X_OK 1
+
+#define srandom srand
+#define random rand
+#define access _access
+
+/* Pretend to be root to replace these */
+inline int setuid(int) { return 1; }
+inline int getuid(void) { return 0; }
+
+inline int seteuid(int) { return 1; }
+inline int geteuid(void) { return 0; }
+
+inline int setgid(int) { return 1; }
+inline int getgid(void) { return 0; }
+
+inline int setegid(int) { return 1; }
+
+#endif
+
+
 /* XXX isspace(3) has i18n encoding signednesss issues on Solaris. */
 #define	_isspaceptr(_chp)	isspace((int)(*(unsigned char *)(_chp)))
 
@@ -48,6 +79,10 @@ char *alloca ();
 
 #if defined(HAVE_UNISTD_H) && !defined(__LCLINT__)
 #include <unistd.h>
+#endif
+
+#ifdef _MSC_VER
+#include <io.h>
 #endif
 
 #ifdef __NeXT
@@ -110,7 +145,7 @@ static inline char * stpcpy (char *dest, const char * src) {
 #endif
 
 #if !defined(__GNUC__) && !defined(__attribute__)
-#define __attribute__(x) 
+#define __attribute__(x)
 #endif
 #define UNUSED(x) x __attribute__((__unused__))
 
