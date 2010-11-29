@@ -88,7 +88,7 @@ char *alloca ();
 #define S_ISVTX 00010000
 
 
-// CHECKME
+/* CHECKME */
 #define S_IWGRP 00000020
 #define S_IWOTH 00000002
 
