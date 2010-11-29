@@ -6,6 +6,11 @@
 #include "config.h"
 #endif
 
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS 1
+#endif
+
+
 #if defined (__GLIBC__) && defined(__LCLINT__)
 /*@-declundef@*/
 /*@unchecked@*/
@@ -16,6 +21,7 @@ extern __const __int32_t *__ctype_toupper;
 #endif
 
 #include <ctype.h>
+
 
 #ifdef __GNUC__
 # undef alloca
@@ -29,36 +35,6 @@ extern __const __int32_t *__ctype_toupper;
 char *alloca ();
 #  endif
 # endif
-#endif
-
-#if defined(_MSC_VER) || defined(__STDC__)
-#  define inline __inline
-#endif /* _MSC_VER */
-
-#ifdef _MSC_VER
-/* missing unistd.h stuff */
-
-#define F_OK 0
-#define R_OK 4
-#define W_OK 2
-#define X_OK 1
-
-#define srandom srand
-#define random rand
-#define access _access
-
-/* Pretend to be root to replace these */
-inline int setuid(int) { return 1; }
-inline int getuid(void) { return 0; }
-
-inline int seteuid(int) { return 1; }
-inline int geteuid(void) { return 0; }
-
-inline int setgid(int) { return 1; }
-inline int getgid(void) { return 0; }
-
-inline int setegid(int) { return 1; }
-
 #endif
 
 
@@ -83,6 +59,7 @@ inline int setegid(int) { return 1; }
 
 #ifdef _MSC_VER
 #include <io.h>
+#include <malloc.h>
 #endif
 
 #ifdef __NeXT
@@ -90,6 +67,71 @@ inline int setegid(int) { return 1; }
  don't try to use posix on NeXTstep 3.3 ! */
 #include <libc.h>
 #endif
+
+
+#if defined(_MSC_VER) || defined(__STDC__)
+#  define inline __inline
+#endif /* _MSC_VER */
+
+
+#ifdef _MSC_VER
+
+#define F_OK 0
+#define R_OK 4
+#define W_OK 2
+#define X_OK 1
+
+#define S_IRWXG 00000070
+#define S_IRWXO 00000007
+#define S_ISUID 00040000
+#define S_ISGID 00020000
+#define S_ISVTX 00010000
+
+
+// CHECKME
+#define S_IWGRP 00000020
+#define S_IWOTH 00000002
+
+#define S_ISREG(m) ((m)&_S_IFREG)
+
+
+/* Documentation claims these are in limits.h, but it seems to be a lie */
+#define FLT_MIN 1.175494351e-38F
+#define FLT_MAX 3.402823466e+38F
+
+typedef int uid_t;
+
+#ifdef _WIN64
+typedef __int64 ssize_t;
+#else
+typedef int ssize_t;
+#endif /* _WIN64 */
+
+#define srandom srand
+#define random rand
+#define access _access
+#define strdup _strdup
+#define execvp _execvp
+#define strtoll _strtoi64
+#define read _read
+#define open _open
+#define close _close
+#define lseek _lseek
+
+/* Pretend to be root to replace these */
+inline int setuid(int x) { return 1; }
+inline int getuid(void) { return 0; }
+
+inline int seteuid(int x) { return 1; }
+inline int geteuid(void) { return 0; }
+
+inline int setgid(int x) { return 1; }
+inline int getgid(void) { return 0; }
+
+inline int setegid(int x) { return 1; }
+
+#endif /* _MSC_VER */
+
 
 /*@-incondefs@*/
 /*@mayexit@*/ /*@only@*/ /*@out@*/ /*@unused@*/

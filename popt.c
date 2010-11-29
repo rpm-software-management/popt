@@ -10,17 +10,13 @@
 
 #include "system.h"
 
-#if defined(__LCLINT__)
-#ifndef _MSC_VER
+#if defined(__LCLINT__) && !defined(_MSC_VER)
 /*@-declundef -exportheader @*/
 extern long long int strtoll(const char *nptr, /*@null@*/ char **endptr,
 		int base)
 	/*@modifies *endptr@*/;
 /*@=declundef =exportheader @*/
 
-#else
-  #define strtoll _strtoi64
-#endif /* _MSC_VER */
 #endif /* defined(__LCLINT__) */
 
 #ifdef HAVE_FLOAT_H
