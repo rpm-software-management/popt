@@ -10,9 +10,11 @@
 
 #include "system.h"
 
-//#define        POPT_USE_TIOCGWINSZ
+#define        POPT_USE_TIOCGWINSZ
 #ifdef POPT_USE_TIOCGWINSZ
+#if defined(HAVE_SYS_IOCTL_H)
 #include <sys/ioctl.h>
+#endif
 #endif
 
 #define	POPT_WCHAR_HACK
