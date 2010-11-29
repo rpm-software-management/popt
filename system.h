@@ -6,9 +6,6 @@
 #include "config.h"
 #endif
 
-#ifdef _MSC_VER
-#define _CRT_SECURE_NO_WARNINGS 1
-#endif
 
 
 #if defined (__GLIBC__) && defined(__LCLINT__)
@@ -58,24 +55,10 @@ char *alloca ();
 #endif
 
 #ifdef _MSC_VER
+#  define inline __inline
+#define _CRT_SECURE_NO_WARNINGS 1
 #include <io.h>
 #include <malloc.h>
-#endif
-
-#ifdef __NeXT
-/* access macros are not declared in non posix mode in unistd.h -
- don't try to use posix on NeXTstep 3.3 ! */
-#include <libc.h>
-#endif
-
-
-#if defined(_MSC_VER) || defined(__STDC__)
-#  define inline __inline
-#endif /* _MSC_VER */
-
-
-#ifdef _MSC_VER
-
 #define F_OK 0
 #define R_OK 4
 #define W_OK 2
@@ -138,6 +121,12 @@ inline int getgid(void) { return 0; }
 inline int setegid(int x) { return 1; }
 
 #endif /* _MSC_VER */
+
+#ifdef __NeXT
+/* access macros are not declared in non posix mode in unistd.h -
+ don't try to use posix on NeXTstep 3.3 ! */
+#include <libc.h>
+#endif
 
 
 /*@-incondefs@*/
