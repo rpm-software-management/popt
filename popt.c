@@ -173,7 +173,7 @@ static void invokeCallbacksOPTION(poptContext con,
 poptContext poptGetContext(const char * name, int argc, const char ** argv,
 			const struct poptOption * options, unsigned int flags)
 {
-    poptContext con = xcalloc(1, sizeof(*con));
+    poptContext con = (poptContext) xcalloc(1, sizeof(*con));
 
 assert(con);	/* XXX can't happen */
     if (con == NULL) return NULL;
@@ -195,7 +195,7 @@ assert(con);	/* XXX can't happen */
     if (!(flags & POPT_CONTEXT_KEEP_FIRST))
 	con->os->next = 1;		/* skip argv[0] */
 
-    con->leftovers = xcalloc( (size_t)(argc + 1), sizeof(*con->leftovers) );
+    con->leftovers = (poptArgv) xcalloc( (size_t)(argc + 1), sizeof(*con->leftovers) );
 
 /*@-dependenttrans -assignexpose@*/	/* FIX: W2DO? */
     con->options = options;
@@ -209,7 +209,7 @@ assert(con);	/* XXX can't happen */
     con->numExecs = 0;
 
     con->nav = argc * 2;
-    con->av = xcalloc( (size_t)con->nav, sizeof(*con->av) );
+    con->av = (poptArgv) xcalloc( (size_t)con->nav, sizeof(*con->av) );
     con->execAbsolute = 1;
     con->arg_strip = NULL;
 
@@ -304,13 +304,13 @@ static int handleExec(/*@special@*/ poptContext con,
        time 'round */
     if ((con->ac + 1) >= (con->nav)) {
 	con->nav += 10;
-	con->av = xrealloc(con->av, sizeof(*con->av) * con->nav);
+	con->av = (poptArgv) xrealloc(con->av, sizeof(*con->av) * con->nav);
     }
 
     i = con->ac++;
 assert(con->av);		/* XXX can't happen */
     if (con->av != NULL)
-    {	char *s  = xmalloc((longName ? strlen(longName) : 0) + sizeof("--"));
+    {	char *s  = (char*) xmalloc((longName ? strlen(longName) : 0) + sizeof("--"));
 assert(s);	/* XXX can't happen */
 	if (s != NULL) {
 	    con->av[i] = s;
@@ -419,9 +419,9 @@ static int handleAlias(/*@special@*/ poptContext con,
     con->os->currAlias = con->aliases + i;
     {	const char ** av;
 	int ac = con->os->currAlias->argc;
-	/* Append --foo=bar arg to alias argv array (if present). */ 
+	/* Append --foo=bar arg to alias argv array (if present). */
 	if (longName && nextArg != NULL && *nextArg != '\0') {
-	    av = xmalloc((ac + 1 + 1) * sizeof(*av));
+	    av = (const char**) xmalloc((ac + 1 + 1) * sizeof(*av));
 assert(av);	/* XXX won't happen. */
 	    if (av != NULL) {
 		for (i = 0; i < ac; i++) {
@@ -466,7 +466,7 @@ assert(argv0);	/* XXX can't happen */
 	return NULL;
 
     /* The return buffer in t is big enough for any path. */
-    if ((t = xmalloc(strlen(path) + strlen(argv0) + sizeof("/"))) != NULL)
+    if ((t = (char*) xmalloc(strlen(path) + strlen(argv0) + sizeof("/"))) != NULL)
     for (s = path; s && *s; s = se) {
 
 	/* Snip PATH element into [s,se). */
@@ -511,13 +511,13 @@ assert(item);	/*XXX can't happen*/
 	(!con->execAbsolute && strchr(item->argv[0], '/')))
 	    return POPT_ERROR_NOARG;
 
-    argv = xmalloc(sizeof(*argv) *
+    argv = (poptArgv) xmalloc(sizeof(*argv) *
 			(6 + item->argc + con->numLeftovers + con->ac));
 assert(argv);	/* XXX can't happen */
     if (argv == NULL) return POPT_ERROR_MALLOC;
 
     if (!strchr(item->argv[0], '/') && con->execPath != NULL) {
-	char *s = xmalloc(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
+        char *s = (char*) xmalloc(strlen(con->execPath) + strlen(item->argv[0]) + sizeof("/"));
 	if (s)
 	    (void)stpcpy(stpcpy(stpcpy(s, con->execPath), "/"), item->argv[0]);
 
@@ -715,9 +715,9 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
     size_t tn = strlen(s) + 1;
     char c;
 
-    te = t = xmalloc(tn);
+    te = t = (char*) xmalloc(tn);
 assert(t);	/* XXX can't happen */
-    if (t == NULL) return NULL;	
+    if (t == NULL) return NULL;
     *t = '\0';
     while ((c = *s++) != '\0') {
 	switch (c) {
@@ -738,7 +738,7 @@ assert(t);	/* XXX can't happen */
 
 	    tn += strlen(a);
 	    {   size_t pos = (size_t) (te - t);
-		t = xrealloc(t, tn);
+        t = (char*) xrealloc(t, tn);
 assert(t);	/* XXX can't happen */
 		if (t == NULL)
 		    return NULL;
@@ -755,7 +755,7 @@ assert(t);	/* XXX can't happen */
     /* If the new string is longer than needed, shorten. */
     if ((t + tn) > te) {
 /*@-usereleased@*/	/* XXX splint can't follow the pointers. */
-	if ((te = xrealloc(t, (size_t)(te - t))) == NULL)
+    if ((te = (char*) xrealloc(t, (size_t)(te - t))) == NULL)
 	    free(t);
 	t = te;
 /*@=usereleased@*/
@@ -953,7 +953,7 @@ int poptSaveBits(poptBits * bitsp,
 
     /* Parse comma separated attributes. */
     te = tbuf = xstrdup(s);
-    assert(te); 
+    assert(te);
     while ((t = te) != NULL && *t) {
 	while (*te != '\0' && *te != ',')
 	    te++;
@@ -989,9 +989,9 @@ int poptSaveString(const char *** argvp,
     if (*argvp != NULL)
     while ((*argvp)[argc] != NULL)
 	argc++;
- 
+
 /*@-unqualifiedtrans -nullstate@*/	/* XXX no annotation for (*argvp) */
-    if ((*argvp = xrealloc(*argvp, (argc + 1 + 1) * sizeof(**argvp))) != NULL) {
+    if ((*argvp = (const char**) xrealloc(*argvp, (argc + 1 + 1) * sizeof(**argvp))) != NULL) {
 	(*argvp)[argc++] = xstrdup(val);
 	(*argvp)[argc  ] = NULL;
     }
@@ -1008,10 +1008,10 @@ static long long poptCalculator(long long arg0, unsigned argInfo, long long arg1
 		/*@null@*/ const char * expr, int * rcp)
 {
 int ixmax = 20;	/* XXX overkill */
-poptStack_t stk = memset(alloca(ixmax*sizeof(*stk)), 0, (ixmax*sizeof(*stk)));
+poptStack_t stk = (poptStack_t) memset((poptStack_t)alloca(ixmax*sizeof(*stk)), 0, (ixmax*sizeof(*stk)));
     int ix = 0;
 size_t nt = 64;	/* XXX overkill */
-char * t = alloca(nt);
+char * t = (char*) alloca(nt);
 char * te = t;
 const char * s;
     int rc = 0;		/* assume success */
@@ -1623,7 +1623,7 @@ assert(opt != NULL);	/* XXX can't happen */
 		    if (con->os == con->optionStack
 		     && F_ISSET(opt, STRIP) && canstrip)
 			poptStripArg(con, con->os->next);
-		
+
 assert(con->os->argv);	/* XXX can't happen */
 		    if (con->os->argv != NULL) {
 			if (F_ISSET(opt, OPTIONAL) &&
@@ -1651,14 +1651,14 @@ assert(con->os->argv);	/* XXX can't happen */
 
 	if ((con->ac + 2) >= (con->nav)) {
 	    con->nav += 10;
-	    con->av = xrealloc(con->av,
+	    con->av = (poptArgv) xrealloc(con->av,
 			    sizeof(*con->av) * con->nav);
 	}
 
 assert(con->av);
 	if (con->av) {
 	    size_t nb = (opt->longName ? strlen(opt->longName) : 0) + sizeof("--");
-	    char *s = xmalloc(nb);
+	    char *s = (char*) xmalloc(nb);
 assert(s);	/* XXX can't happen */
 	    if (s != NULL) {
 		con->av[con->ac++] = s;
@@ -1770,7 +1770,7 @@ poptContext poptFreeContext(poptContext con)
     con->otherHelp = _free(con->otherHelp);
     con->execPath = _free(con->execPath);
     con->arg_strip = PBM_FREE(con->arg_strip);
-    
+
     con = _free(con);
     return con;
 }
@@ -1797,18 +1797,18 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
 {
     poptItem * items, item;
     size_t * nitems;
-    int    * naliases; 
+    int    * naliases;
 
     switch (flags) {
     case 1:
 	items = &con->execs;
 	nitems = &con->numExecs;
-        *items = xrealloc((*items), ((*nitems) + 1) * sizeof(**items));
+      *items = (poptItem) xrealloc((*items), ((*nitems) + 1) * sizeof(**items));
 	break;
     case 0:
 	items = &con->aliases;
 	naliases = &con->numAliases;
-        *items = xrealloc((*items), ((*naliases) + 1) * sizeof(**items));
+      *items = (poptItem) xrealloc((*items), ((*naliases) + 1) * sizeof(**items));
 	break;
     default:
 	return 1;
@@ -1918,14 +1918,14 @@ int poptStrippedArgv(poptContext con, int argc, char ** argv)
     int numargs = argc;
     int j = 1;
     int i;
-    
+
 /*@-sizeoftype@*/
     if (con->arg_strip)
     for (i = 1; i < argc; i++) {
 	if (PBM_ISSET(i, con->arg_strip))
 	    numargs--;
     }
-    
+
     for (i = 1; i < argc; i++) {
 	if (con->arg_strip && PBM_ISSET(i, con->arg_strip))
 	    continue;
@@ -1933,6 +1933,6 @@ int poptStrippedArgv(poptContext con, int argc, char ** argv)
 	j++;
     }
 /*@=sizeoftype@*/
-    
+
     return numargs;
 }

@@ -64,7 +64,7 @@ POPT_dgettext(const char * dom, const char * str)
     char * codeset = NULL;
     char * retval = NULL;
 
-    if (!dom) 
+    if (!dom)
 	dom = textdomain(NULL);
     codeset = bind_textdomain_codeset(dom, NULL);
     bind_textdomain_codeset(dom, "UTF-8");
@@ -102,7 +102,7 @@ strdup_locale_from_utf8 (/*@null@*/ char * istr)
 	char * shift_pin = NULL;
 	size_t db = strlen(istr);
 /*@owned@*/
-	char * dstr = xmalloc((db + 1) * sizeof(*dstr));
+	char * dstr = (char*) xmalloc((db + 1) * sizeof(*dstr));
 	char * pin = istr;
 	char * pout = dstr;
 	size_t ib = db;
@@ -128,7 +128,7 @@ assert(dstr);	/* XXX can't happen */
 	    case E2BIG:
 	    {	size_t used = (size_t)(pout - dstr);
 		db *= 2;
-		dstr = xrealloc(dstr, (db + 1) * sizeof(*dstr));
+		dstr = (char*) xrealloc(dstr, (db + 1) * sizeof(*dstr));
 assert(dstr);	/* XXX can't happen */
 		if (dstr != NULL) {
 		    pout = dstr + used;
@@ -174,7 +174,7 @@ POPT_fprintf (FILE * stream, const char * format, ...)
      * to do with whether the final '\0' is counted (or not). The code
      * below already adds +1 for the (possibly already counted) trailing NUL.
      */
-    while ((b = xrealloc(b, nb+1)) != NULL) {
+    while ((b = (char*) xrealloc(b, nb+1)) != NULL) {
 	va_start(ap, format);
 	rc = vsnprintf(b, nb, format, ap);
 	va_end(ap);

@@ -5,7 +5,7 @@
  */
 
 /* (C) 1998-2002 Red Hat, Inc. -- Licensing details are in the COPYING
-   file accompanying popt source distributions, available from 
+   file accompanying popt source distributions, available from
    ftp://ftp.rpm.org/pub/rpm/dist. */
 
 #include "system.h"
@@ -41,7 +41,7 @@
 /*@exits@*/
 static void displayArgs(poptContext con,
 		/*@unused@*/ UNUSED(enum poptCallbackReason foo),
-		struct poptOption * key, 
+		struct poptOption * key,
 		/*@unused@*/ UNUSED(const char * arg),
 		/*@unused@*/ UNUSED(void * data))
 	/*@globals fileSystem@*/
@@ -110,14 +110,14 @@ typedef struct columns_s {
     size_t max;
 } * columns_t;
 
-/** 
+/**
  * Return no. of columns in output window.
  * @param fp           FILE
- * @return             no. of columns 
- */ 
+ * @return             no. of columns
+ */
 static size_t maxColumnWidth(FILE *fp)
 	/*@*/
-{   
+{
     size_t maxcols = _POPTHELP_MAXLINE;
 #if defined(TIOCGWINSZ)
     struct winsize ws;
@@ -131,7 +131,7 @@ static size_t maxColumnWidth(FILE *fp)
     }
 #endif
     return maxcols;
-}   
+}
 
 /**
  * Determine number of display characters in a string.
@@ -238,7 +238,7 @@ singleOptionDefaultValue(size_t lineLength,
 	/*@*/
 {
     const char * defstr = D_(translation_domain, "default");
-    char * le = xmalloc(4*lineLength + 1);
+    char * le = (char*) xmalloc(4*lineLength + 1);
     char * l = le;
 
 assert(le);	/* XXX can't happen */
@@ -336,7 +336,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     if (F_ISSET(opt, TOGGLE)) nb += sizeof("[no]") - 1;
     if (argDescrip)	nb += strlen(argDescrip);
 
-    left = xmalloc(nb);
+    left = (char*) xmalloc(nb);
 assert(left);	/* XXX can't happen */
     if (left == NULL) return;
     left[0] = '\0';
@@ -383,7 +383,7 @@ assert(left);	/* XXX can't happen */
 	if (F_ISSET(opt, SHOW_DEFAULT)) {
 	    defs = singleOptionDefaultValue(lineLength, opt, translation_domain);
 	    if (defs) {
-		char * t = xmalloc((help ? strlen(help) : 0) +
+		char * t = (char*) xmalloc((help ? strlen(help) : 0) +
 				strlen(defs) + sizeof(" "));
 assert(t);	/* XXX can't happen */
 		if (t) {
@@ -467,7 +467,7 @@ assert(t);	/* XXX can't happen */
     if (help)
 	xx = POPT_fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
     else {
-	xx = POPT_fprintf(fp,"  %s\n", left); 
+	xx = POPT_fprintf(fp,"  %s\n", left);
 	goto out;
     }
 
@@ -531,7 +531,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 {
     size_t max = 0;
     const char * argDescrip;
-    
+
     if (opt != NULL)
     while (opt->longName || opt->shortName || opt->arg) {
 	size_t len = 0;
@@ -564,7 +564,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 	}
 	opt++;
     }
-    
+
     return max;
 }
 
@@ -633,7 +633,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	sub_transdom = getTableTranslationDomain(opt->arg);
 	if (sub_transdom == NULL)
 	    sub_transdom = translation_domain;
-	    
+
 	/* If no popt aliases/execs, skip poptAliasOption processing. */
 	if (opt->arg == poptAliasOptions && !(con->numAliases || con->numExecs))
 	    continue;
@@ -675,7 +675,7 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 
 void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ UNUSED(int flags))
 {
-    columns_t columns = xcalloc((size_t)1, sizeof(*columns));
+    columns_t columns = (columns_t) xcalloc((size_t)1, sizeof(*columns));
     int xx;
 
 assert(columns);	/* XXX can't happen */
@@ -736,7 +736,7 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
     if ((columns->cur + len) > columns->max) {
 	fprintf(fp, "\n       ");
 	columns->cur = (size_t)7;
-    } 
+    }
 
     fprintf(fp, " [");
     if (prtshort)
@@ -865,7 +865,7 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 {
     /* bufsize larger then the ascii set, lazy allocation on top level call. */
     size_t nb = (size_t)300;
-    char * s = (str != NULL ? str : calloc((size_t)1, nb));
+    char * s = (str != NULL ? str : (char*) calloc((size_t)1, nb));
     size_t len = (size_t)0;
 
 assert(s);	/* XXX can't happen */
@@ -883,7 +883,7 @@ assert(s);	/* XXX can't happen */
 	} else if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE)
 	    if (opt->arg)	/* XXX program error */
 		len = showShortOptions(opt->arg, fp, s);
-    } 
+    }
 
     /* On return to top level, print the short options, return print length. */
     if (s != str && *s != '\0') {
@@ -899,7 +899,7 @@ assert(s);	/* XXX can't happen */
 
 void poptPrintUsage(poptContext con, FILE * fp, /*@unused@*/ UNUSED(int flags))
 {
-    columns_t columns = xcalloc((size_t)1, sizeof(*columns));
+    columns_t columns = (columns_t) xcalloc((size_t)1, sizeof(*columns));
     struct poptDone_s done_buf;
     poptDone done = &done_buf;
 
@@ -910,7 +910,7 @@ assert(columns);	/* XXX can't happen */
   if (columns) {
     columns->cur = done->maxopts * sizeof(*done->opts);
     columns->max = maxColumnWidth(fp);
-    done->opts = xcalloc((size_t)1, columns->cur);
+    done->opts = (const void**) xcalloc((size_t)1, columns->cur);
 assert(done->opts);	/* XXX can't happen */
     /*@-keeptrans@*/
     if (done->opts != NULL)

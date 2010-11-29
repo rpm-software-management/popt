@@ -3,7 +3,7 @@
  */
 
 /* (C) 1998-2002 Red Hat, Inc. -- Licensing details are in the COPYING
-   file accompanying popt source distributions, available from 
+   file accompanying popt source distributions, available from
    ftp://ftp.rpm.org/pub/rpm/dist. */
 
 #include "system.h"
@@ -129,7 +129,7 @@ static int poptGlob(/*@unused@*/ UNUSED(poptContext con), const char * pattern,
     {
 	if (acp)
 	    *acp = 1;
-	if (avp && (*avp = calloc((size_t)(1 + 1), sizeof (**avp))) != NULL)
+	if (avp && (*avp = (const char**) calloc((size_t)(1 + 1), sizeof (**avp))) != NULL)
 	    (*avp)[0] = xstrdup(pat);
     }
 
@@ -170,7 +170,7 @@ int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
 
     if ((nb = lseek(fdno, 0, SEEK_END)) == (off_t)-1
      || lseek(fdno, 0, SEEK_SET) == (off_t)-1
-     || (b = calloc(sizeof(*b), (size_t)nb + 1)) == NULL
+     || (b = (char*) calloc(sizeof(*b), (size_t)nb + 1)) == NULL
      || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb)
     {
 	int oerrno = errno;
@@ -275,7 +275,7 @@ static int poptConfigLine(poptContext con, char * line)
 
     if (con->appName == NULL)
 	goto exit;
-    
+
     memset(item, 0, sizeof(*item));
 
     appName = se;
@@ -319,7 +319,7 @@ static int poptConfigLine(poptContext con, char * line)
 	/* Append remaining text to the interpolated file option text. */
 	if (*se != '\0') {
 	    size_t nse = strlen(se) + 1;
-	    if ((b = realloc(b, (nb + nse))) == NULL)	/* XXX can't happen */
+	    if ((b = (char*) realloc(b, (nb + nse))) == NULL)	/* XXX can't happen */
 		goto exit;
 	    (void) stpcpy( stpcpy(&b[nb-1], " "), se);
 	    nb += nse;
@@ -372,7 +372,7 @@ static int poptConfigLine(poptContext con, char * line)
 	item->argc = j;
     }
 /*@=modobserver@*/
-	
+
 /*@-nullstate@*/ /* FIX: item->argv[] may be NULL */
     if (!strcmp(entryType, "alias"))
 	rc = poptAddItem(con, item, 0);
@@ -399,7 +399,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
     if (b == NULL || nb == 0)
 	return POPT_ERROR_BADCONFIG;
 
-    if ((t = malloc(nb + 1)) == NULL)
+    if ((t = (char*) malloc(nb + 1)) == NULL)
 	goto exit;
     te = t;
 
@@ -533,7 +533,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 #endif
 
     if ((home = getenv("HOME"))) {
-	char * fn = malloc(strlen(home) + 20);
+        char * fn = (char*) malloc(strlen(home) + 20);
 	if (fn != NULL) {
 	    (void) stpcpy(stpcpy(fn, home), "/.popt");
 	    rc = poptReadConfigFile(con, fn);
@@ -565,7 +565,7 @@ poptInit(int argc, const char ** argv,
 
     if ((argv0 = strrchr(argv[0], '/')) != NULL) argv0++;
     else argv0 = argv[0];
-   
+
     con = poptGetContext(argv0, argc, (const char **)argv, options, 0);
     if (con != NULL&& poptReadConfigFiles(con, configPaths))
 	con = poptFini(con);
