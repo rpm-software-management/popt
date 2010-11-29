@@ -11,12 +11,17 @@
 #include "system.h"
 
 #if defined(__LCLINT__)
+#ifndef _MSC_VER
 /*@-declundef -exportheader @*/
 extern long long int strtoll(const char *nptr, /*@null@*/ char **endptr,
 		int base)
 	/*@modifies *endptr@*/;
 /*@=declundef =exportheader @*/
-#endif
+
+#else
+  #define strtoll _strtoi64
+#endif /* _MSC_VER */
+#endif /* defined(__LCLINT__) */
 
 #ifdef HAVE_FLOAT_H
 #include <float.h>
@@ -82,7 +87,8 @@ static void invokeCallbacksPRE(poptContext con, const struct poptOption * opt)
 {
     if (opt != NULL)
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
-	poptArg arg = { .ptr = opt->arg };
+    poptArg arg;
+    arg.ptr = opt->arg;
 	if (arg.ptr)
 	switch (poptArgType(opt)) {
 	case POPT_ARG_INCLUDE_TABLE:	/* Recurse on included sub-tables. */
@@ -106,7 +112,8 @@ static void invokeCallbacksPOST(poptContext con, const struct poptOption * opt)
 {
     if (opt != NULL)
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
-	poptArg arg = { .ptr = opt->arg };
+    poptArg arg;
+    arg.ptr = opt->arg;
 	if (arg.ptr)
 	switch (poptArgType(opt)) {
 	case POPT_ARG_INCLUDE_TABLE:	/* Recurse on included sub-tables. */
@@ -132,11 +139,13 @@ static void invokeCallbacksOPTION(poptContext con,
 	/*@modifies internalState@*/
 {
     const struct poptOption * cbopt = NULL;
-    poptArg cbarg = { .ptr = NULL };
+    poptArg cbarg;
+    cbarg.ptr = NULL;
 
     if (opt != NULL)
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
-	poptArg arg = { .ptr = opt->arg };
+    poptArg arg;
+    arg.ptr = opt->arg;
 	switch (poptArgType(opt)) {
 	case POPT_ARG_INCLUDE_TABLE:	/* Recurse on included sub-tables. */
 	    poptSubstituteHelpI18N(arg.opt);	/* XXX side effects */
@@ -606,14 +615,16 @@ findOption(const struct poptOption * opt,
 	/*@modifies *callback, *callbackData */
 {
     const struct poptOption * cb = NULL;
-    poptArg cbarg = { .ptr = NULL };
+    poptArg cbarg;
+    cbarg.ptr = NULL;
 
     /* This happens when a single - is given */
     if (LF_ISSET(ONEDASH) && !shortName && (longName && *longName == '\0'))
 	shortName = '-';
 
     for (; opt->longName || opt->shortName || opt->arg; opt++) {
-	poptArg arg = { .ptr = opt->arg };
+        poptArg arg;
+        arg.ptr = opt->arg;
 
 	switch (poptArgType(opt)) {
 	case POPT_ARG_INCLUDE_TABLE:	/* Recurse on included sub-tables. */
@@ -1276,8 +1287,9 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	/*@globals fileSystem, internalState @*/
 	/*@modifies con, fileSystem, internalState @*/
 {
-    poptArg arg = { .ptr = opt->arg };
     int rc = 0;		/* assume success */
+    poptArg arg;
+    arg.ptr = opt->arg;
 
     switch (poptArgType(opt)) {
     case POPT_ARG_BITSET:

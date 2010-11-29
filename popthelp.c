@@ -249,7 +249,8 @@ assert(le);	/* XXX can't happen */
     *le++ = ':';
     *le++ = ' ';
   if (opt->arg) {	/* XXX programmer error */
-    poptArg arg = { .ptr = opt->arg };
+    poptArg arg;
+    arg.ptr = opt->arg;
     switch (poptArgType(opt)) {
     case POPT_ARG_VAL:
     case POPT_ARG_INT:
