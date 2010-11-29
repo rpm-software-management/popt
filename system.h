@@ -96,8 +96,15 @@ char *alloca ();
 
 
 /* Documentation claims these are in limits.h, but it seems to be a lie */
+/* Microsoft documentation http://msdn.microsoft.com/en-us/library/k15zsh48.aspx */
+
+#if !defined(FLT_MIN)
 #define FLT_MIN 1.175494351e-38F
+#endif
+
+#if !defined(FLT_MAX)
 #define FLT_MAX 3.402823466e+38F
+#endif
 
 typedef int uid_t;
 
