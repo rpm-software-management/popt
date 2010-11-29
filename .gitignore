@@ -79,7 +79,6 @@ ltmain.sh
 m4
 *.m4
 Makefile
-Makefile.am
 Makefile.in
 Makefile.in.in
 Makevars.template

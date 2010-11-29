@@ -3,7 +3,7 @@
  */
 
 /* (C) 1998-2002 Red Hat, Inc. -- Licensing details are in the COPYING
-   file accompanying popt source distributions, available from 
+   file accompanying popt source distributions, available from
    ftp://ftp.rpm.org/pub/rpm/dist. */
 
 #include "system.h"
@@ -49,8 +49,8 @@ int poptDupArgv(int argc, const char **argv,
 	nb += strlen(argv[i]) + 1;
     }
 #endif
-	
-    dst = xmalloc(nb);
+
+    dst = (char*) xmalloc(nb);
 assert(dst);	/* XXX can't happen */
     if (dst == NULL)
 	return POPT_ERROR_MALLOC;
@@ -85,7 +85,7 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     const char * se;
     char quote = '\0';
     size_t argvAlloced = POPT_ARGV_ARRAY_GROW_DELTA;
-    const char ** argv = xmalloc(sizeof(*argv) * argvAlloced);
+    const char ** argv = (const char**) xmalloc(sizeof(*argv) * argvAlloced);
     int argc = 0;
     size_t ns = strlen(s);
     char * t = NULL;
@@ -95,7 +95,7 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
 assert(argv);	/* XXX can't happen */
     if (argv == NULL) return rc;
 
-    te = t = xcalloc((size_t)1, ns + 1);
+    te = t = (char*) xcalloc((size_t)1, ns + 1);
 assert(te);	/* XXX can't happen */
     if (te == NULL) {
 	argv = _free(argv);
@@ -121,7 +121,7 @@ assert(te);	/* XXX can't happen */
 		te++, argc++;
 		if (argc == argvAlloced) {
 		    argvAlloced += POPT_ARGV_ARRAY_GROW_DELTA;
-		    argv = xrealloc(argv, sizeof(*argv) * argvAlloced);
+		    argv = (const char**) xrealloc(argv, sizeof(*argv) * argvAlloced);
 assert(argv);	/* XXX can't happen */
 		    if (argv == NULL) goto exit;
 		}
@@ -167,7 +167,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
 		/*@unused@*/ UNUSED(int flags))
 {
     size_t nline = 8192;	/* XXX configurable? */
-    char * line = alloca(nline);
+    char * line = (char*) alloca(nline);
     char * argstr;
     char * q;
     char * x;
@@ -185,7 +185,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
     if (fp == NULL)
 	return POPT_ERROR_NULLARG;
 
-    argstr = xmalloc(maxargvlen * sizeof(*argstr));
+    argstr = (char*) xmalloc(maxargvlen * sizeof(*argstr));
 assert(argstr);	/* XXX can't happen */
     if (argstr == NULL) return POPT_ERROR_MALLOC;
     argstr[0] = '\0';
@@ -223,7 +223,7 @@ assert(argstr);	/* XXX can't happen */
 	    argvlen += (t = (size_t)(q - l)) + (sizeof(" --")-1);
 	    if (argvlen >= maxargvlen) {
 		maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
-		argstr = xrealloc(argstr, maxargvlen);
+		argstr = (char*) xrealloc(argstr, maxargvlen);
 assert(argstr);	/* XXX can't happen */
 		if (argstr == NULL) return POPT_ERROR_MALLOC;
 	    }
@@ -233,7 +233,7 @@ assert(argstr);	/* XXX can't happen */
 	}
 	if (*q != '=')
 	    continue;	/* XXX for now, silently ignore bogus line */
-		
+
 	/* *q is an equal sign. */
 	*q++ = '\0';
 
@@ -253,7 +253,7 @@ assert(argstr);	/* XXX can't happen */
 	argvlen += t + (sizeof("' --='")-1);
 	if (argvlen >= maxargvlen) {
 	    maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
-	    argstr = xrealloc(argstr, maxargvlen);
+	    argstr = (char*) xrealloc(argstr, maxargvlen);
 assert(argstr);	/* XXX can't happen */
 	    if (argstr == NULL) return POPT_ERROR_MALLOC;
 	}
