@@ -1,12 +1,12 @@
 /*
-    Popt Library Test Program Number Too 
-    
+    Popt Library Test Program Number Too
+
     --> "a real world test of popt bugs" <--
 
     Copyright (C) 1999 US Interactive, Inc.
 
     This program can be used under the GPL or LGPL at your
-    whim as long as this Copyright remains attached.  
+    whim as long as this Copyright remains attached.
 */
 
 #include "system.h"
@@ -45,7 +45,7 @@ char *dayphone			= NULL;
 char *fax			= NULL;
 
 
-int 
+int
 main(int argc, const char ** argv) {
 
     poptContext optCon;   /* context for parsing command-line options */

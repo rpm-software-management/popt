@@ -10,7 +10,7 @@
 
 #include "system.h"
 
-#define        POPT_USE_TIOCGWINSZ
+//#define        POPT_USE_TIOCGWINSZ
 #ifdef POPT_USE_TIOCGWINSZ
 #include <sys/ioctl.h>
 #endif
