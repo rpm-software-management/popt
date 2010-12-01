@@ -6,149 +6,149 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2010-11-10 11:07+0100\n"
+"POT-Creation-Date: 2010-11-04 17:12-0400\n"
 "PO-Revision-Date: 2010-10-19 12:01+0900\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: popt.c:52
+#: popt.c:53
 msgid "unknown errno"
 msgstr "不明なエラー番号"
 
-#: popt.c:1411
+#: popt.c:1419
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "オプションタイプ (%u) はpoptには実装されていません\n"
 
-#: popt.c:1856
+#: popt.c:1864
 msgid "missing argument"
 msgstr "引数がありません"
 
-#: popt.c:1858
+#: popt.c:1866
 msgid "unknown option"
 msgstr "不明なオプション"
 
-#: popt.c:1860
+#: popt.c:1868
 msgid "mutually exclusive logical operations requested"
 msgstr "相互排他的な論理操作が必要です"
 
-#: popt.c:1862
+#: popt.c:1870
 msgid "opt->arg should not be NULL"
 msgstr "opt->argはNULLではいけません"
 
-#: popt.c:1864
+#: popt.c:1872
 msgid "aliases nested too deeply"
 msgstr "エイリアスのネストが深すぎます"
 
-#: popt.c:1866
+#: popt.c:1874
 msgid "error in parameter quoting"
 msgstr "パラメータのクオート付けでエラー"
 
-#: popt.c:1868
+#: popt.c:1876
 msgid "invalid numeric value"
 msgstr "不正な数値"
 
-#: popt.c:1870
+#: popt.c:1878
 msgid "number too large or too small"
 msgstr "数値が大きすぎるか小さすぎます"
 
-#: popt.c:1872
+#: popt.c:1880
 msgid "memory allocation failed"
 msgstr "メモリ確保に失敗しました"
 
-#: popt.c:1874
+#: popt.c:1882
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1876
+#: popt.c:1884
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1878
+#: popt.c:1886
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1880
+#: popt.c:1888
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1884
+#: popt.c:1892
 msgid "unknown error"
 msgstr "不明なエラー"
 
-#: popthelp.c:81 popthelp.c:92
+#: popthelp.c:83 popthelp.c:94
 msgid "Show this help message"
 msgstr "このヘルプメッセージを表示します"
 
-#: popthelp.c:82 popthelp.c:93
+#: popthelp.c:84 popthelp.c:95
 msgid "Display brief usage message"
 msgstr "使い方の概要を表示します"
 
-#: popthelp.c:96
+#: popthelp.c:98
 msgid "Display option defaults in message"
 msgstr "オプションのデフォルト値をメッセージに表示します"
 
-#: popthelp.c:98
+#: popthelp.c:100
 msgid "Terminate options"
 msgstr "終了オプション"
 
-#: popthelp.c:197
+#: popthelp.c:199
 msgid "Help options:"
 msgstr "ヘルプオプション:"
 
-#: popthelp.c:198
+#: popthelp.c:200
 msgid "Options implemented via popt alias/exec:"
 msgstr "poptのalias/execで実装されているオプション:"
 
-#: popthelp.c:206
+#: popthelp.c:208
 msgid "NONE"
 msgstr "なし"
 
-#: popthelp.c:208
+#: popthelp.c:210
 msgid "VAL"
 msgstr "値"
 
-#: popthelp.c:212
+#: popthelp.c:214
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:213
+#: popthelp.c:215
 msgid "SHORT"
 msgstr ""
 
-#: popthelp.c:214
+#: popthelp.c:216
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:215
+#: popthelp.c:217
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:216
+#: popthelp.c:218
 msgid "STRING"
 msgstr "文字列"
 
-#: popthelp.c:217
+#: popthelp.c:219
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:218
+#: popthelp.c:220
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:221
+#: popthelp.c:223
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:660
+#: popthelp.c:663
 msgid "Usage:"
 msgstr "使用法:"
 
-#: popthelp.c:686
+#: popthelp.c:689
 msgid "[OPTION...]"
 msgstr "[オプション...]"
