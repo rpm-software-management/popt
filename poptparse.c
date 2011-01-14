@@ -86,7 +86,7 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     char quote = '\0';
     size_t argvAlloced = POPT_ARGV_ARRAY_GROW_DELTA;
     const char ** argv = (const char**) xmalloc(sizeof(*argv) * argvAlloced);
-    int argc = 0;
+    unsigned int argc = 0;
     size_t ns = strlen(s);
     char * t = NULL;
     char * te;
