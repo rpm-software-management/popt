@@ -257,7 +257,7 @@ void poptResetContext(poptContext con)
     con->doExec = NULL;
 
     if (con->av != NULL) {
-    int i;
+    unsigned int i;
      for (i = 0; i < con->ac; i++) {
 /*@-unqualifiedtrans@*/		/* FIX: typedef double indirection. */
  	con->av[i] = _free(con->av[i]);
@@ -1804,8 +1804,8 @@ int poptAddAlias(poptContext con, struct poptAlias alias,
 int poptAddItem(poptContext con, poptItem newItem, int flags)
 {
     poptItem * items, item;
-    size_t * nitems;
-    int    * naliases;
+    size_t * nitems = NULL;
+    int    * naliases = NULL;
 
     switch (flags) {
     case 1:
