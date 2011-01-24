@@ -58,8 +58,6 @@ Doxyfile
 doxygen
 *.gcda
 *.gcno
-.git
-.gitignore
 *.gmo
 *.header
 header_compile_errors
