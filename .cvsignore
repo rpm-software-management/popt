@@ -53,3 +53,5 @@ popt.pc
 popt-*.tar.gz
 .git
 .gitignore
+logs
+lcov

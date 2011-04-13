@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: update .cvsignore
     - devzero2000: fix compiler warning [-Wuninitialized]
     - jbj: i18n: update po files (Translation Project).
     - devzero2000: add version-script linker capability also for openindiana native ld
