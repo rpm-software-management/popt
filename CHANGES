@@ -9,7 +9,7 @@
     - devzero2000: fix: add missing automake per target test* LDFLAGS
     - devzero2000: require, as in autogen.sh, a minimal automake version for bootstrap 
     - devzero2000: added --enable-valgrind autoconf option
-    - Fixed VPATH building with arbitrary directory structure
+    - devzero2000: Fixed VPATH building with arbitrary directory structure
     - devzero2000: some minor fix to autofu and also a minor portability problem on AIX
       with the native compiler
     - devzero2000: add malloc vodo to testit.sh
