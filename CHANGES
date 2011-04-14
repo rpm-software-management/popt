@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - devzero2000: Rewrite the logic in poptReadDefaultConfig 
+      for finding the popt alias file
     - devzero2000: update .cvsignore
     - devzero2000: fix compiler warning [-Wuninitialized]
     - jbj: i18n: update po files (Translation Project).
