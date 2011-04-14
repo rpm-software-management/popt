@@ -494,6 +494,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 {
     static const char _popt_alias[] = POPT_ALIAS;
     char * home;
+    struct stat sb;
     int rc = 0;		/* assume success */
 
     if (con->appName == NULL) goto exit;

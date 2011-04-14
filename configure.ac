@@ -224,7 +224,7 @@ AM_CONDITIONAL([HAVE_MCCABE],[test "x$MCCABE" != xNO_MCCABE])
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([assert.h fcntl.h float.h langinfo.h libintl.h limits.h sys/ioctl.h wchar.h alloca.h])
+AC_CHECK_HEADERS([assert.h glob.h fnmatch.h fcntl.h float.h langinfo.h libintl.h limits.h sys/ioctl.h wchar.h alloca.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
