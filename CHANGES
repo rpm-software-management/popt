@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: revert bad commit: add missing glob.h and fnmatch.h in configure.ac, add struct sb in poptconfig.c
     - devzero2000: Rewrite the logic in poptReadDefaultConfig 
       for finding the popt alias file
     - devzero2000: update .cvsignore
