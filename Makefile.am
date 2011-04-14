@@ -5,6 +5,69 @@ AM_CPPFLAGS = -I. -I$(top_srcdir)
 AM_CFLAGS = $(POPT_CFLAGS)
 AM_LDFLAGS = $(POPT_LDFLAGS)
 
+## begin configmake
+
+# Retrieve values of the variables through 'configure' followed by
+# 'make', not directly through 'configure', so that a user who
+# sets some of these variables consistently on the 'make' command
+# line gets correct results.
+#
+# One advantage of this approach, compared to the classical
+# approach of adding -DLIBDIR=\"$(libdir)\" etc. to AM_CPPFLAGS,
+# is that it protects against the use of undefined variables.
+# If, say, $(libdir) is not set in the Makefile, LIBDIR is not
+# defined by this module, and code using LIBDIR gives a
+# compilation error.
+#
+# Another advantage is that 'make' output is shorter.
+#
+# Listed in the same order as the GNU makefile conventions.
+# The Automake-defined pkg* macros are appended, in the order
+# listed in the Automake 1.10a+ documentation.
+configmake.h: Makefile
+	$(AM_V_GEN)rm -f $@-t && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  echo '#define PREFIX "$(prefix)"'; \
+	  echo '#define EXEC_PREFIX "$(exec_prefix)"'; \
+	  echo '#define BINDIR "$(bindir)"'; \
+	  echo '#define SBINDIR "$(sbindir)"'; \
+	  echo '#define LIBEXECDIR "$(libexecdir)"'; \
+	  echo '#define DATAROOTDIR "$(datarootdir)"'; \
+	  echo '#define DATADIR "$(datadir)"'; \
+	  echo '#define SYSCONFDIR "$(sysconfdir)"'; \
+	  echo '#define SHAREDSTATEDIR "$(sharedstatedir)"'; \
+	  echo '#define LOCALSTATEDIR "$(localstatedir)"'; \
+	  echo '#define INCLUDEDIR "$(includedir)"'; \
+	  echo '#define OLDINCLUDEDIR "$(oldincludedir)"'; \
+	  echo '#define DOCDIR "$(docdir)"'; \
+	  echo '#define INFODIR "$(infodir)"'; \
+	  echo '#define HTMLDIR "$(htmldir)"'; \
+	  echo '#define DVIDIR "$(dvidir)"'; \
+	  echo '#define PDFDIR "$(pdfdir)"'; \
+	  echo '#define PSDIR "$(psdir)"'; \
+	  echo '#define LIBDIR "$(libdir)"'; \
+	  echo '#define LISPDIR "$(lispdir)"'; \
+	  echo '#define LOCALEDIR "$(localedir)"'; \
+	  echo '#define MANDIR "$(mandir)"'; \
+	  echo '#define MANEXT "$(manext)"'; \
+	  echo '#define PKGDATADIR "$(pkgdatadir)"'; \
+	  echo '#define PKGINCLUDEDIR "$(pkgincludedir)"'; \
+	  echo '#define PKGLIBDIR "$(pkglibdir)"'; \
+	  echo '#define PKGLIBEXECDIR "$(pkglibexecdir)"'; \
+	  echo '#define POPT_ALIAS "$(sysconfdir)/popt"'; \
+	} | sed '/""/d' > $@-t && \
+	if test -f $@ && cmp $@-t $@ > /dev/null; then \
+	  rm -f $@-t; \
+	else \
+	  rm -f $@; mv $@-t $@; \
+	fi
+
+BUILT_SOURCES = configmake.h
+CLEANFILES = configmake.h configmake.h-t
+
+
+## end configmake
+
 EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
 	footer_no_timestamp.html libpopt.vers \
 	$(TESTS) test-poptrc\
@@ -67,7 +130,7 @@ endif
 
 dist_man_MANS = popt.3
 
-BUILT_SOURCES = popt.pc 
+BUILT_SOURCES += popt.pc 
 
 distclean-local:
 	rm -rf .ccache 

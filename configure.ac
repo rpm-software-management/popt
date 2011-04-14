@@ -191,10 +191,6 @@ AC_ARG_ENABLE(doxygen,
     [DOXYGEN_ENABLE=yes])
 AM_CONDITIONAL([DOXYGEN_ENABLE], [test x$DOXYGEN != xNO_DOXYGEN])
 
-# Define for popt_sysconfig 
-popt_sysconfdir="${sysconfdir}"
-eval "popt_sysconfdir=\"${popt_sysconfdir}\"" # expand contained ${prefix}
-AC_DEFINE_UNQUOTED([POPT_SYSCONFDIR], ["$popt_sysconfdir"], [Full path to default POPT configuration directory])
 
 # Check for gcov support.
 # Check for lcov  Makefile conditional
