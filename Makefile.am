@@ -58,6 +58,7 @@ configmake.h: Makefile
 	} | sed '/""/d' > $@-t && \
 	if test -f $@ && cmp $@-t $@ > /dev/null; then \
 	  rm -f $@-t; \
+	  touch $@; \
 	else \
 	  rm -f $@; mv $@-t $@; \
 	fi
@@ -123,6 +124,9 @@ libpopt_la_LDFLAGS = -no-undefined @LTLIBINTL@ @LTLIBICONV@ $(AM_LDFLAGS)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = popt.pc
+
+poptaliasdir = $(sysconfdir)/popt.d
+poptalias_DATA =
 
 if HAVE_LD_VERSION_SCRIPT
 libpopt_la_LDFLAGS += -Wl,@LD_VERSION_SCRIPT_FLAG@,@top_srcdir@/libpopt.vers
