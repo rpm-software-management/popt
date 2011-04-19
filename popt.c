@@ -234,9 +234,14 @@ static void cleanOSE(/*@special@*/ struct optionStackEntry *os)
 	/*@releases os->nextArg, os->argv, os->argb @*/
 	/*@modifies os @*/
 {
-    os->nextArg = _free(os->nextArg);
+#if !defined(SUPPORT_CONTIGUOUS_ARGV)
+    int i;
+    for (i = 0; os->argv[i]; i++)
+	os->argv[i] = _free(os->argv[i]);
+#endif
     os->argv = _free(os->argv);
     os->argb = PBM_FREE(os->argb);
+    os->nextArg = _free(os->nextArg);
 }
 
 void poptResetContext(poptContext con)
@@ -1750,12 +1755,17 @@ poptItem poptFreeItems(/*@only@*/ /*@null@*/ poptItem items, int nitems)
 {
     if (items != NULL) {
 	poptItem item = items;
+	int i;
 	while (--nitems >= 0) {
 /*@-modobserver -observertrans -dependenttrans@*/
 	    item->option.longName = _free(item->option.longName);
 	    item->option.descrip = _free(item->option.descrip);
 	    item->option.argDescrip = _free(item->option.argDescrip);
 /*@=modobserver =observertrans =dependenttrans@*/
+#if !defined(SUPPORT_CONTIGUOUS_ARGV)
+	    for (i = 0; item->argv[i]; i++)
+		item->argv[i] = _free(item->argv[i]);
+#endif
 	    item->argv = _free(item->argv);
 	    item++;
 	}
@@ -1815,12 +1825,12 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
     case 1:
 	items = &con->execs;
 	nitems = &con->numExecs;
-      *items = (poptItem) xrealloc((*items), ((*nitems) + 1) * sizeof(**items));
+      *items = (poptItem) xrealloc(*items, ((*nitems) + 1) * sizeof(**items));
 	break;
     case 0:
 	items = &con->aliases;
 	naliases = &con->numAliases;
-      *items = (poptItem) xrealloc((*items), ((*naliases) + 1) * sizeof(**items));
+      *items = (poptItem) xrealloc(*items, ((*naliases) + 1) * sizeof(**items));
 	break;
     default:
 	return 1;
