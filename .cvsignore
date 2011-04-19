@@ -21,6 +21,7 @@ config.log
 config.rpath
 config.status
 config.sub
+configmake.h
 configure
 doxygen
 depcomp

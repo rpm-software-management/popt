@@ -1023,6 +1023,7 @@ char * te = t;
 const char * s;
     int rc = 0;		/* assume success */
     long long retval = 0;
+    int i;
 const char ** av = NULL;
 int ac = 0;
 int xx;
@@ -1072,8 +1073,7 @@ s = (expr ? expr : t);
 xx = poptParseArgvString(s, &ac, &av);	/* XXX split on CSV character set. */
 assert(!xx && av);
 
-    if (av) {
-    int i;
+    if (av)
     for (i = 0; av[i] != NULL; i++) {
 	const char * arg = av[i];
 	size_t len = strlen(arg);
@@ -1136,7 +1136,6 @@ assert(!xx && av);
 	    }
 	}
     }
-   }
 
     if (ix-- < 1) {
 	rc = POPT_ERROR_STACKUNDERFLOW;
@@ -1145,8 +1144,13 @@ assert(!xx && av);
     retval = stk[ix];
 
 exit:
-    if (av)
+    if (av) {
+#if !defined(SUPPORT_CONTIGUOUS_ARGV)
+	for (i = 0; av[i]; i++)
+	    av[i] = _free(av[i]);
+#endif
 	av = _free(av);
+    }
     *rcp = rc;
     return retval;
 }
