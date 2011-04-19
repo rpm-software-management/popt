@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - jbj: fix: plug another memory leak related to contiguous argv malloc.
+    - jbj: fix: plug a memory leak related to contiguous argv malloc.
     - devzero2000: fix the configmake.h make rule: update its timestamp also if it don't change.
     - devzero2000: revert bad commit: add missing glob.h and fnmatch.h in configure.ac, add struct sb in poptconfig.c
     - devzero2000: Rewrite the logic in poptReadDefaultConfig 

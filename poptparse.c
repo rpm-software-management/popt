@@ -50,7 +50,7 @@ int poptDupArgv(int argc, const char **argv,
     }
 #endif
 
-    dst = (char*) xmalloc(nb);
+    dst = (char *) xmalloc(nb);
 assert(dst);	/* XXX can't happen */
     if (dst == NULL)
 	return POPT_ERROR_MALLOC;
@@ -90,17 +90,19 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     size_t ns = strlen(s);
     char * t = NULL;
     char * te;
+    int i;
     int rc = POPT_ERROR_MALLOC;
 
 assert(argv);	/* XXX can't happen */
     if (argv == NULL) return rc;
 
-    te = t = (char*) xcalloc((size_t)1, ns + 1);
+    te = t = (char*) xmalloc(ns + 1);
 assert(te);	/* XXX can't happen */
     if (te == NULL) {
 	argv = _free(argv);
 	return rc;
     }
+    *te = '\0';
     argv[argc] = te;
 
     for (se = s; *se != '\0'; se++) {
@@ -118,13 +120,14 @@ assert(te);	/* XXX can't happen */
 	    *te++ = *se;
 	} else if (_isspaceptr(se)) {
 	    if (*argv[argc] != '\0') {
-		te++, argc++;
+		*te++ = '\0', argc++;
 		if (argc == argvAlloced) {
 		    argvAlloced += POPT_ARGV_ARRAY_GROW_DELTA;
 		    argv = (const char**) xrealloc(argv, sizeof(*argv) * argvAlloced);
 assert(argv);	/* XXX can't happen */
 		    if (argv == NULL) goto exit;
 		}
+		*te = '\0';
 		argv[argc] = te;
 	    }
 	} else
@@ -147,7 +150,7 @@ assert(argv);	/* XXX can't happen */
     }
 
     if (strlen(argv[argc])) {
-	argc++, te++;
+	argc++, *te++ = '\0';
     }
 
     rc = poptDupArgv(argc, argv, argcPtr, argvPtr);

@@ -381,7 +381,7 @@ static int poptConfigLine(poptContext con, char * line)
 /*@=nullstate@*/
 exit:
     rc = 0;	/* XXX for now, always return success */
-    b=_free(b);
+    b = _free(b);
     return rc;
 }
 /*@=compmempass@*/
