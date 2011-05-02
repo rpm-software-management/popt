@@ -534,10 +534,13 @@ popt expands into other options when they are specified. If the standard
 information in text files.
 .sp
 .SS "1. SPECIFYING ALIASES"
-.RI "Aliases are normally specified in two places: " /etc/popt 
-.RB "and the " .popt " file in the user's home directory (found through "
-.RB "the " HOME " environment variable). Both files have the same format, "
-an arbitrary number of lines formatted like this:
+.RI "Aliases are normally specified in two places: " /etc/popt " and"
+.RB " the " .popt " file in the user's home directory (found through"
+.RB "the " HOME " environment variable). 
+.RB "The directory " /etc/popt.d " can also contain an arbitrary 
+number of these files, with names of your choice. 
+.sp
+They have the same format, an arbitrary number of lines formatted like this:
 .sp
 .IB appname " alias " newoption "" " expansion"
 .sp
