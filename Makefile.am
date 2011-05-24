@@ -70,7 +70,7 @@ CLEANFILES = configmake.h configmake.h-t
 ## end configmake
 
 EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
-	footer_no_timestamp.html libpopt.vers \
+	footer_no_timestamp.html libpopt.vers README-prereq\
 	$(TESTS) test-poptrc\
 	popt.xcodeproj/project.pbxproj \
 	popt.ps Doxyfile 	test3-data/01.answer \
