@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: try to redo the bootstrap check better
     - devzero2000: add configmake.h to .gitignore
     - devzero2000: document the /etc/popt.d use in popt(3)
     - jbj: fix: plug another memory leak related to contiguous argv malloc.

@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: autogen.sh,v 1.21 2010/08/12 16:56:37 devzero2000 Exp $
+# $Id: autogen.sh,v 1.22 2011/05/24 15:45:20 devzero2000 Exp $
 # autogen.sh: autogen.sh script for popt projects
 #
 # Copyright (c) 2010-2011 Elia Pinto <devzero2000@rpm5.org>
@@ -19,41 +19,138 @@ else
   exit 1
 fi
 
-# Version Used for building
+# Function Used for ichecking the Version Used for building
 # 
+# Note this deviates from the version comparison in automake
+# in that it treats 1.5 < 1.5.0, and treats 1.4.4a < 1.4-p3a
+# but this should suffice as we won't be specifying old
+# version formats or redundant trailing .0 in bootstrap.conf.
+# If we did want full compatibility then we should probably
+# use m4_version_compare from autoconf.
+sort_ver() { # sort -V is not generally available
+  ver1="$1"
+  ver2="$2"
 
-# Check for automake
-am_version=`${AUTOMAKE:-automake} --version 2>/dev/null|sed -e 's/^[^0-9]*//;s/[a-z]* *$//;s/[- ].*//g;q'`
-if test -z "$am_version"; then
- echo "$0: automake not found."
- echo "You need automake version 1.11 or newer installed"
- exit 1
-fi
-IFS=_; set $am_version; IFS=' '
-am_version=$1
-IFS=.; set $am_version; IFS=' '
-# automake 1.11 or newer
-if test "$1" = "1" -a "$2" -lt "11"; then
-  echo "$0: automake version $am_version found."
-  echo "You need automake version 1.11 or newer installed"
+  # split on '.' and compare each component
+  i=1
+  while : ; do
+    p1=$(echo "$ver1" | cut -d. -f$i)
+    p2=$(echo "$ver2" | cut -d. -f$i)
+    if [ ! "$p1" ]; then
+      echo "$1 $2"
+      break
+    elif [ ! "$p2" ]; then
+      echo "$2 $1"
+      break
+    elif [ ! "$p1" = "$p2" ]; then
+      if [ "$p1" -gt "$p2" ] 2>/dev/null; then # numeric comparison
+        echo "$2 $1"
+      elif [ "$p2" -gt "$p1" ] 2>/dev/null; then # numeric comparison
+        echo "$1 $2"
+      else # numeric, then lexicographic comparison
+        lp=$(printf "$p1\n$p2\n" | LANG=C sort -n | tail -n1)
+        if [ "$lp" = "$p2" ]; then
+          echo "$1 $2"
+        else
+          echo "$2 $1"
+        fi
+      fi
+      break
+    fi
+    i=$(($i+1))
+  done
+}
+
+get_version() {
+  app=$1
+
+  $app --version >/dev/null 2>&1 || return 1
+
+  $app --version 2>&1 |
+  sed -n '# extract version within line
+          s/.*[v ]\{1,\}\([0-9]\{1,\}\.[.a-z0-9-]*\).*/\1/
+          t done
+
+          # extract version at start of line
+          s/^\([0-9]\{1,\}\.[.a-z0-9-]*\).*/\1/
+          t done
+
+          d
+
+          :done
+          #the following essentially does s/5.005/5.5/
+          s/\.0*\([1-9]\)/.\1/g
+          p
+          q'
+}
+
+check_versions() {
+  ret=0
+
+  while read app req_ver; do
+    # Honor $APP variables ($TAR, $AUTOCONF, etc.)
+    appvar=`echo $app | tr '[a-z]' '[A-Z]'`
+    test "$appvar" = TAR && appvar=AMTAR
+    eval "app=\${$appvar-$app}"
+    inst_ver=$(get_version $app)
+    if [ ! "$inst_ver" ]; then
+      echo "Error: '$app' not found" >&2
+      ret=1
+    elif [ ! "$req_ver" = "-" ]; then
+      latest_ver=$(sort_ver $req_ver $inst_ver | cut -d' ' -f2)
+      if [ ! "$latest_ver" = "$inst_ver" ]; then
+        echo "Error: '$app' version == $inst_ver is too old" >&2
+        echo "       '$app' version >= $req_ver is required" >&2
+        ret=1
+      fi
+    fi
+  done
+
+  return $ret
+}
+
+print_versions() {
+  echo "Program    Min_version"
+  echo "----------------------"
+  printf "$buildreq"
+  echo "----------------------"
+  # can't depend on column -t
+}
+
+#######################
+# Begin  Bootstrapping
+#######################
+# Build prerequisites
+buildreq="\
+autoconf   2.63
+automake   1.11.1
+autopoint  -
+gettext    0.17
+libtool	   1.5.22
+"
+
+echo "$0: Bootstrapping popt build system..."
+echo
+
+# Guess whether we are using configure.ac or configure.in
+if test -f configure.ac; then
+  conffile="configure.ac"
+elif test -f configure.in; then
+  conffile="configure.in"
+else
+  echo "$0: could not find configure.ac or configure.in"
   exit 1
 fi
-# Check for autoconf
-ac_version=`${AUTOCONF:-autoconf} --version 2>/dev/null|sed -e 's/^[^0-9]*//;s/[a-z]* *$//;s/[- ].*//g;q'`
-if test -z "$ac_version"; then
- echo "$0: autoconf not found."
- echo "You need autoconf version 2.63 or newer installed"
- exit 1
+
+if ! printf "$buildreq" | check_versions; then
+  test -f README-prereq &&
+  echo
+  echo "See README-prereq for notes on obtaining these prerequisite programs:" >&2
+  echo
+  print_versions
+  exit 1
 fi
-IFS=_; set $ac_version; IFS=' '
-ac_version=$1
-IFS=.; set $ac_version; IFS=' '
-# autoconf 2.63 or newer 
-if test "$1" = "2" -a "$2" -lt "63" || test "$1" -lt "2"; then
- echo "$0: autoconf version $ac_version found."
- echo "You need autoconf version 2.63 or newer installed"
- exit 1
-fi
+
 # Libtool
 libtoolize=`which glibtoolize 2>/dev/null`
 case $libtoolize in
@@ -75,3 +172,10 @@ po_dir=./po
 LANG=C
 ls "$po_dir"/*.po 2>/dev/null |
               sed 's|.*/||; s|\.po$||' > "$po_dir/LINGUAS"
+
+#
+echo
+echo "$0: done.  Now you can run './configure'."
+#######################
+# End  Bootstrapping
+#######################
