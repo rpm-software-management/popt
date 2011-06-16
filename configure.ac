@@ -245,6 +245,7 @@ AC_CHECK_FUNCS([getuid geteuid iconv mtrace __secure_getenv setregid stpcpy stre
 # drop AC_FUNC_MALLOC, REALLOC and STRTOD
 AC_CHECK_FUNCS([malloc realloc strtod memset nl_langinfo stpcpy strchr strerror strrchr])
 
+dnl check for version script support in the linker (GNU ld, or Solaris ld style)
 AC_ARG_ENABLE([ld-version-script],
               AS_HELP_STRING([--enable-ld-version-script],[enable/disable use of linker version script.
                               (default is system dependent)]),
@@ -253,53 +254,51 @@ AC_ARG_ENABLE([ld-version-script],
 
 AS_IF([test "x$have_ld_version_script" = xyes],
   [ 
-	dnl check for version script support in the linker (GNU ld, or Solaris ld style)
-	AC_CACHE_CHECK([for ld --version-script], [popt_cv_ld_version_script], [dnl
-  cat > conftest.c <<EOF
-void cl_symbol1(void) {}
-void cli_symbol2(void) {}
-EOF
-  cat > conftest.map <<EOF
+    AC_MSG_CHECKING([if ld version-script works - GNU ld, Solaris ld])
+    cat > conftest.map <<EOF
 RELEASE
 {
 	global:
-		cl_*;
+		popt_*;
 	local:
 		*;
 };
 PRIVATE
 {
 	global:
-		cli_*;
+		popti_*;
 	local:
 		*;
 };
 EOF
-  dnl check for GNU ld style linker version script
-  if AC_TRY_COMMAND([${CC-cc} $CFLAGS $pic_flag $LDFLAGS -shared
-				-o conftest.so conftest.c
-				-Wl,--version-script,conftest.map
-		       1>&AS_MESSAGE_LOG_FD]);
-  then
-      LD_VERSION_SCRIPT_FLAG=--version-script
-      popt_cv_ld_version_script=yes
-  else
-	dnl check for Solaris ld style linker version script
-	if AC_TRY_COMMAND([${CC-cc} $CFLAGS $pic_flag $LDFLAGS -shared
-				-o conftest.so conftest.c
-				-Wl,-M,conftest.map
-			1>&AS_MESSAGE_LOG_FD]);
-	then
+    save_LDFLAGS="$LDFLAGS"
+    LDFLAGS="$LDFLAGS -Wl,--version-script=conftest.map"
+    AC_LINK_IFELSE([AC_LANG_PROGRAM([[
+                   void popt_symbol1(void) {}
+                   void popti_symbol2(void) {}
+                   ]], [])],
+                   [have_ld_version_script=yes], [have_ld_version_script=no])
+    LDFLAGS="$save_LDFLAGS"
+    if test x$have_ld_version_script != xyes
+    then
+    	save_LDFLAGS="$LDFLAGS"
+    	LDFLAGS="$LDFLAGS -Wl,-M,conftest.map"
+        AC_LINK_IFELSE([AC_LANG_PROGRAM([[
+                   void popt_symbol1(void) {}
+                   void popti_symbol2(void) {}
+                   ]], [])],
+                   [have_ld_version_script=yes], [have_ld_version_script=no])
+    	LDFLAGS="$save_LDFLAGS"
+    	if test x$have_ld_version_script = xyes
+    	then
 		LD_VERSION_SCRIPT_FLAG=-M
-		popt_cv_ld_version_script=yes;
-	else
-		popt_cv_ld_version_script=no
-	fi
-  fi
- have_ld_version_script=$popt_cv_ld_version_script
- rm -f conftest*])
-  ])
-
+    	fi
+    else
+      LD_VERSION_SCRIPT_FLAG=--version-script
+    fi
+    AC_MSG_RESULT($have_ld_version_script)
+    rm -f conftest.map conftest.c
+])
 AC_SUBST([LD_VERSION_SCRIPT_FLAG])
 AM_CONDITIONAL([HAVE_LD_VERSION_SCRIPT],[test "$have_ld_version_script" = "yes"])
 

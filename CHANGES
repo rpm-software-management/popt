@@ -1,4 +1,9 @@
 1.17 -> 2.0:
+    - devzero2000: redo the autofu vendor-script linker script check for openindiana native
+      ld, using modern and not deprecated autoconf construct. Even if the check is not perfect 
+      but it is based on a resultant ld warningi, on openindiana the result actually work
+      with gcc and native ld. This patch also fix the build 
+      on openindiana broken by the precedent patch.
     - devzero2000: add missing README-prereq
     - devzero2000: try to redo the bootstrap check better
     - devzero2000: add configmake.h to .gitignore
