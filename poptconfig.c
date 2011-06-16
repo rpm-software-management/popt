@@ -411,8 +411,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    te = t;
 	    while (*te && _isspaceptr(te)) te++;
 	    if (*te && *te != '#') {
-                int xx;
-		xx = poptConfigLine(con, te); /* XXX: unchecked */
+		poptConfigLine(con, te); /* XXX: unchecked */
             }
 	    /*@switchbreak@*/ break;
 /*@-usedef@*/	/* XXX *se may be uninitialized */

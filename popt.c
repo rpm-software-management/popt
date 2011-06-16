@@ -510,7 +510,6 @@ static int execCommand(poptContext con)
     poptItem item = con->doExec;
     poptArgv argv = NULL;
     int argc = 0;
-    int rc;
     int ec = POPT_ERROR_ERRNO;
 
 assert(item);	/*XXX can't happen*/
@@ -557,10 +556,13 @@ assert(argv);	/* XXX can't happen */
     argv[argc] = NULL;
 
 #if defined(hpux) || defined(__hpux)
+    {
+    int rc;
     rc = setresgid(getgid(), getgid(),-1);
     if (rc) goto exit;
     rc = setresuid(getuid(), getuid(),-1);
     if (rc) goto exit;
+    }
 #else
 /*
  * XXX " ... on BSD systems setuid() should be preferred over setreuid()"
@@ -568,15 +570,21 @@ assert(argv);	/* XXX can't happen */
  * XXX	from Norbert Warmuth <nwarmuth@privat.circular.de>
  */
 #if defined(HAVE_SETUID)
+    {
+    int rc;
     rc = setgid(getgid());
     if (rc) goto exit;
     rc = setuid(getuid());
     if (rc) goto exit;
+    }
 #elif defined (HAVE_SETREUID)
+    {
+    int rc;
     rc = setregid(getgid(), getgid());
     if (rc) goto exit;
     rc = setreuid(getuid(), getuid());
     if (rc) goto exit;
+    }
 #else
     ; /* Can't drop privileges */
 #endif
@@ -593,7 +601,7 @@ if (_popt_debug)
 #endif
 
 /*@-nullstate@*/
-    rc = execvp(argv[0], (char *const *)argv);
+    execvp(argv[0], (char *const *)argv);
 /*@=nullstate@*/
 
 exit:

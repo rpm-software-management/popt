@@ -332,7 +332,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     char * left;
     size_t nb = maxLeftCol + 1;
     int displaypad = 0;
-    int xx;
 
     /* Make sure there's more than enough room in target buffer. */
     if (opt->longName)	nb += strlen(opt->longName);
@@ -468,9 +467,9 @@ assert(t);	/* XXX can't happen */
     }
 
     if (help)
-	xx = POPT_fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
+	POPT_fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
     else {
-	xx = POPT_fprintf(fp,"  %s\n", left);
+	POPT_fprintf(fp,"  %s\n", left);
 	goto out;
     }
 
@@ -500,7 +499,7 @@ assert(t);	/* XXX can't happen */
 		fmthelp[ch - help] = '\0';
 		sprintf(format, "%%s\n%%%ds", (int) indentLength);
 		/*@-formatconst@*/
-		xx = POPT_fprintf(fp, format, fmthelp, " ");
+		POPT_fprintf(fp, format, fmthelp, " ");
 		/*@=formatconst@*/
 		free(fmthelp);
 	    }
@@ -641,8 +640,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	if (opt->arg == poptAliasOptions && !(con->numAliases || con->numExecs))
 	    continue;
 	if (opt->descrip) {
-            int xx;
-	    xx = POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip)); /* XXX: unchecked */
+	    POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip)); /* XXX: unchecked */
         }
 
 	singleTableHelp(con, fp, opt->arg, columns, sub_transdom);
@@ -658,9 +656,8 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 	/*@modifies fp, fileSystem @*/
 {
     size_t len = (size_t)6;
-    int xx;
 
-    xx = POPT_fprintf(fp, POPT_("Usage:"));
+    POPT_fprintf(fp, POPT_("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {
 	struct optionStackEntry * os = con->optionStack;
 	const char * fn = (os->argv ? os->argv[0] : NULL);
@@ -679,14 +676,13 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 void poptPrintHelp(poptContext con, FILE * fp, /*@unused@*/ UNUSED(int flags))
 {
     columns_t columns = (columns_t) xcalloc((size_t)1, sizeof(*columns));
-    int xx;
 
 assert(columns);	/* XXX can't happen */
     (void) showHelpIntro(con, fp);
     if (con->otherHelp)
-	xx = POPT_fprintf(fp, " %s\n", con->otherHelp);
+	POPT_fprintf(fp, " %s\n", con->otherHelp);
     else
-	xx = POPT_fprintf(fp, " %s\n", POPT_("[OPTION...]"));
+	POPT_fprintf(fp, " %s\n", POPT_("[OPTION...]"));
 
     if (columns) {
 	columns->cur = maxArgWidth(con->options, NULL);
