@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: fix compiler warning -Wunused-but-set-variable (GCC 4.6)
     - devzero2000: redo the autofu vendor-script linker script check for openindiana native
       ld, using modern and not deprecated autoconf construct. Even if the check is not perfect 
       but it is based on a resultant ld warning, on openindiana the result actually work
