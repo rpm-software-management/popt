@@ -2,77 +2,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2010-11-04 17:12-0400\n"
+"POT-Creation-Date: 2011-09-04 10:33-0400\n"
 "PO-Revision-Date: 2001-06-27 11:05+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
+"Language: no\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Language: no\n"
 
 #: popt.c:53
 msgid "unknown errno"
 msgstr "ukjent errno"
 
-#: popt.c:1419
+#: popt.c:1436
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "flaggtype (%d) ikke implementert i popt\n"
 
-#: popt.c:1864
+#: popt.c:1886
 msgid "missing argument"
 msgstr "manglende argument"
 
-#: popt.c:1866
+#: popt.c:1888
 msgid "unknown option"
 msgstr "ukjent flagg"
 
-#: popt.c:1868
+#: popt.c:1890
 msgid "mutually exclusive logical operations requested"
 msgstr "gjensidig eksluderende logiske operasjoner forespurt"
 
-#: popt.c:1870
+#: popt.c:1892
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg må ikke være NULL"
 
-#: popt.c:1872
+#: popt.c:1894
 msgid "aliases nested too deeply"
 msgstr "aliaser med for dype løkker"
 
-#: popt.c:1874
+#: popt.c:1896
 msgid "error in parameter quoting"
 msgstr "feil i parametersitering"
 
-#: popt.c:1876
+#: popt.c:1898
 msgid "invalid numeric value"
 msgstr "ugyldig numerisk verdi"
 
-#: popt.c:1878
+#: popt.c:1900
 msgid "number too large or too small"
 msgstr "tallet er for stort eller lite"
 
-#: popt.c:1880
+#: popt.c:1902
 msgid "memory allocation failed"
 msgstr "minneallokering feilet"
 
-#: popt.c:1882
+#: popt.c:1904
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1884
+#: popt.c:1906
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1886
+#: popt.c:1908
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1888
+#: popt.c:1910
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1892
+#: popt.c:1914
 msgid "unknown error"
 msgstr "ukjent feil"
 
@@ -141,10 +141,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:663
+#: popthelp.c:660
 msgid "Usage:"
 msgstr "Bruk:"
 
-#: popthelp.c:689
+#: popthelp.c:685
 msgid "[OPTION...]"
 msgstr "[FLAGG...]"

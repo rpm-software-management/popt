@@ -2,77 +2,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2010-11-04 17:12-0400\n"
+"POT-Creation-Date: 2011-09-04 10:33-0400\n"
 "PO-Revision-Date: 2001-06-08 01:35+0000\n"
 "Last-Translator: Richard Allen <ra@hp.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Language: \n"
 
 #: popt.c:53
 msgid "unknown errno"
 msgstr "óþekkt villunúmer"
 
-#: popt.c:1419
+#: popt.c:1436
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "rofagerðin (%d) er ekki studd í popt\n"
 
-#: popt.c:1864
+#: popt.c:1886
 msgid "missing argument"
 msgstr "vantar viðfang"
 
-#: popt.c:1866
+#: popt.c:1888
 msgid "unknown option"
 msgstr "óþekktur rofi"
 
-#: popt.c:1868
+#: popt.c:1890
 msgid "mutually exclusive logical operations requested"
 msgstr "beðið um rofa sem slökkva hvor á öðrum"
 
-#: popt.c:1870
+#: popt.c:1892
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ætti ekki að vera NULL"
 
-#: popt.c:1872
+#: popt.c:1894
 msgid "aliases nested too deeply"
 msgstr "alíasar of flóknir"
 
-#: popt.c:1874
+#: popt.c:1896
 msgid "error in parameter quoting"
 msgstr "villa í viðföngum (gæsalappir og svo frv.)"
 
-#: popt.c:1876
+#: popt.c:1898
 msgid "invalid numeric value"
 msgstr "ógilt tölulegt gildi"
 
-#: popt.c:1878
+#: popt.c:1900
 msgid "number too large or too small"
 msgstr "talan of stór eða smá"
 
-#: popt.c:1880
+#: popt.c:1902
 msgid "memory allocation failed"
 msgstr "ekki tókst að taka frá minni"
 
-#: popt.c:1882
+#: popt.c:1904
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1884
+#: popt.c:1906
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1886
+#: popt.c:1908
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1888
+#: popt.c:1910
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1892
+#: popt.c:1914
 msgid "unknown error"
 msgstr "óþekkt villa"
 
@@ -141,10 +141,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:663
+#: popthelp.c:660
 msgid "Usage:"
 msgstr "Notkun:"
 
-#: popthelp.c:689
+#: popthelp.c:685
 msgid "[OPTION...]"
 msgstr "[ROFI...]"

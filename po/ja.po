@@ -6,78 +6,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2010-11-04 17:12-0400\n"
+"POT-Creation-Date: 2011-09-04 10:33-0400\n"
 "PO-Revision-Date: 2010-10-19 12:01+0900\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: popt.c:53
 msgid "unknown errno"
 msgstr "不明なエラー番号"
 
-#: popt.c:1419
+#: popt.c:1436
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "オプションタイプ (%u) はpoptには実装されていません\n"
 
-#: popt.c:1864
+#: popt.c:1886
 msgid "missing argument"
 msgstr "引数がありません"
 
-#: popt.c:1866
+#: popt.c:1888
 msgid "unknown option"
 msgstr "不明なオプション"
 
-#: popt.c:1868
+#: popt.c:1890
 msgid "mutually exclusive logical operations requested"
 msgstr "相互排他的な論理操作が必要です"
 
-#: popt.c:1870
+#: popt.c:1892
 msgid "opt->arg should not be NULL"
 msgstr "opt->argはNULLではいけません"
 
-#: popt.c:1872
+#: popt.c:1894
 msgid "aliases nested too deeply"
 msgstr "エイリアスのネストが深すぎます"
 
-#: popt.c:1874
+#: popt.c:1896
 msgid "error in parameter quoting"
 msgstr "パラメータのクオート付けでエラー"
 
-#: popt.c:1876
+#: popt.c:1898
 msgid "invalid numeric value"
 msgstr "不正な数値"
 
-#: popt.c:1878
+#: popt.c:1900
 msgid "number too large or too small"
 msgstr "数値が大きすぎるか小さすぎます"
 
-#: popt.c:1880
+#: popt.c:1902
 msgid "memory allocation failed"
 msgstr "メモリ確保に失敗しました"
 
-#: popt.c:1882
+#: popt.c:1904
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1884
+#: popt.c:1906
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1886
+#: popt.c:1908
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1888
+#: popt.c:1910
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1892
+#: popt.c:1914
 msgid "unknown error"
 msgstr "不明なエラー"
 
@@ -145,10 +145,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:663
+#: popthelp.c:660
 msgid "Usage:"
 msgstr "使用法:"
 
-#: popthelp.c:689
+#: popthelp.c:685
 msgid "[OPTION...]"
 msgstr "[オプション...]"
