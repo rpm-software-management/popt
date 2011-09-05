@@ -265,7 +265,11 @@ assert(le);	/* XXX can't happen */
 	le += sprintf(le, "%ld", arg.longp[0]);
 	break;
     case POPT_ARG_LONGLONG:
+#if defined(_MSC_VER) || defined(__MINGW32__)
 	le += sprintf(le, "%" LONG_LONG_FORMAT, arg.longlongp[0]);
+#else 
+        le += sprintf(le, "%lld", arg.longlongp[0]);
+#endif
 	break;
     case POPT_ARG_FLOAT:
     {	double aDouble = (double) arg.floatp[0];

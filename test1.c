@@ -334,7 +334,11 @@ int main(int argc, const char ** argv)
     if (aLong != bLong)
 	fprintf(stdout, " aLong: %ld", aLong);
     if (aLongLong != bLongLong)
+#if defined(_MSC_VER) || defined(__MINGW32__)
 	fprintf(stdout, " aLongLong: %" LONG_LONG_FORMAT, aLongLong);
+#else
+        fprintf(stdout, " aLongLong: %lld", aLongLong);
+#endif
 /*@-realcompare@*/
     if (aFloat != bFloat)
 	fprintf(stdout, " aFloat: %g", (double)aFloat);
