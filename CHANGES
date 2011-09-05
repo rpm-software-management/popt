@@ -1,4 +1,9 @@
 1.17 -> 2.0:
+    - devzero2000: redo commit 8396019 
+      Useless to have format crap just for conforming
+      to oddball platform 
+      (http://rpm5.org/community/rpm-devel/5166.html).
+      Keep the patch only inside MinGW.
     - devzero2000: merge commit fc8836e from git pull request  
       https://github.com/devzero2000/POPT/pull/2 
       "Fix more MSVC build warnings"
