@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2011-09-04 10:33-0400\n"
+"POT-Creation-Date: 2011-09-05 08:27-0400\n"
 "PO-Revision-Date: 2008-02-18 20:16+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,68 +17,68 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:53
+#: popt.c:54
 msgid "unknown errno"
 msgstr "未知的错误"
 
-#: popt.c:1436
+#: popt.c:1437
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "选项类别 (%u) 没有在 popt 中实现\n"
 
-#: popt.c:1886
+#: popt.c:1887
 msgid "missing argument"
 msgstr "缺少参数"
 
-#: popt.c:1888
+#: popt.c:1889
 msgid "unknown option"
 msgstr "未知的选项"
 
-#: popt.c:1890
+#: popt.c:1891
 msgid "mutually exclusive logical operations requested"
 msgstr "需要 XOR 逻辑运算"
 
-#: popt.c:1892
+#: popt.c:1893
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg 不应该为 NULL"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "aliases nested too deeply"
 msgstr "别名嵌套太深"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "error in parameter quoting"
 msgstr "参数引号错误"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "invalid numeric value"
 msgstr "无效的数值"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "number too large or too small"
 msgstr "数值太大或太小"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "memory allocation failed"
 msgstr "内存分配错误"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "unknown error"
 msgstr "未知的错误"
 
@@ -146,10 +146,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:660
+#: popthelp.c:664
 msgid "Usage:"
 msgstr "用法:"
 
-#: popthelp.c:685
+#: popthelp.c:689
 msgid "[OPTION...]"
 msgstr "[选项...]"
