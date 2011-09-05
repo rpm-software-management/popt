@@ -1,4 +1,9 @@
 1.17 -> 2.0:
+    - devzero2000: merge commit aee9f24 from git pull request  
+      https://github.com/devzero2000/POPT/pull/2 
+      "Add makefile for mingw" 
+      by asenm (Matt Arsenault). Include these new object 
+      in EXTRA_DIST (Makefile.am) by devzero2000 (Elia Pinto)
     - devzero2000: merge commit 8396019 from git pull request  
       https://github.com/devzero2000/POPT/pull/2 
       "Work around missing format for long long in windows; fix warnings"
