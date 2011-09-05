@@ -1,4 +1,8 @@
 1.17 -> 2.0:
+    - devzero2000: merge  commit ea2978d from git pull request 
+      https://github.com/devzero2000/POPT/pull/2 
+      "Fix build with MinGW 32/64 + MSVC" by arsenm
+      (Matt Arsenault)
     - devzero2000: fix compiler warning -Wunused-but-set-variable (GCC 4.6)
     - devzero2000: redo the autofu vendor-script linker script check for openindiana native
       ld, using modern and not deprecated autoconf construct. Even if the check is not perfect 

@@ -256,6 +256,7 @@ int main(int argc, const char ** argv)
     const char ** rest;
     int help = 0;
     int usage = 0;
+    char * testpoptrc;
 
 #if defined(HAVE_MCHECK_H) && defined(HAVE_MTRACE)
     /*@-moduncon -noeffectuncon@*/
@@ -269,9 +270,8 @@ int main(int argc, const char ** argv)
 /*@-temptrans@*/
     optCon = poptGetContext("test1", argc, argv, options, 0);
 #ifdef HAVE_STDLIB_H
-    char * testpoptrc;
     testpoptrc = getenv ("testpoptrc");
-    if (testpoptrc != NULL ) 
+    if (testpoptrc != NULL )
     (void) poptReadConfigFile(optCon, testpoptrc);
     else {
     (void) poptReadConfigFile(optCon, "./test-poptrc");
