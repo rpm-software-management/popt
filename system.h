@@ -3,7 +3,15 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+# ifndef _MSC_VER
+#  include "config.h"
+# else
+#  include "config_msvc.h"
+# endif /* _MSC_VER */
+#endif /* HAVE_CONFIG_H */
+
+#if defined(_MSC_VER) || defined(__MINGW32__)
+# define _CRT_SECURE_NO_WARNINGS 1
 #endif
 
 
@@ -66,9 +74,9 @@ char *alloca ();
 
 
 #if defined(_MSC_VER) || defined(__MINGW32__)
-#define _CRT_SECURE_NO_WARNINGS 1
 #include <io.h>
 #include <malloc.h>
+#include <process.h>
 #define F_OK 0
 #define R_OK 4
 #define W_OK 2
@@ -121,6 +129,7 @@ typedef int ssize_t;
 #define open _open
 #define close _close
 #define lseek _lseek
+#define execvp _execvp
 
 /* Pretend to be root to replace these */
 static inline int setuid(UNUSED(int x)) { return 1; }

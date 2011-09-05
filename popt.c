@@ -31,6 +31,7 @@ extern long long int strtoll(const char *nptr, /*@null@*/ char **endptr,
 #define	assert(_x)
 #endif
 
+
 #ifdef	MYDEBUG
 /*@unchecked@*/
 int _popt_debug = 0;
