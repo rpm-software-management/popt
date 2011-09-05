@@ -1,4 +1,9 @@
 1.17 -> 2.0:
+    - devzero2000: merge commit fc8836e from git pull request  
+      https://github.com/devzero2000/POPT/pull/2 
+      "Fix more MSVC build warnings"
+      by asenm (Matt Arsenault). This is the last commit
+      of this patch series and pull request.
     - devzero2000: merge commit aee9f24 from git pull request  
       https://github.com/devzero2000/POPT/pull/2 
       "Add makefile for mingw" 
