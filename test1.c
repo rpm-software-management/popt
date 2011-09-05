@@ -335,7 +335,7 @@ int main(int argc, const char ** argv)
 	fprintf(stdout, " aLong: %ld", aLong);
     if (aLongLong != bLongLong)
 #if defined(_MSC_VER) || defined(__MINGW32__)
-	fprintf(stdout, " aLongLong: %" LONG_LONG_FORMAT, aLongLong);
+	fprintf(stdout, " aLongLong: %I64d", aLongLong);
 #else
         fprintf(stdout, " aLongLong: %lld", aLongLong);
 #endif

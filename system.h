@@ -88,10 +88,6 @@ char *alloca ();
 #define S_ISGID 00020000
 #define S_ISVTX 00010000
 
-/* I haven't discovered a better way to work around these format
-   specifier problems */
-#define LONG_LONG_FORMAT "I64d"
-
 
 /* CHECKME */
 #define S_IWGRP 00000020
@@ -147,7 +143,6 @@ static inline int setegid(UNUSED(int x)) { return 1; }
 
 #else
 
-#define LONG_LONG_FORMAT "lld"
 
 #endif /* defined(_MSC_VER) || defined(__MINGW32__) */
 
