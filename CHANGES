@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: i18n: msgmerge (Translation Project).
     - devzero2000: redo commit 8396019 
       Useless to have format crap just for conforming
       to oddball platform 

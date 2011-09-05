@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2011-09-04 10:33-0400\n"
+"POT-Creation-Date: 2011-09-05 08:27-0400\n"
 "PO-Revision-Date: 2008-02-19 15:53+0700\n"
 "Last-Translator: Seksan Poltree <seksan.poltree@gmail.com>\n"
 "Language-Team: Thai <translation-team-th@lists.sourceforge.net>\n"
@@ -17,68 +17,68 @@ msgstr ""
 "X-Poedit-Language: Thai\n"
 "X-Poedit-Country: THAILAND\n"
 
-#: popt.c:53
+#: popt.c:54
 msgid "unknown errno"
 msgstr "เกิด errno ที่ไม่รู้จัก"
 
-#: popt.c:1436
+#: popt.c:1437
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "ตัวเลือกชนิด (%u) ไม่ถูกอิมพลีเมนต์ใน popt\n"
 
-#: popt.c:1886
+#: popt.c:1887
 msgid "missing argument"
 msgstr "ไม่พบอาร์กิวเมนต์"
 
-#: popt.c:1888
+#: popt.c:1889
 msgid "unknown option"
 msgstr "ไม่รู้จักตัวเลือก"
 
-#: popt.c:1890
+#: popt.c:1891
 msgid "mutually exclusive logical operations requested"
 msgstr "เกิดการร้องขอร่วมกันของการดำเนินการด้านตรรกะอย่างเดียวกัน"
 
-#: popt.c:1892
+#: popt.c:1893
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ไม่ควรจะเป็น NULL"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "aliases nested too deeply"
 msgstr "นามแฝงซ้อนกันมากเกินไป"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "error in parameter quoting"
 msgstr "เกิดข้อผิดพลาดในการอ้างอิงพารามิเตอร์"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "invalid numeric value"
 msgstr "ค่าตัวเลขผิดพลาด"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "number too large or too small"
 msgstr "ตัวเลขมีค่ามากหรือน้อยเกินไป"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "memory allocation failed"
 msgstr "การจัดสรรหน่วยความจำผิดพลาด"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "unknown error"
 msgstr "ความผิดพลาดที่ไม่รู้จัก"
 
@@ -146,10 +146,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:660
+#: popthelp.c:664
 msgid "Usage:"
 msgstr "วิธีใช้:"
 
-#: popthelp.c:685
+#: popthelp.c:689
 msgid "[OPTION...]"
 msgstr "[ตัวเลือก...]"

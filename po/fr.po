@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2011-09-04 10:33-0400\n"
+"POT-Creation-Date: 2011-09-05 08:27-0400\n"
 "PO-Revision-Date: 2003-06-22 23:43+0200\n"
 "Last-Translator: RPM French Translation <rpm-fr@livna.org>\n"
 "Language-Team: RPM French Translation <rpm-fr@livna.org>\n"
@@ -21,68 +21,68 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: popt.c:53
+#: popt.c:54
 msgid "unknown errno"
 msgstr "errno inconnu"
 
-#: popt.c:1436
+#: popt.c:1437
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "type(%d) d'option non implémenté dans popt\n"
 
-#: popt.c:1886
+#: popt.c:1887
 msgid "missing argument"
 msgstr "argument manquant"
 
-#: popt.c:1888
+#: popt.c:1889
 msgid "unknown option"
 msgstr "option iconnue"
 
-#: popt.c:1890
+#: popt.c:1891
 msgid "mutually exclusive logical operations requested"
 msgstr "opérations logiques mutuellement exclusives requises"
 
-#: popt.c:1892
+#: popt.c:1893
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ne devrait pas être NULL"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "aliases nested too deeply"
 msgstr "les alias sont trop entremellés"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "error in parameter quoting"
 msgstr "erreur en citant les paramètres"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "invalid numeric value"
 msgstr "valeur numérique invalide"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "number too large or too small"
 msgstr "nombre trop grand ou trop petit"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "memory allocation failed"
 msgstr "échec de l'allocation de mémoire"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "unknown error"
 msgstr "erreur inconnue"
 
@@ -151,10 +151,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:660
+#: popthelp.c:664
 msgid "Usage:"
 msgstr "Utilisation:"
 
-#: popthelp.c:685
+#: popthelp.c:689
 msgid "[OPTION...]"
 msgstr "[OPTION...]"
