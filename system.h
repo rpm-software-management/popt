@@ -56,6 +56,9 @@ char *alloca ();
 
 #ifdef _MSC_VER
 #  define inline __inline
+#endif
+
+#if defined(_MSC_VER) || defined(__MINGW32__)
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <io.h>
 #include <malloc.h>
@@ -109,18 +112,19 @@ typedef int ssize_t;
 #define lseek _lseek
 
 /* Pretend to be root to replace these */
-inline int setuid(int x) { return 1; }
-inline int getuid(void) { return 0; }
+static inline int setuid(int x) { return 1; }
 
-inline int seteuid(int x) { return 1; }
-inline int geteuid(void) { return 0; }
+static inline int getuid(void) { return 0; }
 
-inline int setgid(int x) { return 1; }
-inline int getgid(void) { return 0; }
+static inline int seteuid(int x) { return 1; }
+static inline int geteuid(void) { return 0; }
 
-inline int setegid(int x) { return 1; }
+static inline int setgid(int x) { return 1; }
+static inline int getgid(void) { return 0; }
 
-#endif /* _MSC_VER */
+static inline int setegid(int x) { return 1; }
+
+#endif /* defined(_MSC_VER) || defined(__MINGW32__) */
 
 #ifdef __NeXT
 /* access macros are not declared in non posix mode in unistd.h -
