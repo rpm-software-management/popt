@@ -1,0 +1,91 @@
+# Makefile for building Popt with MinGW (gcc and gnumake)
+
+POPT_PREFIX ?= C:\popt
+POPT_SRC_DIR ?= .
+
+OPT_FLAGS = -Os -DNDEBUG 
+WARNINGS = -Wall -Wextra
+INCLUDE_DIRS = -I$(POPT_SRC_DIR)
+DEFINITIONS = -DHAVE_CONFIG_H
+CFLAGS = $(OPT_FLAGS) $(WARNINGS) $(INCLUDE_DIRS) $(DEFINITIONS)
+CXXFLAGS = $(CFLAGS)
+CC = gcc
+CXX = g++
+RM = del
+MKDIR = mkdir
+CP = copy
+
+
+CONFIG_HEADER = config.h
+CONFIG_MINGW_HEADER_NAME = config.h.mingw
+
+#CONFIGMAKE_HEADER = configmake.h
+#CONFIGMAKE_MINGW_HEADER_NAME = configmake.h.mingw
+
+POPT_SRC = $(POPT_SRC_DIR)/lookup3.c \
+	 $(POPT_SRC_DIR)/poptconfig.c \
+	 $(POPT_SRC_DIR)/popthelp.c \
+	 $(POPT_SRC_DIR)/poptint.c \
+	 $(POPT_SRC_DIR)/poptparse.c \
+	 $(POPT_SRC_DIR)/popt.c
+
+POPT_HEADERS = $(POPT_SRC_DIR)/config.h \
+	     $(POPT_SRC_DIR)/configmake.h \
+	     $(POPT_SRC_DIR)/popt.h \
+	     $(POPT_SRC_DIR)/poptint.h \
+	     $(POPT_SRC_DIR)/system.h
+
+POPT_PUBLIC_HEADERS ?= $(POPT_SRC_DIR)\popt.h 
+
+LIB_OBJ = lookup3.o poptconfig.o popthelp.o poptint.o poptparse.o popt.o
+
+LIB_BIN = libpopt.a
+TEST_BINS = tdict.exe test1.exe test2.exe
+OBJ = $(LIB_OBJ) $(TEST_OBJ)
+BIN = $(LIB_BIN) $(TEST_BINS)
+
+
+
+all: $(BIN) $(TEST_BINS)
+
+$(CONFIG_HEADER): 
+	  $(CP) $(CONFIG_MINGW_HEADER_NAME) $(CONFIG_HEADER)
+	  $(CP) $(CONFIGMAKE_MINGW_HEADER_NAME) $(CONFIGMAKE_HEADER)
+
+%.o: $(POPT_SRC_DIR)/%.c $(CONFIG_HEADER)
+	$(CC) -c $< -o $@ $(CPPFLAGS) $(CFLAGS)
+
+$(LIB_BIN): $(LIB_OBJ)
+	$(AR) rc $@ $^
+
+tdict.exe: tdict.c $(LIB_BIN)
+	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $< $(LIB_BIN)
+
+test1.exe: test1.c $(LIB_BIN)
+	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $< $(LIB_BIN) 
+
+test2.exe: test2.c $(LIB_BIN)
+	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $< $(LIB_BIN) 
+
+
+RANLIB ?= ranlib
+
+tests: $(TEST_BINS)
+
+
+install: $(LIB_BIN) $(POPT_PUBLIC_HEADERS)
+	 $(MKDIR) $(POPT_PREFIX)\include
+	 $(MKDIR) $(POPT_PREFIX)\lib
+	 $(CP) $(POPT_PUBLIC_HEADERS) $(POPT_PREFIX)\include
+	 $(RANLIB) $(LIB_BIN)
+	 $(CP) $(LIB_BIN) $(POPT_PREFIX)\lib
+.PHONY: install
+
+uninstall: 
+	   rmdir /S /Q $(POPT_PREFIX)
+.PHONY: uninstall
+
+clean:
+	$(RM) $(OBJ) $(BIN) $(CONFIG_HEADER)
+
+.PHONY: clean

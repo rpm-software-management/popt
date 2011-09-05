@@ -78,7 +78,9 @@ EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
 				test3-data/02.answer \
 				test3-data/02.input \
 				test3-data/03.answer \
-				test3-data/03.input
+				test3-data/03.input \
+                                Makefile.mingw \
+                                config.h.mingw
 
 SUBDIRS = po . auto
 
