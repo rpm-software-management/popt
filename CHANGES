@@ -1,4 +1,8 @@
 1.17 -> 2.0:
+    - devzero2000: merge commit 8396019 from git pull request  
+      https://github.com/devzero2000/POPT/pull/2 
+      "Work around missing format for long long in windows; fix warnings"
+      by asenm (Matt Arsenault)
     - devzero2000: merge  commit ea2978d from git pull request 
       https://github.com/devzero2000/POPT/pull/2 
       "Fix build with MinGW 32/64 + MSVC" by arsenm

@@ -265,7 +265,7 @@ assert(le);	/* XXX can't happen */
 	le += sprintf(le, "%ld", arg.longp[0]);
 	break;
     case POPT_ARG_LONGLONG:
-	le += sprintf(le, "%lld", arg.longlongp[0]);
+	le += sprintf(le, "%" LONG_LONG_FORMAT, arg.longlongp[0]);
 	break;
     case POPT_ARG_FLOAT:
     {	double aDouble = (double) arg.floatp[0];

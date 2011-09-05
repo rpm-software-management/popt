@@ -91,7 +91,7 @@ static char * lStr =
 "123456789+123456789+123456789+123456789+123456789+ "
 "123456789+123456789+123456789+123456789+123456789+ ";
 /*@unchecked@*/ /*@null@*/
-static char * nStr = NULL; 
+static char * nStr = NULL;
 
 /*@unchecked@*/
 static struct poptOption moreCallbackArgs[] = {
@@ -334,7 +334,7 @@ int main(int argc, const char ** argv)
     if (aLong != bLong)
 	fprintf(stdout, " aLong: %ld", aLong);
     if (aLongLong != bLongLong)
-	fprintf(stdout, " aLongLong: %lld", aLongLong);
+	fprintf(stdout, " aLongLong: %" LONG_LONG_FORMAT, aLongLong);
 /*@-realcompare@*/
     if (aFloat != bFloat)
 	fprintf(stdout, " aFloat: %g", (double)aFloat);
