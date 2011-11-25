@@ -1,5 +1,6 @@
 #!/bin/sh
-# $Id: autogen.sh,v 1.22 2011/05/24 15:45:20 devzero2000 Exp $
+#
+# $Id: autogen.sh,v 1.23 2011/11/25 11:54:27 devzero2000 Exp $
 # autogen.sh: autogen.sh script for popt projects
 #
 # Copyright (c) 2010-2011 Elia Pinto <devzero2000@rpm5.org>
@@ -7,17 +8,32 @@
 # This program have the same copyright notice as popt
 # itself
 #
+# Global Function and Variables
+#
+_PROGNAME="$0"
+#
+red=; grn=; lgn=; blu=; std=; 
+test "X$$TERM" != Xdumb \
+&&  test -t 1 2>/dev/null  \
+&& { \
+  red='[0;31m'; \
+  grn='[0;32m'; \
+  lgn='[1;32m'; \
+  blu='[1;34m'; \
+  std='[m'; \
+}
 
+Die()    {
+        color="$red"
+	echo "${color}${_PROGNAME}: Error: $@${std}" >&2
+	exit 1
+}
 
-# Guess whether we are using configure.ac or configure.in
-if test -f configure.ac; then
-  conffile="configure.ac"
-elif test -f configure.in; then
-  conffile="configure.in"
-else
-  echo "$0: could not find configure.ac or configure.in"
-  exit 1
-fi
+Notice() {
+        color="$grn"
+	echo "${color}${_PROGNAME}: $@${std}" 
+}
+
 
 # Function Used for ichecking the Version Used for building
 # 
@@ -128,18 +144,17 @@ autopoint  -
 gettext    0.17
 libtool	   1.5.22
 "
-
-echo "$0: Bootstrapping popt build system..."
 echo
-
+Notice "Bootstrapping popt build system..."
+echo
 # Guess whether we are using configure.ac or configure.in
 if test -f configure.ac; then
   conffile="configure.ac"
 elif test -f configure.in; then
   conffile="configure.in"
 else
-  echo "$0: could not find configure.ac or configure.in"
-  exit 1
+  Die "could not find configure.ac or configure.in"
+  echo
 fi
 
 if ! printf "$buildreq" | check_versions; then
@@ -162,7 +177,8 @@ case $libtoolize in
     	esac
 esac
 if test -z "$libtoolize"; then
-		echo "$0: libtool not found."
+		Die "libtool not found."
+		echo
 fi
 find . -name "autom4te.cache" | xargs rm -rf 
 [ ! -d m4 ]        && mkdir m4
@@ -175,7 +191,7 @@ ls "$po_dir"/*.po 2>/dev/null |
 
 #
 echo
-echo "$0: done.  Now you can run './configure'."
+Notice "done.  Now you can run './configure'."
 #######################
 # End  Bootstrapping
 #######################

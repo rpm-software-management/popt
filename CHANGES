@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - devzero2000: give some color to autogen.sh
+      Certainly not so useful but not hurt either.
     - jbj: i18n: msgmerge (Translation Project).
     - devzero2000: redo commit 8396019 
       Useless to have format crap just for conforming
