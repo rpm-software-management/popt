@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - devzero2000: Fix move popt.m4 to acinclude.m4
+      so we can put it under version control
     - devzero2000: give some color to autogen.sh
       Certainly not so useful but not hurt either.
     - jbj: i18n: msgmerge (Translation Project).

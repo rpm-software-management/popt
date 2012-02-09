@@ -1,4 +1,7 @@
-# popt.m4 serial 1
+dnl ##
+dnl ##  acinclude.m4 -- manually provided local Autoconf macros
+dnl ##
+
 dnl Copyright (C) Elia Pinto (devzero2000@rpm5.org)
 dnl Inspired from gnulib warning.m4 and other
 dnl but not from ac_archive 

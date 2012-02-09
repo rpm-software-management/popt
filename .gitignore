@@ -76,7 +76,6 @@ logs
 ltconfig
 ltmain.sh
 m4
-*.m4
 Makefile
 Makefile.in
 Makefile.in.in
