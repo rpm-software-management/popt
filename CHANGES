@@ -1,4 +1,8 @@
 1.17 -> 2.0:
+    - devzero2000: Enable many more gcc warnings for popt
+      Inspired by http://www.spinics.net/lists/selinux/msg11726.html
+      but popt can, unlike libselinux now, also detect if  
+      gcc support a compiler flag or not 
     - devzero2000: Fix move popt.m4 to acinclude.m4
       so we can put it under version control
     - devzero2000: give some color to autogen.sh
