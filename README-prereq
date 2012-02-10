@@ -1,12 +1,14 @@
-This gives some notes on the minimum version for the tools required 
-for development.
-I.E. the tools checked for by the autogen.sh bootstrap script for the
-GNU Build System and include:
+This gives some notes on obtaining the tools required for development.
+I.E. the tools checked for by the bootstrap script and include:
 
-- Autoconf  <http://www.gnu.org/software/autoconf/> (version 2.63 or newer)
-- Automake  <http://www.gnu.org/software/automake/> (version 1.11.1 or newer)
-- Gettext   <http://www.gnu.org/software/gettext/>  (version 0.17 or newer)
-- libtool   <http://www.gnu.org/software/libtool/>  (version 1.5.22 or newer)
+- Autoconf  <http://www.gnu.org/software/autoconf/> - version 2.63   or higher
+- Automake  <http://www.gnu.org/software/automake/> - version 1.11.1 or higher
+- Gettext   <http://www.gnu.org/software/gettext/>  - version 0.17   or higher
+- libtool   <http://www.gnu.org/software/libtool/>  - version 1.5.22 or higher. 
+  It is preferred to use the libtool 2.2.x family.
 
-For libtool it is strongly recommended to use the 2.2.x branch, however. 
+Note please try to install/build official packages for your system.
+If these programs are not available use the following instructions
+to build them and install the results into a directory that you will
+then use when building this package.
 

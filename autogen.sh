@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Id: autogen.sh,v 1.23 2011/11/25 11:54:27 devzero2000 Exp $
+# $Id: autogen.sh,v 1.24 2012/02/10 13:49:29 devzero2000 Exp $
 # autogen.sh: autogen.sh script for popt projects
 #
 # Copyright (c) 2010-2011 Elia Pinto <devzero2000@rpm5.org>
