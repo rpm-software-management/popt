@@ -8,7 +8,5 @@ I.E. the tools checked for by the bootstrap script and include:
   It is preferred to use the libtool 2.2.x family.
 
 Note please try to install/build official packages for your system.
-If these programs are not available use the following instructions
-to build them and install the results into a directory that you will
-then use when building this package.
-
+If these programs are not available refer to the above site for
+instruction for installing it.
