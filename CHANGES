@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: i18n: msgmerge (Translation Project).
     - devzero2000: Enable many more gcc warnings for popt
       Inspired by http://www.spinics.net/lists/selinux/msg11726.html
       but popt can, unlike libselinux now, also detect if  
