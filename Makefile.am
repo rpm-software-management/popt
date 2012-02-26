@@ -3,7 +3,7 @@
 ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I. -I$(top_srcdir)
 AM_CFLAGS = $(POPT_CFLAGS)
-AM_LDFLAGS = $(POPT_LDFLAGS)
+AM_LDFLAGS = $(POPT_LDFLAGS) $(INTLLIBS)
 
 ## begin configmake
 
