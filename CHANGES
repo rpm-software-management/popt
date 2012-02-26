@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: macosx: needs $(INTLLIBS) explictly.
     - jbj: autofu: fix: MacPorts uses glibtool/gliboolize. test earlier.
     - jbj: i18n: msgmerge (Translation Project).
     - devzero2000: Enable many more gcc warnings for popt
