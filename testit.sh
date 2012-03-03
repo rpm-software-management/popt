@@ -514,12 +514,12 @@ if [ -f /usr/share/dict/words ]
 then
 run tdict "tdict - 1" "\
 ===== Some words are in /usr/share/dict/words
-a:	YES
-b:	YES
-rpm:	YES
-dpkg:	YES
-ipkg:	NO
-total(5) = hits(4) + misses(1)" a b rpm dpkg ipkg
+hope:	YES
+faith:	YES
+charity:	YES
+troofth:	NO
+juicetess:	NO
+total(5) = hits(3) + misses(2)" hope faith charity troofth juicetess
 run tdict "tdict - 2" "\
 Usage: tdict [-?] [-d|--debug] [-v|--verbose] [-?|--help] [--usage]" --usage
 run tdict "tdict - 3" "\
