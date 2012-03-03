@@ -67,9 +67,9 @@ int main(int argc, const char ** argv)
     /* XXX Scale the Bloom filters in popt. */
     if ((rc = loadDict(dictfn, NULL)) <= 0)
 	goto exit;
-    _poptBitsK = 2;
+    _poptBitsK = 10;
     _poptBitsM = 0;
-    _poptBitsN = _poptBitsK * rc;
+    _poptBitsN = 2 * _poptBitsK * rc;
 
     optCon = poptGetContext("tdict", argc, argv, options, 0);
 
