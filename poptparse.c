@@ -90,7 +90,6 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
     size_t ns = strlen(s);
     char * t = NULL;
     char * te;
-    int i;
     int rc = POPT_ERROR_MALLOC;
 
 assert(argv);	/* XXX can't happen */
