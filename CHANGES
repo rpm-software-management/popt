@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - devzero2000: fix compiler warning -Wunused-variable 
+    - jbj: use words instead of jargon to increase portability 
     - jbj: macosx: needs $(INTLLIBS) explictly.
     - jbj: autofu: fix: MacPorts uses glibtool/gliboolize. test earlier.
     - jbj: i18n: msgmerge (Translation Project).
