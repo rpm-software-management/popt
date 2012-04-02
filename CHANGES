@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: add sr.po (Translation Project).
     - devzero2000: fix compiler warning -Wunused-variable 
     - jbj: use words instead of jargon to increase portability 
     - jbj: macosx: needs $(INTLLIBS) explictly.
