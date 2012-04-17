@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Id: autogen.sh,v 1.25 2012/02/25 22:18:48 jbj Exp $
+# $Id: autogen.sh,v 1.26 2012/04/17 07:11:08 devzero2000 Exp $
 # autogen.sh: autogen.sh script for popt projects
 #
 # Copyright (c) 2010-2011 Elia Pinto <devzero2000@rpm5.org>
@@ -35,7 +35,7 @@ Notice() {
 }
 
 
-# Function Used for ichecking the Version Used for building
+# Function Used for checking the Version Used for building
 # 
 # Note this deviates from the version comparison in automake
 # in that it treats 1.5 < 1.5.0, and treats 1.4.4a < 1.4-p3a
