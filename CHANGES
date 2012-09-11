@@ -1,4 +1,7 @@
 1.17 -> 2.0:
+    - devzero2000: quote AC_PREREQ in configure.ac
+      for a old bug autoupdate don't do it before autoconf v2.66
+      (http://lists.gnu.org/archive/html/autoconf-patches/2010-06/msg00014.html)
     - jbj: add sr.po (Translation Project).
     - devzero2000: fix compiler warning -Wunused-variable 
     - jbj: use words instead of jargon to increase portability 

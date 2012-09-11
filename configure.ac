@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.63)
+AC_PREREQ([2.63])
 AC_INIT([popt],[1.17.DEVEL],[popt-devel@rpm5.org])
 
 AC_CONFIG_SRCDIR([lookup3.c])
