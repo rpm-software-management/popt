@@ -74,6 +74,12 @@ glob_pattern_p (const char * pattern, int quote)
 }
 #endif	/* !defined(__GLIBC__) */
 
+#if defined(HAVE_ASSERT_H)
+#include <assert.h>
+#else
+#define assert(_x)
+#endif
+
 /*@unchecked@*/
 static int poptGlobFlags = 0;
 
@@ -332,7 +338,7 @@ static int poptConfigLine(poptContext con, char * line)
 		longName++;
 	    else
 		longName = fn;
-	    if (longName == NULL)	/* XXX can't happen. */
+assert(longName != NULL);	/* XXX can't happen. */
 		goto exit;
 	    /* Single character basenames are treated as short options. */
 	    if (longName[1] != '\0')
