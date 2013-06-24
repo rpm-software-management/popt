@@ -396,8 +396,10 @@ int poptReadConfigFile(poptContext con, const char * fn)
 
     if ((rc = poptReadFile(fn, &b, &nb, POPT_READFILE_TRIMNEWLINES)) != 0)
 	return (errno == ENOENT ? 0 : rc);
-    if (b == NULL || nb == 0)
-	return POPT_ERROR_BADCONFIG;
+    if (b == NULL || nb == 0) {
+	rc = POPT_ERROR_BADCONFIG;
+	goto exit;
+    }
 
     if ((t = (char*) malloc(nb + 1)) == NULL)
 	goto exit;
