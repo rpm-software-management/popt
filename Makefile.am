@@ -3,7 +3,7 @@
 ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I. -I$(top_srcdir)
 AM_CFLAGS = $(POPT_CFLAGS)
-AM_LDFLAGS = $(POPT_LDFLAGS) $(LTLIBINTL) $(LTLIBICONV)
+AM_LDFLAGS = $(POPT_LDFLAGS) $(INTLLIBS)
 
 ## begin configmake
 
@@ -123,6 +123,7 @@ usrlib_LTLIBRARIES = libpopt.la
 
 libpopt_la_SOURCES = popt.c poptparse.c poptconfig.c popthelp.c poptint.c
 libpopt_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
+libpopt_la_LIBADD = $(LTLIBICONV)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = popt.pc
@@ -164,6 +165,15 @@ doxygen: Doxyfile
 	mkdir -p doxygen
 	$(DOXYGEN)
 endif 
+
+# --- scan.coverity.com manual submission in popt.tgz
+COVDIR =	cov-int
+COVBUILD =	cov-build --dir $(COVDIR)
+covscan::
+	rm -rf $(COVDIR) popt.tgz
+	make clean
+	$(COVBUILD) make
+	tar czf popt.tgz $(COVDIR)
 
 if HAVE_LCOV
 # run lcov from scratch, always
