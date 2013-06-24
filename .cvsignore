@@ -11,7 +11,7 @@ aclocal.m4
 autom4te*
 build
 build-aux
-build-aux
+build-aux/test-driver
 clang
 config.cache
 config.guess
@@ -23,6 +23,7 @@ config.status
 config.sub
 configmake.h
 configure
+cov-int
 doxygen
 depcomp
 install-sh
@@ -35,6 +36,7 @@ m4
 missing
 mkinstalldirs
 popt.spec
+popt.tgz
 stamp-h
 stamp-h1
 stamp-h.in
