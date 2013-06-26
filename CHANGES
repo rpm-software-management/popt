@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - devzero2000: fix misspelling
+      Fix misspelling using  http://github.com/lyda/misspell-check
     - devzero2000: quote AC_PREREQ in configure.ac
       for a old bug autoupdate don't do it before autoconf v2.66
       (http://lists.gnu.org/archive/html/autoconf-patches/2010-06/msg00014.html)

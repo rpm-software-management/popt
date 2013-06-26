@@ -426,7 +426,7 @@ int poptReadConfigFile(poptContext con, const char * fn)
 /** \ingroup popt
  * Read configuration file(s).
  * Colon separated files to read, looping over poptReadConfigFile().
- * Note that an '@' character preceeding a path in the list will
+ * Note that an '@' character preceding a path in the list will
  * also perform additional sanity checks on the file before reading.
  * @param con		context
  * @param paths		colon separated file name(s) to read
