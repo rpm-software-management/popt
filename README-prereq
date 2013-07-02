@@ -3,7 +3,7 @@ I.E. the tools checked for by the bootstrap script and include:
 
 - Autoconf  <http://www.gnu.org/software/autoconf/> - version 2.63   or higher
 - Automake  <http://www.gnu.org/software/automake/> - version 1.11.1 or higher
-- Gettext   <http://www.gnu.org/software/gettext/>  - version 0.17   or higher
+- Gettext   <http://www.gnu.org/software/gettext/>  - version 0.18   or higher
 - libtool   <http://www.gnu.org/software/libtool/>  - version 1.5.22 or higher. 
   It is preferred to use the libtool 2.2.x family.
 

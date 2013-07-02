@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: update the gettext version prereq
     - devzero2000: fix misspelling
       Fix misspelling using  http://github.com/lyda/misspell-check
     - devzero2000: quote AC_PREREQ in configure.ac
