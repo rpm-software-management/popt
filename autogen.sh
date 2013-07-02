@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# $Id: autogen.sh,v 1.27 2013/06/24 21:15:20 jbj Exp $
+# $Id: autogen.sh,v 1.28 2013/07/02 14:05:26 devzero2000 Exp $
 # autogen.sh: autogen.sh script for popt projects
 #
 # Copyright (c) 2010-2011 Elia Pinto <devzero2000@rpm5.org>
@@ -142,7 +142,7 @@ buildreq="\
 autoconf   2.63
 automake   1.11.1
 autopoint  -
-gettext    0.17
+gettext    0.18
 libtool	   1.5.22
 "
 echo
