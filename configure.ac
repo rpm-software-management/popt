@@ -306,7 +306,7 @@ AC_TYPE_INT64_T
 AC_CHECK_FUNC(setreuid, [], [
     AC_CHECK_LIB(ucb, setreuid, [if echo $LIBS | grep -- -lucb >/dev/null ;then :; else LIBS="$LIBS -lc -lucb" USEUCB=y;fi])
 ])
-AC_CHECK_FUNCS([getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf srandom])
+AC_CHECK_FUNCS([getuid geteuid iconv mtrace __secure_getenv secure_gentenv setregid stpcpy strerror vasprintf srandom])
 # drop AC_FUNC_MALLOC, REALLOC and STRTOD
 AC_CHECK_FUNCS([malloc realloc strtod memset nl_langinfo stpcpy strchr strerror strrchr])
 
