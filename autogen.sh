@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# $Id: autogen.sh,v 1.28 2013/07/02 14:05:26 devzero2000 Exp $
+# $Id: autogen.sh,v 1.29 2013/07/03 16:50:20 devzero2000 Exp $
 # autogen.sh: autogen.sh script for popt projects
 #
 # Copyright (c) 2010-2011 Elia Pinto <devzero2000@rpm5.org>
@@ -185,7 +185,7 @@ fi
 find . -name "autom4te.cache" | xargs rm -rf 
 [ ! -d m4 ]        && mkdir m4
 [ ! -d build-aux ] && mkdir build-aux
-autoreconf -vfi
+autoreconf -vfi || Die "bootstrap failed"
 po_dir=./po
 LANG=C
 ls "$po_dir"/*.po 2>/dev/null |
