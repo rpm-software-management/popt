@@ -1,4 +1,8 @@
 1.17 -> 2.0:
+    - devzero2000: refine the --enable-valgrind autoconf check
+      we are now analyzing with valgrind only the test suite
+      and not the shell that invokes them, so drop the suppression. 
+      Drop also the unused AM_CONDITIONAL macro USE_VALGRIND.
     - devzero2000: Don't use MALLOC_CHECK_ and valgrind(memcheck) at the
       same time
       The test suite can use valgrind(memcheck) via 'configure --enable-valgrind'
