@@ -339,7 +339,6 @@ static int poptConfigLine(poptContext con, char * line)
 	    else
 		longName = fn;
 assert(longName != NULL);	/* XXX can't happen. */
-		goto exit;
 	    /* Single character basenames are treated as short options. */
 	    if (longName[1] != '\0')
 		item->option.longName = longName;
