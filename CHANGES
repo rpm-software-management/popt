@@ -1,4 +1,12 @@
 1.17 -> 2.0:
+    - devzero2000: malloc check voodo portability quirk
+      Get rid of a non portable shell export VAR=VALUE
+      costruct. "Posix requires export to honor assignments
+      made as arguments, but older shells do not support this,
+      including /bin/sh in Solaris 10.
+      Portable scripts should separate assignments
+      and exports into different statements"
+      (from http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Limitations-of-Builtins.html)
     - devzero2000: check secure_getenv for glibc 2.17 
       Use secure_getenv if it is available.
       Fall back to __secure_getenv if it is not.
