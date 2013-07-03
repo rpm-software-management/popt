@@ -3,9 +3,11 @@
 # malloc voo-doo
 ###############################################
 # see http://lists.gnupg.org/pipermail/gcrypt-devel/2010-June/001605.html
-export MALLOC_CHECK_=3
+MALLOC_CHECK_=3
+export MALLOC_CHECK_
 # http://udrepper.livejournal.com/11429.html
-export MALLOC_PERTURB_=`expr \( $RANDOM % 255 \) + 1 `
+MALLOC_PERTURB_=`expr \( $RANDOM % 255 \) + 1 `
+export MALLOC_PERTURB_
 #
 if [ -z "${MALLOC_PERTURB_}" ]  # XXX: some shell don't have RANDOM ?
 then
