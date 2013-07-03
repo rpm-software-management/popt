@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - devzero2000: fail autogen.sh if autoreconf fail 
     - devzero2000: refine the --enable-valgrind autoconf check
       we are now analyzing with valgrind only the test suite
       and not the shell that invokes them, so drop the suppression. 
