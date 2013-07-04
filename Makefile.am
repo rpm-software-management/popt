@@ -110,8 +110,7 @@ tdict_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 test3_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 
 TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) MUDFLAP_OPTIONS="$(MUDFLAP_OPTIONS)" testpoptrc="$(top_srcdir)/test-poptrc" PATH=.:../src:$$PATH \
-                        valgrind_environment="$(VALGRIND_ENVIRONMENT)" \
-			$(SHELL)
+                        valgrind_environment="$(VALGRIND_ENVIRONMENT)"
 
 
 TESTS = testit.sh
