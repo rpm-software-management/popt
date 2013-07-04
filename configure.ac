@@ -167,7 +167,9 @@ AS_IF([ test x"$popt_gcc_mudflap" = x"yes" ],
 			AC_SUBST([MUDFLAP_OPTIONS])
                       ])
               ],
-              [ AC_MSG_WARN([--enable-mudflap requires GCC])]
+              [ popt_gcc_mudflap=no
+               AC_MSG_WARN([--enable-mudflap requires GCC])
+              ]
         )
       ])
      
@@ -189,7 +191,8 @@ AS_IF([test "x$popt_gcc_pie" = xyes],
               [ popt_CFLAGS_ADD([-fpie], [POPT_CFLAGS])
                 popt_LDFLAGS_ADD([-pie], [POPT_LDFLAGS])
               ],
-              [ AC_MSG_WARN([--enable-build-pie requires GCC])]
+              [ popt_gcc_pie=no
+                AC_MSG_WARN([--enable-build-pie requires GCC])]
         )
       ])
 AC_SUBST([POPT_LDFLAGS])
@@ -212,13 +215,14 @@ AC_SUBST([POPT_CFLAGS])
 
 # Support for running test cases using valgrind:
 
-use_valgrind=false
+use_valgrind=no
+HAVE_VALGRIND=no
 VALGRIND_ENVIRONMENT=""
-AC_ARG_ENABLE(valgrind,
+AC_ARG_ENABLE([valgrind],
 [  --enable-valgrind       Use valgrind when running unit tests. ],
-[ use_valgrind=true ])
+[ use_valgrind=yes ])
 
-AS_IF([ test x"$use_valgrind" = x"true" ], 
+AS_IF([ test x"$use_valgrind" = x"yes" ], 
       [
         AC_CHECK_PROG(HAVE_VALGRIND, valgrind, yes, no)
         AS_IF([ test x$HAVE_VALGRIND = no ],
@@ -238,7 +242,7 @@ AS_IF([ test x"$use_valgrind" = x"true" ],
      
 #  Checks for doxygen support. 
 AC_PATH_PROG(DOXYGEN, doxygen, NO_DOXYGEN)
-AC_ARG_ENABLE(doxygen,
+AC_ARG_ENABLE([doxygen],
     AS_HELP_STRING([--disable-doxygen],[disable doxygen API docs generation ]),
     [DOXYGEN_ENABLE=$enableval,
     if test x$DOXYGEN_ENABLE != xno 
@@ -257,8 +261,8 @@ AM_CONDITIONAL([DOXYGEN_ENABLE], [test x$DOXYGEN != xNO_DOXYGEN])
 
 # Check for gcov support.
 # Check for lcov  Makefile conditional
-AC_PATH_PROG(LCOV,lcov, NO_LCOV)
-AC_ARG_ENABLE(build-gcov,
+AC_PATH_PROG(LCOV,lcov, no)
+AC_ARG_ENABLE([build-gcov],
     AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov @<:@default=no@:>@.]), 
     [enable_build_gcov=${enableval}],
     [enable_build_gcov=no])
@@ -270,10 +274,10 @@ AS_IF([test "x$enable_build_gcov" != xno],
             popt_CFLAGS_ADD([-fprofile-arcs -ftest-coverage], [POPT_CFLAGS])
             AC_SUBST([POPT_CFLAGS])
         else
-            LCOV=NO_LCOV
+            LCOV=no
         fi 
        ])
-AM_CONDITIONAL([HAVE_LCOV], [test x$LCOV != xNO_LCOV])
+AM_CONDITIONAL([HAVE_LCOV], [test x$LCOV != xno])
 
 # Check for api-sanity-autotest.pl Makefile conditional support for check-local
 AC_PATH_PROG(API_SANITY_AUTOTEST,api-sanity-autotest.pl,NO_API_SANITY_AUTOTEST)
@@ -399,3 +403,15 @@ AC_SUBST([POPT_PKGCONFIG_LIBS],"$popt_pkgconfig_libs")
 AC_CONFIG_FILES([Makefile Doxyfile popt.pc popt.spec po/Makefile.in
     auto/Makefile auto/desc ])
 AC_OUTPUT
+
+# Print a summary of what features we enabled and have 
+AC_MSG_NOTICE([Summary of detected features follows])
+
+popt_MSG_STATUS([gcc-warnings],[$popt_gcc_warnings],[$popt_gcc_warnings])
+popt_MSG_STATUS([mudflap],[$popt_gcc_mudflap],[$popt_gcc_mudflap])
+popt_MSG_STATUS([build-pie],[$popt_gcc_pie],[$popt_gcc_pie])
+popt_MSG_STATUS([valgrind],[$HAVE_VALGRIND],[$use_valgrind])
+popt_MSG_STATUS([doxygen],[$DOXYGEN_ENABLE],[$DOXYGEN_ENABLE])
+popt_MSG_STATUS([build-gcov],[$LCOV], [$enable_build_gcov])
+popt_MSG_STATUS([ld-version-script],[LD_VERSION_SCRIPT_FLAG=$LD_VERSION_SCRIPT_FLAG],[$have_ld_version_script])
+

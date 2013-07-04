@@ -56,3 +56,16 @@ AS_VAR_POPDEF([popt_ldflags])dnl
 AS_VAR_POPDEF([popt_my_ldflags])dnl
 m4_ifval([$2], [AS_LITERAL_IF([$2], [AC_SUBST([$2])], [])])dnl
 ])
+
+# popt_MSG_STATUS([featurename],[have_feature], [enable_feature])
+# --------------------------------------------------------------
+AC_DEFUN([popt_MSG_STATUS],
+[
+   m4_if($#,3,,[m4_fatal([$0: invalid number of arguments: $#])])
+   AS_ECHO_N(["    $1: "])
+   AS_IF([test "x$3" = "xno"], [AS_ECHO(["$2 (disabled)"])],
+         [test "x$3" = "xyes"], [AS_ECHO(["$2"])],
+         [test "x$3" = "x"], [AS_ECHO(["$2"])],
+         [AS_ECHO(["$2 ($3)"])])
+])
+

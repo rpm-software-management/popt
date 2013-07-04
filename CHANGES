@@ -1,4 +1,6 @@
 1.17 -> 2.0:
+    - devzero2000: Print to the end of the configure phase the options we have
+      enabled and their results on the basis of the target system
     - devzero2000: fail autogen.sh if autoreconf fail 
     - devzero2000: refine the --enable-valgrind autoconf check
       we are now analyzing with valgrind only the test suite
