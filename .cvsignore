@@ -51,7 +51,9 @@ test?-test?.o
 *.la
 *.lcd
 *.lo
+*.log
 *.swp
+*.trs
 popt.pc
 popt-*.tar.gz
 .git
