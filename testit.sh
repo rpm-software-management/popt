@@ -30,10 +30,10 @@ if [ -z "${valgrind_environment}" ]
 then
 	MALLOC_CHECK_=3
 	export MALLOC_CHECK_
-	MALLOC_PERTURB_=`expr \( $RANDOM % 255 \) + 1 `
+	[ -n "${RANDOM}" ] && MALLOC_PERTURB_=`expr \( $RANDOM % 255 \) + 1 `
 	export MALLOC_PERTURB_
 	#
-	if [ -z "${MALLOC_PERTURB_}" ]  # XXX: some shell don't have RANDOM ?
+	if [ -z "${MALLOC_PERTURB_}" ]  # RANDOM is a bashism
 	then
 		r=`ps -ef | cksum | cut -f1 -d" " 2>/dev/null`
 		[ -z "${r}" ] && r=1234567890
