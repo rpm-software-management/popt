@@ -1692,7 +1692,7 @@ assert(s);	/* XXX can't happen */
 		if (opt->longName) {
 		    if (!F_ISSET(opt, ONEDASH))
 			*s++ = '-';
-		    s = stpcpy(s, opt->longName);
+		    (void)stpcpy(s, opt->longName);
 		} else {
 		    *s++ = opt->shortName;
 		    *s = '\0';
