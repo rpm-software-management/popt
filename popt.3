@@ -200,7 +200,7 @@ arguments.
 .RB "This macro includes another option table (via " POPT_ARG_INCLUDE_TABLE
 ; see below) in the main one which provides the table entries for these
 .RB "arguments. When " --usage " or " --help " are passed to programs which
-use popt's automatical help, popt displays the appropriate message on 
+use popt's automatic help, popt displays the appropriate message on 
 stderr as soon as it finds the option, and exits the program with a
 return code of 0. If you want to use popt's automatic help generation in
 a different way, you need to explicitly add the option entries to your programs 
@@ -473,7 +473,7 @@ A parsed string has a quotation mismatch (such as a single quotation
 .TP
 .B POPT_ERROR_BADNUMBER
 A conversion from a string to a number (int or long) failed due
-to the string containing nonnumeric characters. This occurs when
+to the string containing non-numeric characters. This occurs when
 .BR poptGetNextOpt() " is processing an argument of type " 
 .BR POPT_ARG_INT ", " POPT_ARG_SHORT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", "
 .RB POPT_ARG_FLOAT ", or " POPT_ARG_DOUBLE "."  
