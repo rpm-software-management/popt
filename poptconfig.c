@@ -500,7 +500,6 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 {
     static const char _popt_alias[] = POPT_ALIAS;
     char * home;
-    struct stat sb;
     int rc = 0;		/* assume success */
 
     if (con->appName == NULL) goto exit;
@@ -509,6 +508,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
     if (rc) goto exit;
 
 #if defined(HAVE_GLOB_H)
+    struct stat sb;
     if (!stat("SYSCONFDIR/popt.d", &sb) && S_ISDIR(sb.st_mode)) {
 	const char ** av = NULL;
 	int ac = 0;
