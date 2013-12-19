@@ -508,6 +508,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
     if (rc) goto exit;
 
 #if defined(HAVE_GLOB_H)
+    {
     struct stat sb;
     if (!stat("SYSCONFDIR/popt.d", &sb) && S_ISDIR(sb.st_mode)) {
 	const char ** av = NULL;
@@ -528,6 +529,7 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 	    }
 	    av=_free(av);
 	}
+     }
     }
     if (rc) goto exit;
 #endif
