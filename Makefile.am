@@ -158,6 +158,13 @@ mccabe:
 
 endif
 
+if HAVE_CPPCHECK
+cppcheck:
+	$(CPPCHECK) -I $(includedir) --enable=all $(libpopt_la_SOURCES)
+
+endif
+
+
 if DOXYGEN_ENABLE
 doxygen: Doxyfile
 	rm -rf doxygen

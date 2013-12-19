@@ -289,6 +289,9 @@ AM_CONDITIONAL([HAVE_SPLINT],[test "x$SPLINT" != xNO_SPLINT])
 # Check for mccabe makefile conditional support
 AC_PATH_PROG(MCCABE,pmccabe,NO_MCCABE)
 AM_CONDITIONAL([HAVE_MCCABE],[test "x$MCCABE" != xNO_MCCABE])
+# Check for cppcheck makefile conditional support
+AC_PATH_PROG(CPPCHECK,cppcheck,NO_CPPCHECK)
+AM_CONDITIONAL([HAVE_CPPCHECK],[test "x$CPPCHECK" != xNO_CPPCHECK])
 # Checks for libraries.
 
 # Checks for header files.
