@@ -157,7 +157,7 @@ assert(dstr);	/* XXX can't happen */
 int
 POPT_fprintf (FILE * stream, const char * format, ...)
 {
-    char * b = NULL, * ob = NULL;
+    char * b = NULL;
     int rc;
     va_list ap;
 
@@ -191,6 +191,7 @@ POPT_fprintf (FILE * stream, const char * format, ...)
     rc = 0;
     if (b != NULL) {
 #ifdef HAVE_ICONV
+    	char * ob = NULL;
 	ob = strdup_locale_from_utf8(b);
 	if (ob != NULL) {
 	    rc = fprintf(stream, "%s", ob);
