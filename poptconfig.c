@@ -167,7 +167,6 @@ int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
     int fdno;
     char * b = NULL;
     off_t nb = 0;
-    char * s, * t, * se;
     int rc = POPT_ERROR_ERRNO;	/* assume failure */
 
     fdno = open(fn, O_RDONLY);
@@ -197,6 +196,7 @@ int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
     if (flags & POPT_READFILE_TRIMNEWLINES)
 /*@=bitwisesigned@*/
     {
+	char * s, * t, * se;
 	for (t = b, s = b, se = b + nb; *s && s < se; s++) {
 	    switch (*s) {
 	    case '\\':
