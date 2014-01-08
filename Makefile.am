@@ -160,7 +160,7 @@ endif
 
 if HAVE_CPPCHECK
 cppcheck:
-	$(CPPCHECK) -I. -I$(includedir) --enable=all $(libpopt_la_SOURCES)
+	$(CPPCHECK) -I. -I$(includedir) --inline-suppr --enable=all $(libpopt_la_SOURCES)
 
 endif
 

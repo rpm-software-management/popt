@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2012-04-02 12:59-0400\n"
+"POT-Creation-Date: 2014-01-08 08:09-0800\n"
 "PO-Revision-Date: 2002-02-13 18:32+0000\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
@@ -15,64 +15,64 @@ msgstr ""
 msgid "unknown errno"
 msgstr "errno desconhecido"
 
-#: popt.c:1437
+#: popt.c:1439
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "tipo de opção (%d) não implementado no popt\n"
 
-#: popt.c:1887
+#: popt.c:1889
 msgid "missing argument"
 msgstr "falta um argumento"
 
-#: popt.c:1889
+#: popt.c:1891
 msgid "unknown option"
 msgstr "opção desconhecida"
 
-#: popt.c:1891
+#: popt.c:1893
 msgid "mutually exclusive logical operations requested"
 msgstr "foram pedidas operações lógicas mutuamente exclusivas"
 
-#: popt.c:1893
+#: popt.c:1895
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg não deve ser NULL"
 
-#: popt.c:1895
+#: popt.c:1897
 msgid "aliases nested too deeply"
 msgstr "'aliases' demasiado aninhados"
 
-#: popt.c:1897
+#: popt.c:1899
 msgid "error in parameter quoting"
 msgstr "erros no 'quoting' de parâmetros"
 
-#: popt.c:1899
+#: popt.c:1901
 msgid "invalid numeric value"
 msgstr "valor númerico inválido"
 
-#: popt.c:1901
+#: popt.c:1903
 msgid "number too large or too small"
 msgstr "número demasiado grando ou pequeno"
 
-#: popt.c:1903
+#: popt.c:1905
 msgid "memory allocation failed"
 msgstr "alocação de memória falhou"
 
-#: popt.c:1905
+#: popt.c:1907
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1907
+#: popt.c:1909
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1909
+#: popt.c:1911
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1911
+#: popt.c:1913
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1915
+#: popt.c:1917
 msgid "unknown error"
 msgstr "erro desconhecido"
 

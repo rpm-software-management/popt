@@ -1,4 +1,7 @@
 1.17 -> 2.0:
+    - devzero2000: add cpp suppressions directive for dealing with
+      false positive. Enable cppcheck inline suppression for
+      the make cppcheck target
     - devzero2000: popthelp.c reduce variables scope (cppcheck warning)
     - devzero2000: poptint.c reduce variables scope (cppcheck warning)
     - devzero2000: poptconfig.c reduce variables scope (cppcheck warning)

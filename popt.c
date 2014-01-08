@@ -759,6 +759,7 @@ assert(t);	/* XXX can't happen */
 
 	    tn += strlen(a);
 	    {   size_t pos = (size_t) (te - t);
+	/* cppcheck-suppress memleakOnRealloc  */
         t = (char*) xrealloc(t, tn);
 assert(t);	/* XXX can't happen */
 		if (t == NULL)
@@ -1040,6 +1041,7 @@ const char * s;
     int i;
 const char ** av = NULL;
 int ac = 0;
+/* cppcheck-suppress unreadVariable  */
 int xx;
 
     stk[ix++] = arg0;

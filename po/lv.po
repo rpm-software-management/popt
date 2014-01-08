@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt-1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2012-04-02 12:59-0400\n"
+"POT-Creation-Date: 2014-01-08 08:09-0800\n"
 "PO-Revision-Date: 2009-04-12 16:34+0300\n"
 "Last-Translator: Rihards Prieditis <RPrieditis@inbox.lv>\n"
 "Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
@@ -24,64 +24,64 @@ msgstr ""
 msgid "unknown errno"
 msgstr "nezināms kļūdas numurs"
 
-#: popt.c:1437
+#: popt.c:1439
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "iespējas tips (%u) nav ieviests popt\n"
 
-#: popt.c:1887
+#: popt.c:1889
 msgid "missing argument"
 msgstr "trūkst arguments"
 
-#: popt.c:1889
+#: popt.c:1891
 msgid "unknown option"
 msgstr "nezināma iespēja"
 
-#: popt.c:1891
+#: popt.c:1893
 msgid "mutually exclusive logical operations requested"
 msgstr "pieprasītas savstarpējie izslēdzošas loģiskās operācijas"
 
-#: popt.c:1893
+#: popt.c:1895
 msgid "opt->arg should not be NULL"
 msgstr "opcija->arguments nevar būt NULL"
 
-#: popt.c:1895
+#: popt.c:1897
 msgid "aliases nested too deeply"
 msgstr "aizstājvārdi iegulti pārāk dziļi"
 
-#: popt.c:1897
+#: popt.c:1899
 msgid "error in parameter quoting"
 msgstr "kļuda parametru citēšanā"
 
-#: popt.c:1899
+#: popt.c:1901
 msgid "invalid numeric value"
 msgstr "nederīga skaitļa vērtība"
 
-#: popt.c:1901
+#: popt.c:1903
 msgid "number too large or too small"
 msgstr "skaitlis pārāk liels, vai pārāk mazs"
 
-#: popt.c:1903
+#: popt.c:1905
 msgid "memory allocation failed"
 msgstr "atmiņas iedalīšana neizdevās"
 
-#: popt.c:1905
+#: popt.c:1907
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1907
+#: popt.c:1909
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1909
+#: popt.c:1911
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1911
+#: popt.c:1913
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1915
+#: popt.c:1917
 msgid "unknown error"
 msgstr "nezināma kļūda"
 

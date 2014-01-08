@@ -122,6 +122,7 @@ assert(te);	/* XXX can't happen */
 		*te++ = '\0', argc++;
 		if (argc == argvAlloced) {
 		    argvAlloced += POPT_ARGV_ARRAY_GROW_DELTA;
+		    /* cppcheck-suppress memleakOnRealloc  */
 		    argv = (const char**) xrealloc(argv, sizeof(*argv) * argvAlloced);
 assert(argv);	/* XXX can't happen */
 		    if (argv == NULL) goto exit;
@@ -225,6 +226,7 @@ assert(argstr);	/* XXX can't happen */
 	    argvlen += (t = (size_t)(q - l)) + (sizeof(" --")-1);
 	    if (argvlen >= maxargvlen) {
 		maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
+		/* cppcheck-suppress memleakOnRealloc  */
 		argstr = (char*) xrealloc(argstr, maxargvlen);
 assert(argstr);	/* XXX can't happen */
 		if (argstr == NULL) return POPT_ERROR_MALLOC;
@@ -255,6 +257,7 @@ assert(argstr);	/* XXX can't happen */
 	argvlen += t + (sizeof("' --='")-1);
 	if (argvlen >= maxargvlen) {
 	    maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
+	    /* cppcheck-suppress memleakOnRealloc  */
 	    argstr = (char*) xrealloc(argstr, maxargvlen);
 assert(argstr);	/* XXX can't happen */
 	    if (argstr == NULL) return POPT_ERROR_MALLOC;
