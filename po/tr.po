@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2012-04-02 12:59-0400\n"
+"POT-Creation-Date: 2014-01-08 08:09-0800\n"
 "PO-Revision-Date: 2000-02-11 13:01+0200\n"
 "Last-Translator: Nilgun Belma Buguner <nilgun@technologist.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -18,64 +18,64 @@ msgstr ""
 msgid "unknown errno"
 msgstr "bilinmeyen hata no"
 
-#: popt.c:1437
+#: popt.c:1439
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "seçenek türü (%d) popt için geçersiz\n"
 
-#: popt.c:1887
+#: popt.c:1889
 msgid "missing argument"
 msgstr "argüman eksik"
 
-#: popt.c:1889
+#: popt.c:1891
 msgid "unknown option"
 msgstr "bilinmeyen seçenek"
 
-#: popt.c:1891
+#: popt.c:1893
 msgid "mutually exclusive logical operations requested"
 msgstr "birbirini dýþlayan mantýksal iþlemler istendi"
 
-#: popt.c:1893
+#: popt.c:1895
 msgid "opt->arg should not be NULL"
 msgstr ""
 
-#: popt.c:1895
+#: popt.c:1897
 msgid "aliases nested too deeply"
 msgstr "adlarda çok fazla içiçelikler"
 
-#: popt.c:1897
+#: popt.c:1899
 msgid "error in parameter quoting"
 msgstr "parametrelerde týrnak iþaretleme hatalý "
 
-#: popt.c:1899
+#: popt.c:1901
 msgid "invalid numeric value"
 msgstr "sayýsal deðer geçersiz"
 
-#: popt.c:1901
+#: popt.c:1903
 msgid "number too large or too small"
 msgstr "sayý ya çok büyük ya da çok küçük"
 
-#: popt.c:1903
+#: popt.c:1905
 msgid "memory allocation failed"
 msgstr ""
 
-#: popt.c:1905
+#: popt.c:1907
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1907
+#: popt.c:1909
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1909
+#: popt.c:1911
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1911
+#: popt.c:1913
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1915
+#: popt.c:1917
 msgid "unknown error"
 msgstr "bilinmeyen hata"
 

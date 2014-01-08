@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2012-04-02 12:59-0400\n"
+"POT-Creation-Date: 2014-01-08 08:09-0800\n"
 "PO-Revision-Date: 2008-02-20 19:26+0100\n"
 "Last-Translator: Tim Van Holder <tim.van.holder@telenet.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -19,65 +19,65 @@ msgstr ""
 msgid "unknown errno"
 msgstr "onbekend foutnummer (errno)"
 
-#: popt.c:1437
+#: popt.c:1439
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "dit optietype (%u) is niet geïmplementeerd in popt\n"
 
-#: popt.c:1887
+#: popt.c:1889
 msgid "missing argument"
 msgstr "ontbrekend argument"
 
-#: popt.c:1889
+#: popt.c:1891
 msgid "unknown option"
 msgstr "onbekende optie"
 
-#: popt.c:1891
+#: popt.c:1893
 msgid "mutually exclusive logical operations requested"
 msgstr "elkaar uitsluitende logische operatoren werden gevraagd"
 
-#: popt.c:1893
+#: popt.c:1895
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg zou niet NULL mogen zijn"
 
-#: popt.c:1895
+#: popt.c:1897
 msgid "aliases nested too deeply"
 msgstr "aliassen zijn te diep genest"
 
 # of toch beter "quoting" behouden?
-#: popt.c:1897
+#: popt.c:1899
 msgid "error in parameter quoting"
 msgstr "fout in de aanhaling van parameters"
 
-#: popt.c:1899
+#: popt.c:1901
 msgid "invalid numeric value"
 msgstr "ongeldige numerieke waarde"
 
-#: popt.c:1901
+#: popt.c:1903
 msgid "number too large or too small"
 msgstr "getal is te klein of te groot"
 
-#: popt.c:1903
+#: popt.c:1905
 msgid "memory allocation failed"
 msgstr "reserveren van geheugen is mislukt"
 
-#: popt.c:1905
+#: popt.c:1907
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1907
+#: popt.c:1909
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1909
+#: popt.c:1911
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1911
+#: popt.c:1913
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1915
+#: popt.c:1917
 msgid "unknown error"
 msgstr "onbekende fout"
 
