@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# $Id: autogen.sh,v 1.29 2013/07/03 16:50:20 devzero2000 Exp $
+# $Id: autogen.sh,v 1.30 2014/03/28 17:10:13 devzero2000 Exp $
 # autogen.sh: autogen.sh script for popt projects
 #
 # Copyright (c) 2010-2011 Elia Pinto <devzero2000@rpm5.org>
@@ -106,7 +106,7 @@ check_versions() {
 
   while read app req_ver; do
     # Honor $APP variables ($TAR, $AUTOCONF, etc.)
-    appvar=`echo $app | tr '[a-z]' '[A-Z]'`
+    appvar=$(echo $app | tr '[a-z]' '[A-Z]')
     test "$appvar" = TAR && appvar=AMTAR
     eval "app=\${$appvar-$app}"
     inst_ver=$(get_version $app)
@@ -159,10 +159,10 @@ else
 fi
 
 # Libtool
-libtoolize=`which glibtoolize 2>/dev/null`
+libtoolize=$(which glibtoolize 2>/dev/null)
 case $libtoolize in
 		/*) export LIBTOOL=glibtool;;
-		*)  libtoolize=`which libtoolize 2>/dev/null`
+		*)  libtoolize=$(which libtoolize 2>/dev/null)
 	case $libtoolize in
     	/*) ;;
     	*)  libtoolize=libtoolize
