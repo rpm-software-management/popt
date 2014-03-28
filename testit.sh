@@ -30,14 +30,14 @@ if [ -z "${valgrind_environment}" ]
 then
 	MALLOC_CHECK_=3
 	export MALLOC_CHECK_
-	[ -n "${RANDOM}" ] && MALLOC_PERTURB_=`expr \( $RANDOM % 255 \) + 1 `
+	[ -n "${RANDOM}" ] && MALLOC_PERTURB_=$(expr \( $RANDOM % 255 \) + 1 )
 	export MALLOC_PERTURB_
 	#
 	if [ -z "${MALLOC_PERTURB_}" ]  # RANDOM is a bashism
 	then
-		r=`ps -ef | cksum | cut -f1 -d" " 2>/dev/null`
+		r=$(ps -ef | cksum | cut -f1 -d" " 2>/dev/null)
 		[ -z "${r}" ] && r=1234567890
-		MALLOC_PERTURB_=`expr \( $r % 255 \) + 1 `
+		MALLOC_PERTURB_=$(expr \( $r % 255 \) + 1 )
 		export MALLOC_PERTURB_
 	fi
 fi
@@ -49,7 +49,7 @@ run() {
 
     echo Running test $name.
 
-    result=`HOME=$builddir $builddir/$prog $* 2>&1`
+    result=$(HOME=$builddir $builddir/$prog $* 2>&1)
 
     if [ "$answer" != "$result" ]; then
 	echo "Test \"$prog $*\" failed with: \"$result\" != \"$answer\" "
@@ -81,7 +81,7 @@ run_diff() {
     rm $out $diff_file
 }
 
-builddir=`pwd`
+builddir=$(pwd)
 #srcdir=$builddir
 cd ${srcdir}
 test1=${builddir}/test1
