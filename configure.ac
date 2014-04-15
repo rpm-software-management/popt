@@ -130,6 +130,7 @@ AS_IF([test "x$popt_gcc_warnings" = xyes],
   popt_CFLAGS_ADD([-fipa-pure-const],[POPT_CFLAGS])
   popt_CFLAGS_ADD([-Wno-aggregate-return],[POPT_CFLAGS])
   popt_CFLAGS_ADD([-Wno-redundant-decls],[POPT_CFLAGS])
+  popt_CFLAGS_ADD([-Wdeclaration-after-statement],[POPT_CFLAGS])
   ])
 
 # build popt with mudflap instrumentation (GCC only)
