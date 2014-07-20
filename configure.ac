@@ -18,7 +18,7 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 # Set common system defines for POSIX extensions, such as GNU_SOURCE
 # Must be called before any macros that run the compiler (like AC-PROG-LIBTOOL)
 AC_USE_SYSTEM_EXTENSIONS
-AM_GNU_GETTEXT_VERSION([0.18])
+AM_GNU_GETTEXT_VERSION([0.18.2])
 AM_GNU_GETTEXT([external])
 AM_ICONV
 AM_MAINTAINER_MODE
