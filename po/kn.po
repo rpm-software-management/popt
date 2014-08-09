@@ -1,0 +1,159 @@
+# Translation of popt to Kannada (kn.po)
+#
+# This file is distributed under the same license as the popt package.
+#
+# Copyright (C)
+# Shankar <svenkate@redhat.com>, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: popt 1.14\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2014-08-09 16:22-0400\n"
+"PO-Revision-Date: 2014-02-05 11:43+0630\n"
+"Last-Translator: Shankar Prasad Venkateshbhat <svenkate@redhat.com>\n"
+"Language-Team: Kannada <debian-l10n-kannada@lists.debian.org>\n"
+"Language: kn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Zanata 3.2.3\n"
+"Plural-Forms: nplurals=2; plural=(n!=1)\n"
+
+#: popt.c:54
+msgid "unknown errno"
+msgstr "ಗೊತ್ತಿರದ errno"
+
+#: popt.c:1439
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt\n"
+msgstr "ಆಯ್ಕೆಯ ಬಗೆ (%d) ಅನ್ನು popt ಅನ್ವಯಿಸಲಾಗಿಲ್ಲ\n"
+
+#: popt.c:1889
+msgid "missing argument"
+msgstr "ಆರ್ಗುಮೆಂಟ್‌ ಕಾಣಿಸುತ್ತಿಲ್ಲ"
+
+#: popt.c:1891
+msgid "unknown option"
+msgstr "ಗೊತ್ತಿರದ ಆಯ್ಕೆ"
+
+#: popt.c:1893
+msgid "mutually exclusive logical operations requested"
+msgstr "ಪರಸ್ಪರ ಪ್ರತ್ಯೇಕವಾದ ತಾರ್ಕಿಕ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಮನವಿ ಮಾಡಲಾಗಿದೆ"
+
+#: popt.c:1895
+msgid "opt->arg should not be NULL"
+msgstr "opt->arg ಎನ್ನುವುದು NULL ಆಗಿರುವಂತಿಲ್ಲ"
+
+#: popt.c:1897
+msgid "aliases nested too deeply"
+msgstr "ಅಲಿಯಾಸ್‌ಗಳನ್ನು ಬಹಳ ಆಳವಾಗಿ ನೆಸ್ಟ್ ಮಾಡಲಾಗಿದೆ"
+
+#: popt.c:1899
+msgid "error in parameter quoting"
+msgstr "ನಿಯತಾಂಕವನ್ನು ಕೋಟ್ ಮಾಡುವಲ್ಲಿ ದೋಷ"
+
+#: popt.c:1901
+msgid "invalid numeric value"
+msgstr "ಅಮಾನ್ಯವಾದ ಅಂಕೀಯ ಮೌಲ್ಯ"
+
+#: popt.c:1903
+msgid "number too large or too small"
+msgstr "ಸಂಖ್ಯೆಯು ಬಹಳ ದೊಡ್ಡದಾಗಿದೆ ಅಥವ ಬಹಳ ಸಣ್ಣದಾಗಿದೆ"
+
+#: popt.c:1905
+msgid "memory allocation failed"
+msgstr "ಮೆಮೊರಿ ನಿಯೋಜನೆ ವಿಫಲಗೊಂಡಿದೆ"
+
+#: popt.c:1907
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1909
+msgid "option does not take an argument"
+msgstr ""
+
+#: popt.c:1911
+msgid "stack underflow"
+msgstr ""
+
+#: popt.c:1913
+msgid "stack overflow"
+msgstr ""
+
+#: popt.c:1917
+msgid "unknown error"
+msgstr "ಗೊತ್ತಿರದ ದೋಷ"
+
+#: popthelp.c:83 popthelp.c:94
+msgid "Show this help message"
+msgstr "ಈ ನೆರವಿನ ಸಂದೇಶವನ್ನು ತೋರಿಸು"
+
+#: popthelp.c:84 popthelp.c:95
+msgid "Display brief usage message"
+msgstr "ಸಂಕ್ಷಿಪ್ತ ಬಳಕೆಯ ಸಂದೇಶವನ್ನು ತೋರಿಸು"
+
+#: popthelp.c:98
+msgid "Display option defaults in message"
+msgstr "ಸಂದೇಶದಲ್ಲಿ ಪೂರ್ವನಿಯೋಜಿತವಾದ ಆಯ್ಕೆಯನ್ನು ತೋರಿಸು"
+
+#: popthelp.c:100
+#, fuzzy
+msgid "Terminate options"
+msgstr "ನೆರವಿನ ಆಯ್ಕೆಗಳು:"
+
+#: popthelp.c:199
+msgid "Help options:"
+msgstr "ನೆರವಿನ ಆಯ್ಕೆಗಳು:"
+
+#: popthelp.c:200
+msgid "Options implemented via popt alias/exec:"
+msgstr "popt ಅಲಿಯಾಸ್‌/exec ಮುಖಾಂತರ ಅನ್ವಯಿಸಲಾದ ಆಯ್ಕೆಗಳು:"
+
+#: popthelp.c:208
+msgid "NONE"
+msgstr "ಯಾವುದೂ ಇಲ್ಲ"
+
+#: popthelp.c:210
+msgid "VAL"
+msgstr "VAL"
+
+#: popthelp.c:214
+msgid "INT"
+msgstr "INT"
+
+#: popthelp.c:215
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:216
+msgid "LONG"
+msgstr "LONG"
+
+#: popthelp.c:217
+#, fuzzy
+msgid "LONGLONG"
+msgstr "LONG"
+
+#: popthelp.c:218
+msgid "STRING"
+msgstr "STRING"
+
+#: popthelp.c:219
+msgid "FLOAT"
+msgstr "FLOAT"
+
+#: popthelp.c:220
+msgid "DOUBLE"
+msgstr "DOUBLE"
+
+#: popthelp.c:223
+msgid "ARG"
+msgstr "ARG"
+
+#: popthelp.c:664
+msgid "Usage:"
+msgstr "ಬಳಕೆ:"
+
+#: popthelp.c:689
+msgid "[OPTION...]"
+msgstr "[ಆಯ್ಕೆ...]"

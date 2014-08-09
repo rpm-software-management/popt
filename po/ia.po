@@ -1,60 +1,65 @@
+# Interlingua translations for popt package.
+# This file is put in the public domain.
+# Nik Kalach <nik.kalach@inbox.ru>, 2012.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2014-08-09 16:22-0400\n"
-"PO-Revision-Date: 2001-06-08 01:35+0000\n"
-"Last-Translator: Richard Allen <ra@hp.is>\n"
-"Language-Team: is <kde-isl@mmedia.is>\n"
-"Language: is\n"
+"PO-Revision-Date: 2012-12-08 22:12+0400\n"
+"Last-Translator: Nik Kalach <nik.kalach@inbox.ru>\n"
+"Language-Team: Interlingua <translation-team-ia@lists.sourceforge.net>\n"
+"Language: ia\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: popt.c:54
 msgid "unknown errno"
-msgstr "óþekkt villunúmer"
+msgstr "error incognite"
 
 #: popt.c:1439
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "rofagerðin (%d) er ekki studd í popt\n"
+msgstr "typo de option (%u) non implementate in popt\n"
 
 #: popt.c:1889
 msgid "missing argument"
-msgstr "vantar viðfang"
+msgstr "argumento mancante"
 
 #: popt.c:1891
 msgid "unknown option"
-msgstr "óþekktur rofi"
+msgstr "option incognite"
 
 #: popt.c:1893
 msgid "mutually exclusive logical operations requested"
-msgstr "beðið um rofa sem slökkva hvor á öðrum"
+msgstr "requesta del operationes logic mutualmente exclusive"
 
 #: popt.c:1895
 msgid "opt->arg should not be NULL"
-msgstr "opt->arg ætti ekki að vera NULL"
+msgstr "opt->arg non debe esser NULL"
 
 #: popt.c:1897
 msgid "aliases nested too deeply"
-msgstr "alíasar of flóknir"
+msgstr "alias annidate troppo profundemente"
 
 #: popt.c:1899
 msgid "error in parameter quoting"
-msgstr "villa í viðföngum (gæsalappir og svo frv.)"
+msgstr "error in citation de parametros"
 
 #: popt.c:1901
 msgid "invalid numeric value"
-msgstr "ógilt tölulegt gildi"
+msgstr "valor numeric incorrecte"
 
 #: popt.c:1903
 msgid "number too large or too small"
-msgstr "talan of stór eða smá"
+msgstr "numero troppo grande o troppo parve"
 
 #: popt.c:1905
 msgid "memory allocation failed"
-msgstr "ekki tókst að taka frá minni"
+msgstr "insuccesso del allocation de memoria"
 
 #: popt.c:1907
 msgid "config file failed sanity test"
@@ -74,35 +79,35 @@ msgstr ""
 
 #: popt.c:1917
 msgid "unknown error"
-msgstr "óþekkt villa"
+msgstr "error incognite"
 
 #: popthelp.c:83 popthelp.c:94
 msgid "Show this help message"
-msgstr "Sýna þessa hjálp"
+msgstr "Monstrar iste message de adjuta"
 
 #: popthelp.c:84 popthelp.c:95
 msgid "Display brief usage message"
-msgstr "Sýna stuttar notkunarleiðbeiningar"
+msgstr "Monstrar un breve message de usage"
 
 #: popthelp.c:98
 msgid "Display option defaults in message"
-msgstr "Sýna sjálfgefin gildi rofa í skilaboðum"
+msgstr "Monstrar le valores predefinite de optiones in le message"
 
 #: popthelp.c:100
 msgid "Terminate options"
-msgstr ""
+msgstr "Terminar optiones"
 
 #: popthelp.c:199
 msgid "Help options:"
-msgstr ""
+msgstr "Optiones de adjuta:"
 
 #: popthelp.c:200
 msgid "Options implemented via popt alias/exec:"
-msgstr ""
+msgstr "Optiones implementate via alias/exec de popt:"
 
 #: popthelp.c:208
 msgid "NONE"
-msgstr "ENGIN"
+msgstr "NIHIL"
 
 #: popthelp.c:210
 msgid "VAL"
@@ -118,24 +123,23 @@ msgstr ""
 
 #: popthelp.c:216
 msgid "LONG"
-msgstr "LONG"
+msgstr "LONGE"
 
 #: popthelp.c:217
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "DUPLELONGE"
 
 #: popthelp.c:218
 msgid "STRING"
-msgstr "STRING"
+msgstr "CATENA"
 
 #: popthelp.c:219
 msgid "FLOAT"
-msgstr "FLOAT"
+msgstr "FLOTTANTE"
 
 #: popthelp.c:220
 msgid "DOUBLE"
-msgstr "DOUBLE"
+msgstr "DUPLE"
 
 #: popthelp.c:223
 msgid "ARG"
@@ -143,8 +147,8 @@ msgstr "ARG"
 
 #: popthelp.c:664
 msgid "Usage:"
-msgstr "Notkun:"
+msgstr "Usage:"
 
 #: popthelp.c:689
 msgid "[OPTION...]"
-msgstr "[ROFI...]"
+msgstr "[OPTION...]"
