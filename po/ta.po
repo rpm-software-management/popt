@@ -1,0 +1,155 @@
+# Tamil translations for popt.
+# This file is put in the public domain.
+#
+# Shantha kumar <shkumar@redhat.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: popt 1.14\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2014-08-09 16:22-0400\n"
+"PO-Revision-Date: 2014-02-03 15:02+0530\n"
+"Last-Translator: Shantha kumar <shkumar@redhat.com>\n"
+"Language-Team: Tamil <(nothing)>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: popt.c:54
+msgid "unknown errno"
+msgstr "தெரியாத errno"
+
+#: popt.c:1439
+#, c-format
+msgid "option type (%u) not implemented in popt\n"
+msgstr "விருப்ப வகை (%u) popt இல் செயல்படுத்தப்படவில்லை\n"
+
+#: popt.c:1889
+msgid "missing argument"
+msgstr "மதிப்புரு விடுபட்டுள்ளது"
+
+#: popt.c:1891
+msgid "unknown option"
+msgstr "தெரியாத விருப்பம்"
+
+#: popt.c:1893
+msgid "mutually exclusive logical operations requested"
+msgstr "ஒன்றுக்கொன்று பிரத்யேகமான தருக்க செயல்பாடுகள் கோரப்பட்டன"
+
+#: popt.c:1895
+msgid "opt->arg should not be NULL"
+msgstr "opt->arg NULL ஆக இருக்கக்கூடாது"
+
+#: popt.c:1897
+msgid "aliases nested too deeply"
+msgstr "மாற்றுப் பெயர்கள் மிக அதிகமாக உள்ளுக்குள்ளாக அமைக்கப்பட்டுள்ளன"
+
+#: popt.c:1899
+msgid "error in parameter quoting"
+msgstr "அளவுரு கோட்டிங்கில் பிழை"
+
+#: popt.c:1901
+msgid "invalid numeric value"
+msgstr "செல்லாத‌ எண் மதிப்பு"
+
+#: popt.c:1903
+msgid "number too large or too small"
+msgstr "எண் மிகப் பெரியது அல்லது மிகச் சிறியது"
+
+#: popt.c:1905
+msgid "memory allocation failed"
+msgstr "நினைவக ஒதுக்கீடு தோல்வி"
+
+#: popt.c:1907
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1909
+msgid "option does not take an argument"
+msgstr ""
+
+#: popt.c:1911
+msgid "stack underflow"
+msgstr ""
+
+#: popt.c:1913
+msgid "stack overflow"
+msgstr ""
+
+#: popt.c:1917
+msgid "unknown error"
+msgstr "தெரியாத பிழை"
+
+#: popthelp.c:83 popthelp.c:94
+msgid "Show this help message"
+msgstr "இந்த உதவி செய்தியை காட்டவும்"
+
+#: popthelp.c:84 popthelp.c:95
+msgid "Display brief usage message"
+msgstr "சுருக்கமான பயன்பாட்டு செய்தியை காண்பிக்கவும்"
+
+#: popthelp.c:98
+msgid "Display option defaults in message"
+msgstr "செய்தியில் விருப்ப முன்னிருப்புகளைக் காண்பி"
+
+#: popthelp.c:100
+msgid "Terminate options"
+msgstr "முடித்தல் விருப்பங்கள்"
+
+#: popthelp.c:199
+msgid "Help options:"
+msgstr "உதவி விருப்பங்கள்:"
+
+#: popthelp.c:200
+msgid "Options implemented via popt alias/exec:"
+msgstr "popt alias/exec மூலம் செயல்படுத்தப்பட்ட விருப்பங்கள்:"
+
+#: popthelp.c:208
+msgid "NONE"
+msgstr "எதுவுமில்லை"
+
+#: popthelp.c:210
+msgid "VAL"
+msgstr "VAL"
+
+#: popthelp.c:214
+msgid "INT"
+msgstr "INT"
+
+#: popthelp.c:215
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:216
+msgid "LONG"
+msgstr "LONG"
+
+#: popthelp.c:217
+msgid "LONGLONG"
+msgstr "LONGLONG"
+
+#: popthelp.c:218
+msgid "STRING"
+msgstr "STRING"
+
+#: popthelp.c:219
+msgid "FLOAT"
+msgstr "FLOAT"
+
+#: popthelp.c:220
+msgid "DOUBLE"
+msgstr "DOUBLE"
+
+#: popthelp.c:223
+msgid "ARG"
+msgstr "ARG"
+
+#: popthelp.c:664
+msgid "Usage:"
+msgstr "பயன்பாடு:"
+
+#: popthelp.c:689
+msgid "[OPTION...]"
+msgstr "[OPTION...]"

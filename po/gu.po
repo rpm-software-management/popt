@@ -1,70 +1,69 @@
-# translation of popt-1.14.pot to Latvian
-# Copyright © 2009 Free Software Foundation, Inc.
-# This file is distributed under the same license as the popt package.
-# This file is put in the public domain.
+# Translation of popt (gu.po) to Gujarati
 #
-# Rihards Prieditis <RPrieditis@inbox.lv>, 2009.
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014.
+# This file is distributed under the same license as the popt package.
+#
+# Copyright (C)
+#
+# Ankit Patel <ankit@redhat.com>, 2013, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: popt-1.14\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2014-08-09 16:22-0400\n"
-"PO-Revision-Date: 2014-04-20 18:12+0300\n"
-"Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
-"Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
-"Language: lv\n"
+"PO-Revision-Date: 2014-02-04 17:43+0630\n"
+"Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
+"Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
+"Language: gu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.5\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1)\n"
 
 #: popt.c:54
 msgid "unknown errno"
-msgstr "nezināms kļūdas numurs"
+msgstr "અજ્ઞાત ક્ષતિનંબર"
 
 #: popt.c:1439
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "opcijas tips (%u) nav ieviests popt\n"
+msgstr "વિકલ્પ પ્રકાર (%u) એ popt માં લાગુ થયેલ નથી\n"
 
 #: popt.c:1889
 msgid "missing argument"
-msgstr "trūkst argumenta"
+msgstr "ગુમ થયેલ દલીલ"
 
 #: popt.c:1891
 msgid "unknown option"
-msgstr "nezināma opcija"
+msgstr "અજ્ઞાત વિકલ્પ"
 
 #: popt.c:1893
 msgid "mutually exclusive logical operations requested"
-msgstr "pieprasītas savstarpējie izslēdzošas loģiskās operācijas"
+msgstr "ખાસ કરીને પરસ્પર લાગુ પડતી તાર્કિક પ્રક્રિયાઓની અરજી થઇ છે"
 
 #: popt.c:1895
 msgid "opt->arg should not be NULL"
-msgstr "opcija->arguments nevar būt NULL"
+msgstr "opt->arg એ NULL હોવું જોઇએ નહિં"
 
 #: popt.c:1897
 msgid "aliases nested too deeply"
-msgstr "aizstājvārdi iegulti pārāk dziļi"
+msgstr "ઉપનામો ખૂબ ઊંડે સુધી ગૂંચવાયેલા છે"
 
 #: popt.c:1899
 msgid "error in parameter quoting"
-msgstr "kļūda parametru citēšanā"
+msgstr "પરિમાણ માપ આપવામાં ક્ષતિ"
 
 #: popt.c:1901
 msgid "invalid numeric value"
-msgstr "nederīga skaitļa vērtība"
+msgstr "અયોગ્ય આંકડાકીય મૂલ્ય"
 
 #: popt.c:1903
 msgid "number too large or too small"
-msgstr "skaitlis pārāk liels, vai pārāk mazs"
+msgstr "આંકડો ખૂબ મોટો અથવા ખૂબ નાનો છે"
 
 #: popt.c:1905
 msgid "memory allocation failed"
-msgstr "atmiņas piešķiršana neizdevās"
+msgstr "મેમરી સોંપણી નિષ્ફળ"
 
 #: popt.c:1907
 msgid "config file failed sanity test"
@@ -84,39 +83,39 @@ msgstr ""
 
 #: popt.c:1917
 msgid "unknown error"
-msgstr "nezināma kļūda"
+msgstr "અજ્ઞાત ક્ષતિ"
 
 #: popthelp.c:83 popthelp.c:94
 msgid "Show this help message"
-msgstr "Rādīt šo palīdzības ziņu"
+msgstr "આ મદદ સંદેશો બતાવો"
 
 #: popthelp.c:84 popthelp.c:95
 msgid "Display brief usage message"
-msgstr "Attēlot īsu izmantošanas ziņu"
+msgstr "સંક્ષિપ્ત વપરાશ સંદેશો દર્શાવો"
 
 #: popthelp.c:98
 msgid "Display option defaults in message"
-msgstr "Attēlot noklusējuma iespējas ziņojumā"
+msgstr "દર્શાવાના વિકલ્પ મૂળભૂતો સંદેશામાં"
 
 #: popthelp.c:100
 msgid "Terminate options"
-msgstr "Pārtraukt opcijas"
+msgstr "નિવારણ વિકલ્પો"
 
 #: popthelp.c:199
 msgid "Help options:"
-msgstr "Palīdzības opcijas:"
+msgstr "મદદ વિકલ્પો:"
 
 #: popthelp.c:200
 msgid "Options implemented via popt alias/exec:"
-msgstr "Opcijas ieviestas caur popt aizstājvārda/izpildāmais:"
+msgstr "popt alias/exec મારફત લાગુ થયેલ વિકલ્પો:"
 
 #: popthelp.c:208
 msgid "NONE"
-msgstr "NEKAS"
+msgstr "કંઇ નહિં"
 
 #: popthelp.c:210
 msgid "VAL"
-msgstr "VĒRTĪBA"
+msgstr "VAL"
 
 #: popthelp.c:214
 msgid "INT"
@@ -136,7 +135,7 @@ msgstr "LONGLONG"
 
 #: popthelp.c:218
 msgid "STRING"
-msgstr "VIRKNE"
+msgstr "STRING"
 
 #: popthelp.c:219
 msgid "FLOAT"
@@ -148,12 +147,12 @@ msgstr "DOUBLE"
 
 #: popthelp.c:223
 msgid "ARG"
-msgstr "ARGUMENTS"
+msgstr "ARG"
 
 #: popthelp.c:664
 msgid "Usage:"
-msgstr "Lietošana:"
+msgstr "વપરાશ:"
 
 #: popthelp.c:689
 msgid "[OPTION...]"
-msgstr "[OPCIJA..]"
+msgstr "[વિકલ્પો...]"
