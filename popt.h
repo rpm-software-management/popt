@@ -167,6 +167,10 @@ typedef struct poptItem_s {
  */
 /*@{*/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Empty table marker to enable displaying popt alias/exec options.
  */
@@ -220,9 +224,6 @@ enum poptCallbackReason {
 };
 /*@=exportconst@*/
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 /*@-type@*/
 
 /** \ingroup popt
@@ -230,8 +231,8 @@ extern "C" {
  * @param con		context
  * @param reason	reason for callback
  * @param opt		option that triggered callback
- * @param arg		@todo Document.
- * @param data		@todo Document.
+ * @param arg		arg value
+ * @param data		callback data
  */
 typedef void (*poptCallbackType) (poptContext con, 
 		enum poptCallbackReason reason,
