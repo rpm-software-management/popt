@@ -1,68 +1,73 @@
 # Translation into the ukrainian language.
 # Copyright (C) 1999 Free Software Foundation, Inc.
-# Yuri Syrota <rasta@renome.rovno.ua>, 1999.
+# This file is distributed under the same license as the popt package.
 #
+# Yuri Syrota <rasta@renome.rovno.ua>, 1999.
+# Yuri Chornoivan <yurchor@ukr.net>, 2015.
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
+"Project-Id-Version: popt 1.16\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2014-08-13 13:27-0400\n"
-"PO-Revision-Date: 1999-09-30 16:54+0200\n"
-"Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2015-03-29 18:07+0300\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-u\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.5\n"
 
 #: popt.c:54
 msgid "unknown errno"
-msgstr ""
+msgstr "невідомий номер помилки"
 
 #: popt.c:1439
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr ""
+msgstr "тип параметра (%u) у popt не реалізовано\n"
 
 #: popt.c:1889
 msgid "missing argument"
-msgstr ""
+msgstr "пропущено аргумент"
 
 #: popt.c:1891
 msgid "unknown option"
-msgstr ""
+msgstr "невідомий параметр"
 
 #: popt.c:1893
 msgid "mutually exclusive logical operations requested"
-msgstr ""
+msgstr "надійшов запит на взаємно виключні логічні операції"
 
 #: popt.c:1895
 msgid "opt->arg should not be NULL"
-msgstr ""
+msgstr "параметр->аргумент повинне не дорівнювати NULL"
 
 #: popt.c:1897
 msgid "aliases nested too deeply"
-msgstr ""
+msgstr "надто великий рівень вкладеності у альтернативних назвах"
 
 #: popt.c:1899
 msgid "error in parameter quoting"
-msgstr ""
+msgstr "помилка у використанні лапок у параметрі"
 
 #: popt.c:1901
 msgid "invalid numeric value"
-msgstr ""
+msgstr "некоректне числове значення"
 
 #: popt.c:1903
 msgid "number too large or too small"
-msgstr ""
+msgstr "число є надто великим або надто малим"
 
 #: popt.c:1905
 msgid "memory allocation failed"
-msgstr ""
+msgstr "не вдалося отримати місце у пам'яті"
 
 #: popt.c:1907
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "файл налаштувань не пройшов перевірку на чинність"
 
 #: popt.c:1909
 msgid "option does not take an argument"
@@ -78,77 +83,76 @@ msgstr ""
 
 #: popt.c:1917
 msgid "unknown error"
-msgstr ""
+msgstr "невідома помилка"
 
 #: popthelp.c:83 popthelp.c:94
 msgid "Show this help message"
-msgstr "�������� �� ��צ���"
+msgstr "Показати цю довідку"
 
 #: popthelp.c:84 popthelp.c:95
 msgid "Display brief usage message"
-msgstr "�������� ������� ��צ��� ��� ������������"
+msgstr "Показати коротку довідку про використання"
 
 #: popthelp.c:98
-#, fuzzy
 msgid "Display option defaults in message"
-msgstr "�������� ������� ��צ��� ��� ������������"
+msgstr "Показати типові значення параметрів у повідомленні"
 
 #: popthelp.c:100
 msgid "Terminate options"
-msgstr ""
+msgstr "Завершити параметри"
 
 #: popthelp.c:199
 msgid "Help options:"
-msgstr ""
+msgstr "Параметри довідки:"
 
 #: popthelp.c:200
 msgid "Options implemented via popt alias/exec:"
-msgstr ""
+msgstr "Параметри, реалізовані за допомогою alias/exec popt:"
 
 #: popthelp.c:208
 msgid "NONE"
-msgstr ""
+msgstr "НІЧОГО"
 
 #: popthelp.c:210
 msgid "VAL"
-msgstr ""
+msgstr "ЗНАЧЕННЯ"
 
 #: popthelp.c:214
 msgid "INT"
-msgstr ""
+msgstr "ЦІЛЕ"
 
 #: popthelp.c:215
 msgid "SHORT"
-msgstr ""
+msgstr "КОРОТКЕ"
 
 #: popthelp.c:216
 msgid "LONG"
-msgstr ""
+msgstr "ДОВГЕ"
 
 #: popthelp.c:217
 msgid "LONGLONG"
-msgstr ""
+msgstr "LONGLONG"
 
 #: popthelp.c:218
 msgid "STRING"
-msgstr ""
+msgstr "РЯДОК"
 
 #: popthelp.c:219
 msgid "FLOAT"
-msgstr ""
+msgstr "FLOAT"
 
 #: popthelp.c:220
 msgid "DOUBLE"
-msgstr ""
+msgstr "DOUBLE"
 
 #: popthelp.c:223
 msgid "ARG"
-msgstr ""
+msgstr "АРГУМЕНТ"
 
 #: popthelp.c:664
 msgid "Usage:"
-msgstr ""
+msgstr "Користування:"
 
 #: popthelp.c:689
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[ПАРАМЕТР...]"

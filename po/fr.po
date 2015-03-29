@@ -1,21 +1,21 @@
 # A French translation for rpm messages
 # Copyright (C) 2003 Free Software Foundation, Inc.
-# This file is distributed under the same license as the RPM package.
+# This file is distributed under the same license as the popt package.
 # RPM French Translation <rpm-fr@livna.org>, 2003.
+# Stéphane Aulery <lkppo@free.fr>
 # JBJ : THANX A LOT !!!
 #
 # N'hésitez pas à m'envoyez un courriel si vous avez des
 # suggestions/corrections.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.11\n"
+"Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
 "POT-Creation-Date: 2014-08-13 13:27-0400\n"
-"PO-Revision-Date: 2003-06-22 23:43+0200\n"
-"Last-Translator: RPM French Translation <rpm-fr@livna.org>\n"
-"Language-Team: RPM French Translation <rpm-fr@livna.org>\n"
+"PO-Revision-Date: 2015-03-23 13:50+0100\n"
+"Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
+"Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,9 +26,9 @@ msgid "unknown errno"
 msgstr "errno inconnu"
 
 #: popt.c:1439
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "type(%d) d'option non implémenté dans popt\n"
+msgstr "type d'option (%u) non implémenté dans popt\n"
 
 #: popt.c:1889
 msgid "missing argument"
@@ -36,7 +36,7 @@ msgstr "argument manquant"
 
 #: popt.c:1891
 msgid "unknown option"
-msgstr "option iconnue"
+msgstr "option inconnue"
 
 #: popt.c:1893
 msgid "mutually exclusive logical operations requested"
@@ -48,11 +48,11 @@ msgstr "opt->arg ne devrait pas être NULL"
 
 #: popt.c:1897
 msgid "aliases nested too deeply"
-msgstr "les alias sont trop entremellés"
+msgstr "imbrications trop profondes des alias"
 
 #: popt.c:1899
 msgid "error in parameter quoting"
-msgstr "erreur en citant les paramètres"
+msgstr "erreur d'échappement des paramètres"
 
 #: popt.c:1901
 msgid "invalid numeric value"
@@ -88,11 +88,11 @@ msgstr "erreur inconnue"
 
 #: popthelp.c:83 popthelp.c:94
 msgid "Show this help message"
-msgstr "Montre ce message d'aide"
+msgstr "Affiche ce message d'aide"
 
 #: popthelp.c:84 popthelp.c:95
 msgid "Display brief usage message"
-msgstr "Affiche un bref descriptif de l'utilisation"
+msgstr "Affiche un bref descriptif du fonctionnement"
 
 #: popthelp.c:98
 msgid "Display option defaults in message"
@@ -100,15 +100,15 @@ msgstr "Afficher les valeurs par défaut des options dans le message"
 
 #: popthelp.c:100
 msgid "Terminate options"
-msgstr ""
+msgstr "Terminer les options"
 
 #: popthelp.c:199
 msgid "Help options:"
-msgstr ""
+msgstr "Options d'aide :"
 
 #: popthelp.c:200
 msgid "Options implemented via popt alias/exec:"
-msgstr ""
+msgstr "Options implémentées via popt alias / exec :"
 
 #: popthelp.c:208
 msgid "NONE"
@@ -131,13 +131,12 @@ msgid "LONG"
 msgstr "LONG"
 
 #: popthelp.c:217
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
 #: popthelp.c:218
 msgid "STRING"
-msgstr "CHAINE"
+msgstr "CHAÎNE"
 
 #: popthelp.c:219
 msgid "FLOAT"
@@ -153,8 +152,8 @@ msgstr "ARG"
 
 #: popthelp.c:664
 msgid "Usage:"
-msgstr "Utilisation:"
+msgstr "Usage :"
 
 #: popthelp.c:689
 msgid "[OPTION...]"
-msgstr "[OPTION...]"
+msgstr "[OPTION…]"

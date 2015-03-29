@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: i18n: update da fr nb nl uk, and msgmerge (Translation Project).
     - jbj: i18n: add gu hr ia kn pt_BR ta, msgmerge (Translation Project).
     - devzero2000: add cpp suppressions directive for dealing with
       false positive. Enable cppcheck inline suppression for
