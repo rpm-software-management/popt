@@ -2,7 +2,7 @@
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the popt package.
 # RPM French Translation <rpm-fr@livna.org>, 2003.
-# Stéphane Aulery <lkppo@free.fr>
+# Stéphane Aulery <lkppo@free.fr>, 2015.
 # JBJ : THANX A LOT !!!
 #
 # N'hésitez pas à m'envoyez un courriel si vous avez des
@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.14\n"
+"Project-Id-Version: popt 1.16\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2014-08-13 13:27-0400\n"
-"PO-Revision-Date: 2015-03-23 13:50+0100\n"
+"POT-Creation-Date: 2010-02-17 13:35-0500\n"
+"PO-Revision-Date: 2015-03-29 20:48+0200\n"
 "Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -21,139 +21,127 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: popt.c:54
+#: popt.c:47
 msgid "unknown errno"
 msgstr "errno inconnu"
 
-#: popt.c:1439
+#: popt.c:1290
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "type d'option (%u) non implémenté dans popt\n"
 
-#: popt.c:1889
+#: popt.c:1711
 msgid "missing argument"
 msgstr "argument manquant"
 
-#: popt.c:1891
+#: popt.c:1713
 msgid "unknown option"
 msgstr "option inconnue"
 
-#: popt.c:1893
+#: popt.c:1715
 msgid "mutually exclusive logical operations requested"
 msgstr "opérations logiques mutuellement exclusives requises"
 
-#: popt.c:1895
+#: popt.c:1717
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ne devrait pas être NULL"
 
-#: popt.c:1897
+#: popt.c:1719
 msgid "aliases nested too deeply"
 msgstr "imbrications trop profondes des alias"
 
-#: popt.c:1899
+#: popt.c:1721
 msgid "error in parameter quoting"
 msgstr "erreur d'échappement des paramètres"
 
-#: popt.c:1901
+#: popt.c:1723
 msgid "invalid numeric value"
 msgstr "valeur numérique invalide"
 
-#: popt.c:1903
+#: popt.c:1725
 msgid "number too large or too small"
 msgstr "nombre trop grand ou trop petit"
 
-#: popt.c:1905
+#: popt.c:1727
 msgid "memory allocation failed"
 msgstr "échec de l'allocation de mémoire"
 
-#: popt.c:1907
+#: popt.c:1729
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "le fichier de configuration n'a pas passé le test de conformité"
 
-#: popt.c:1909
-msgid "option does not take an argument"
-msgstr ""
-
-#: popt.c:1911
-msgid "stack underflow"
-msgstr ""
-
-#: popt.c:1913
-msgid "stack overflow"
-msgstr ""
-
-#: popt.c:1917
+#: popt.c:1733
 msgid "unknown error"
 msgstr "erreur inconnue"
 
-#: popthelp.c:83 popthelp.c:94
+#: popthelp.c:75 popthelp.c:86
 msgid "Show this help message"
 msgstr "Affiche ce message d'aide"
 
-#: popthelp.c:84 popthelp.c:95
+#: popthelp.c:76 popthelp.c:87
 msgid "Display brief usage message"
 msgstr "Affiche un bref descriptif du fonctionnement"
 
-#: popthelp.c:98
+#: popthelp.c:90
 msgid "Display option defaults in message"
 msgstr "Afficher les valeurs par défaut des options dans le message"
 
-#: popthelp.c:100
+#: popthelp.c:92
 msgid "Terminate options"
 msgstr "Terminer les options"
 
-#: popthelp.c:199
+#: popthelp.c:191
 msgid "Help options:"
 msgstr "Options d'aide :"
 
-#: popthelp.c:200
+#: popthelp.c:192
 msgid "Options implemented via popt alias/exec:"
 msgstr "Options implémentées via popt alias / exec :"
 
-#: popthelp.c:208
+#: popthelp.c:200
 msgid "NONE"
 msgstr "RIEN"
 
-#: popthelp.c:210
+#: popthelp.c:202
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:214
+#: popthelp.c:206
 msgid "INT"
 msgstr "ENTIER"
 
-#: popthelp.c:215
+#: popthelp.c:207
 msgid "SHORT"
-msgstr ""
+msgstr "ENTIER COURT"
 
-#: popthelp.c:216
+#: popthelp.c:208
 msgid "LONG"
-msgstr "LONG"
+msgstr "ENTIER LONG"
 
-#: popthelp.c:217
+#: popthelp.c:209
 msgid "LONGLONG"
-msgstr "LONGLONG"
+msgstr "ENTIER LONG LONG"
 
-#: popthelp.c:218
+#: popthelp.c:210
 msgid "STRING"
 msgstr "CHAÎNE"
 
-#: popthelp.c:219
+#: popthelp.c:211
 msgid "FLOAT"
-msgstr "FLOTTANT"
+msgstr "DÉCIMAL SIMPLE"
 
-#: popthelp.c:220
+#: popthelp.c:212
 msgid "DOUBLE"
-msgstr "DOUBLE"
+msgstr "DÉCIMAL DOUBLE"
 
-#: popthelp.c:223
+#: popthelp.c:215
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:664
+#: popthelp.c:649
 msgid "Usage:"
 msgstr "Usage :"
 
-#: popthelp.c:689
+#: popthelp.c:672
 msgid "[OPTION...]"
 msgstr "[OPTION…]"
