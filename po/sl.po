@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-02-16 19:54-0500\n"
+"POT-Creation-Date: 2014-08-13 13:27-0400\n"
 "PO-Revision-Date: 2012-03-05 10:25+0100\n"
 "Last-Translator: Klemen Košir <klemen.kosir@gmx.com>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
@@ -17,119 +17,139 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:35
+#: popt.c:54
 msgid "unknown errno"
 msgstr "neznana številka napake"
 
-#: popt.c:1090
+#: popt.c:1439
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "vrsta možnosti (%u) ni podprta\n"
 
-#: popt.c:1294
+#: popt.c:1889
 msgid "missing argument"
 msgstr "manjkajoč argument"
 
-#: popt.c:1296
+#: popt.c:1891
 msgid "unknown option"
 msgstr "neznana možnost"
 
-#: popt.c:1298
+#: popt.c:1893
 msgid "mutually exclusive logical operations requested"
 msgstr "zahtevani so medsebojno izključujoči logični operatorji"
 
-#: popt.c:1300
+#: popt.c:1895
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ne sme biti NULL"
 
-#: popt.c:1302
+#: popt.c:1897
 msgid "aliases nested too deeply"
 msgstr "vzdevki so vgnezdeni pregloboko"
 
-#: popt.c:1304
+#: popt.c:1899
 msgid "error in parameter quoting"
 msgstr "napaka pri navajanju parametra"
 
-#: popt.c:1306
+#: popt.c:1901
 msgid "invalid numeric value"
 msgstr "neveljavna številska vrednost"
 
-#: popt.c:1308
+#: popt.c:1903
 msgid "number too large or too small"
 msgstr "število je preveliko ali premajhno"
 
-#: popt.c:1310
+#: popt.c:1905
 msgid "memory allocation failed"
 msgstr "dodeljevanje pomnilnika ni uspelo"
 
-#: popt.c:1314
+#: popt.c:1907
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1909
+msgid "option does not take an argument"
+msgstr ""
+
+#: popt.c:1911
+msgid "stack underflow"
+msgstr ""
+
+#: popt.c:1913
+msgid "stack overflow"
+msgstr ""
+
+#: popt.c:1917
 msgid "unknown error"
 msgstr "neznana napaka"
 
-#: popthelp.c:74 popthelp.c:86
+#: popthelp.c:83 popthelp.c:94
 msgid "Show this help message"
 msgstr "Izpiše pomoč."
 
-#: popthelp.c:75 popthelp.c:87
+#: popthelp.c:84 popthelp.c:95
 msgid "Display brief usage message"
 msgstr "Izpiše kratka navodila za uporabo."
 
-#: popthelp.c:76 popthelp.c:92
-msgid "Terminate options"
-msgstr "Konec možnosti"
-
-#: popthelp.c:90
+#: popthelp.c:98
 msgid "Display option defaults in message"
 msgstr "Izpiše privzete vrednosti možnosti."
 
-#: popthelp.c:191
+#: popthelp.c:100
+msgid "Terminate options"
+msgstr "Konec možnosti"
+
+#: popthelp.c:199
 msgid "Help options:"
 msgstr "Možnosti pomoči:"
 
-#: popthelp.c:192
+#: popthelp.c:200
 msgid "Options implemented via popt alias/exec:"
 msgstr "Možnosti, podprte s popt alias/exec:"
 
-#: popthelp.c:200
+#: popthelp.c:208
 msgid "NONE"
 msgstr "BREZ"
 
-#: popthelp.c:202
+#: popthelp.c:210
 msgid "VAL"
 msgstr "VREDNOST"
 
-#: popthelp.c:206
+#: popthelp.c:214
 msgid "INT"
 msgstr "CELO_ŠTEVILO"
 
-#: popthelp.c:207
+#: popthelp.c:215
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:216
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:208
+#: popthelp.c:217
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:209
+#: popthelp.c:218
 msgid "STRING"
 msgstr "NIZ"
 
-#: popthelp.c:210
+#: popthelp.c:219
 msgid "FLOAT"
 msgstr "PLAVAJOČA_VEJICA"
 
-#: popthelp.c:211
+#: popthelp.c:220
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:214
+#: popthelp.c:223
 msgid "ARG"
 msgstr "ARGUMENT"
 
-#: popthelp.c:634
+#: popthelp.c:664
 msgid "Usage:"
 msgstr "Uporaba:"
 
-#: popthelp.c:658
+#: popthelp.c:689
 msgid "[OPTION...]"
 msgstr "[MOŽNOST ...]"
