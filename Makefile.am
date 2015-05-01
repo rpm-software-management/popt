@@ -136,10 +136,13 @@ endif
 
 dist_man_MANS = popt.3
 
-BUILT_SOURCES += popt.pc 
+BUILT_SOURCES += popt.pc .syntastic_c_config
+
+.syntastic_c_config: Makefile
+	@echo $(COMPILE) | tr ' ' '\n' | sed -e '1d' > $@
 
 distclean-local:
-	rm -rf .ccache 
+	rm -rf .ccache .syntastic_c_config
 
 clean-local:
 	rm -rf doxygen *.gcda *.gcno lcov-result popt-valgrind-result 
