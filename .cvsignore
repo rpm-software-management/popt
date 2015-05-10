@@ -25,6 +25,7 @@ config.sub
 configmake.h
 configure
 cov-int
+cscope.*
 doxygen
 depcomp
 install-sh
