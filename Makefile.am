@@ -143,6 +143,7 @@ BUILT_SOURCES += popt.pc .syntastic_c_config
 
 distclean-local:
 	rm -rf .ccache .syntastic_c_config
+	rm -f cscope.files cscope.out cscope.in.out cscope.po.out
 
 clean-local:
 	rm -rf doxygen *.gcda *.gcno lcov-result popt-valgrind-result 
