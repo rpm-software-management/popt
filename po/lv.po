@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt-1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"POT-Creation-Date: 2008-02-16 19:54-0500\n"
 "PO-Revision-Date: 2014-04-20 18:12+0300\n"
 "Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
 "Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
@@ -18,142 +18,121 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.5\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
-#: popt.c:54
+#: popt.c:35
 msgid "unknown errno"
 msgstr "nezināms kļūdas numurs"
 
-#: popt.c:1439
+#: popt.c:1090
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "opcijas tips (%u) nav ieviests popt\n"
 
-#: popt.c:1889
+#: popt.c:1294
 msgid "missing argument"
 msgstr "trūkst argumenta"
 
-#: popt.c:1891
+#: popt.c:1296
 msgid "unknown option"
 msgstr "nezināma opcija"
 
-#: popt.c:1893
+#: popt.c:1298
 msgid "mutually exclusive logical operations requested"
 msgstr "pieprasītas savstarpējie izslēdzošas loģiskās operācijas"
 
-#: popt.c:1895
+#: popt.c:1300
 msgid "opt->arg should not be NULL"
 msgstr "opcija->arguments nevar būt NULL"
 
-#: popt.c:1897
+#: popt.c:1302
 msgid "aliases nested too deeply"
 msgstr "aizstājvārdi iegulti pārāk dziļi"
 
-#: popt.c:1899
+#: popt.c:1304
 msgid "error in parameter quoting"
 msgstr "kļūda parametru citēšanā"
 
-#: popt.c:1901
+#: popt.c:1306
 msgid "invalid numeric value"
 msgstr "nederīga skaitļa vērtība"
 
-#: popt.c:1903
+#: popt.c:1308
 msgid "number too large or too small"
 msgstr "skaitlis pārāk liels, vai pārāk mazs"
 
-#: popt.c:1905
+#: popt.c:1310
 msgid "memory allocation failed"
 msgstr "atmiņas piešķiršana neizdevās"
 
-#: popt.c:1907
-msgid "config file failed sanity test"
-msgstr ""
-
-#: popt.c:1909
-msgid "option does not take an argument"
-msgstr ""
-
-#: popt.c:1911
-msgid "stack underflow"
-msgstr ""
-
-#: popt.c:1913
-msgid "stack overflow"
-msgstr ""
-
-#: popt.c:1917
+#: popt.c:1314
 msgid "unknown error"
 msgstr "nezināma kļūda"
 
-#: popthelp.c:83 popthelp.c:94
+#: popthelp.c:74 popthelp.c:86
 msgid "Show this help message"
 msgstr "Rādīt šo palīdzības ziņu"
 
-#: popthelp.c:84 popthelp.c:95
+#: popthelp.c:75 popthelp.c:87
 msgid "Display brief usage message"
 msgstr "Attēlot īsu izmantošanas ziņu"
 
-#: popthelp.c:98
-msgid "Display option defaults in message"
-msgstr "Attēlot noklusējuma iespējas ziņojumā"
-
-#: popthelp.c:100
+#: popthelp.c:76 popthelp.c:92
 msgid "Terminate options"
 msgstr "Pārtraukt opcijas"
 
-#: popthelp.c:199
+#: popthelp.c:90
+msgid "Display option defaults in message"
+msgstr "Attēlot noklusējuma iespējas ziņojumā"
+
+#: popthelp.c:191
 msgid "Help options:"
 msgstr "Palīdzības opcijas:"
 
-#: popthelp.c:200
+#: popthelp.c:192
 msgid "Options implemented via popt alias/exec:"
 msgstr "Opcijas ieviestas caur popt aizstājvārda/izpildāmais:"
 
-#: popthelp.c:208
+#: popthelp.c:200
 msgid "NONE"
 msgstr "NEKAS"
 
-#: popthelp.c:210
+#: popthelp.c:202
 msgid "VAL"
 msgstr "VĒRTĪBA"
 
-#: popthelp.c:214
+#: popthelp.c:206
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:215
-msgid "SHORT"
-msgstr ""
-
-#: popthelp.c:216
+#: popthelp.c:207
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:217
+#: popthelp.c:208
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:218
+#: popthelp.c:209
 msgid "STRING"
 msgstr "VIRKNE"
 
-#: popthelp.c:219
+#: popthelp.c:210
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:220
+#: popthelp.c:211
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:223
+#: popthelp.c:214
 msgid "ARG"
 msgstr "ARGUMENTS"
 
-#: popthelp.c:664
+#: popthelp.c:634
 msgid "Usage:"
 msgstr "Lietošana:"
 
-#: popthelp.c:689
+#: popthelp.c:658
 msgid "[OPTION...]"
 msgstr "[OPCIJA..]"
