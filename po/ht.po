@@ -1,0 +1,153 @@
+# Bing automated translation of popt messages
+# This file is put in the public domain.
+# bing-ht <popt-devel@rpm5.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: popt 1.17\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"PO-Revision-Date: 2015-05-12 17:16-0400\n"
+"Last-Translator: bing-ht <popt-devel@rpm5.org>\n"
+"Language-Team: bing-ht <popt-devel@rpm5.org>\n"
+"Language: ht\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: popt.c:54
+msgid "unknown errno"
+msgstr "aka san errno"
+
+#: popt.c:1439
+#, c-format
+msgid "option type (%u) not implemented in popt\n"
+msgstr "opsyon tip (grip %u) pa aplike nan popt\n"
+
+#: popt.c:1889
+msgid "missing argument"
+msgstr "pa wè kont"
+
+#: popt.c:1891
+msgid "unknown option"
+msgstr "aka san yon opsyon"
+
+#: popt.c:1893
+msgid "mutually exclusive logical operations requested"
+msgstr "mityèlman esklizif operasyon lojik yo te mande"
+
+#: popt.c:1895
+msgid "opt->arg should not be NULL"
+msgstr "refize nou bay enfòmasyon-> arg pa ta dwe NIL"
+
+#: popt.c:1897
+msgid "aliases nested too deeply"
+msgstr "aliases imbriqués twò fò"
+
+#: popt.c:1899
+msgid "error in parameter quoting"
+msgstr "erreur nan paramètre devis"
+
+#: popt.c:1901
+msgid "invalid numeric value"
+msgstr "valè numérique non"
+
+#: popt.c:1903
+msgid "number too large or too small"
+msgstr "nombre twò gwo ou twò piti"
+
+#: popt.c:1905
+msgid "memory allocation failed"
+msgstr "chonje alokasyon te tonbe"
+
+#: popt.c:1907
+msgid "config file failed sanity test"
+msgstr "fichier config echwe larezon tès"
+
+#: popt.c:1909
+msgid "option does not take an argument"
+msgstr "opsyon ki p'ap mache fè kwè yo tanmen kritike"
+
+#: popt.c:1911
+msgid "stack underflow"
+msgstr "pile underflow"
+
+#: popt.c:1913
+msgid "stack overflow"
+msgstr "pile par"
+
+#: popt.c:1917
+msgid "unknown error"
+msgstr "aka san erreur"
+
+#: popthelp.c:83 popthelp.c:94
+msgid "Show this help message"
+msgstr "Montre sa a mesaj èd"
+
+#: popthelp.c:84 popthelp.c:95
+msgid "Display brief usage message"
+msgstr "Ekspozisyon brèf l' mesaj"
+
+#: popthelp.c:98
+msgid "Display option defaults in message"
+msgstr "Affichage par chwa nan mesaj"
+
+#: popthelp.c:100
+msgid "Terminate options"
+msgstr "Fin posiblite"
+
+#: popthelp.c:199
+msgid "Help options:"
+msgstr "Ede chwa:"
+
+#: popthelp.c:200
+msgid "Options implemented via popt alias/exec:"
+msgstr "Posiblite aplike via popt alyas/exec:"
+
+#: popthelp.c:208
+msgid "NONE"
+msgstr "AUCUN"
+
+#: popthelp.c:210
+msgid "VAL"
+msgstr "VAL"
+
+#: popthelp.c:214
+msgid "INT"
+msgstr "INT"
+
+#: popthelp.c:215
+msgid "SHORT"
+msgstr "KOUT"
+
+#: popthelp.c:216
+msgid "LONG"
+msgstr "LONTAN"
+
+#: popthelp.c:217
+msgid "LONGLONG"
+msgstr "LONGLONG"
+
+#: popthelp.c:218
+msgid "STRING"
+msgstr "FILÈ"
+
+#: popthelp.c:219
+msgid "FLOAT"
+msgstr "RET SOU DLO"
+
+#: popthelp.c:220
+msgid "DOUBLE"
+msgstr "TOUT BAGAY AN DE"
+
+#: popthelp.c:223
+msgid "ARG"
+msgstr "ARG"
+
+#: popthelp.c:664
+msgid "Usage:"
+msgstr "L':"
+
+#: popthelp.c:689
+msgid "[OPTION...]"
+msgstr "[OPSYON...]"

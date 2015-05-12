@@ -1,0 +1,153 @@
+# Bing automated translation of popt messages
+# This file is put in the public domain.
+# bing-yua <popt-devel@rpm5.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: popt 1.17\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"PO-Revision-Date: 2015-05-12 17:17-0400\n"
+"Last-Translator: bing-yua <popt-devel@rpm5.org>\n"
+"Language-Team: bing-yua <popt-devel@rpm5.org>\n"
+"Language: yua\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: popt.c:54
+msgid "unknown errno"
+msgstr "errno desconocido"
+
+#: popt.c:1439
+#, c-format
+msgid "option type (%u) not implemented in popt\n"
+msgstr "bin yano'ob opción (%u) ma' implementado ti' popt\n"
+
+#: popt.c:1889
+msgid "missing argument"
+msgstr "argumento u si'ipil"
+
+#: popt.c:1891
+msgid "unknown option"
+msgstr "opción desconocida"
+
+#: popt.c:1893
+msgid "mutually exclusive logical operations requested"
+msgstr "operaciones lógicas excluyentes solicitadas"
+
+#: popt.c:1895
+msgid "opt->arg should not be NULL"
+msgstr "OPC-> arg ma' k'a'ana'an u NULL"
+
+#: popt.c:1897
+msgid "aliases nested too deeply"
+msgstr "alias jach Nib anidadas"
+
+#: popt.c:1899
+msgid "error in parameter quoting"
+msgstr "ba'alo' ti' le parámetro citando"
+
+#: popt.c:1901
+msgid "invalid numeric value"
+msgstr "ku numérico ma' válido"
+
+#: popt.c:1903
+msgid "number too large or too small"
+msgstr "meyaj jach nojoch wa Jach chichan"
+
+#: popt.c:1905
+msgid "memory allocation failed"
+msgstr "ba'alo' asignación memoria"
+
+#: popt.c:1907
+msgid "config file failed sanity test"
+msgstr "prueba cordura fallido config file"
+
+#: popt.c:1909
+msgid "option does not take an argument"
+msgstr "opción ma' uk' juntúul argumento"
+
+#: popt.c:1911
+msgid "stack underflow"
+msgstr "subdesbordamiento ich kastláan"
+
+#: popt.c:1913
+msgid "stack overflow"
+msgstr "desbordamiento ich kastláan"
+
+#: popt.c:1917
+msgid "unknown error"
+msgstr "ba'alo' desconocido"
+
+#: popthelp.c:83 popthelp.c:94
+msgid "Show this help message"
+msgstr "We'esik le k'ubent'aano' áantaj"
+
+#: popthelp.c:84 popthelp.c:95
+msgid "Display brief usage message"
+msgstr "Ku chíikpajal jump'éel t'aan búukinta'al breve"
+
+#: popthelp.c:98
+msgid "Display option defaults in message"
+msgstr "We'esik le opción tumen defecto ti' le k'uuben t'aano'"
+
+#: popthelp.c:100
+msgid "Terminate options"
+msgstr "Opciones u"
+
+#: popthelp.c:199
+msgid "Help options:"
+msgstr "Opciones u áantaj:"
+
+#: popthelp.c:200
+msgid "Options implemented via popt alias/exec:"
+msgstr "Opciones implementadas yo'osal popt alias yaan exec:"
+
+#: popthelp.c:208
+msgid "NONE"
+msgstr "MIX JUNTÚUL"
+
+#: popthelp.c:210
+msgid "VAL"
+msgstr "VAL"
+
+#: popthelp.c:214
+msgid "INT"
+msgstr "INT"
+
+#: popthelp.c:215
+msgid "SHORT"
+msgstr "KÓOM"
+
+#: popthelp.c:216
+msgid "LONG"
+msgstr "LARGO"
+
+#: popthelp.c:217
+msgid "LONGLONG"
+msgstr "LARGO"
+
+#: popthelp.c:218
+msgid "STRING"
+msgstr "TSOLOKBAL"
+
+#: popthelp.c:219
+msgid "FLOAT"
+msgstr "FLOTADOR"
+
+#: popthelp.c:220
+msgid "DOUBLE"
+msgstr "DOBLE"
+
+#: popthelp.c:223
+msgid "ARG"
+msgstr "ARG"
+
+#: popthelp.c:664
+msgid "Usage:"
+msgstr "Búukinta'al:"
+
+#: popthelp.c:689
+msgid "[OPTION...]"
+msgstr "[OPCIONES...]"

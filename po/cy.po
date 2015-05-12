@@ -1,0 +1,153 @@
+# Bing automated translation of popt messages
+# This file is put in the public domain.
+# bing-cy <popt-devel@rpm5.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: popt 1.17\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"PO-Revision-Date: 2015-05-12 17:15-0400\n"
+"Last-Translator: bing-cy <popt-devel@rpm5.org>\n"
+"Language-Team: bing-cy <popt-devel@rpm5.org>\n"
+"Language: cy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: popt.c:54
+msgid "unknown errno"
+msgstr "errno anhysbys"
+
+#: popt.c:1439
+#, c-format
+msgid "option type (%u) not implemented in popt\n"
+msgstr "math o ddewis (%u) ar waith nid yn popt\n"
+
+#: popt.c:1889
+msgid "missing argument"
+msgstr "dadl ar goll"
+
+#: popt.c:1891
+msgid "unknown option"
+msgstr "opsiwn anhysbys"
+
+#: popt.c:1893
+msgid "mutually exclusive logical operations requested"
+msgstr "gweithrediadau rhesymegol gilydd gofynnir"
+
+#: popt.c:1895
+msgid "opt->arg should not be NULL"
+msgstr "dewis-> arg ni ddylid nwl"
+
+#: popt.c:1897
+msgid "aliases nested too deeply"
+msgstr "enwau eraill nythu rhy ddwfn"
+
+#: popt.c:1899
+msgid "error in parameter quoting"
+msgstr "Gwall wrth ddyfynnu'r paramedr"
+
+#: popt.c:1901
+msgid "invalid numeric value"
+msgstr "gwerth rhifol annilys"
+
+#: popt.c:1903
+msgid "number too large or too small"
+msgstr "nifer rhy fawr neu'n rhy fach"
+
+#: popt.c:1905
+msgid "memory allocation failed"
+msgstr "dyrannu cof wedi methu"
+
+#: popt.c:1907
+msgid "config file failed sanity test"
+msgstr "prawf aflwyddiannus gallineb ffeil ffurfweddu"
+
+#: popt.c:1909
+msgid "option does not take an argument"
+msgstr "Nid yw'r opsiwn yn cymryd dadl"
+
+#: popt.c:1911
+msgid "stack underflow"
+msgstr "stacio underflow"
+
+#: popt.c:1913
+msgid "stack overflow"
+msgstr "gorlifo pentwr"
+
+#: popt.c:1917
+msgid "unknown error"
+msgstr "Gwall anhysbys"
+
+#: popthelp.c:83 popthelp.c:94
+msgid "Show this help message"
+msgstr "Dangos neges hon helpu"
+
+#: popthelp.c:84 popthelp.c:95
+msgid "Display brief usage message"
+msgstr "Arddangos defnydd byr neges"
+
+#: popthelp.c:98
+msgid "Display option defaults in message"
+msgstr "Arddangos rhagosodiadau opsiwn mewn neges"
+
+#: popthelp.c:100
+msgid "Terminate options"
+msgstr "Derfynu opsiynau"
+
+#: popthelp.c:199
+msgid "Help options:"
+msgstr "Dewisiadau help:"
+
+#: popthelp.c:200
+msgid "Options implemented via popt alias/exec:"
+msgstr "Opsiynau ar waith drwy gyfrwng popt enw arall/gweithredol:"
+
+#: popthelp.c:208
+msgid "NONE"
+msgstr "DIM"
+
+#: popthelp.c:210
+msgid "VAL"
+msgstr "VAL"
+
+#: popthelp.c:214
+msgid "INT"
+msgstr "CYFD"
+
+#: popthelp.c:215
+msgid "SHORT"
+msgstr "FER"
+
+#: popthelp.c:216
+msgid "LONG"
+msgstr "HIR"
+
+#: popthelp.c:217
+msgid "LONGLONG"
+msgstr "LONGLONG"
+
+#: popthelp.c:218
+msgid "STRING"
+msgstr "LLINYN"
+
+#: popthelp.c:219
+msgid "FLOAT"
+msgstr "ARNOFIO"
+
+#: popthelp.c:220
+msgid "DOUBLE"
+msgstr "DWBL"
+
+#: popthelp.c:223
+msgid "ARG"
+msgstr "ARG"
+
+#: popthelp.c:664
+msgid "Usage:"
+msgstr "Defnydd:"
+
+#: popthelp.c:689
+msgid "[OPTION...]"
+msgstr "[DEWIS...]"

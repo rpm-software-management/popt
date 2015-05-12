@@ -1,0 +1,153 @@
+# Bing automated translation of popt messages
+# This file is put in the public domain.
+# bing-ms <popt-devel@rpm5.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: popt 1.17\n"
+"Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
+"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"PO-Revision-Date: 2015-05-12 17:16-0400\n"
+"Last-Translator: bing-ms <popt-devel@rpm5.org>\n"
+"Language-Team: bing-ms <popt-devel@rpm5.org>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: popt.c:54
+msgid "unknown errno"
+msgstr "errno tidak diketahui"
+
+#: popt.c:1439
+#, c-format
+msgid "option type (%u) not implemented in popt\n"
+msgstr "jenis opsyen (%u) tidak dilaksanakan di popt\n"
+
+#: popt.c:1889
+msgid "missing argument"
+msgstr "hilang hujah"
+
+#: popt.c:1891
+msgid "unknown option"
+msgstr "Opsyen tidak dikenali"
+
+#: popt.c:1893
+msgid "mutually exclusive logical operations requested"
+msgstr "saling eksklusif operasi logik yang diminta"
+
+#: popt.c:1895
+msgid "opt->arg should not be NULL"
+msgstr "memilih-> arg tidak harus NULL"
+
+#: popt.c:1897
+msgid "aliases nested too deeply"
+msgstr "Alias yang bersarang terlalu mendalam"
+
+#: popt.c:1899
+msgid "error in parameter quoting"
+msgstr "Ralat dalam parameter Sebutharga"
+
+#: popt.c:1901
+msgid "invalid numeric value"
+msgstr "nilai angka yang tidak sah"
+
+#: popt.c:1903
+msgid "number too large or too small"
+msgstr "nombor yang terlalu besar atau terlalu kecil"
+
+#: popt.c:1905
+msgid "memory allocation failed"
+msgstr "Pengagihan ingatan yang gagal"
+
+#: popt.c:1907
+msgid "config file failed sanity test"
+msgstr "Konfigurasi fail kewarasan gagal ujian"
+
+#: popt.c:1909
+msgid "option does not take an argument"
+msgstr "Opsyen tidak mengambil hujah"
+
+#: popt.c:1911
+msgid "stack underflow"
+msgstr "Koleksi underflow"
+
+#: popt.c:1913
+msgid "stack overflow"
+msgstr "limpahan tindanan"
+
+#: popt.c:1917
+msgid "unknown error"
+msgstr "Ralat yang tidak diketahui"
+
+#: popthelp.c:83 popthelp.c:94
+msgid "Show this help message"
+msgstr "Tayang mesej bantuan ini"
+
+#: popthelp.c:84 popthelp.c:95
+msgid "Display brief usage message"
+msgstr "Mesej ringkas penggunaan paparan"
+
+#: popthelp.c:98
+msgid "Display option defaults in message"
+msgstr "Paparan pilihan lalai dalam mesej"
+
+#: popthelp.c:100
+msgid "Terminate options"
+msgstr "Menamatkan pilihan"
+
+#: popthelp.c:199
+msgid "Help options:"
+msgstr "Opsyen bantuan:"
+
+#: popthelp.c:200
+msgid "Options implemented via popt alias/exec:"
+msgstr "Opsyen yang dilaksanakan melalui popt alias/exec:"
+
+#: popthelp.c:208
+msgid "NONE"
+msgstr "TIADA SEORANG PUN"
+
+#: popthelp.c:210
+msgid "VAL"
+msgstr "VAL"
+
+#: popthelp.c:214
+msgid "INT"
+msgstr "INT"
+
+#: popthelp.c:215
+msgid "SHORT"
+msgstr "PENDEK"
+
+#: popthelp.c:216
+msgid "LONG"
+msgstr "PANJANG"
+
+#: popthelp.c:217
+msgid "LONGLONG"
+msgstr "LONGLONG"
+
+#: popthelp.c:218
+msgid "STRING"
+msgstr "RENTETAN"
+
+#: popthelp.c:219
+msgid "FLOAT"
+msgstr "APUNGAN"
+
+#: popthelp.c:220
+msgid "DOUBLE"
+msgstr "BILIK DOUBLE"
+
+#: popthelp.c:223
+msgid "ARG"
+msgstr "ARG"
+
+#: popthelp.c:664
+msgid "Usage:"
+msgstr "Penggunaan:"
+
+#: popthelp.c:689
+msgid "[OPTION...]"
+msgstr "[PILIHAN...]"
