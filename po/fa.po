@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"POT-Creation-Date: 2015-05-12 18:30-0400\n"
 "PO-Revision-Date: 2015-05-12 17:15-0400\n"
 "Last-Translator: bing-fa <popt-devel@rpm5.org>\n"
 "Language-Team: bing-fa <popt-devel@rpm5.org>\n"
@@ -19,135 +19,135 @@ msgstr ""
 msgid "unknown errno"
 msgstr "errno ناشناخته"
 
-#: popt.c:1439
+#: popt.c:1441
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "نوع گزینه (%u) نیست در popt اجرا\n"
 
-#: popt.c:1889
+#: popt.c:1894
 msgid "missing argument"
 msgstr "استدلال های گم شده"
 
-#: popt.c:1891
+#: popt.c:1896
 msgid "unknown option"
 msgstr "گزینه ناشناخته"
 
-#: popt.c:1893
+#: popt.c:1898
 msgid "mutually exclusive logical operations requested"
 msgstr "منحصربه عملیات منطقی درخواست"
 
-#: popt.c:1895
+#: popt.c:1900
 msgid "opt->arg should not be NULL"
 msgstr "انتخاب-> ارگ نباید تهی"
 
-#: popt.c:1897
+#: popt.c:1902
 msgid "aliases nested too deeply"
 msgstr "نام های مستعار زیادی بیش از حد عمیق تو درتو"
 
-#: popt.c:1899
+#: popt.c:1904
 msgid "error in parameter quoting"
 msgstr "خطا در پارامتر به نقل از"
 
-#: popt.c:1901
+#: popt.c:1906
 msgid "invalid numeric value"
 msgstr "مقدار عددی نامعتبر"
 
-#: popt.c:1903
+#: popt.c:1908
 msgid "number too large or too small"
 msgstr "تعداد بیش از حد بزرگ یا خیلی کوچک"
 
-#: popt.c:1905
+#: popt.c:1910
 msgid "memory allocation failed"
 msgstr "تخصیص حافظه انجام نشد"
 
-#: popt.c:1907
+#: popt.c:1912
 msgid "config file failed sanity test"
 msgstr "پیکربندی فایل آزمون ناموفق عاقلی"
 
-#: popt.c:1909
+#: popt.c:1914
 msgid "option does not take an argument"
 msgstr "گزینه یک استدلال را"
 
-#: popt.c:1911
+#: popt.c:1916
 msgid "stack underflow"
 msgstr "underflow پشته"
 
-#: popt.c:1913
+#: popt.c:1918
 msgid "stack overflow"
 msgstr "سرریز پشته"
 
-#: popt.c:1917
+#: popt.c:1922
 msgid "unknown error"
 msgstr "خطای ناشناخته"
 
-#: popthelp.c:83 popthelp.c:94
+#: popthelp.c:84 popthelp.c:95
 msgid "Show this help message"
 msgstr "نمایش این پیغام کمک"
 
-#: popthelp.c:84 popthelp.c:95
+#: popthelp.c:85 popthelp.c:96
 msgid "Display brief usage message"
 msgstr "نمایش پیام های کوتاه استفاده"
 
-#: popthelp.c:98
+#: popthelp.c:99
 msgid "Display option defaults in message"
 msgstr "پیش فرض گزینه نمایش پیام"
 
-#: popthelp.c:100
+#: popthelp.c:101
 msgid "Terminate options"
 msgstr "گزینه های خاتمه"
 
-#: popthelp.c:199
+#: popthelp.c:200
 msgid "Help options:"
 msgstr "گزینه های راهنما:"
 
-#: popthelp.c:200
+#: popthelp.c:201
 msgid "Options implemented via popt alias/exec:"
 msgstr "گزینه های اجرا شده از طریق popt نام مستعار در exec:"
 
-#: popthelp.c:208
+#: popthelp.c:209
 msgid "NONE"
 msgstr "هیچ کدام"
 
-#: popthelp.c:210
+#: popthelp.c:211
 msgid "VAL"
 msgstr "وال"
 
-#: popthelp.c:214
+#: popthelp.c:215
 msgid "INT"
 msgstr "دانشنامه هوشمند"
 
-#: popthelp.c:215
+#: popthelp.c:216
 msgid "SHORT"
 msgstr "کوتاه"
 
-#: popthelp.c:216
+#: popthelp.c:217
 msgid "LONG"
 msgstr "طولانی"
 
-#: popthelp.c:217
+#: popthelp.c:218
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:218
+#: popthelp.c:219
 msgid "STRING"
 msgstr "رشته"
 
-#: popthelp.c:219
+#: popthelp.c:220
 msgid "FLOAT"
 msgstr "شناور"
 
-#: popthelp.c:220
+#: popthelp.c:221
 msgid "DOUBLE"
 msgstr "دو"
 
-#: popthelp.c:223
+#: popthelp.c:224
 msgid "ARG"
 msgstr "ارگ"
 
-#: popthelp.c:664
+#: popthelp.c:665
 msgid "Usage:"
 msgstr "طریقه استفاده:"
 
-#: popthelp.c:689
+#: popthelp.c:690
 msgid "[OPTION...]"
 msgstr "[گزینه]"

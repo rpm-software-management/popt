@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"POT-Creation-Date: 2015-05-12 18:30-0400\n"
 "PO-Revision-Date: 2015-05-12 17:15-0400\n"
 "Last-Translator: bing-el <popt-devel@rpm5.org>\n"
 "Language-Team: bing-el <popt-devel@rpm5.org>\n"
@@ -19,135 +19,135 @@ msgstr ""
 msgid "unknown errno"
 msgstr "άγνωστο errno"
 
-#: popt.c:1439
+#: popt.c:1441
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "επιλογή τύπου (%u) δεν εφαρμόζονται σε popt\n"
 
-#: popt.c:1889
+#: popt.c:1894
 msgid "missing argument"
 msgstr "Λείπει όρισμα"
 
-#: popt.c:1891
+#: popt.c:1896
 msgid "unknown option"
 msgstr "Άγνωστη επιλογή"
 
-#: popt.c:1893
+#: popt.c:1898
 msgid "mutually exclusive logical operations requested"
 msgstr "αλληλοαναιρούνται λογικών πράξεων"
 
-#: popt.c:1895
+#: popt.c:1900
 msgid "opt->arg should not be NULL"
 msgstr "επιλέξουν-> arg δεν πρέπει να είναι NULL"
 
-#: popt.c:1897
+#: popt.c:1902
 msgid "aliases nested too deeply"
 msgstr "ψευδώνυμα που έχουν εντεθεί πολύ βαθιά"
 
-#: popt.c:1899
+#: popt.c:1904
 msgid "error in parameter quoting"
 msgstr "σφάλμα στην παράμετρο παραθέτοντας"
 
-#: popt.c:1901
+#: popt.c:1906
 msgid "invalid numeric value"
 msgstr "μη έγκυρη αριθμητική τιμή"
 
-#: popt.c:1903
+#: popt.c:1908
 msgid "number too large or too small"
 msgstr "αριθμός πάρα πολύ μεγάλη είτε πολύ μικρή"
 
-#: popt.c:1905
+#: popt.c:1910
 msgid "memory allocation failed"
 msgstr "κατανομή μνήμης που απέτυχε"
 
-#: popt.c:1907
+#: popt.c:1912
 msgid "config file failed sanity test"
 msgstr "config αρχείο λογικότητα αποτυχημένη δοκιμή"
 
-#: popt.c:1909
+#: popt.c:1914
 msgid "option does not take an argument"
 msgstr "επιλογή δεν λαμβάνει ένα επιχείρημα"
 
-#: popt.c:1911
+#: popt.c:1916
 msgid "stack underflow"
 msgstr "υποχείλιση στοίβας"
 
-#: popt.c:1913
+#: popt.c:1918
 msgid "stack overflow"
 msgstr "υπερχείλιση στοίβας"
 
-#: popt.c:1917
+#: popt.c:1922
 msgid "unknown error"
 msgstr "άγνωστο σφάλμα"
 
-#: popthelp.c:83 popthelp.c:94
+#: popthelp.c:84 popthelp.c:95
 msgid "Show this help message"
 msgstr "Δείξετε αυτό το μήνυμα βοήθειας"
 
-#: popthelp.c:84 popthelp.c:95
+#: popthelp.c:85 popthelp.c:96
 msgid "Display brief usage message"
 msgstr "Εμφάνιση μήνυμα σύντομη χρήση"
 
-#: popthelp.c:98
+#: popthelp.c:99
 msgid "Display option defaults in message"
 msgstr "Οθόνη επιλογή προεπιλογές σε μήνυμα"
 
-#: popthelp.c:100
+#: popthelp.c:101
 msgid "Terminate options"
 msgstr "Τερματίσει επιλογές"
 
-#: popthelp.c:199
+#: popthelp.c:200
 msgid "Help options:"
 msgstr "Βοήθεια επιλογές:"
 
-#: popthelp.c:200
+#: popthelp.c:201
 msgid "Options implemented via popt alias/exec:"
 msgstr "Επιλογές υλοποιηθούν μέσω popt ψευδώνυμο/exec:"
 
-#: popthelp.c:208
+#: popthelp.c:209
 msgid "NONE"
 msgstr "ΚΑΝΈΝΑΣ"
 
-#: popthelp.c:210
+#: popthelp.c:211
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:214
+#: popthelp.c:215
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:215
+#: popthelp.c:216
 msgid "SHORT"
 msgstr "ΣΎΝΤΟΜΗ"
 
-#: popthelp.c:216
+#: popthelp.c:217
 msgid "LONG"
 msgstr "ΜΑΚΡΆ"
 
-#: popthelp.c:217
+#: popthelp.c:218
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:218
+#: popthelp.c:219
 msgid "STRING"
 msgstr "ΣΥΜΒΟΛΟΣΕΙΡΆ"
 
-#: popthelp.c:219
+#: popthelp.c:220
 msgid "FLOAT"
 msgstr "ΕΠΙΠΛΈΟΥΝ"
 
-#: popthelp.c:220
+#: popthelp.c:221
 msgid "DOUBLE"
 msgstr "ΔΙΠΛΌ"
 
-#: popthelp.c:223
+#: popthelp.c:224
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:664
+#: popthelp.c:665
 msgid "Usage:"
 msgstr "Χρήση:"
 
-#: popthelp.c:689
+#: popthelp.c:690
 msgid "[OPTION...]"
 msgstr "[ΕΠΙΛΟΓΉ...]"
