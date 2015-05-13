@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2008-02-16 19:54-0500\n"
+"POT-Creation-Date: 2015-05-12 18:30-0400\n"
 "PO-Revision-Date: 2014-02-04 17:43+0630\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
@@ -20,119 +20,139 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=(n!=1)\n"
 
-#: popt.c:35
+#: popt.c:54
 msgid "unknown errno"
 msgstr "અજ્ઞાત ક્ષતિનંબર"
 
-#: popt.c:1090
+#: popt.c:1441
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "વિકલ્પ પ્રકાર (%u) એ popt માં લાગુ થયેલ નથી\n"
 
-#: popt.c:1294
+#: popt.c:1894
 msgid "missing argument"
 msgstr "ગુમ થયેલ દલીલ"
 
-#: popt.c:1296
+#: popt.c:1896
 msgid "unknown option"
 msgstr "અજ્ઞાત વિકલ્પ"
 
-#: popt.c:1298
+#: popt.c:1898
 msgid "mutually exclusive logical operations requested"
 msgstr "ખાસ કરીને પરસ્પર લાગુ પડતી તાર્કિક પ્રક્રિયાઓની અરજી થઇ છે"
 
-#: popt.c:1300
+#: popt.c:1900
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg એ NULL હોવું જોઇએ નહિં"
 
-#: popt.c:1302
+#: popt.c:1902
 msgid "aliases nested too deeply"
 msgstr "ઉપનામો ખૂબ ઊંડે સુધી ગૂંચવાયેલા છે"
 
-#: popt.c:1304
+#: popt.c:1904
 msgid "error in parameter quoting"
 msgstr "પરિમાણ માપ આપવામાં ક્ષતિ"
 
-#: popt.c:1306
+#: popt.c:1906
 msgid "invalid numeric value"
 msgstr "અયોગ્ય આંકડાકીય મૂલ્ય"
 
-#: popt.c:1308
+#: popt.c:1908
 msgid "number too large or too small"
 msgstr "આંકડો ખૂબ મોટો અથવા ખૂબ નાનો છે"
 
-#: popt.c:1310
+#: popt.c:1910
 msgid "memory allocation failed"
 msgstr "મેમરી સોંપણી નિષ્ફળ"
 
-#: popt.c:1314
+#: popt.c:1912
+msgid "config file failed sanity test"
+msgstr ""
+
+#: popt.c:1914
+msgid "option does not take an argument"
+msgstr ""
+
+#: popt.c:1916
+msgid "stack underflow"
+msgstr ""
+
+#: popt.c:1918
+msgid "stack overflow"
+msgstr ""
+
+#: popt.c:1922
 msgid "unknown error"
 msgstr "અજ્ઞાત ક્ષતિ"
 
-#: popthelp.c:74 popthelp.c:86
+#: popthelp.c:84 popthelp.c:95
 msgid "Show this help message"
 msgstr "આ મદદ સંદેશો બતાવો"
 
-#: popthelp.c:75 popthelp.c:87
+#: popthelp.c:85 popthelp.c:96
 msgid "Display brief usage message"
 msgstr "સંક્ષિપ્ત વપરાશ સંદેશો દર્શાવો"
 
-#: popthelp.c:76 popthelp.c:92
-msgid "Terminate options"
-msgstr "નિવારણ વિકલ્પો"
-
-#: popthelp.c:90
+#: popthelp.c:99
 msgid "Display option defaults in message"
 msgstr "દર્શાવાના વિકલ્પ મૂળભૂતો સંદેશામાં"
 
-#: popthelp.c:191
+#: popthelp.c:101
+msgid "Terminate options"
+msgstr "નિવારણ વિકલ્પો"
+
+#: popthelp.c:200
 msgid "Help options:"
 msgstr "મદદ વિકલ્પો:"
 
-#: popthelp.c:192
+#: popthelp.c:201
 msgid "Options implemented via popt alias/exec:"
 msgstr "popt alias/exec મારફત લાગુ થયેલ વિકલ્પો:"
 
-#: popthelp.c:200
+#: popthelp.c:209
 msgid "NONE"
 msgstr "કંઇ નહિં"
 
-#: popthelp.c:202
+#: popthelp.c:211
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:206
+#: popthelp.c:215
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:207
+#: popthelp.c:216
+msgid "SHORT"
+msgstr ""
+
+#: popthelp.c:217
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:208
+#: popthelp.c:218
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:209
+#: popthelp.c:219
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:210
+#: popthelp.c:220
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:211
+#: popthelp.c:221
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:214
+#: popthelp.c:224
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:634
+#: popthelp.c:665
 msgid "Usage:"
 msgstr "વપરાશ:"
 
-#: popthelp.c:658
+#: popthelp.c:690
 msgid "[OPTION...]"
 msgstr "[વિકલ્પો...]"

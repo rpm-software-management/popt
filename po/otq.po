@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2014-08-13 13:27-0400\n"
+"POT-Creation-Date: 2015-05-12 18:30-0400\n"
 "PO-Revision-Date: 2015-05-12 17:16-0400\n"
 "Last-Translator: bing-otq <popt-devel@rpm5.org>\n"
 "Language-Team: bing-otq <popt-devel@rpm5.org>\n"
@@ -19,135 +19,135 @@ msgstr ""
 msgid "unknown errno"
 msgstr "errno desconocido"
 
-#: popt.c:1439
+#: popt.c:1441
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "ar klase ar opción (%u) hingi implementado jar popt\n"
 
-#: popt.c:1889
+#: popt.c:1894
 msgid "missing argument"
 msgstr "argumento nzäm'bu̲ xi"
 
-#: popt.c:1891
+#: popt.c:1896
 msgid "unknown option"
 msgstr "opción desconocida"
 
-#: popt.c:1893
+#: popt.c:1898
 msgid "mutually exclusive logical operations requested"
 msgstr "ja ya lógicas excluyentes solicitadas"
 
-#: popt.c:1895
+#: popt.c:1900
 msgid "opt->arg should not be NULL"
 msgstr "OPC-> arg hingi da da NULL"
 
-#: popt.c:1897
+#: popt.c:1902
 msgid "aliases nested too deeply"
 msgstr "ya alias xki profundamente anidadas"
 
-#: popt.c:1899
+#: popt.c:1904
 msgid "error in parameter quoting"
 msgstr "error ar parámetro jar citando"
 
-#: popt.c:1901
+#: popt.c:1906
 msgid "invalid numeric value"
 msgstr "hmädi numérico hindi válido"
 
-#: popt.c:1903
+#: popt.c:1908
 msgid "number too large or too small"
 msgstr "'bede xki dätä wa ya xki pequeño"
 
-#: popt.c:1905
+#: popt.c:1910
 msgid "memory allocation failed"
 msgstr "error asignación memoria"
 
-#: popt.c:1907
+#: popt.c:1912
 msgid "config file failed sanity test"
 msgstr "ntsa̲ cordura fallido config file"
 
-#: popt.c:1909
+#: popt.c:1914
 msgid "option does not take an argument"
 msgstr "opción hingi tsi 'nar argumento"
 
-#: popt.c:1911
+#: popt.c:1916
 msgid "stack underflow"
 msgstr "subdesbordamiento pila"
 
-#: popt.c:1913
+#: popt.c:1918
 msgid "stack overflow"
 msgstr "desbordamiento pila"
 
-#: popt.c:1917
+#: popt.c:1922
 msgid "unknown error"
 msgstr "error desconocido"
 
-#: popthelp.c:83 popthelp.c:94
+#: popthelp.c:84 popthelp.c:95
 msgid "Show this help message"
 msgstr "Mostrar nuna 'me̲hni pa mfats'i"
 
-#: popthelp.c:84 popthelp.c:95
+#: popthelp.c:85 popthelp.c:96
 msgid "Display brief usage message"
 msgstr "Neki 'nar 'me̲hni njapu'befi breve"
 
-#: popthelp.c:98
+#: popthelp.c:99
 msgid "Display option defaults in message"
 msgstr "Mostrar ar opción ya defecto jar ar 'me̲hni pa"
 
-#: popthelp.c:100
+#: popthelp.c:101
 msgid "Terminate options"
 msgstr "Opciones ar wadi"
 
-#: popthelp.c:199
+#: popthelp.c:200
 msgid "Help options:"
 msgstr "Opciones mfats'i:"
 
-#: popthelp.c:200
+#: popthelp.c:201
 msgid "Options implemented via popt alias/exec:"
 msgstr "Opciones implementadas ir nge ya popt alias yá exec:"
 
-#: popthelp.c:208
+#: popthelp.c:209
 msgid "NONE"
 msgstr "NINGUNO"
 
-#: popthelp.c:210
+#: popthelp.c:211
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:214
+#: popthelp.c:215
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:215
+#: popthelp.c:216
 msgid "SHORT"
 msgstr "HINGI MAA"
 
-#: popthelp.c:216
+#: popthelp.c:217
 msgid "LONG"
 msgstr "LARGO"
 
-#: popthelp.c:217
+#: popthelp.c:218
 msgid "LONGLONG"
 msgstr "LARGO"
 
-#: popthelp.c:218
+#: popthelp.c:219
 msgid "STRING"
 msgstr "CADENA"
 
-#: popthelp.c:219
+#: popthelp.c:220
 msgid "FLOAT"
 msgstr "FLOTADOR"
 
-#: popthelp.c:220
+#: popthelp.c:221
 msgid "DOUBLE"
 msgstr "DOBLE"
 
-#: popthelp.c:223
+#: popthelp.c:224
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:664
+#: popthelp.c:665
 msgid "Usage:"
 msgstr "Njapu'befi:"
 
-#: popthelp.c:689
+#: popthelp.c:690
 msgid "[OPTION...]"
 msgstr "[OPCIONES...]"

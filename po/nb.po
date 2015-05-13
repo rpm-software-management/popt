@@ -8,138 +8,150 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.16\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2010-02-17 13:35-0500\n"
+"POT-Creation-Date: 2015-05-12 18:30-0400\n"
 "PO-Revision-Date: 2015-03-29 17:30+0100\n"
 "Last-Translator: Johnny A. Solbu <johnny@solbu.net>\n"
 "Language-Team: Norwegian Bokmaal <i18n-nb@lister.ping.uio.no>\n"
-"Language: nb_NO\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: popt.c:47
+#: popt.c:54
 msgid "unknown errno"
 msgstr "ukjent errno"
 
-#: popt.c:1290
+#: popt.c:1441
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "valgtype (%u) ikke implementert i popt\n"
 
-#: popt.c:1711
+#: popt.c:1894
 msgid "missing argument"
 msgstr "manglende argument"
 
-#: popt.c:1713
+#: popt.c:1896
 msgid "unknown option"
 msgstr "ukjent valg"
 
-#: popt.c:1715
+#: popt.c:1898
 msgid "mutually exclusive logical operations requested"
 msgstr "gjensidig eksluderende logiske operasjoner forespurt"
 
-#: popt.c:1717
+#: popt.c:1900
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg må ikke være NULL"
 
-#: popt.c:1719
+#: popt.c:1902
 msgid "aliases nested too deeply"
 msgstr "aliaser med for dype løkker"
 
-#: popt.c:1721
+#: popt.c:1904
 msgid "error in parameter quoting"
 msgstr "feil i parametersitering"
 
-#: popt.c:1723
+#: popt.c:1906
 msgid "invalid numeric value"
 msgstr "ugyldig numerisk verdi"
 
-#: popt.c:1725
+#: popt.c:1908
 msgid "number too large or too small"
 msgstr "tallet er for stort eller lite"
 
-#: popt.c:1727
+#: popt.c:1910
 msgid "memory allocation failed"
 msgstr "minneallokering feilet"
 
-#: popt.c:1729
+#: popt.c:1912
 msgid "config file failed sanity test"
 msgstr "konfig-filen feilet tilregnelighettesten"
 
-#: popt.c:1733
+#: popt.c:1914
+msgid "option does not take an argument"
+msgstr ""
+
+#: popt.c:1916
+msgid "stack underflow"
+msgstr ""
+
+#: popt.c:1918
+msgid "stack overflow"
+msgstr ""
+
+#: popt.c:1922
 msgid "unknown error"
 msgstr "ukjent feil"
 
-#: popthelp.c:75 popthelp.c:86
+#: popthelp.c:84 popthelp.c:95
 msgid "Show this help message"
 msgstr "Vis denne hjelpmeldingen"
 
-#: popthelp.c:76 popthelp.c:87
+#: popthelp.c:85 popthelp.c:96
 msgid "Display brief usage message"
 msgstr "Vis kort bruksmelding"
 
-#: popthelp.c:90
+#: popthelp.c:99
 msgid "Display option defaults in message"
 msgstr "Vis forvalgte valg i melding"
 
-#: popthelp.c:92
+#: popthelp.c:101
 msgid "Terminate options"
 msgstr "Avslutt alternativer"
 
-#: popthelp.c:191
+#: popthelp.c:200
 msgid "Help options:"
 msgstr "Hjelp-alternativ:"
 
-#: popthelp.c:192
+#: popthelp.c:201
 msgid "Options implemented via popt alias/exec:"
 msgstr "Alternativer implementert via popt alias/exec:"
 
-#: popthelp.c:200
+#: popthelp.c:209
 msgid "NONE"
 msgstr "INGEN"
 
-#: popthelp.c:202
+#: popthelp.c:211
 msgid "VAL"
 msgstr "VERDI"
 
-#: popthelp.c:206
+#: popthelp.c:215
 msgid "INT"
 msgstr "HELTALL"
 
-#: popthelp.c:207
+#: popthelp.c:216
 msgid "SHORT"
 msgstr "KORT"
 
-#: popthelp.c:208
+#: popthelp.c:217
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:209
+#: popthelp.c:218
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:210
+#: popthelp.c:219
 msgid "STRING"
 msgstr "STRENG"
 
-#: popthelp.c:211
+#: popthelp.c:220
 msgid "FLOAT"
 msgstr "FLYTTALL"
 
-#: popthelp.c:212
+#: popthelp.c:221
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:215
+#: popthelp.c:224
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:649
+#: popthelp.c:665
 msgid "Usage:"
 msgstr "Bruk:"
 
-#: popthelp.c:672
+#: popthelp.c:690
 msgid "[OPTION...]"
 msgstr "[VALG...]"
