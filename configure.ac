@@ -6,6 +6,14 @@ AC_INIT([popt],[1.17.DEVEL],[popt-devel@rpm5.org])
 
 AC_CONFIG_SRCDIR([lookup3.c])
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_LINKS([testit.sh:testit.sh])
+AC_CONFIG_LINKS([test-poptrc:test-poptrc])
+AC_CONFIG_LINKS([test3-data/01.answer:test3-data/01.answer])
+AC_CONFIG_LINKS([test3-data/01.input:test3-data/01.input])
+AC_CONFIG_LINKS([test3-data/02.answer:test3-data/02.answer])
+AC_CONFIG_LINKS([test3-data/02.input:test3-data/02.input])
+AC_CONFIG_LINKS([test3-data/03.answer:test3-data/03.answer])
+AC_CONFIG_LINKS([test3-data/03.input:test3-data/03.input])
 AC_CONFIG_MACRO_DIR([m4])
 
 # Must come before AM_INIT_AUTOMAKE.

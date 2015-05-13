@@ -4,7 +4,8 @@
 #include <string.h>
 #include <popt.h>
 
-int main (int argc, char **argv) {
+int main (int argc, char **argv)
+{
     char *out;
     int newargc, j, f, ret;
     const char **newargv;

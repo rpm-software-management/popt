@@ -55,6 +55,7 @@ static void displayArgs(poptContext con,
 	poptPrintUsage(con, stdout, 0);
 
 #if !defined(__LCLINT__)	/* XXX keep both splint & valgrind happy */
+    // cppcheck-suppress uselessAssignmentPtrArg
     con = poptFreeContext(con);
 #endif
     exit(0);
@@ -484,7 +485,6 @@ assert(t);	/* XXX can't happen */
     helpLength = strlen(help);
     while (helpLength > lineLength) {
 	const char * ch;
-	char format[16];
 
 	ch = help + lineLength - 1;
 	while (ch > help && !_isspaceptr(ch))
@@ -500,6 +500,7 @@ assert(t);	/* XXX can't happen */
 	 */
 	{   char * fmthelp = xstrdup(help);
 	    if (fmthelp) {
+	    char format[16];
 		fmthelp[ch - help] = '\0';
 		sprintf(format, "%%s\n%%%ds", (int) indentLength);
 		/*@-formatconst@*/

@@ -71,24 +71,27 @@ CLEANFILES = configmake.h configmake.h-t
 
 EXTRA_DIST = lookup3.c autogen.sh CHANGES  \
 	footer_no_timestamp.html libpopt.vers README-prereq \
-	$(TESTS) test-poptrc \
 	popt.xcodeproj/project.pbxproj \
-	popt.ps Doxyfile 	test3-data/01.answer \
-				test3-data/01.input \
-				test3-data/02.answer \
-				test3-data/02.input \
-				test3-data/03.answer \
-				test3-data/03.input \
-                                Makefile.mingw \
-                                config.h.mingw
+	popt.ps Doxyfile \
+	Makefile.mingw config.h.mingw
+
+dist_noinst_SCRIPTS = \
+	autogen.sh \
+	testit.sh
+dist_noinst_DATA = \
+	test-poptrc \
+	test3-data/01.answer \
+	test3-data/01.input \
+	test3-data/02.answer \
+	test3-data/02.input \
+	test3-data/03.answer \
+	test3-data/03.input
 
 SUBDIRS = po . auto
-
 
 noinst_HEADERS = poptint.h system.h
 
 check_PROGRAMS  = test1 test2 tdict test3
-
 check_SCRIPTS	= $(TESTS)
 
 
@@ -109,7 +112,7 @@ test2_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 tdict_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 test3_LDADD  = $(top_builddir)/$(usrlib_LTLIBRARIES)
 
-TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) MUDFLAP_OPTIONS="$(MUDFLAP_OPTIONS)" testpoptrc="$(top_srcdir)/test-poptrc" PATH=.:../src:$$PATH \
+TESTS_ENVIRONMENT = top_srcdir=$(top_srcdir) MUDFLAP_OPTIONS="$(MUDFLAP_OPTIONS)" testpoptrc="test-poptrc" PATH=.:../src:$$PATH \
                         valgrind_environment="$(VALGRIND_ENVIRONMENT)"
 
 
@@ -159,15 +162,24 @@ endif
 if HAVE_MCCABE
 mccabe:
 	$(MCCABE) $(libpopt_la_SOURCES) | sort -n -r | head -n 10
-
 endif
 
 if HAVE_CPPCHECK
 cppcheck:
-	$(CPPCHECK) -I. -I$(includedir) --inline-suppr --enable=all $(libpopt_la_SOURCES)
+	$(CPPCHECK) -q --force --inline-suppr \
+	  --template="{file},{line},{severity},{id},{message}" \
+	  -UNOTYET -UNOTNOW -UNOTNEEDED -UDYING -UDEAD -UREFERENCE \
+	  -U__cplusplus -U__LCLINT__ -USWIG \
+	  -U_JLU3_SELFTEST \
+	  -U _WIN64 \
+	  -U __NeXT \
+	  -DHAVE_CONFIG_H \
+	  -DPOPT_fprintf=fprintf \
+	  --enable=warning,style,performance,portability,information,unusedFunction,missingInclude \
+	  $(AM_CPPFLAGS) -I$(includedir) \
+	  $(libpopt_la_SOURCES) test1.c test2.c test3.c tdict.c
 
 endif
-
 
 if DOXYGEN_ENABLE
 doxygen: Doxyfile
