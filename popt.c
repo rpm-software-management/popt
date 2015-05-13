@@ -285,13 +285,13 @@ static int handleExec(/*@special@*/ poptContext con,
 		con->av, con->nav, con->ac @*/
 	/*@modifies con @*/
 {
-    poptItem item;
     int i;
 
-    if (con->execs == NULL || con->numExecs <= 0)
+    if (con->execs == NULL || con->numExecs == 0)
 	return 0;
 
     for (i = con->numExecs - 1; i >= 0; i--) {
+	poptItem item;
 	item = con->execs + i;
 	if (longName && !(item->option.longName &&
 			!strcmp(longName, item->option.longName)))
@@ -697,6 +697,7 @@ static const char * findNextArg(/*@special@*/ poptContext con,
     const char * arg;
 
     do {
+	// cppcheck-suppress variableScope
 	int i;
 	arg = NULL;
 	while (os->next == os->argc && os > con->optionStack) os--;
@@ -1030,9 +1031,11 @@ static long long poptCalculator(long long arg0, unsigned argInfo, long long arg1
 		/*@null@*/ const char * expr, int * rcp)
 {
 int ixmax = 20;	/* XXX overkill */
+// cppcheck-suppress obsoleteFunctionsalloca
 poptStack_t stk = (poptStack_t) memset((poptStack_t)alloca(ixmax*sizeof(*stk)), 0, (ixmax*sizeof(*stk)));
     int ix = 0;
 size_t nt = 64;	/* XXX overkill */
+// cppcheck-suppress obsoleteFunctionsalloca
 char * t = (char*) alloca(nt);
 char * te = t;
 const char * s;
@@ -1041,7 +1044,6 @@ const char * s;
     int i;
 const char ** av = NULL;
 int ac = 0;
-/* cppcheck-suppress unreadVariable  */
 int xx;
 
     stk[ix++] = arg0;
@@ -1766,20 +1768,21 @@ poptItem poptFreeItems(/*@only@*/ /*@null@*/ poptItem items, int nitems)
 {
     if (items != NULL) {
 	poptItem item = items;
-	int i;
 	while (--nitems >= 0) {
+#if !defined(SUPPORT_CONTIGUOUS_ARGV)
+	    int i;
+	    for (i = 0; item->argv[i]; i++)
+		item->argv[i] = _free(item->argv[i]);
+#endif
+	    item->argv = _free(item->argv);
 /*@-modobserver -observertrans -dependenttrans@*/
 	    item->option.longName = _free(item->option.longName);
 	    item->option.descrip = _free(item->option.descrip);
 	    item->option.argDescrip = _free(item->option.argDescrip);
 /*@=modobserver =observertrans =dependenttrans@*/
-#if !defined(SUPPORT_CONTIGUOUS_ARGV)
-	    for (i = 0; item->argv[i]; i++)
-		item->argv[i] = _free(item->argv[i]);
-#endif
-	    item->argv = _free(item->argv);
 	    item++;
 	}
+	// cppcheck-suppress uselessAssignmentPtrArg
 	items = _free(items);
     }
     return NULL;
@@ -1836,11 +1839,13 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
     case 1:
 	items = &con->execs;
 	nitems = &con->numExecs;
+	// cppcheck-suppress memleakOnRealloc
       *items = (poptItem) xrealloc(*items, ((*nitems) + 1) * sizeof(**items));
 	break;
     case 0:
 	items = &con->aliases;
 	naliases = &con->numAliases;
+	// cppcheck-suppress memleakOnRealloc
       *items = (poptItem) xrealloc(*items, ((*naliases) + 1) * sizeof(**items));
 	break;
     default:

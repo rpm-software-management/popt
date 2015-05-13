@@ -25,6 +25,7 @@ static const char ** poptArgvFree(/*@only@*/ const char ** av)
 	av[i] = _free(av[i]);
     }
 #endif
+    // cppcheck-suppress uselessAssignmentPtrArg
     av = _free(av);
     return NULL;
 }
@@ -170,7 +171,8 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
 		/*@unused@*/ UNUSED(int flags))
 {
     size_t nline = 8192;	/* XXX configurable? */
-    char * line = (char*) alloca(nline);
+    // cppcheck-suppress obsoleteFunctionsalloca
+    char * line = (char *) alloca(nline);
     char * argstr;
     char * q;
     char * x;
@@ -178,6 +180,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
     size_t argvlen = 0;
     size_t maxargvlen = (size_t)480;
 
+    // cppcheck-suppress nullPointer
     if (argstrp)
 	*argstrp = NULL;
 

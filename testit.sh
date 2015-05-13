@@ -82,8 +82,6 @@ run_diff() {
 }
 
 builddir=$(pwd)
-#srcdir=$builddir
-cd ${srcdir}
 test1=${builddir}/test1
 echo "Running tests in $builddir" 
 
@@ -567,9 +565,9 @@ fi
 # Begin test3 test
 ###################
 
-run_diff test3 "test3 - 1" $srcdir/test3-data/01.input $srcdir/test3-data/01.answer
-run_diff test3 "test3 - 2" $srcdir/test3-data/02.input $srcdir/test3-data/02.answer
-run_diff test3 "test3 - 3" $srcdir/test3-data/03.input $srcdir/test3-data/03.answer
+run_diff test3 "test3 - 1" ./test3-data/01.input ./test3-data/01.answer
+run_diff test3 "test3 - 2" ./test3-data/02.input ./test3-data/02.answer
+run_diff test3 "test3 - 3" ./test3-data/03.input ./test3-data/03.answer
 
 ###################
 # End   test3 test
