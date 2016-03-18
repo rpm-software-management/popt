@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2015-05-12 17:15-0400\n"
 "Last-Translator: bing-ca <popt-devel@rpm5.org>\n"
 "Language-Team: bing-ca <popt-devel@rpm5.org>\n"
@@ -20,63 +20,63 @@ msgid "unknown errno"
 msgstr "desconegut errno"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "tipus d'opció (%u) no implementades en popt\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "l'argument que falten"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "opció desconeguda"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "mútuament excloents operacions lògiques sol·licitat"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "optar-> cat no hauria de ser nul"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "àlies massa incrustats"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "error al paràmetre citant"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "valor numèric no és vàlid"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "Número massa gran o massa petit"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "assignació de memòria ha fallat"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr "prova de seny fallit de fitxer config"
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr "opció no pren un argument"
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr "sotaeiximent de la pila"
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr "Sobreeiximent de piles"
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "error desconegut"
 

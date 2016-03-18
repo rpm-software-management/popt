@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2015-05-12 17:17-0400\n"
 "Last-Translator: bing-ur <popt-devel@rpm5.org>\n"
 "Language-Team: bing-ur <popt-devel@rpm5.org>\n"
@@ -20,63 +20,63 @@ msgid "unknown errno"
 msgstr "نامعلوم اررنو"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "پاوپٹ میں لاگو نہیں اختیار کی قسم (%u)\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "غائب دلیل"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "نامعلوم اختیارات"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "باہمی ناشمول منطقی کارروائیوں کی درخواست کی"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "آپٹ آؤٹ-> ارگ صفر کو ہونا نہیں چاہیے"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "عرفی نام گہرائی سے ترتیب میں رکھے"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "پیرامیٹر کے حوالے سے رپورٹ میں نقص"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "ناجائز عددی قدر"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "بہت بڑا یا بہت چھوٹا نمبر"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "ناکام میموری تعین"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr "تشکیل مسل ناکام وویک ٹیسٹ"
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr "اختیار ایک دلیل نہیں ملتا"
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr "اسٹیک انڈرفلاوو"
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr "تھاک ڈبونا"
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "نامعلوم نقص"
 

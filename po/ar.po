@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2015-05-12 17:15-0400\n"
 "Last-Translator: bing-ar <popt-devel@rpm5.org>\n"
 "Language-Team: bing-ar <popt-devel@rpm5.org>\n"
@@ -20,63 +20,63 @@ msgid "unknown errno"
 msgstr "errno غير معروف"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "نوع الخيار (% u) لم تنفذ في بوت\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "الوسيطة المفقودة"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "الخيار غير معروف"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "العمليات المنطقية التبادلية وطلب"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "تختار-> arg لا ينبغي أن تكون فارغة (null)"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "الأسماء المستعارة متداخلة جداً"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "خطأ في معلمة نقلا عن"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "قيمة رقمية غير صحيحة"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "عدد كبير جداً أو صغير جداً"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "فشل في تخصيص الذاكرة"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr "اختبار التعقل فشل ملف التهيئة"
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr "خيار لا يأخذ وسيطة"
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr "تجاوز الحد الأدنى للمكدس"
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr "تجاوز سعة المكدس"
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "خطأ غير معروف"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2014-02-04 17:43+0630\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
@@ -25,63 +25,63 @@ msgid "unknown errno"
 msgstr "અજ્ઞાત ક્ષતિનંબર"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "વિકલ્પ પ્રકાર (%u) એ popt માં લાગુ થયેલ નથી\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "ગુમ થયેલ દલીલ"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "અજ્ઞાત વિકલ્પ"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "ખાસ કરીને પરસ્પર લાગુ પડતી તાર્કિક પ્રક્રિયાઓની અરજી થઇ છે"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg એ NULL હોવું જોઇએ નહિં"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "ઉપનામો ખૂબ ઊંડે સુધી ગૂંચવાયેલા છે"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "પરિમાણ માપ આપવામાં ક્ષતિ"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "અયોગ્ય આંકડાકીય મૂલ્ય"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "આંકડો ખૂબ મોટો અથવા ખૂબ નાનો છે"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "મેમરી સોંપણી નિષ્ફળ"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "અજ્ઞાત ક્ષતિ"
 

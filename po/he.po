@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2015-05-12 17:16-0400\n"
 "Last-Translator: bing-he <popt-devel@rpm5.org>\n"
 "Language-Team: bing-he <popt-devel@rpm5.org>\n"
@@ -20,63 +20,63 @@ msgid "unknown errno"
 msgstr "errno לא ידוע"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "סוג האפשרות (%u) אינה מיושמת ב- popt\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "חסר ארגומנט"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "אפשרות לא ידוע"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "הפעולות הלוגיות שבחירה המבוקש"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "לבחור-> arg לא צריך להיות NULL"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "כינויים עמוקה מדי"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "שגיאת הפרמטר לצטט"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "הערך המספרי לא חוקי"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "מספר גדול מדי או קטן מדי"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "הקצאת זיכרון נכשל"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr "מבחן שפיות שנכשלו הקובץ config"
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr "אפשרות לא לוקח ויכוח"
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr "חמיקת מחסנית"
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr "גלישת מחסנית"
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "שגיאה לא ידועה"
 
