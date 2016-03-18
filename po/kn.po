@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2014-02-05 11:43+0630\n"
 "Last-Translator: Shankar Prasad Venkateshbhat <svenkate@redhat.com>\n"
 "Language-Team: Kannada <debian-l10n-kannada@lists.debian.org>\n"
@@ -25,62 +25,62 @@ msgstr "ಗೊತ್ತಿರದ errno"
 
 #: popt.c:1441
 #, fuzzy, c-format
-msgid "option type (%u) not implemented in popt\n"
+msgid "option type (%u) not implemented in popt"
 msgstr "ಆಯ್ಕೆಯ ಬಗೆ (%d) ಅನ್ನು popt ಅನ್ವಯಿಸಲಾಗಿಲ್ಲ\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "ಆರ್ಗುಮೆಂಟ್‌ ಕಾಣಿಸುತ್ತಿಲ್ಲ"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "ಗೊತ್ತಿರದ ಆಯ್ಕೆ"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "ಪರಸ್ಪರ ಪ್ರತ್ಯೇಕವಾದ ತಾರ್ಕಿಕ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಮನವಿ ಮಾಡಲಾಗಿದೆ"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ಎನ್ನುವುದು NULL ಆಗಿರುವಂತಿಲ್ಲ"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "ಅಲಿಯಾಸ್‌ಗಳನ್ನು ಬಹಳ ಆಳವಾಗಿ ನೆಸ್ಟ್ ಮಾಡಲಾಗಿದೆ"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "ನಿಯತಾಂಕವನ್ನು ಕೋಟ್ ಮಾಡುವಲ್ಲಿ ದೋಷ"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "ಅಮಾನ್ಯವಾದ ಅಂಕೀಯ ಮೌಲ್ಯ"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "ಸಂಖ್ಯೆಯು ಬಹಳ ದೊಡ್ಡದಾಗಿದೆ ಅಥವ ಬಹಳ ಸಣ್ಣದಾಗಿದೆ"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "ಮೆಮೊರಿ ನಿಯೋಜನೆ ವಿಫಲಗೊಂಡಿದೆ"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "ಗೊತ್ತಿರದ ದೋಷ"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2014-03-20 22:49+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -24,63 +24,63 @@ msgid "unknown errno"
 msgstr "ismeretlen hibaszám"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "a kapcsolótípus (%u) nincs megvalósítva a popt-ban\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "hiányzó paraméter"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "ismeretlen kapcsoló"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "kölcsönösen kizáró logikai műveleteket kért"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "az opt->arg nem lehet NULL"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "az álnevek túl mélyen vannak egymásba ágyazva"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "hiba a paraméter idézésében"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "érvénytelen numerikus érték"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "a szám túl nagy vagy túl kicsi"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "a memóriafoglalás meghiúsult"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "ismeretlen hiba"
 

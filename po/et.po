@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2015-05-12 17:15-0400\n"
 "Last-Translator: bing-et <popt-devel@rpm5.org>\n"
 "Language-Team: bing-et <popt-devel@rpm5.org>\n"
@@ -20,63 +20,63 @@ msgid "unknown errno"
 msgstr "Tundmatu veakood"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "variant tüüp (%u) ei rakendatud popt\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "Puuduv argument"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "Tundmatu valik"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "taotletud teineteist välistavad loogikatehteid"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "valida-> arg ei tohiks olla NULL"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "liiga sügavalt pesistatud varjunimed"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "tõrge, parameetri tsiteerimisel"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "Sobimatu arvväärtus"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "number liiga suur või liiga väike"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "mälu jaotamine nurjus"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr "config faili ebaõnnestunud meelerahu test"
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr "võimalus olla argument"
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr "korstna underflow"
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr "pinu ületäitumine"
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "Tundmatu tõrge"
 

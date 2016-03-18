@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2008-02-18 20:16+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -22,63 +22,63 @@ msgid "unknown errno"
 msgstr "未知的错误"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "选项类别 (%u) 没有在 popt 中实现\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "缺少参数"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "未知的选项"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "需要 XOR 逻辑运算"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg 不应该为 NULL"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "别名嵌套太深"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "参数引号错误"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "无效的数值"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "数值太大或太小"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "内存分配错误"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "未知的错误"
 

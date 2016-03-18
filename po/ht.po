@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2015-05-12 17:16-0400\n"
 "Last-Translator: bing-ht <popt-devel@rpm5.org>\n"
 "Language-Team: bing-ht <popt-devel@rpm5.org>\n"
@@ -20,63 +20,63 @@ msgid "unknown errno"
 msgstr "aka san errno"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "opsyon tip (grip %u) pa aplike nan popt\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "pa wè kont"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "aka san yon opsyon"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "mityèlman esklizif operasyon lojik yo te mande"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "refize nou bay enfòmasyon-> arg pa ta dwe NIL"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "aliases imbriqués twò fò"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "erreur nan paramètre devis"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "valè numérique non"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "nombre twò gwo ou twò piti"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "chonje alokasyon te tonbe"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr "fichier config echwe larezon tès"
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr "opsyon ki p'ap mache fè kwè yo tanmen kritike"
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr "pile underflow"
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr "pile par"
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "aka san erreur"
 

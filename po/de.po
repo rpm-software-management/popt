@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.16\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-12 18:30-0400\n"
+"POT-Creation-Date: 2015-05-13 11:54-0400\n"
 "PO-Revision-Date: 2015-03-30 09:34+0100\n"
 "Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -22,63 +22,63 @@ msgid "unknown errno"
 msgstr "Unbekannte Fehler-Nummer"
 
 #: popt.c:1441
-#, c-format
-msgid "option type (%u) not implemented in popt\n"
+#, fuzzy, c-format
+msgid "option type (%u) not implemented in popt"
 msgstr "Optionstyp (%u) ist in popt nicht vorhanden\n"
 
-#: popt.c:1894
+#: popt.c:1895
 msgid "missing argument"
 msgstr "Fehlendes Argument"
 
-#: popt.c:1896
+#: popt.c:1897
 msgid "unknown option"
 msgstr "Unbekannte Option"
 
-#: popt.c:1898
+#: popt.c:1899
 msgid "mutually exclusive logical operations requested"
 msgstr "Gegenseitig ausschließende logische Operatoren"
 
-#: popt.c:1900
+#: popt.c:1901
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg sollte nicht NULL sein"
 
-#: popt.c:1902
+#: popt.c:1903
 msgid "aliases nested too deeply"
 msgstr "Aliase zu tief verschachtelt"
 
-#: popt.c:1904
+#: popt.c:1905
 msgid "error in parameter quoting"
 msgstr "Fehler beim Quotieren der Parameter"
 
-#: popt.c:1906
+#: popt.c:1907
 msgid "invalid numeric value"
 msgstr "Ungültiger nummerischer Wert"
 
-#: popt.c:1908
+#: popt.c:1909
 msgid "number too large or too small"
 msgstr "Nummer zu groß oder zu klein"
 
-#: popt.c:1910
+#: popt.c:1911
 msgid "memory allocation failed"
 msgstr "Speicherzuordnung fehlgeschlagen"
 
-#: popt.c:1912
+#: popt.c:1913
 msgid "config file failed sanity test"
 msgstr "Konfigurationsdatei ist beschädigt"
 
-#: popt.c:1914
+#: popt.c:1915
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1916
+#: popt.c:1917
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1918
+#: popt.c:1919
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1922
+#: popt.c:1923
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
