@@ -1438,8 +1438,9 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 /*@=assignexpose =type@*/
 	/*@switchbreak@*/ break;
     default:
-	fprintf(stdout, POPT_("option type (%u) not implemented in popt\n"),
+	fprintf(stdout, POPT_("option type (%u) not implemented in popt"),
 		poptArgType(opt));
+	fprintf(stdout, "\n");
 	exit(EXIT_FAILURE);
 	/*@notreached@*/ /*@switchbreak@*/ break;
     }
