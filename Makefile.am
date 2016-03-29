@@ -188,14 +188,23 @@ doxygen: Doxyfile
 	$(DOXYGEN)
 endif 
 
-# --- scan.coverity.com manual submission in popt.tgz
+# --- scan.coverity.com manual submission in $(PACKAGE).tgz
 COVDIR =	cov-int
 COVBUILD =	cov-build --dir $(COVDIR)
-covscan::
-	rm -rf $(COVDIR) popt.tgz
+COVFILE =	$(PACKAGE)-scan.tgz
+COVSITE =	https://scan.coverity.com/builds?project=$(PACKAGE_NAME)
+covscan:
+	rm -rf $(COVDIR) $(PACKAGE).tgz
 	make clean
-	$(COVBUILD) make
-	tar czf popt.tgz $(COVDIR)
+	$(COVBUILD) make -j4
+	tar czf $(COVFILE) $(COVDIR)
+	curl --form project=$(PACKAGE) \
+	     --form token=HEYLAdeYklp2QrsRMaHVAw  \
+	     --form email=n3npq@mac.com \
+	     --form file=@$(COVFILE) \
+	     --form version=$(PACKAGE_VERSION) \
+	     --form description=$$(date -u "+%Y%m%d.%H%M%S") \
+	     $(COVSITE)
 
 if HAVE_LCOV
 # run lcov from scratch, always
