@@ -4,6 +4,7 @@ EXTRA_DIST = types
 
 clean-local:
 	rm -rf $(TDIRS)
+	-[ -d tests ] && find tests -name '*.gcno' -exec rm -f {} \;
 
 if HAVE_API_SANITY_AUTOTEST
 check-local:
