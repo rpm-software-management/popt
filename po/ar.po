@@ -22,7 +22,7 @@ msgstr "errno غير معروف"
 #: popt.c:1441
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt"
-msgstr "نوع الخيار (% u) لم تنفذ في بوت\n"
+msgstr "نوع الخيار (%u) لم تنفذ في بوت\n"
 
 #: popt.c:1895
 msgid "missing argument"
