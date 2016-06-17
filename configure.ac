@@ -40,11 +40,10 @@ AM_MAINTAINER_MODE
 # Interfaces changed/added/removed:   CURRENT++       REVISION=0
 # Interfaces added:                             AGE++
 # Interfaces removed:                           AGE=0
-AC_SUBST(LT_CURRENT, 8)
+AC_SUBST(LT_CURRENT,  8)
 AC_SUBST(LT_REVISION, 0)
-AC_SUBST(LT_AGE, 8)
-DLL_VERSION=$(expr $(LT_CURRENT) - $(LT_AGE))
-AC_SUBST(DLL_VERSION)
+AC_SUBST(LT_AGE,      8)
+AC_SUBST(DLL_VERSION, 0)
 
 AC_PROG_CC_STDC
 AC_PROG_CC
