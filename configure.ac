@@ -34,25 +34,25 @@ AM_GNU_GETTEXT_VERSION([0.18.2])
 AM_GNU_GETTEXT([external])
 AM_ICONV
 AM_MAINTAINER_MODE
+
 # Libtool library interface versions 
 # Library code modified:                              REVISION++
 # Interfaces changed/added/removed:   CURRENT++       REVISION=0
 # Interfaces added:                             AGE++
 # Interfaces removed:                           AGE=0
-AC_SUBST(LT_CURRENT, 0)
+AC_SUBST(LT_CURRENT, 8)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 8)
+DLL_VERSION=$(expr $(LT_CURRENT) - $(LT_AGE))
+AC_SUBST(DLL_VERSION)
 
-
-
-AC_PROG_CC
 AC_PROG_CC_STDC
+AC_PROG_CC
 AC_SYS_LARGEFILE
 AC_PROG_MAKE_SET
 AC_PROG_INSTALL
 AM_PROG_AR
 AC_PROG_LIBTOOL
-AM_PROG_CC_C_O
 
 # Turn gcc warning
 
