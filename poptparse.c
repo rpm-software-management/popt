@@ -16,7 +16,7 @@
 #define assert(_x)
 #endif
 
-static const char ** poptArgvFree(/*@only@*/ const char ** av)
+const char ** poptArgvFree(/*@only@*/ const char ** av)
 {
 #if !defined(SUPPORT_CONTIGUOUS_ARGV)
     if (av) {

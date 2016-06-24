@@ -470,8 +470,6 @@ int poptDupArgv(int argc, /*@null@*/ const char **argv,
  * Parse a string into an argument array.
  * The parse allows ', ", and \ quoting, but ' is treated the same as " and
  * both may include \ quotes.
- * @note: The argument array is malloc'd as a single area, so only argv must
- * be free'd.
  *
  * @param s		string to parse
  * @retval argcPtr	address of returned no. of arguments
@@ -480,6 +478,13 @@ int poptDupArgv(int argc, /*@null@*/ const char **argv,
 int poptParseArgvString(const char * s,
 		/*@out@*/ int * argcPtr, /*@out@*/ const char *** argvPtr)
 	/*@modifies *argcPtr, *argvPtr @*/;
+
+/** \ingroup popt
+ * Free the argument array.
+ * @param argv		argument array.
+ * @retval		NULL always
+ */
+const char ** poptArgvFree(const char ** argv);
 
 /** \ingroup popt
  * Parses an input configuration file and returns an string that is a 

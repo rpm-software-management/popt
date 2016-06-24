@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: use poptArgvFree to avoid memory leaks.
     - jbj: i18n: update PO files (Translation Project).
     - jbj: i18n: update PO files (Translation Project).
     - jbj: i18n: update da fr nb nl uk, and msgmerge (Translation Project).

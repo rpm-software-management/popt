@@ -1770,12 +1770,7 @@ poptItem poptFreeItems(/*@only@*/ /*@null@*/ poptItem items, int nitems)
     if (items != NULL) {
 	poptItem item = items;
 	while (--nitems >= 0) {
-#if !defined(SUPPORT_CONTIGUOUS_ARGV)
-	    int i;
-	    for (i = 0; item->argv[i]; i++)
-		item->argv[i] = _free(item->argv[i]);
-#endif
-	    item->argv = _free(item->argv);
+	    item->argv = poptArgvFree(item->argv);
 /*@-modobserver -observertrans -dependenttrans@*/
 	    item->option.longName = _free(item->option.longName);
 	    item->option.descrip = _free(item->option.descrip);
