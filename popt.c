@@ -254,7 +254,7 @@ void poptResetContext(poptContext con)
     con->os->argb = PBM_FREE(con->os->argb);
     con->os->currAlias = NULL;
     con->os->nextCharArg = NULL;
-    con->os->nextArg = NULL;
+    con->os->nextArg = _free(con->os->nextArg);
     con->os->next = 1;			/* skip argv[0] */
 
     con->numLeftovers = 0;
@@ -733,13 +733,11 @@ expandNextArg(/*@special@*/ poptContext con, const char * s)
 	/*@modifies con @*/
 {
     const char * a = NULL;
-    char *t, *te;
     size_t tn = strlen(s) + 1;
+    char *t = (char*) xmalloc(tn);
+    char *te = t;
     char c;
 
-    te = t = (char*) xmalloc(tn);
-assert(t);	/* XXX can't happen */
-    if (t == NULL) return NULL;
     *t = '\0';
     while ((c = *s++) != '\0') {
 	switch (c) {
@@ -760,9 +758,8 @@ assert(t);	/* XXX can't happen */
 
 	    tn += strlen(a);
 	    {   size_t pos = (size_t) (te - t);
-	/* cppcheck-suppress memleakOnRealloc  */
-        t = (char*) xrealloc(t, tn);
-assert(t);	/* XXX can't happen */
+		/* cppcheck-suppress memleakOnRealloc  */
+		t = (char*) xrealloc(t, tn);
 		if (t == NULL)
 		    return NULL;
 		te = stpcpy(t + pos, a);
@@ -778,7 +775,7 @@ assert(t);	/* XXX can't happen */
     /* If the new string is longer than needed, shorten. */
     if ((t + tn) > te) {
 /*@-usereleased@*/	/* XXX splint can't follow the pointers. */
-    if ((te = (char*) xrealloc(t, (size_t)(te - t))) == NULL)
+	if ((te = (char*) xrealloc(t, (size_t)(te - t))) == NULL)
 	    free(t);
 	t = te;
 /*@=usereleased@*/
@@ -1311,16 +1308,16 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 
     switch (poptArgType(opt)) {
     case POPT_ARG_BITSET:
-	/* XXX memory leak, application is responsible for free. */
 	rc = poptSaveBits(arg.ptr, opt->argInfo, con->os->nextArg);
+con->os->nextArg = _free(con->os->nextArg);
 	/*@switchbreak@*/ break;
     case POPT_ARG_ARGV:
-	/* XXX memory leak, application is responsible for free. */
 	rc = poptSaveString(arg.ptr, opt->argInfo, con->os->nextArg);
+con->os->nextArg = _free(con->os->nextArg);
 	/*@switchbreak@*/ break;
     case POPT_ARG_STRING:
-	/* XXX memory leak, application is responsible for free. */
-	arg.argv[0] = (con->os->nextArg) ? xstrdup(con->os->nextArg) : NULL;
+	arg.argv[0] = con->os->nextArg;
+con->os->nextArg = NULL;
 	/*@switchbreak@*/ break;
 
     case POPT_ARG_LONGLONG:
@@ -1390,6 +1387,7 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 		arg.shortp[0] = (short) aNUM;
 	    /*@innerbreak@*/ break;
 	}
+con->os->nextArg = _free(con->os->nextArg);
     }   /*@switchbreak@*/ break;
 
     case POPT_ARG_FLOAT:
@@ -1431,6 +1429,7 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	    arg.floatp[0] = (float) aDouble;
 	    /*@innerbreak@*/ break;
 	}
+con->os->nextArg = _free(con->os->nextArg);
     }   /*@switchbreak@*/ break;
     case POPT_ARG_MAINCALL:
 /*@-assignexpose -type@*/
