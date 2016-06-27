@@ -42,11 +42,10 @@ extern int glob_pattern_p (const char *__pattern, int __quote)
 /*@=declundef =exportheader =incondefs =protoparammatch =redecl =type @*/
 #endif	/* __LCLINT__ */
 
-#if !defined(__GLIBC__)
 /* Return nonzero if PATTERN contains any metacharacters.
    Metacharacters can be quoted with backslashes if QUOTE is nonzero.  */
 static int
-glob_pattern_p (const char * pattern, int quote)
+poptGlob_pattern_p (const char * pattern, int quote)
 	/*@*/
 {
     const char * p;
@@ -72,7 +71,6 @@ glob_pattern_p (const char * pattern, int quote)
     }
     return 0;
 }
-#endif	/* !defined(__GLIBC__) */
 
 #if defined(HAVE_ASSERT_H)
 #include <assert.h>
@@ -111,7 +109,7 @@ static int poptGlob(/*@unused@*/ UNUSED(poptContext con), const char * pattern,
 	pat++;
 
 #if defined(HAVE_GLOB_H)
-    if (glob_pattern_p(pat, 0)) {
+    if (poptGlob_pattern_p(pat, 0)) {
 	glob_t _g, *pglob = &_g;
 
 	if (!glob(pat, poptGlobFlags, poptGlob_error, pglob)) {
