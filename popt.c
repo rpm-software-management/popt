@@ -1308,16 +1308,25 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 
     switch (poptArgType(opt)) {
     case POPT_ARG_BITSET:
+	/* XXX memory leak, application is responsible for free. */
 	rc = poptSaveBits(arg.ptr, opt->argInfo, con->os->nextArg);
+#if 0
 con->os->nextArg = _free(con->os->nextArg);
+#endif
 	/*@switchbreak@*/ break;
     case POPT_ARG_ARGV:
+	/* XXX memory leak, application is responsible for free. */
 	rc = poptSaveString(arg.ptr, opt->argInfo, con->os->nextArg);
+#if 0
 con->os->nextArg = _free(con->os->nextArg);
+#endif
 	/*@switchbreak@*/ break;
     case POPT_ARG_STRING:
+	/* XXX memory leak, application is responsible for free. */
 	arg.argv[0] = con->os->nextArg;
+#if 1
 con->os->nextArg = NULL;
+#endif
 	/*@switchbreak@*/ break;
 
     case POPT_ARG_LONGLONG:
@@ -1387,7 +1396,9 @@ con->os->nextArg = NULL;
 		arg.shortp[0] = (short) aNUM;
 	    /*@innerbreak@*/ break;
 	}
+#if 0
 con->os->nextArg = _free(con->os->nextArg);
+#endif
     }   /*@switchbreak@*/ break;
 
     case POPT_ARG_FLOAT:
@@ -1429,7 +1440,9 @@ con->os->nextArg = _free(con->os->nextArg);
 	    arg.floatp[0] = (float) aDouble;
 	    /*@innerbreak@*/ break;
 	}
+#if 0
 con->os->nextArg = _free(con->os->nextArg);
+#endif
     }   /*@switchbreak@*/ break;
     case POPT_ARG_MAINCALL:
 /*@-assignexpose -type@*/
