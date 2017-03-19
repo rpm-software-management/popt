@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-13 11:54-0400\n"
+"POT-Creation-Date: 2017-03-19 12:46-0400\n"
 "PO-Revision-Date: 2015-05-12 17:15-0400\n"
 "Last-Translator: bing-bg <popt-devel@rpm5.org>\n"
 "Language-Team: bing-bg <popt-devel@rpm5.org>\n"
@@ -19,64 +19,64 @@ msgstr ""
 msgid "unknown errno"
 msgstr "неизвестен errno"
 
-#: popt.c:1441
+#: popt.c:1453
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt"
 msgstr "тип на опция (%u), не се прилага в popt\n"
 
-#: popt.c:1895
+#: popt.c:1902
 msgid "missing argument"
 msgstr "Липсващ аргумент"
 
-#: popt.c:1897
+#: popt.c:1904
 msgid "unknown option"
 msgstr "неизвестна опция"
 
-#: popt.c:1899
+#: popt.c:1906
 msgid "mutually exclusive logical operations requested"
 msgstr "взаимно изключващи логически операции изисква"
 
-#: popt.c:1901
+#: popt.c:1908
 msgid "opt->arg should not be NULL"
 msgstr "откажете-> arg не трябва да бъде NULL"
 
-#: popt.c:1903
+#: popt.c:1910
 msgid "aliases nested too deeply"
 msgstr "псевдоними вложени твърде дълбоко"
 
-#: popt.c:1905
+#: popt.c:1912
 msgid "error in parameter quoting"
 msgstr "грешка в параметър цитира"
 
-#: popt.c:1907
+#: popt.c:1914
 msgid "invalid numeric value"
 msgstr "Невалидна числова стойност"
 
-#: popt.c:1909
+#: popt.c:1916
 msgid "number too large or too small"
 msgstr "брой твърде големи или твърде малки"
 
-#: popt.c:1911
+#: popt.c:1918
 msgid "memory allocation failed"
 msgstr "Неуспешно разпределение на паметта"
 
-#: popt.c:1913
+#: popt.c:1920
 msgid "config file failed sanity test"
 msgstr "Config файла не е хигиеничен тест"
 
-#: popt.c:1915
+#: popt.c:1922
 msgid "option does not take an argument"
 msgstr "опцията не се аргумент"
 
-#: popt.c:1917
+#: popt.c:1924
 msgid "stack underflow"
 msgstr "отрицателно препълване на стека"
 
-#: popt.c:1919
+#: popt.c:1926
 msgid "stack overflow"
 msgstr "препълване на стека"
 
-#: popt.c:1923
+#: popt.c:1930
 msgid "unknown error"
 msgstr "неизвестна грешка"
 

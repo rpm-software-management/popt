@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.17.DEVEL\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-13 11:54-0400\n"
+"POT-Creation-Date: 2017-03-19 12:46-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,64 +20,64 @@ msgstr ""
 msgid "unknown errno"
 msgstr ""
 
-#: popt.c:1441
+#: popt.c:1453
 #, c-format
 msgid "option type (%u) not implemented in popt"
 msgstr ""
 
-#: popt.c:1895
+#: popt.c:1902
 msgid "missing argument"
 msgstr ""
 
-#: popt.c:1897
+#: popt.c:1904
 msgid "unknown option"
 msgstr ""
 
-#: popt.c:1899
+#: popt.c:1906
 msgid "mutually exclusive logical operations requested"
 msgstr ""
 
-#: popt.c:1901
+#: popt.c:1908
 msgid "opt->arg should not be NULL"
 msgstr ""
 
-#: popt.c:1903
+#: popt.c:1910
 msgid "aliases nested too deeply"
 msgstr ""
 
-#: popt.c:1905
+#: popt.c:1912
 msgid "error in parameter quoting"
 msgstr ""
 
-#: popt.c:1907
+#: popt.c:1914
 msgid "invalid numeric value"
 msgstr ""
 
-#: popt.c:1909
+#: popt.c:1916
 msgid "number too large or too small"
 msgstr ""
 
-#: popt.c:1911
+#: popt.c:1918
 msgid "memory allocation failed"
 msgstr ""
 
-#: popt.c:1913
+#: popt.c:1920
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1915
+#: popt.c:1922
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1917
+#: popt.c:1924
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1919
+#: popt.c:1926
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1923
+#: popt.c:1930
 msgid "unknown error"
 msgstr ""
 
