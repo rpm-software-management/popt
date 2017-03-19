@@ -1,84 +1,88 @@
 # translation of translation.po to 
 # Simplified Chinese Messages for popt
 # Copyright (C) 2005, 2007 Free Software Foundation, Inc.
+# This file is distributed under the same license as the popt package.
 # Wei-Lun Chao <chaoweilun@pcmail.com.tw>, 2005.
 # LI Daobing <lidaobing@gmail.com>, 2007, 2008.
+# Jeff Bai <jeffbai@aosc.xyz>, 2015.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: popt 1.14\n"
+"Project-Id-Version: popt 1.16\n"
 "Report-Msgid-Bugs-To: <popt-devel@rpm5.org>\n"
-"POT-Creation-Date: 2015-05-13 11:54-0400\n"
-"PO-Revision-Date: 2008-02-18 20:16+0800\n"
-"Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
+"POT-Creation-Date: 2017-03-19 12:46-0400\n"
+"PO-Revision-Date: 2016-04-27 20:50-0400\n"
+"Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
+"X-Generator: Poedit 1.8.7\n"
 
 #: popt.c:54
 msgid "unknown errno"
-msgstr "未知的错误"
+msgstr "未知的错误号"
 
-#: popt.c:1441
+#: popt.c:1453
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt"
-msgstr "选项类别 (%u) 没有在 popt 中实现\n"
+msgstr "选项类型 (%u) 未在 popt 中实现\n"
 
-#: popt.c:1895
+#: popt.c:1902
 msgid "missing argument"
 msgstr "缺少参数"
 
-#: popt.c:1897
+#: popt.c:1904
 msgid "unknown option"
 msgstr "未知的选项"
 
-#: popt.c:1899
+#: popt.c:1906
 msgid "mutually exclusive logical operations requested"
-msgstr "需要 XOR 逻辑运算"
+msgstr "请求了 XOR 逻辑运算"
 
-#: popt.c:1901
+#: popt.c:1908
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg 不应该为 NULL"
 
-#: popt.c:1903
+#: popt.c:1910
 msgid "aliases nested too deeply"
 msgstr "别名嵌套太深"
 
-#: popt.c:1905
+#: popt.c:1912
 msgid "error in parameter quoting"
 msgstr "参数引号错误"
 
-#: popt.c:1907
+#: popt.c:1914
 msgid "invalid numeric value"
 msgstr "无效的数值"
 
-#: popt.c:1909
+#: popt.c:1916
 msgid "number too large or too small"
 msgstr "数值太大或太小"
 
-#: popt.c:1911
+#: popt.c:1918
 msgid "memory allocation failed"
 msgstr "内存分配错误"
 
-#: popt.c:1913
+#: popt.c:1920
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "配置文件无法通过健全测试"
 
-#: popt.c:1915
+#: popt.c:1922
 msgid "option does not take an argument"
 msgstr ""
 
-#: popt.c:1917
+#: popt.c:1924
 msgid "stack underflow"
 msgstr ""
 
-#: popt.c:1919
+#: popt.c:1926
 msgid "stack overflow"
 msgstr ""
 
-#: popt.c:1923
+#: popt.c:1930
 msgid "unknown error"
 msgstr "未知的错误"
 
@@ -100,7 +104,7 @@ msgstr "终止选项"
 
 #: popthelp.c:200
 msgid "Help options:"
-msgstr "帮助选项:"
+msgstr "帮助选项："
 
 #: popthelp.c:201
 msgid "Options implemented via popt alias/exec:"
@@ -108,47 +112,47 @@ msgstr "通过 popt alias/exec 实现的选项:"
 
 #: popthelp.c:209
 msgid "NONE"
-msgstr "NONE"
+msgstr "无"
 
 #: popthelp.c:211
 msgid "VAL"
-msgstr "VAL"
+msgstr "值"
 
 #: popthelp.c:215
 msgid "INT"
-msgstr "INT"
+msgstr "整型"
 
 #: popthelp.c:216
 msgid "SHORT"
-msgstr ""
+msgstr "短整"
 
 #: popthelp.c:217
 msgid "LONG"
-msgstr "LONG"
+msgstr "长整"
 
 #: popthelp.c:218
 msgid "LONGLONG"
-msgstr "LONGLONG"
+msgstr "长长整"
 
 #: popthelp.c:219
 msgid "STRING"
-msgstr "STRING"
+msgstr "字串"
 
 #: popthelp.c:220
 msgid "FLOAT"
-msgstr "FLOAT"
+msgstr "浮点"
 
 #: popthelp.c:221
 msgid "DOUBLE"
-msgstr "DOUBLE"
+msgstr "双精度"
 
 #: popthelp.c:224
 msgid "ARG"
-msgstr "ARG"
+msgstr "参数"
 
 #: popthelp.c:665
 msgid "Usage:"
-msgstr "用法:"
+msgstr "用法："
 
 #: popthelp.c:690
 msgid "[OPTION...]"

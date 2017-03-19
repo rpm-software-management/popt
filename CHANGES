@@ -1,4 +1,5 @@
 1.17 -> 2.0:
+    - jbj: i18n: update PO files (Translation Project).
     - jbj: fix: free con->os->nextArg when used (memory leaks).
     - jbj: enable SUPPORT_GLOBAL_CALCULATOR.
     - jbj: revert to SUPPORT_CONTIGUOUS_ARGV: alias/exec have memroy leaks.
