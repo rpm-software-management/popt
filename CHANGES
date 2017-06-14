@@ -1,5 +1,6 @@
 1.17 -> 2.0:
-    - jbj: fix: SYSCONFDIR as prefix, not literal, when globbing (bz#1051685).
+    - jbj: fix: SYSCONFDIR as prefix, not literal, when globbing (rtc@helen.PLASMA.Xg8.DE).
+    - jbj: fix: handle glob(3) error returns (bz#1051685).
     - jbj: i18n: update PO files (Translation Project).
     - jbj: fix: free con->os->nextArg when used (memory leaks).
     - jbj: enable SUPPORT_GLOBAL_CALCULATOR.
