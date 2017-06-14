@@ -509,11 +509,11 @@ int poptReadDefaultConfig(poptContext con, /*@unused@*/ UNUSED(int useEnv))
 #if defined(HAVE_GLOB_H)
     {
     struct stat sb;
-    if (!stat("SYSCONFDIR/popt.d", &sb) && S_ISDIR(sb.st_mode)) {
+    if (!stat(SYSCONFDIR"/popt.d", &sb) && S_ISDIR(sb.st_mode)) {
 	const char ** av = NULL;
 	int ac = 0;
 
-	if ((rc = poptGlob(con, "SYSCONFDIR/popt.d/*", &ac, &av)) == 0) {
+	if ((rc = poptGlob(con, SYSCONFDIR"/popt.d/*", &ac, &av)) == 0) {
 	    int i;
 	    for (i = 0; rc == 0 && i < ac; i++) {
 		const char * fn = av[i];
