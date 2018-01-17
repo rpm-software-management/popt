@@ -416,7 +416,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    /* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
 	    if (!strchr(" =(", argDescrip[0]))
 		*le++ = ((poptArgType(opt) == POPT_ARG_MAINCALL) ? ' ' :
-			 (poptArgType(opt) == POPT_ARG_ARGV) ? ' ' : '=');
+			 (poptArgType(opt) == POPT_ARG_ARGV) ? ' ' :
+			 opt->longName == NULL ? ' ' : '=');
 	    le = stpcpy(leo = le, argDescrip);
 
 	    /* Adjust for (possible) wide characters. */
@@ -700,7 +701,7 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
 
     if (argDescrip) {
 	/* XXX argDescrip[0] determines "--foo=bar" or "--foo bar". */
-	if (!strchr(" =(", argDescrip[0])) fprintf(fp, "=");
+	if (!strchr(" =(", argDescrip[0])) fputc(opt->longName == NULL ? ' ' : '=', fp);
 	fprintf(fp, "%s", argDescrip);
     }
     fprintf(fp, "]");
