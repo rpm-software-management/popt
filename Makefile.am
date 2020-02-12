@@ -2,7 +2,6 @@
 
 AUTOMAKE_OPTIONS = 1.4 foreign
 
-LINT =		splint
 MCCABE =	pmccabe
 
 EXTRA_DIST = config.rpath lookup3.c autogen.sh CHANGES $(man_MANS) \
@@ -70,10 +69,6 @@ popt.lcd: Makefile.am ${libpopt_la_SOURCES} ${include_HEADERS} ${noinst_HEADERS}
 .PHONY:	sources
 sources:
 	@echo $(libpopt_la_SOURCES:%=popt/%)
-
-.PHONY: lint
-lint:
-	$(LINT) ${DEFS} ${INCLUDES} test1.c ${libpopt_la_SOURCES}
 
 .PHONY:	mccabe
 mccabe:
