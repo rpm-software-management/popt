@@ -46,7 +46,6 @@ AC_GCC_TRADITIONAL
 AC_SYS_LARGEFILE
 
 AC_ISC_POSIX
-AM_C_PROTOTYPES
 
 AC_CHECK_HEADERS(float.h fnmatch.h glob.h langinfo.h libintl.h mcheck.h unistd.h)
 
@@ -84,6 +83,7 @@ AC_CHECK_FUNC(setreuid, [], [
 ])
 AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf srandom)
 
+AM_GNU_GETTEXT_VERSION([0.16.1])
 AM_GNU_GETTEXT([external])
 AM_ICONV_LINK
 
@@ -128,7 +128,7 @@ AC_DEFINE_UNQUOTED(POPT_SOURCE_PATH, "$POPT_SOURCE_PATH",
 AC_SUBST(POPT_SOURCE_PATH)
 
 AC_CONFIG_SUBDIRS()
-AC_CONFIG_FILES([ po/Makefile.in m4/Makefile
+AC_CONFIG_FILES([ po/Makefile.in
     Doxyfile Makefile popt.pc test-poptrc
     auto/Makefile auto/desc auto/types
 ])
