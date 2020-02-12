@@ -97,17 +97,17 @@ int poptParseArgvString(const char * s, int * argcPtr, const char *** argvPtr)
 	  case '"':
 	  case '\'':
 	    quote = *src;
-	    /*@switchbreak@*/ break;
+	    break;
 	  case '\\':
 	    src++;
 	    if (!*src) {
 		rc = POPT_ERROR_BADQUOTE;
 		goto exit;
 	    }
-	    /*@fallthrough@*/
+	    /* fallthrough */
 	  default:
 	    *buf++ = *src;
-	    /*@switchbreak@*/ break;
+	    break;
 	}
     }
 
@@ -129,7 +129,7 @@ exit:
  * 3== umm.... more?
  */
 int poptConfigFileToString(FILE *fp, char ** argstrp,
-		/*@unused@*/ UNUSED(int flags))
+		UNUSED(int flags))
 {
     char line[999];
     char * argstr;
