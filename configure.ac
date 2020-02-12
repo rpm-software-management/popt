@@ -1,5 +1,5 @@
 AC_PREREQ(2.57)
-AC_INIT(popt, 1.16, popt-devel@rpm5.org)
+AC_INIT(popt, 1.16, rpm-maint@lists.rpm.org)
 AC_CONFIG_SRCDIR([popt.h])
 AC_CONFIG_HEADERS([config.h])
 AC_CANONICAL_TARGET

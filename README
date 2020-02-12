@@ -13,4 +13,6 @@ tarball), which is excerpted with permission from the book "Linux
 Application Development" by Michael K. Johnson and Erik Troan (available
 from Addison Wesley in May, 1998).
 
-Comments on popt should be addressed to popt-devel@rpm5.org.
+Bugs, feature requests and contributions can be submitted at
+https://github.com/rpm-software-management/popt or alternatively
+rpm-maint@lists.rpm.org.
