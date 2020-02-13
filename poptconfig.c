@@ -80,7 +80,7 @@ static int poptGlob(UNUSED(poptContext con), const char * pattern,
     if (glob_pattern_p(pat, 0)) {
 	glob_t _g, *pglob = &_g;
 
-	if (!glob(pat, poptGlobFlags, poptGlob_error, pglob)) {
+	if (!(rc = glob(pat, poptGlobFlags, poptGlob_error, pglob))) {
 	    if (acp) {
 		*acp = (int) pglob->gl_pathc;
 		pglob->gl_pathc = 0;
@@ -90,6 +90,10 @@ static int poptGlob(UNUSED(poptContext con), const char * pattern,
 		pglob->gl_pathv = NULL;
 	    }
 	    globfree(pglob);
+	} else if (rc == GLOB_NOMATCH) {
+	    *avp = NULL;
+	    *acp = 0;
+	    rc = 0;
 	} else
 	    rc = POPT_ERROR_ERRNO;
     } else
