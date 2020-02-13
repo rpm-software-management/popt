@@ -340,7 +340,6 @@ int poptReadConfigFile(poptContext con, const char * fn)
     const char *se;
     char *t, *te;
     int rc;
-    int xx;
 
     if ((rc = poptReadFile(fn, &b, &nb, POPT_READFILE_TRIMNEWLINES)) != 0)
 	return (errno == ENOENT ? 0 : rc);
@@ -359,7 +358,8 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    te = t;
 	    while (*te && _isspaceptr(te)) te++;
 	    if (*te && *te != '#')
-		xx = poptConfigLine(con, te);
+		if ((rc = poptConfigLine(con, te)) != 0)
+		    goto exit;
 	    break;
 	  case '\\':
 	    *te = *se++;
@@ -374,11 +374,10 @@ int poptReadConfigFile(poptContext con, const char * fn)
 	    break;
 	}
     }
-
-    free(t);
     rc = 0;
 
 exit:
+    free(t);
     if (b)
 	free(b);
     return rc;
