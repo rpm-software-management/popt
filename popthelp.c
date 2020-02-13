@@ -297,7 +297,6 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     char * left;
     size_t nb = maxLeftCol + 1;
     int displaypad = 0;
-    int xx;
 
     /* Make sure there's more than enough room in target buffer. */
     if (opt->longName)	nb += strlen(opt->longName);
@@ -429,9 +428,9 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     }
 
     if (help)
-	xx = POPT_fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
+	POPT_fprintf(fp,"  %-*s   ", (int)(maxLeftCol+displaypad), left);
     else {
-	xx = POPT_fprintf(fp,"  %s\n", left); 
+	POPT_fprintf(fp,"  %s\n", left);
 	goto out;
     }
 
@@ -460,7 +459,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	    if (fmthelp) {
 		fmthelp[ch - help] = '\0';
 		sprintf(format, "%%s\n%%%ds", (int) indentLength);
-		xx = POPT_fprintf(fp, format, fmthelp, " ");
+		POPT_fprintf(fp, format, fmthelp, " ");
 		free(fmthelp);
 	    }
 	}
@@ -567,7 +566,6 @@ static void singleTableHelp(poptContext con, FILE * fp,
 {
     const struct poptOption * opt;
     const char *sub_transdom;
-    int xx;
 
     if (table == poptAliasOptions) {
 	itemHelp(fp, con->aliases, con->numAliases, columns, NULL);
@@ -593,7 +591,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	if (opt->arg == poptAliasOptions && !(con->numAliases || con->numExecs))
 	    continue;
 	if (opt->descrip)
-	    xx = POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
+	    POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
 
 	singleTableHelp(con, fp, opt->arg, columns, sub_transdom);
     }
@@ -606,9 +604,8 @@ static void singleTableHelp(poptContext con, FILE * fp,
 static size_t showHelpIntro(poptContext con, FILE * fp)
 {
     size_t len = (size_t)6;
-    int xx;
 
-    xx = POPT_fprintf(fp, POPT_("Usage:"));
+    POPT_fprintf(fp, POPT_("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {
 	struct optionStackEntry * os = con->optionStack;
 	const char * fn = (os->argv ? os->argv[0] : NULL);
@@ -625,13 +622,12 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 void poptPrintHelp(poptContext con, FILE * fp, UNUSED(int flags))
 {
     columns_t columns = calloc((size_t)1, sizeof(*columns));
-    int xx;
 
     (void) showHelpIntro(con, fp);
     if (con->otherHelp)
-	xx = POPT_fprintf(fp, " %s\n", con->otherHelp);
+	POPT_fprintf(fp, " %s\n", con->otherHelp);
     else
-	xx = POPT_fprintf(fp, " %s\n", POPT_("[OPTION...]"));
+	POPT_fprintf(fp, " %s\n", POPT_("[OPTION...]"));
 
     if (columns) {
 	columns->cur = maxArgWidth(con->options, NULL);
