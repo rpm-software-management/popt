@@ -78,10 +78,8 @@ AC_ARG_ENABLE(build-gcov,
     fi
 ])
 
-AC_CHECK_FUNC(setreuid, [], [
-    AC_CHECK_LIB(ucb, setreuid, [if echo $LIBS | grep -- -lucb >/dev/null ;then :; else LIBS="$LIBS -lc -lucb" USEUCB=y;fi])
-])
-AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf srandom)
+AC_SEARCH_LIBS(setreuid, [ucb])
+AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setreuid setuid stpcpy strerror vasprintf srandom)
 
 AM_GNU_GETTEXT_VERSION([0.16.1])
 AM_GNU_GETTEXT([external])
