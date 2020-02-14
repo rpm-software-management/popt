@@ -112,15 +112,14 @@ static int poptGlob(UNUSED(poptContext con), const char * pattern,
 int poptSaneFile(const char * fn)
 {
     struct stat sb;
-    uid_t uid = getuid();
 
+    if (fn == NULL || strstr(fn, ".rpmnew") || strstr(fn, ".rpmsave"))
+	return 0;
     if (stat(fn, &sb) == -1)
-	return 1;
-    if ((uid_t)sb.st_uid != uid)
 	return 0;
     if (!S_ISREG(sb.st_mode))
 	return 0;
-    if (sb.st_mode & (S_IWGRP|S_IWOTH))
+    if (sb.st_mode & (S_IXUSR|S_IXGRP|S_IXOTH))
 	return 0;
     return 1;
 }

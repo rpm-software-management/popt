@@ -334,9 +334,9 @@ int poptAddAlias(poptContext con, struct poptAlias alias, int flags);
 int poptAddItem(poptContext con, poptItem newItem, int flags);
 
 /** \ingroup popt
- * Perform sanity checks on a file path.
+ * Test path/file for config file sanity (regular file, permissions etc)
  * @param fn		file name
- * @return		0 on OK, 1 on NOTOK.
+ * @return		1 on OK, 0 on NOTOK.
  */
 int poptSaneFile(const char * fn);
 
