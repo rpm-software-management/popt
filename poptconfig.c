@@ -72,10 +72,6 @@ static int poptGlob(UNUSED(poptContext con), const char * pattern,
     const char * pat = pattern;
     int rc = 0;		/* assume success */
 
-    /* XXX skip the attention marker. */
-    if (pat[0] == '@' && pat[1] != '(')
-	pat++;
-
 #if defined(HAVE_GLOB_H)
     if (glob_pattern_p(pat, 0)) {
 	glob_t _g, *pglob = &_g;
@@ -411,17 +407,8 @@ int poptReadConfigFiles(poptContext con, const char * paths)
 	/* work-off each resulting file from the path element */
 	for (i = 0; i < ac; i++) {
 	    const char * fn = av[i];
-	    if (av[i] == NULL)	/* XXX can't happen */
+	    if (!poptSaneFile(fn))
 		continue;
-	    /* XXX should '@' attention be pushed into poptReadConfigFile? */
-	    if (p[0] == '@' && p[1] != '(') {
-		if (fn[0] == '@' && fn[1] != '(')
-		    fn++;
-		xx = poptSaneFile(fn);
-		if (!xx && rc == 0)
-		    rc = POPT_ERROR_BADCONFIG;
-		continue;
-	    }
 	    xx = poptReadConfigFile(con, fn);
 	    if (xx && rc == 0)
 		rc = xx;
@@ -458,12 +445,8 @@ int poptReadDefaultConfig(poptContext con, UNUSED(int useEnv))
 	if ((rc = poptGlob(con, POPT_SYSCONFDIR "/popt.d/*", &ac, &av)) == 0) {
 	    for (i = 0; rc == 0 && i < ac; i++) {
 		const char * fn = av[i];
-		if (fn == NULL || strstr(fn, ".rpmnew") || strstr(fn, ".rpmsave"))
+		if (!poptSaneFile(fn))
 		    continue;
-		if (!stat(fn, &sb)) {
-		    if (!S_ISREG(sb.st_mode) && !S_ISLNK(sb.st_mode))
-			continue;
-		}
 		rc = poptReadConfigFile(con, fn);
 		free((void *)av[i]);
 		av[i] = NULL;
