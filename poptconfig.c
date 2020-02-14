@@ -441,29 +441,22 @@ int poptReadConfigFiles(poptContext con, const char * paths)
 
 int poptReadDefaultConfig(poptContext con, UNUSED(int useEnv))
 {
-    static const char _popt_sysconfdir[] = POPT_SYSCONFDIR "/popt";
-    static const char _popt_etc[] = "/etc/popt";
     char * home;
     struct stat sb;
     int rc = 0;		/* assume success */
 
     if (con->appName == NULL) goto exit;
 
-    if (strcmp(_popt_sysconfdir, _popt_etc)) {
-	rc = poptReadConfigFile(con, _popt_sysconfdir);
-	if (rc) goto exit;
-    }
-
-    rc = poptReadConfigFile(con, _popt_etc);
+    rc = poptReadConfigFile(con, POPT_SYSCONFDIR "/popt");
     if (rc) goto exit;
 
 #if defined(HAVE_GLOB_H)
-    if (!stat("/etc/popt.d", &sb) && S_ISDIR(sb.st_mode)) {
+    if (!stat(POPT_SYSCONFDIR "/popt.d", &sb) && S_ISDIR(sb.st_mode)) {
 	const char ** av = NULL;
 	int ac = 0;
 	int i;
 
-	if ((rc = poptGlob(con, "/etc/popt.d/*", &ac, &av)) == 0) {
+	if ((rc = poptGlob(con, POPT_SYSCONFDIR "/popt.d/*", &ac, &av)) == 0) {
 	    for (i = 0; rc == 0 && i < ac; i++) {
 		const char * fn = av[i];
 		if (fn == NULL || strstr(fn, ".rpmnew") || strstr(fn, ".rpmsave"))
