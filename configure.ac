@@ -56,10 +56,6 @@ AM_GNU_GETTEXT_VERSION([0.16.1])
 AM_GNU_GETTEXT([external])
 AM_ICONV_LINK
 
-popt_sysconfdir="${sysconfdir}"
-eval "popt_sysconfdir=\"${popt_sysconfdir}\"" # expand contained ${prefix}
-AC_DEFINE_UNQUOTED([POPT_SYSCONFDIR], ["$popt_sysconfdir"], [Full path to default POPT configuration directory])
-
 AC_CONFIG_SUBDIRS()
 AC_CONFIG_FILES([ po/Makefile.in
     Doxyfile Makefile popt.pc test-poptrc
