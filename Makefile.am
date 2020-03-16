@@ -17,16 +17,16 @@ noinst_HEADERS = poptint.h system.h
 noinst_PROGRAMS = test1 test2 tdict # test3
 test1_SOURCES = test1.c
 test1_LDFLAGS = 
-test1_LDADD = $(usrlib_LTLIBRARIES)
+test1_LDADD = $(lib_LTLIBRARIES)
 test2_SOURCES = test2.c
 test2_LDFLAGS = 
-test2_LDADD = $(usrlib_LTLIBRARIES)
+test2_LDADD = $(lib_LTLIBRARIES)
 #test3_SOURCES = test3.c
 #test3_LDFLAGS = 
-#test3_LDADD = $(usrlib_LTLIBRARIES)
+#test3_LDADD = $(lib_LTLIBRARIES)
 tdict_SOURCES = tdict.c
 tdict_LDFLAGS = 
-tdict_LDADD = $(usrlib_LTLIBRARIES)
+tdict_LDADD = $(lib_LTLIBRARIES)
 
 noinst_SCRIPTS = testit.sh
 
@@ -36,9 +36,7 @@ test1="$(top_builddir)/test1"
 TESTS = $(top_builddir)/testit.sh
 
 include_HEADERS = popt.h
-
-usrlibdir = $(libdir)
-usrlib_LTLIBRARIES = libpopt.la
+lib_LTLIBRARIES = libpopt.la
 
 libpopt_la_SOURCES = popt.c poptparse.c poptconfig.c popthelp.c poptint.c
 
