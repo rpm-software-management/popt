@@ -8,7 +8,6 @@ dnl Must come before AM_INIT_AUTOMAKE.
 dnl AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign -Wall])
-AM_MAINTAINER_MODE
 
 AC_PROG_CC_STDC
 AC_PROG_CC
