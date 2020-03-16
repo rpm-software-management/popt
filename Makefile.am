@@ -1,7 +1,5 @@
 # Makefile for popt library.
 
-AUTOMAKE_OPTIONS = 1.4 foreign
-
 MCCABE =	pmccabe
 
 EXTRA_DIST = config.rpath lookup3.c autogen.sh CHANGES $(man_MANS) \
