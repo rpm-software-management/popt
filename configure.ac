@@ -10,14 +10,6 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign -Wall])
 AM_MAINTAINER_MODE
 
-# Library code modified:                              REVISION++
-# Interfaces changed/added/removed:   CURRENT++       REVISION=0
-# Interfaces added:                             AGE++
-# Interfaces removed:                           AGE=0
-AC_SUBST(LT_CURRENT, 0)
-AC_SUBST(LT_REVISION, 0)
-AC_SUBST(LT_AGE, 8)
-
 AC_PROG_CC_STDC
 AC_PROG_CC
 

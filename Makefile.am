@@ -43,6 +43,8 @@ usrlib_LTLIBRARIES = libpopt.la
 
 libpopt_la_SOURCES = popt.c poptparse.c poptconfig.c popthelp.c poptint.c
 libpopt_la_LDFLAGS = -no-undefined @LTLIBINTL@ @LTLIBICONV@
+# libtool current:revision:age info
+libpopt_la_LDFLAGS += -version-info 0:0:0
 
 pkgconfigdir = $(prefix)/lib/pkgconfig
 pkgconfig_DATA = popt.pc
