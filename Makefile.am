@@ -3,7 +3,7 @@
 MCCABE =	pmccabe
 
 EXTRA_DIST = lookup3.c autogen.sh CHANGES $(man_MANS) \
-	footer_no_timestamp.html libpopt.vers \
+	libpopt.vers \
 	testit.sh test-poptrc \
 	popt.ps
 
