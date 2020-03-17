@@ -2,7 +2,6 @@ AC_PREREQ(2.57)
 AC_INIT(popt, 1.16, rpm-maint@lists.rpm.org)
 AC_CONFIG_SRCDIR([popt.h])
 AC_CONFIG_HEADERS([config.h])
-AC_CANONICAL_TARGET
 
 dnl Must come before AM_INIT_AUTOMAKE.
 dnl AC_CONFIG_AUX_DIR([build-aux])
