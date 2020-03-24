@@ -2,7 +2,7 @@
 
 MCCABE =	pmccabe
 
-EXTRA_DIST = lookup3.c autogen.sh CHANGES $(man_MANS) \
+EXTRA_DIST = lookup3.c autogen.sh CHANGES $(man_MANS) ci/Dockerfile \
 	libpopt.vers
 
 SUBDIRS = po . auto tests
@@ -31,6 +31,11 @@ endif
 man_MANS = popt.3
 
 BUILT_SOURCES = popt.pc # popt.lcd
+
+.PHONY: ci
+ci:
+	podman build -t popt -f ci/Dockerfile .
+	podman run -t popt
 
 .PHONY:	updatepo
 updatepo:
