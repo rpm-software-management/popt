@@ -58,7 +58,7 @@ AM_ICONV_LINK
 
 AC_CONFIG_SUBDIRS()
 AC_CONFIG_FILES([ po/Makefile.in
-    Doxyfile Makefile popt.pc test-poptrc
+    Doxyfile Makefile popt.pc tests/test-poptrc tests/Makefile
     auto/Makefile auto/desc auto/types
 ])
 AC_OUTPUT

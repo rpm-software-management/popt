@@ -3,36 +3,14 @@
 MCCABE =	pmccabe
 
 EXTRA_DIST = lookup3.c autogen.sh CHANGES $(man_MANS) \
-	libpopt.vers \
-	testit.sh test-poptrc
+	libpopt.vers
 
-SUBDIRS = po . auto
+SUBDIRS = po . auto tests
 
 AM_CPPFLAGS = -I. -I$(top_srcdir)
 AM_CPPFLAGS += -DPOPT_SYSCONFDIR="\"$(sysconfdir)\""
 
 noinst_HEADERS = poptint.h system.h
-
-noinst_PROGRAMS = test1 test2 tdict # test3
-test1_SOURCES = test1.c
-test1_LDFLAGS = 
-test1_LDADD = $(lib_LTLIBRARIES)
-test2_SOURCES = test2.c
-test2_LDFLAGS = 
-test2_LDADD = $(lib_LTLIBRARIES)
-#test3_SOURCES = test3.c
-#test3_LDFLAGS = 
-#test3_LDADD = $(lib_LTLIBRARIES)
-tdict_SOURCES = tdict.c
-tdict_LDFLAGS = 
-tdict_LDADD = $(lib_LTLIBRARIES)
-
-noinst_SCRIPTS = testit.sh
-
-TESTS_ENVIRONMENT = \
-test1="$(top_builddir)/test1"
-
-TESTS = $(top_builddir)/testit.sh
 
 include_HEADERS = popt.h
 lib_LTLIBRARIES = libpopt.la
@@ -53,9 +31,6 @@ endif
 man_MANS = popt.3
 
 BUILT_SOURCES = popt.pc # popt.lcd
-
-distclean-local:
-	rm -rf .ccache
 
 .PHONY:	updatepo
 updatepo:
