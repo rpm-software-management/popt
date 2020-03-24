@@ -4,8 +4,7 @@ MCCABE =	pmccabe
 
 EXTRA_DIST = lookup3.c autogen.sh CHANGES $(man_MANS) \
 	libpopt.vers \
-	testit.sh test-poptrc \
-	popt.ps
+	testit.sh test-poptrc
 
 SUBDIRS = po . auto
 
