@@ -2,9 +2,9 @@
 
 # Package source files
 
-popt.c
-popt.h
-poptconfig.c
-popthelp.c
-poptint.c
-poptparse.c
+src/popt.c
+src/popt.h
+src/poptconfig.c
+src/popthelp.c
+src/poptint.c
+src/poptparse.c

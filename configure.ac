@@ -1,6 +1,6 @@
 AC_PREREQ(2.57)
 AC_INIT(popt, 1.16, rpm-maint@lists.rpm.org)
-AC_CONFIG_SRCDIR([popt.h])
+AC_CONFIG_SRCDIR([src/popt.h])
 AC_CONFIG_HEADERS([config.h])
 
 dnl Must come before AM_INIT_AUTOMAKE.
@@ -58,7 +58,7 @@ AM_ICONV_LINK
 
 AC_CONFIG_SUBDIRS()
 AC_CONFIG_FILES([ po/Makefile.in
-    Doxyfile Makefile popt.pc tests/test-poptrc tests/Makefile
+    Doxyfile Makefile src/Makefile popt.pc tests/test-poptrc tests/Makefile
     auto/Makefile auto/desc auto/types
 ])
 AC_OUTPUT
