@@ -2,7 +2,7 @@
 
 MCCABE =	pmccabe
 
-EXTRA_DIST = autogen.sh CHANGES $(man_MANS) ci/Dockerfile
+EXTRA_DIST = autogen.sh CHANGES $(man_MANS) ci/Dockerfile build-aux
 
 SUBDIRS = src po auto tests
 
