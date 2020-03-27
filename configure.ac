@@ -4,7 +4,7 @@ AC_CONFIG_SRCDIR([src/popt.h])
 AC_CONFIG_HEADERS([config.h])
 
 dnl Must come before AM_INIT_AUTOMAKE.
-dnl AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([1.10 foreign -Wall])
 
