@@ -3,6 +3,7 @@
 EXTRA_DIST = testit.sh test-poptrc
 
 AM_CPPFLAGS = -I. -I$(top_srcdir)/src
+AM_CFLAGS = @POPTCFLAGS@
 
 noinst_PROGRAMS = test1 test2 tdict # test3
 test1_SOURCES = test1.c

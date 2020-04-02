@@ -4,6 +4,7 @@ EXTRA_DIST = lookup3.c libpopt.vers
 
 AM_CPPFLAGS = -I. -I$(top_srcdir)
 AM_CPPFLAGS += -DPOPT_SYSCONFDIR="\"$(sysconfdir)\""
+AM_CFLAGS = @POPTCFLAGS@
 
 noinst_HEADERS = poptint.h system.h
 

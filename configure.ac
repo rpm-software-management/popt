@@ -44,10 +44,11 @@ AC_ARG_ENABLE(build-gcov,
     if test ".$enableval" = .yes; then
         if test ".`$CC --version 2>&1 | grep 'GCC'`" != .; then
             dnl # GNU GCC (usually "gcc")
-            CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
+            POPTCFLAGS="$POPTCFLAGS -fprofile-arcs -ftest-coverage"
         fi
     fi
 ])
+AC_SUBST(POPTCFLAGS)
 
 AC_SEARCH_LIBS(setreuid, [ucb])
 AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setreuid setuid stpcpy strerror vasprintf srandom)
