@@ -19,7 +19,7 @@ RUN dnf -y install \
 COPY . .
 
 RUN autoreconf -vi
-RUN ./configure
+RUN ./configure --enable-werror
 RUN make
 
 CMD make distcheck
