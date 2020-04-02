@@ -44,6 +44,10 @@ AC_ARG_ENABLE(werror,
     [POPTCFLAGS="$POPTCFLAGS -Werror"], []
 )
 
+if test "$GCC" = "yes"; then
+    POPTCFLAGS="$POPTCFLAGS -Wall -Wextra"
+fi
+
 AC_ARG_ENABLE(build-gcov,
     AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov]), [dnl
     if test ".$enableval" = .yes; then
