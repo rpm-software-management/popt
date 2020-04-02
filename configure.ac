@@ -39,6 +39,11 @@ AC_ARG_ENABLE([ld-version-script],
               [ : ] )
 AM_CONDITIONAL(HAVE_LD_VERSION_SCRIPT, test "$have_ld_version_script" = "yes")
 
+AC_ARG_ENABLE(werror,
+    AS_HELP_STRING([--enable-werror], [build with -Werror]),
+    [POPTCFLAGS="$POPTCFLAGS -Werror"], []
+)
+
 AC_ARG_ENABLE(build-gcov,
     AS_HELP_STRING([--enable-build-gcov], [build POPT instrumented for gcov]), [dnl
     if test ".$enableval" = .yes; then
