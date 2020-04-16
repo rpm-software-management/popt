@@ -13,6 +13,11 @@ AC_PROG_CC
 AC_USE_SYSTEM_EXTENSIONS
 AM_PROG_AR
 
+AC_PROG_CC_C99
+if test "$ac_cv_prog_cc_c99" = no; then
+    AC_MSG_ERROR([ISO C99 capable compiler required])
+fi
+
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 
