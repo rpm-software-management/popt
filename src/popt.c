@@ -10,9 +10,7 @@
 
 #include "system.h"
 
-#ifdef HAVE_FLOAT_H
 #include <float.h>
-#endif
 #include <math.h>
 #include <unistd.h>
 #include <limits.h>
@@ -1182,9 +1180,6 @@ static int poptSaveArg(poptContext con, const struct poptOption * opt)
 	    arg.doublep[0] = aDouble;
 	    break;
 	case POPT_ARG_FLOAT:
-#if !defined(DBL_EPSILON)
-#define DBL_EPSILON 2.2204460492503131e-16
-#endif
 #define POPT_ABS(a)	((((a) - 0.0) < DBL_EPSILON) ? -(a) : (a))
 	    if ((FLT_MIN - POPT_ABS(aDouble)) > DBL_EPSILON
 	     || (POPT_ABS(aDouble) - FLT_MAX) > DBL_EPSILON)
