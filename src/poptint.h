@@ -121,10 +121,6 @@ struct poptContext_s {
 #include <iconv.h>
 #endif
 
-#ifdef HAVE_LANGINFO_H
-#include <langinfo.h>
-#endif
-
 #if defined(HAVE_DCGETTEXT)
 char *POPT_dgettext(const char * dom, const char * str);
 #endif
