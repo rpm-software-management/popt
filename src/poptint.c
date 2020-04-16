@@ -1,5 +1,6 @@
 #include "system.h"
 #include <stdarg.h>
+#include <errno.h>
 #include "poptint.h"
 
 /* Any pair of 32 bit hashes can be used. lookup3.c generates pairs, will do. */
