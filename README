@@ -8,7 +8,7 @@ to getopt(3), it contains a number of enhancements, including:
 	4) popt provides convience functions for parsing strings
 	   into argv[] style arrays
 
-Complete documentation on popt(3) is available in popt.ps (included in this
+Complete documentation on popt(3) is available in popt.pdf (included in this
 tarball), which is excerpted with permission from the book "Linux
 Application Development" by Michael K. Johnson and Erik Troan (available
 from Addison Wesley in May, 1998).
