@@ -23,16 +23,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#if defined(HAVE_UNISTD_H)
-#include <unistd.h>
-#endif
-
-#ifdef __NeXT
-/* access macros are not declared in non posix mode in unistd.h -
- don't try to use posix on NeXTstep 3.3 ! */
-#include <libc.h>
-#endif
-
 void * xmalloc (size_t size);
 
 void * xcalloc (size_t nmemb, size_t size);

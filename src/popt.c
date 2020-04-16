@@ -14,6 +14,7 @@
 #include <float.h>
 #endif
 #include <math.h>
+#include <unistd.h>
 
 #include "poptint.h"
 
