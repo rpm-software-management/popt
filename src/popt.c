@@ -15,6 +15,8 @@
 #endif
 #include <math.h>
 #include <unistd.h>
+#include <limits.h>
+#include <errno.h>
 
 #include "poptint.h"
 

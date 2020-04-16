@@ -11,15 +11,10 @@
 /* XXX isspace(3) has i18n encoding signednesss issues on Solaris. */
 #define	_isspaceptr(_chp)	isspace((int)(*(unsigned char *)(_chp)))
 
-#include <errno.h>
-#include <fcntl.h>
-#include <limits.h>
-
 #ifdef HAVE_MCHECK_H
 #include <mcheck.h>
 #endif
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
