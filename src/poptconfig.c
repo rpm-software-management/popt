@@ -9,6 +9,7 @@
 #include "system.h"
 #include "poptint.h"
 #include <sys/stat.h>
+#include <unistd.h>
 
 #if defined(HAVE_FNMATCH_H)
 #include <fnmatch.h>
