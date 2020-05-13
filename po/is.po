@@ -2,137 +2,137 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-02-12 10:47+0200\n"
+"POT-Creation-Date: 2020-05-13 11:40+0300\n"
 "PO-Revision-Date: 2001-06-08 01:35+0000\n"
 "Last-Translator: Richard Allen <ra@hp.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"
-"Language: \n"
+"Language: is\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: popt.c:47
+#: src/popt.c:37
 msgid "unknown errno"
-msgstr "óþekkt villunúmer"
+msgstr "Ã³Ã¾ekkt villunÃºmer"
 
-#: popt.c:1290
+#: src/popt.c:1196
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "rofagerðin (%d) er ekki studd í popt\n"
+msgstr "rofagerÃ°in (%d) er ekki studd Ã­ popt\n"
 
-#: popt.c:1711
+#: src/popt.c:1607
 msgid "missing argument"
-msgstr "vantar viðfang"
+msgstr "vantar viÃ°fang"
 
-#: popt.c:1713
+#: src/popt.c:1609
 msgid "unknown option"
-msgstr "óþekktur rofi"
+msgstr "Ã³Ã¾ekktur rofi"
 
-#: popt.c:1715
+#: src/popt.c:1611
 msgid "mutually exclusive logical operations requested"
-msgstr "beðið um rofa sem slökkva hvor á öðrum"
+msgstr "beÃ°iÃ° um rofa sem slÃ¶kkva hvor Ã¡ Ã¶Ã°rum"
 
-#: popt.c:1717
+#: src/popt.c:1613
 msgid "opt->arg should not be NULL"
-msgstr "opt->arg ætti ekki að vera NULL"
+msgstr "opt->arg Ã¦tti ekki aÃ° vera NULL"
 
-#: popt.c:1719
+#: src/popt.c:1615
 msgid "aliases nested too deeply"
-msgstr "alíasar of flóknir"
+msgstr "alÃ­asar of flÃ³knir"
 
-#: popt.c:1721
+#: src/popt.c:1617
 msgid "error in parameter quoting"
-msgstr "villa í viðföngum (gæsalappir og svo frv.)"
+msgstr "villa Ã­ viÃ°fÃ¶ngum (gÃ¦salappir og svo frv.)"
 
-#: popt.c:1723
+#: src/popt.c:1619
 msgid "invalid numeric value"
-msgstr "ógilt tölulegt gildi"
+msgstr "Ã³gilt tÃ¶lulegt gildi"
 
-#: popt.c:1725
+#: src/popt.c:1621
 msgid "number too large or too small"
-msgstr "talan of stór eða smá"
+msgstr "talan of stÃ³r eÃ°a smÃ¡"
 
-#: popt.c:1727
+#: src/popt.c:1623
 msgid "memory allocation failed"
-msgstr "ekki tókst að taka frá minni"
+msgstr "ekki tÃ³kst aÃ° taka frÃ¡ minni"
 
-#: popt.c:1729
+#: src/popt.c:1625
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1733
+#: src/popt.c:1629
 msgid "unknown error"
-msgstr "óþekkt villa"
+msgstr "Ã³Ã¾ekkt villa"
 
-#: popthelp.c:75 popthelp.c:86
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
-msgstr "Sýna þessa hjálp"
+msgstr "SÃ½na Ã¾essa hjÃ¡lp"
 
-#: popthelp.c:76 popthelp.c:87
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
-msgstr "Sýna stuttar notkunarleiðbeiningar"
+msgstr "SÃ½na stuttar notkunarleiÃ°beiningar"
 
-#: popthelp.c:90
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
-msgstr "Sýna sjálfgefin gildi rofa í skilaboðum"
+msgstr "SÃ½na sjÃ¡lfgefin gildi rofa Ã­ skilaboÃ°um"
 
-#: popthelp.c:92
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr ""
 
-#: popthelp.c:191
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr ""
 
-#: popthelp.c:192
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: popthelp.c:200
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "ENGIN"
 
-#: popthelp.c:202
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:206
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:207
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: popthelp.c:208
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:209
+#: src/popthelp.c:188
 #, fuzzy
 msgid "LONGLONG"
 msgstr "LONG"
 
-#: popthelp.c:210
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:211
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:212
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:215
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:649
+#: src/popthelp.c:608
 msgid "Usage:"
 msgstr "Notkun:"
 
-#: popthelp.c:672
+#: src/popthelp.c:630
 msgid "[OPTION...]"
 msgstr "[ROFI...]"

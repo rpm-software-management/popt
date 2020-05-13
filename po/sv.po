@@ -1,7 +1,7 @@
 # Swedish messages for popt.
-# Copyright © 2008 Free Software Foundation, Inc.
+# Copyright Â© 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the popt package.
-# Göran Uddeborg <goeran@uddeborg.se>, 2008.
+# GÃ¶ran Uddeborg <goeran@uddeborg.se>, 2008.
 #
 # $Revision: 1.4 $
 #
@@ -9,136 +9,136 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-02-12 10:47+0200\n"
+"POT-Creation-Date: 2020-05-13 11:40+0300\n"
 "PO-Revision-Date: 2008-02-23 20:15+0100\n"
-"Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
+"Last-Translator: GÃ¶ran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:47
+#: src/popt.c:37
 msgid "unknown errno"
-msgstr "okänt felnummer"
+msgstr "okÃ¤nt felnummer"
 
-#: popt.c:1290
+#: src/popt.c:1196
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "flaggtypen (%u) är inte implementerad i popt\n"
+msgstr "flaggtypen (%u) Ã¤r inte implementerad i popt\n"
 
-#: popt.c:1711
+#: src/popt.c:1607
 msgid "missing argument"
 msgstr "argument saknas"
 
-#: popt.c:1713
+#: src/popt.c:1609
 msgid "unknown option"
-msgstr "okänd flagga"
+msgstr "okÃ¤nd flagga"
 
-#: popt.c:1715
+#: src/popt.c:1611
 msgid "mutually exclusive logical operations requested"
-msgstr "ömsesidigt uteslutande logiska operationer begärdes"
+msgstr "Ã¶msesidigt uteslutande logiska operationer begÃ¤rdes"
 
-#: popt.c:1717
+#: src/popt.c:1613
 msgid "opt->arg should not be NULL"
-msgstr "opt->arg får inte vara NULL"
+msgstr "opt->arg fÃ¥r inte vara NULL"
 
-#: popt.c:1719
+#: src/popt.c:1615
 msgid "aliases nested too deeply"
-msgstr "alias är nästade för djupt"
+msgstr "alias Ã¤r nÃ¤stade fÃ¶r djupt"
 
-#: popt.c:1721
+#: src/popt.c:1617
 msgid "error in parameter quoting"
 msgstr "fel i parametercitering"
 
-#: popt.c:1723
+#: src/popt.c:1619
 msgid "invalid numeric value"
-msgstr "ogiltigt numeriskt värde"
+msgstr "ogiltigt numeriskt vÃ¤rde"
 
-#: popt.c:1725
+#: src/popt.c:1621
 msgid "number too large or too small"
-msgstr "talet för stort eller för litet"
+msgstr "talet fÃ¶r stort eller fÃ¶r litet"
 
-#: popt.c:1727
+#: src/popt.c:1623
 msgid "memory allocation failed"
 msgstr "minnesallokering misslyckades"
 
-#: popt.c:1729
+#: src/popt.c:1625
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1733
+#: src/popt.c:1629
 msgid "unknown error"
-msgstr "okänt fel"
+msgstr "okÃ¤nt fel"
 
-#: popthelp.c:75 popthelp.c:86
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
-msgstr "Visa denna hjälptext"
+msgstr "Visa denna hjÃ¤lptext"
 
-#: popthelp.c:76 popthelp.c:87
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
-msgstr "Visa en kortfattad användningstext"
+msgstr "Visa en kortfattad anvÃ¤ndningstext"
 
-#: popthelp.c:90
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
-msgstr "Visa standardalternativ för flaggor i meddelande"
+msgstr "Visa standardalternativ fÃ¶r flaggor i meddelande"
 
-#: popthelp.c:92
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr "Avsluta flaggor"
 
-#: popthelp.c:191
+#: src/popthelp.c:170
 msgid "Help options:"
-msgstr "Hjälpflaggor:"
+msgstr "HjÃ¤lpflaggor:"
 
-#: popthelp.c:192
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr "Flaggor implementerade via popt-alias/exec:"
 
-#: popthelp.c:200
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "INGET"
 
-#: popthelp.c:202
+#: src/popthelp.c:181
 msgid "VAL"
-msgstr "VÄRDE"
+msgstr "VÃ„RDE"
 
-#: popthelp.c:206
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "HELTAL"
 
-#: popthelp.c:207
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: popthelp.c:208
+#: src/popthelp.c:187
 msgid "LONG"
-msgstr "LÅNG"
+msgstr "LÃ…NG"
 
-#: popthelp.c:209
+#: src/popthelp.c:188
 msgid "LONGLONG"
-msgstr "LÅNGLÅNG"
+msgstr "LÃ…NGLÃ…NG"
 
-#: popthelp.c:210
+#: src/popthelp.c:189
 msgid "STRING"
-msgstr "STRÄNG"
+msgstr "STRÃ„NG"
 
-#: popthelp.c:211
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLYTTAL"
 
-#: popthelp.c:212
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DUBBEL"
 
-#: popthelp.c:215
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:649
+#: src/popthelp.c:608
 msgid "Usage:"
-msgstr "Användning:"
+msgstr "AnvÃ¤ndning:"
 
-#: popthelp.c:672
+#: src/popthelp.c:630
 msgid "[OPTION...]"
 msgstr "[FLAGGA...]"

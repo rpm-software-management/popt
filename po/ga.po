@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-02-12 10:47+0200\n"
+"POT-Creation-Date: 2020-05-13 11:40+0300\n"
 "PO-Revision-Date: 2008-04-10 06:21-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -15,128 +15,128 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:47
+#: src/popt.c:37
 msgid "unknown errno"
 msgstr "errno anaithnid"
 
-#: popt.c:1290
+#: src/popt.c:1196
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "níl an cineál rogha seo (%u) ar fáil i popt\n"
 
-#: popt.c:1711
+#: src/popt.c:1607
 msgid "missing argument"
 msgstr "argóint ar iarraidh"
 
-#: popt.c:1713
+#: src/popt.c:1609
 msgid "unknown option"
 msgstr "rogha anaithnid"
 
-#: popt.c:1715
+#: src/popt.c:1611
 msgid "mutually exclusive logical operations requested"
 msgstr "iarradh oibríochtaí loighciúla comheisiacha"
 
-#: popt.c:1717
+#: src/popt.c:1613
 msgid "opt->arg should not be NULL"
 msgstr "níor chóir rogha->arg a bheith NULL"
 
-#: popt.c:1719
+#: src/popt.c:1615
 msgid "aliases nested too deeply"
 msgstr "ailiasanna neadaithe ródhomhain"
 
-#: popt.c:1721
+#: src/popt.c:1617
 msgid "error in parameter quoting"
 msgstr "earráid agus paraiméadar á chur faoi chomharthaí athfhriotail"
 
-#: popt.c:1723
+#: src/popt.c:1619
 msgid "invalid numeric value"
 msgstr "luach neamhbhailí uimhriúil"
 
-#: popt.c:1725
+#: src/popt.c:1621
 msgid "number too large or too small"
 msgstr "uimhir rómhór nó róbheag"
 
-#: popt.c:1727
+#: src/popt.c:1623
 msgid "memory allocation failed"
 msgstr "theip ar dháileadh na cuimhne"
 
-#: popt.c:1729
+#: src/popt.c:1625
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1733
+#: src/popt.c:1629
 msgid "unknown error"
 msgstr "earráid anaithnid"
 
-#: popthelp.c:75 popthelp.c:86
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "Taispeáin an chabhair seo"
 
-#: popthelp.c:76 popthelp.c:87
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "Taispeáin beagán eolais faoin úsáid"
 
-#: popthelp.c:90
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr "Taispeáin luachanna réamhshocraithe na roghanna sa teachtaireacht"
 
 # Terminate not a verb here
-#: popthelp.c:92
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr "Roghanna scortha"
 
-#: popthelp.c:191
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr "Roghanna cabhracha:"
 
-#: popthelp.c:192
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr "Roghanna a cuireadh i bhfeidhm trí ailias/exec popt:"
 
-#: popthelp.c:200
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "NEAMHNÍ"
 
-#: popthelp.c:202
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr "LUACH"
 
-#: popthelp.c:206
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:207
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: popthelp.c:208
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:209
+#: src/popthelp.c:188
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: popthelp.c:210
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr "STRING"
 
-#: popthelp.c:211
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:212
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:215
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:649
+#: src/popthelp.c:608
 msgid "Usage:"
 msgstr "Úsáid:"
 
-#: popthelp.c:672
+#: src/popthelp.c:630
 msgid "[OPTION...]"
 msgstr "[ROGHA...]"
