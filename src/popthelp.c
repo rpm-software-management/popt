@@ -75,7 +75,7 @@ static struct poptOption poptHelpOptions2[] = {
   { "defaults", '\0', POPT_ARG_NONE, &show_option_defaults, 0,
 	N_("Display option defaults in message"), NULL },
 #endif
-  { "", '\0',	0, NULL, 0, N_("Terminate options"), NULL },
+  { NULL, '\0',	0, NULL, 0, N_("Terminate options"), NULL },
     POPT_TABLEEND
 } ;
 
@@ -494,8 +494,12 @@ static size_t maxArgWidth(const struct poptOption * opt,
     if (opt != NULL)
     while (opt->longName || opt->shortName || opt->arg) {
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
-	    if (opt->arg)	/* XXX program error */
-	        len = maxArgWidth(opt->arg, translation_domain);
+	    void * arg = opt->arg;
+	    /* XXX sick hack to preserve pretense of ABI. */
+	    if (arg == poptHelpOptions)
+		arg = poptHelpOptionsI18N;
+	    if (arg)	/* XXX program error */
+		len = maxArgWidth(arg, translation_domain);
 	    if (len > max) max = len;
 	} else if (!F_ISSET(opt, DOC_HIDDEN)) {
 	    len = sizeof("  ")-1;
@@ -581,19 +585,23 @@ static void singleTableHelp(poptContext con, FILE * fp,
 
     if (table != NULL)
     for (opt = table; opt->longName || opt->shortName || opt->arg; opt++) {
+	void * arg = opt->arg;
 	if (poptArgType(opt) != POPT_ARG_INCLUDE_TABLE)
 	    continue;
-	sub_transdom = getTableTranslationDomain(opt->arg);
+	/* XXX sick hack to preserve pretense of ABI. */
+	if (arg == poptHelpOptions)
+	    arg = poptHelpOptionsI18N;
+	sub_transdom = getTableTranslationDomain(arg);
 	if (sub_transdom == NULL)
 	    sub_transdom = translation_domain;
 	    
 	/* If no popt aliases/execs, skip poptAliasOption processing. */
-	if (opt->arg == poptAliasOptions && !(con->numAliases || con->numExecs))
+	if (arg == poptAliasOptions && !(con->numAliases || con->numExecs))
 	    continue;
 	if (opt->descrip)
 	    POPT_fprintf(fp, "\n%s\n", D_(sub_transdom, opt->descrip));
 
-	singleTableHelp(con, fp, opt->arg, columns, sub_transdom);
+	singleTableHelp(con, fp, arg, columns, sub_transdom);
     }
 }
 
@@ -759,20 +767,24 @@ static size_t singleTableUsage(poptContext con, FILE * fp, columns_t columns,
 	    translation_domain = (const char *)opt->arg;
 	} else
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
+	    void * arg = opt->arg;
+	    /* XXX sick hack to preserve pretense of ABI. */
+	    if (arg == poptHelpOptions)
+		arg = poptHelpOptionsI18N;
 	    if (done) {
 		int i = 0;
 		if (done->opts != NULL)
 		for (i = 0; i < done->nopts; i++) {
 		    const void * that = done->opts[i];
-		    if (that == NULL || that != opt->arg)
+		    if (that == NULL || that != arg)
 			continue;
 		    break;
 		}
 		/* Skip if this table has already been processed. */
-		if (opt->arg == NULL || i < done->nopts)
+		if (arg == NULL || i < done->nopts)
 		    continue;
 		if (done->opts != NULL && done->nopts < done->maxopts)
-		    done->opts[done->nopts++] = (const void *) opt->arg;
+		    done->opts[done->nopts++] = (const void *) arg;
 	    }
 	    columns->cur = singleTableUsage(con, fp, columns, opt->arg,
 			translation_domain, done);
@@ -812,9 +824,14 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 	    if (!strchr(s, opt->shortName) && isprint((int)opt->shortName)
 	     && opt->shortName != ' ')
 		s[strlen(s)] = opt->shortName;
-	} else if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE)
-	    if (opt->arg)	/* XXX program error */
-		len = showShortOptions(opt->arg, fp, s);
+	} else if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
+	    void * arg = opt->arg;
+	    /* XXX sick hack to preserve pretense of ABI. */
+	    if (arg == poptHelpOptions)
+		arg = poptHelpOptionsI18N;
+	    if (arg)	/* XXX program error */
+		len = showShortOptions(arg, fp, s);
+	}
     } 
 
     /* On return to top level, print the short options, return print length. */
