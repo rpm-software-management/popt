@@ -103,6 +103,7 @@ struct poptContext_s {
     unsigned int flags;
     poptItem execs;
     int numExecs;
+    char * execFail;
     poptArgv finalArgv;
     int finalArgvCount;
     int finalArgvAlloced;

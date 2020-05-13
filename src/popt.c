@@ -174,6 +174,7 @@ poptContext poptGetContext(const char * name, int argc, const char ** argv,
     con->flags = flags;
     con->execs = NULL;
     con->numExecs = 0;
+    con->execFail = NULL;
     con->finalArgvAlloced = argc * 2;
     con->finalArgv = calloc( (size_t)con->finalArgvAlloced, sizeof(*con->finalArgv) );
     con->execAbsolute = 1;
@@ -215,6 +216,7 @@ void poptResetContext(poptContext con)
     con->nextLeftover = 0;
     con->restLeftover = 0;
     con->doExec = NULL;
+    con->execFail = _free(con->execFail);
 
     if (con->finalArgv != NULL)
     for (i = 0; i < con->finalArgvCount; i++) {
@@ -527,6 +529,9 @@ if (_popt_debug)
 #endif
 
     rc = execvp(argv[0], (char *const *)argv);
+
+    /* only reached on execvp() failure */
+    con->execFail = xstrdup(argv[0]);
 
 exit:
     if (argv) {
@@ -1598,11 +1603,19 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
 const char * poptBadOption(poptContext con, unsigned int flags)
 {
     struct optionStackEntry * os = NULL;
+    const char *badOpt = NULL;
 
-    if (con != NULL)
-	os = (flags & POPT_BADOPTION_NOALIAS) ? con->optionStack : con->os;
+    if (con != NULL) {
+       /* Stupid hack to return something semi-meaningful from exec failure */
+       if (con->execFail) {
+           badOpt = con->execFail;
+       } else {
+           os = (flags & POPT_BADOPTION_NOALIAS) ? con->optionStack : con->os;
+           badOpt = os->argv[os->next - 1];
+       }
+    }
 
-    return (os != NULL && os->argv != NULL ? os->argv[os->next - 1] : NULL);
+    return badOpt;
 }
 
 const char * poptStrerror(const int error)
