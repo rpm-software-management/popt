@@ -6,7 +6,7 @@ EXTRA_DIST = autogen.sh CHANGES $(man_MANS) ci/Dockerfile build-aux
 
 SUBDIRS = src po auto tests
 
-pkgconfigdir = $(prefix)/lib/pkgconfig
+pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = popt.pc
 
 man_MANS = popt.3
