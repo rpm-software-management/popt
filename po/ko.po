@@ -2,137 +2,137 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-02-12 10:47+0200\n"
+"POT-Creation-Date: 2020-05-13 11:40+0300\n"
 "PO-Revision-Date: 2001-09-06 20:06+0900\n"
 "Last-Translator: Jong-Hoon Ryu <redhat4u@netian.com>\n"
 "Language-Team: GNU Translation project <ko@li.org>\n"
-"Language: \n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=EUC-KR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: popt.c:47
+#: src/popt.c:37
 msgid "unknown errno"
-msgstr "¾Ë ¼ö ¾ø´Â ¿À·ùÄÚµå(errno) ÀÔ´Ï´Ù"
+msgstr "ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ì½”ë“œ(errno) ì…ë‹ˆë‹¤"
 
-#: popt.c:1290
+#: src/popt.c:1196
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "¿É¼Ç À¯Çü (%d)Àº popt¿¡¼­ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "ì˜µì…˜ ìœ í˜• (%d)ì€ poptì—ì„œ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: popt.c:1711
+#: src/popt.c:1607
 msgid "missing argument"
-msgstr "ÀÎ¼ö°¡ ÁöÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù"
+msgstr "ì¸ìˆ˜ê°€ ì§€ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤"
 
-#: popt.c:1713
+#: src/popt.c:1609
 msgid "unknown option"
-msgstr "¾Ë ¼ö ¾ø´Â ¿É¼ÇÀÔ´Ï´Ù"
+msgstr "ì•Œ ìˆ˜ ì—†ëŠ” ì˜µì…˜ì…ë‹ˆë‹¤"
 
-#: popt.c:1715
+#: src/popt.c:1611
 msgid "mutually exclusive logical operations requested"
-msgstr "¾çÂÊ¿¡ ¹èÅ¸Àû ³í¸® ¿¬»êÀÌ ÁöÁ¤µÇ¾ú½À´Ï´Ù"
+msgstr "ì–‘ìª½ì— ë°°íƒ€ì  ë…¼ë¦¬ ì—°ì‚°ì´ ì§€ì •ë˜ì—ˆìŠµë‹ˆë‹¤"
 
-#: popt.c:1717
+#: src/popt.c:1613
 msgid "opt->arg should not be NULL"
-msgstr "¿É¼Ç->ÀÎ¼ö°¡ NULLÀÌ µÇ¾î¼­´Â ¾ÈµË´Ï´Ù"
+msgstr "ì˜µì…˜->ì¸ìˆ˜ê°€ NULLì´ ë˜ì–´ì„œëŠ” ì•ˆë©ë‹ˆë‹¤"
 
-#: popt.c:1719
+#: src/popt.c:1615
 msgid "aliases nested too deeply"
-msgstr "º°Äª(alias)ÀÌ º¹ÀâÇÏ°Ô ¼³Á¤µÇ¾ú½À´Ï´Ù"
+msgstr "ë³„ì¹­(alias)ì´ ë³µì¡í•˜ê²Œ ì„¤ì •ë˜ì—ˆìŠµë‹ˆë‹¤"
 
-#: popt.c:1721
+#: src/popt.c:1617
 msgid "error in parameter quoting"
-msgstr "¸Å°³º¯¼ö¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù"
+msgstr "ë§¤ê°œë³€ìˆ˜ì— ì˜¤ë¥˜ê°€ ìˆìŠµë‹ˆë‹¤"
 
-#: popt.c:1723
+#: src/popt.c:1619
 msgid "invalid numeric value"
-msgstr "Àß¸øµÈ ¼öÄ¡ °ªÀÔ´Ï´Ù"
+msgstr "ì˜ëª»ëœ ìˆ˜ì¹˜ ê°’ì…ë‹ˆë‹¤"
 
-#: popt.c:1725
+#: src/popt.c:1621
 msgid "number too large or too small"
-msgstr "¼ıÀÚ°¡ ³Ê¹« Å©°Å³ª ³Ê¹« Àû½À´Ï´Ù"
+msgstr "ìˆ«ìê°€ ë„ˆë¬´ í¬ê±°ë‚˜ ë„ˆë¬´ ì ìŠµë‹ˆë‹¤"
 
-#: popt.c:1727
+#: src/popt.c:1623
 msgid "memory allocation failed"
-msgstr "¸Ş¸ğ¸® ÇÒ´ç¿¡ ½ÇÆĞÇß½À´Ï´Ù"
+msgstr "ë©”ëª¨ë¦¬ í• ë‹¹ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤"
 
-#: popt.c:1729
+#: src/popt.c:1625
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1733
+#: src/popt.c:1629
 msgid "unknown error"
-msgstr "¾Ë ¼ö ¾ø´Â ¿À·ùÀÔ´Ï´Ù"
+msgstr "ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ì…ë‹ˆë‹¤"
 
-#: popthelp.c:75 popthelp.c:86
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
-msgstr "ÀÌ µµ¿ò¸»À» º¸¿©Áİ´Ï´Ù"
+msgstr "ì´ ë„ì›€ë§ì„ ë³´ì—¬ì¤ë‹ˆë‹¤"
 
-#: popthelp.c:76 popthelp.c:87
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
-msgstr "°£´ÜÇÑ »ç¿ë¹ıÀ» º¸¿©Áİ´Ï´Ù"
+msgstr "ê°„ë‹¨í•œ ì‚¬ìš©ë²•ì„ ë³´ì—¬ì¤ë‹ˆë‹¤"
 
-#: popthelp.c:90
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
-msgstr "±âº»ÀûÀÎ ¿É¼ÇÀ» º¸¿©Áİ´Ï´Ù"
+msgstr "ê¸°ë³¸ì ì¸ ì˜µì…˜ì„ ë³´ì—¬ì¤ë‹ˆë‹¤"
 
-#: popthelp.c:92
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr ""
 
-#: popthelp.c:191
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr ""
 
-#: popthelp.c:192
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: popthelp.c:200
+#: src/popthelp.c:179
 msgid "NONE"
-msgstr "¾øÀ½(NONE)"
+msgstr "ì—†ìŒ(NONE)"
 
-#: popthelp.c:202
+#: src/popthelp.c:181
 msgid "VAL"
-msgstr "°ª(VAL)"
+msgstr "ê°’(VAL)"
 
-#: popthelp.c:206
+#: src/popthelp.c:185
 msgid "INT"
-msgstr "Á¤¼ö(INT)"
+msgstr "ì •ìˆ˜(INT)"
 
-#: popthelp.c:207
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: popthelp.c:208
+#: src/popthelp.c:187
 msgid "LONG"
-msgstr "Á¤¼ö(LONG)"
+msgstr "ì •ìˆ˜(LONG)"
 
-#: popthelp.c:209
+#: src/popthelp.c:188
 #, fuzzy
 msgid "LONGLONG"
-msgstr "Á¤¼ö(LONG)"
+msgstr "ì •ìˆ˜(LONG)"
 
-#: popthelp.c:210
+#: src/popthelp.c:189
 msgid "STRING"
-msgstr "¹®ÀÚ¿­(STRING)"
+msgstr "ë¬¸ìì—´(STRING)"
 
-#: popthelp.c:211
+#: src/popthelp.c:190
 msgid "FLOAT"
-msgstr "¼Ò¼ö(FLOAT)"
+msgstr "ì†Œìˆ˜(FLOAT)"
 
-#: popthelp.c:212
+#: src/popthelp.c:191
 msgid "DOUBLE"
-msgstr "¼Ò¼ö(DOUBLE)"
+msgstr "ì†Œìˆ˜(DOUBLE)"
 
-#: popthelp.c:215
+#: src/popthelp.c:194
 msgid "ARG"
-msgstr "ÀÎ¼ö(ARG)"
+msgstr "ì¸ìˆ˜(ARG)"
 
-#: popthelp.c:649
+#: src/popthelp.c:608
 msgid "Usage:"
-msgstr "»ç¿ë¹ı:"
+msgstr "ì‚¬ìš©ë²•:"
 
-#: popthelp.c:672
+#: src/popthelp.c:630
 msgid "[OPTION...]"
-msgstr "[¿É¼Ç...]"
+msgstr "[ì˜µì…˜...]"

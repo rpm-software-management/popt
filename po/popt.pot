@@ -5,9 +5,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: popt 1.16\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-02-12 10:47+0200\n"
+"POT-Creation-Date: 2020-05-13 11:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,127 +16,127 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:47
+#: src/popt.c:37
 msgid "unknown errno"
 msgstr ""
 
-#: popt.c:1290
+#: src/popt.c:1196
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr ""
 
-#: popt.c:1711
+#: src/popt.c:1607
 msgid "missing argument"
 msgstr ""
 
-#: popt.c:1713
+#: src/popt.c:1609
 msgid "unknown option"
 msgstr ""
 
-#: popt.c:1715
+#: src/popt.c:1611
 msgid "mutually exclusive logical operations requested"
 msgstr ""
 
-#: popt.c:1717
+#: src/popt.c:1613
 msgid "opt->arg should not be NULL"
 msgstr ""
 
-#: popt.c:1719
+#: src/popt.c:1615
 msgid "aliases nested too deeply"
 msgstr ""
 
-#: popt.c:1721
+#: src/popt.c:1617
 msgid "error in parameter quoting"
 msgstr ""
 
-#: popt.c:1723
+#: src/popt.c:1619
 msgid "invalid numeric value"
 msgstr ""
 
-#: popt.c:1725
+#: src/popt.c:1621
 msgid "number too large or too small"
 msgstr ""
 
-#: popt.c:1727
+#: src/popt.c:1623
 msgid "memory allocation failed"
 msgstr ""
 
-#: popt.c:1729
+#: src/popt.c:1625
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1733
+#: src/popt.c:1629
 msgid "unknown error"
 msgstr ""
 
-#: popthelp.c:75 popthelp.c:86
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr ""
 
-#: popthelp.c:76 popthelp.c:87
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr ""
 
-#: popthelp.c:90
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr ""
 
-#: popthelp.c:92
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr ""
 
-#: popthelp.c:191
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr ""
 
-#: popthelp.c:192
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: popthelp.c:200
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr ""
 
-#: popthelp.c:202
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr ""
 
-#: popthelp.c:206
+#: src/popthelp.c:185
 msgid "INT"
 msgstr ""
 
-#: popthelp.c:207
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: popthelp.c:208
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr ""
 
-#: popthelp.c:209
+#: src/popthelp.c:188
 msgid "LONGLONG"
 msgstr ""
 
-#: popthelp.c:210
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr ""
 
-#: popthelp.c:211
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr ""
 
-#: popthelp.c:212
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr ""
 
-#: popthelp.c:215
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr ""
 
-#: popthelp.c:649
+#: src/popthelp.c:608
 msgid "Usage:"
 msgstr ""
 
-#: popthelp.c:672
+#: src/popthelp.c:630
 msgid "[OPTION...]"
 msgstr ""

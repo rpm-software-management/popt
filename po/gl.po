@@ -2,138 +2,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-02-12 10:47+0200\n"
+"POT-Creation-Date: 2020-05-13 11:40+0300\n"
 "PO-Revision-Date: 2001-01-17 01:01+0100\n"
-"Last-Translator: Jes˙s Bravo ¡lvarez <jba@pobox.com>\n"
+"Last-Translator: Jes√∫s Bravo √Ålvarez <jba@pobox.com>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popt.c:47
+#: src/popt.c:37
 msgid "unknown errno"
-msgstr "errno descoÒecido"
+msgstr "errno desco√±ecido"
 
-#: popt.c:1290
+#: src/popt.c:1196
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "tipo de opciÛn (%d) non implementada en popt\n"
+msgstr "tipo de opci√≥n (%d) non implementada en popt\n"
 
-#: popt.c:1711
+#: src/popt.c:1607
 msgid "missing argument"
 msgstr "falta un argumento"
 
-#: popt.c:1713
+#: src/popt.c:1609
 msgid "unknown option"
-msgstr "opciÛn descoÒecida"
+msgstr "opci√≥n desco√±ecida"
 
-#: popt.c:1715
+#: src/popt.c:1611
 msgid "mutually exclusive logical operations requested"
-msgstr "solicit·ronse operaciÛns lÛxicas mutuamente excluÌntes"
+msgstr "solicit√°ronse operaci√≥ns l√≥xicas mutuamente exclu√≠ntes"
 
-#: popt.c:1717
+#: src/popt.c:1613
 msgid "opt->arg should not be NULL"
 msgstr ""
 
-#: popt.c:1719
+#: src/popt.c:1615
 msgid "aliases nested too deeply"
-msgstr "aliases aniÒados a un nivel demasiado profundo"
+msgstr "aliases ani√±ados a un nivel demasiado profundo"
 
-#: popt.c:1721
+#: src/popt.c:1617
 msgid "error in parameter quoting"
-msgstr "erro nas comiÒas do par·metro"
+msgstr "erro nas comi√±as do par√°metro"
 
-#: popt.c:1723
+#: src/popt.c:1619
 msgid "invalid numeric value"
-msgstr "valor numÈrico non v·lido"
+msgstr "valor num√©rico non v√°lido"
 
-#: popt.c:1725
+#: src/popt.c:1621
 msgid "number too large or too small"
-msgstr "n˙mero demasiado grande ou pequeno"
+msgstr "n√∫mero demasiado grande ou pequeno"
 
-#: popt.c:1727
+#: src/popt.c:1623
 msgid "memory allocation failed"
 msgstr ""
 
-#: popt.c:1729
+#: src/popt.c:1625
 msgid "config file failed sanity test"
 msgstr ""
 
-#: popt.c:1733
+#: src/popt.c:1629
 msgid "unknown error"
-msgstr "erro descoÒecido"
+msgstr "erro desco√±ecido"
 
-#: popthelp.c:75 popthelp.c:86
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "Amosar esta mensaxe de axuda"
 
-#: popthelp.c:76 popthelp.c:87
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
-msgstr "Amosar brevemente o xeito de utilizaciÛn"
+msgstr "Amosar brevemente o xeito de utilizaci√≥n"
 
-#: popthelp.c:90
+#: src/popthelp.c:76
 #, fuzzy
 msgid "Display option defaults in message"
-msgstr "Amosar brevemente o xeito de utilizaciÛn"
+msgstr "Amosar brevemente o xeito de utilizaci√≥n"
 
-#: popthelp.c:92
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr ""
 
-#: popthelp.c:191
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr ""
 
-#: popthelp.c:192
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: popthelp.c:200
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "NADA"
 
-#: popthelp.c:202
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr "VAL"
 
-#: popthelp.c:206
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
-#: popthelp.c:207
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: popthelp.c:208
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
-#: popthelp.c:209
+#: src/popthelp.c:188
 #, fuzzy
 msgid "LONGLONG"
 msgstr "LONG"
 
-#: popthelp.c:210
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr "CADEA"
 
-#: popthelp.c:211
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: popthelp.c:212
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: popthelp.c:215
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
-#: popthelp.c:649
+#: src/popthelp.c:608
 msgid "Usage:"
 msgstr "Uso:"
 
-#: popthelp.c:672
+#: src/popthelp.c:630
 msgid "[OPTION...]"
-msgstr "[OPCI”N...]"
+msgstr "[OPCI√ìN...]"
