@@ -53,7 +53,9 @@ static inline char * stpcpy (char *dest, const char * src) {
 #define	xstrdup(_str)	strdup(_str)
 #endif  /* defined(HAVE_MCHECK_H) && defined(__GNUC__) */
 
-#if defined(HAVE___SECURE_GETENV)
+#if defined(HAVE_SECURE_GETENV)
+#define getenv(_s)	secure_getenv(_s)
+#elif defined(HAVE___SECURE_GETENV)
 #define	getenv(_s)	__secure_getenv(_s)
 #endif
 
