@@ -18,7 +18,7 @@ AC_PROG_LIBTOOL
 
 AC_SYS_LARGEFILE
 
-AC_CHECK_HEADERS(fnmatch.h glob.h langinfo.h libintl.h mcheck.h)
+AC_CHECK_HEADERS(fnmatch.h glob.h langinfo.h libintl.h mcheck.h stdalign.h)
 
 # For some systems we know that we have ld_version scripts.
 # Use it then as default.

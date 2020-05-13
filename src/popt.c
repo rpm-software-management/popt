@@ -18,6 +18,15 @@
 
 #include "poptint.h"
 
+#ifdef HAVE_STDALIGN_H
+#include <stdalign.h>
+#define ALIGNOF(x) alignof(x)
+#elif defined __GNUC__
+#define ALIGNOF(x) __alignof__(x)
+#else
+#define ALIGNOF(x) sizeof(x)
+#endif
+
 #ifdef	MYDEBUG
 int _popt_debug = 0;
 #endif
@@ -894,12 +903,8 @@ static unsigned int seed = 0;
 
 int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 {
-    if (arg == NULL
-#ifdef	NOTYET
     /* XXX Check alignment, may fail on funky platforms. */
-     || (((unsigned long long)arg) & (sizeof(*arg)-1))
-#endif
-    )
+    if (arg == NULL || (((unsigned long)arg) & (ALIGNOF(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
     if (aLongLong != 0 && LF_ISSET(RANDOM)) {
@@ -940,7 +945,7 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 {
     /* XXX Check alignment, may fail on funky platforms. */
-    if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
+    if (arg == NULL || (((unsigned long)arg) & (ALIGNOF(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
@@ -973,7 +978,7 @@ int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 int poptSaveInt(int * arg, unsigned int argInfo, long aLong)
 {
     /* XXX Check alignment, may fail on funky platforms. */
-    if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
+    if (arg == NULL || (((unsigned long)arg) & (ALIGNOF(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
@@ -1006,7 +1011,7 @@ int poptSaveInt(int * arg, unsigned int argInfo, long aLong)
 int poptSaveShort(short * arg, unsigned int argInfo, long aLong)
 {
     /* XXX Check alignment, may fail on funky platforms. */
-    if (arg == NULL || (((unsigned long)arg) & (sizeof(*arg)-1)))
+    if (arg == NULL || (((unsigned long)arg) & (ALIGNOF(*arg)-1)))
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
