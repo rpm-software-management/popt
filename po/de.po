@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-05-13 11:40+0300\n"
+"POT-Creation-Date: 2020-05-18 15:51+0300\n"
 "PO-Revision-Date: 2009-11-10 19:58+0100\n"
 "Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -16,56 +16,56 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/popt.c:37
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "Unbekannte Fehler-Nummer"
 
-#: src/popt.c:1196
+#: src/popt.c:1206
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "Optionstyp (%u) ist in popt nicht vorhanden\n"
 
-#: src/popt.c:1607
+#: src/popt.c:1625
 msgid "missing argument"
 msgstr "Fehlendes Argument"
 
-#: src/popt.c:1609
+#: src/popt.c:1627
 msgid "unknown option"
 msgstr "Unbekannte Option"
 
-#: src/popt.c:1611
+#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr "Gegenseitig ausschließende logische Operatoren"
 
-#: src/popt.c:1613
+#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg sollte nicht NULL sein"
 
-#: src/popt.c:1615
+#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "Aliase zu tief verschachtelt"
 
-#: src/popt.c:1617
+#: src/popt.c:1635
 msgid "error in parameter quoting"
 msgstr "Fehler beim Quotieren der Parameter"
 
-#: src/popt.c:1619
+#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "Ungültiger nummerischer Wert"
 
-#: src/popt.c:1621
+#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "Nummer zu groß oder zu klein"
 
-#: src/popt.c:1623
+#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr "Speicherzuordnung fehlgeschlagen"
 
-#: src/popt.c:1625
+#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1629
+#: src/popt.c:1647
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
@@ -133,10 +133,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARGUMENT"
 
-#: src/popthelp.c:608
+#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "Verwendung:"
 
-#: src/popthelp.c:630
+#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[OPTION...]"
