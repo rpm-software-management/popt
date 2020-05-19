@@ -4,7 +4,7 @@ MCCABE =	pmccabe
 
 EXTRA_DIST = autogen.sh CHANGES $(man_MANS) ci/Dockerfile build-aux popt.pdf
 
-SUBDIRS = src po auto tests
+SUBDIRS = src po tests
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = popt.pc
