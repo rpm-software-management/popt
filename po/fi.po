@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-05-13 11:40+0300\n"
+"POT-Creation-Date: 2020-05-18 15:51+0300\n"
 "PO-Revision-Date: 2008-02-21 18:19+0200\n"
 "Last-Translator: Jorma Karvonen <karvjorm@users.sf.net>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -20,56 +20,56 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #  errno - number of last error (defined by the ISO C standard)
-#: src/popt.c:37
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "tuntematon errno-virhenumeroarvo"
 
-#: src/popt.c:1196
+#: src/popt.c:1206
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "valitsintyyppiä (%u) ei ole toteutettu popt-ohjelmassa\n"
 
-#: src/popt.c:1607
+#: src/popt.c:1625
 msgid "missing argument"
 msgstr "puuttuva argumentti"
 
-#: src/popt.c:1609
+#: src/popt.c:1627
 msgid "unknown option"
 msgstr "tuntematon valitsin"
 
-#: src/popt.c:1611
+#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr "pyydettyjä loogisia toimintoja ei voi käyttää yhdessä"
 
-#: src/popt.c:1613
+#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr "”opt->arg”-valitsinargumentti ei saa olla NULL"
 
-#: src/popt.c:1615
+#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "liian monta aliasta sisäkkäin"
 
-#: src/popt.c:1617
+#: src/popt.c:1635
 msgid "error in parameter quoting"
 msgstr "virhe parametrien lainauksessa"
 
-#: src/popt.c:1619
+#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "virheellinen numeroarvo"
 
-#: src/popt.c:1621
+#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "numero on liian iso tai liian pieni"
 
-#: src/popt.c:1623
+#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr "muistin varaus ei onnistunut"
 
-#: src/popt.c:1625
+#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1629
+#: src/popt.c:1647
 msgid "unknown error"
 msgstr "tuntematon virhe"
 
@@ -139,10 +139,10 @@ msgstr "DOUBLE-LIUKULUKU"
 msgid "ARG"
 msgstr "ARGUMENTTI"
 
-#: src/popthelp.c:608
+#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "Käyttö:"
 
-#: src/popthelp.c:630
+#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[VALITSIN...]"

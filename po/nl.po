@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-05-13 11:40+0300\n"
+"POT-Creation-Date: 2020-05-18 15:51+0300\n"
 "PO-Revision-Date: 2008-02-20 19:26+0100\n"
 "Last-Translator: Tim Van Holder <tim.van.holder@telenet.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -15,57 +15,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/popt.c:37
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "onbekend foutnummer (errno)"
 
-#: src/popt.c:1196
+#: src/popt.c:1206
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "dit optietype (%u) is niet geïmplementeerd in popt\n"
 
-#: src/popt.c:1607
+#: src/popt.c:1625
 msgid "missing argument"
 msgstr "ontbrekend argument"
 
-#: src/popt.c:1609
+#: src/popt.c:1627
 msgid "unknown option"
 msgstr "onbekende optie"
 
-#: src/popt.c:1611
+#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr "elkaar uitsluitende logische operatoren werden gevraagd"
 
-#: src/popt.c:1613
+#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg zou niet NULL mogen zijn"
 
-#: src/popt.c:1615
+#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "aliassen zijn te diep genest"
 
 # of toch beter "quoting" behouden?
-#: src/popt.c:1617
+#: src/popt.c:1635
 msgid "error in parameter quoting"
 msgstr "fout in de aanhaling van parameters"
 
-#: src/popt.c:1619
+#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "ongeldige numerieke waarde"
 
-#: src/popt.c:1621
+#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "getal is te klein of te groot"
 
-#: src/popt.c:1623
+#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr "reserveren van geheugen is mislukt"
 
-#: src/popt.c:1625
+#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1629
+#: src/popt.c:1647
 msgid "unknown error"
 msgstr "onbekende fout"
 
@@ -136,10 +136,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: src/popthelp.c:608
+#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "Gebruik:"
 
-#: src/popthelp.c:630
+#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[OPTIE...]"

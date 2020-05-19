@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-05-13 11:40+0300\n"
+"POT-Creation-Date: 2020-05-18 15:51+0300\n"
 "PO-Revision-Date: 2009-02-01 13:30+0300\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
@@ -19,56 +19,56 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/popt.c:37
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "неизвестный errno"
 
-#: src/popt.c:1196
+#: src/popt.c:1206
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "обработка параметра (%u) в popt не предусмотрена\n"
 
-#: src/popt.c:1607
+#: src/popt.c:1625
 msgid "missing argument"
 msgstr "пропущен аргумент"
 
-#: src/popt.c:1609
+#: src/popt.c:1627
 msgid "unknown option"
 msgstr "неизвестный параметр"
 
-#: src/popt.c:1611
+#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr "запрошены взаимно исключающие логические операции"
 
-#: src/popt.c:1613
+#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg не может быть NULL"
 
-#: src/popt.c:1615
+#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "превышен уровень допустимой рекурсии подстановок"
 
-#: src/popt.c:1617
+#: src/popt.c:1635
 msgid "error in parameter quoting"
 msgstr "ошибка помещения параметров в кавычки"
 
-#: src/popt.c:1619
+#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "неправильное числовое значение"
 
-#: src/popt.c:1621
+#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "числовое значение за пределами предусмотренного"
 
-#: src/popt.c:1623
+#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr "не удалось выделить память"
 
-#: src/popt.c:1625
+#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1629
+#: src/popt.c:1647
 msgid "unknown error"
 msgstr "неизвестная ошибка"
 
@@ -136,10 +136,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: src/popthelp.c:608
+#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "Использование:"
 
-#: src/popthelp.c:630
+#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[ПАРАМЕТР...]"

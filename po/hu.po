@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-05-13 11:40+0300\n"
+"POT-Creation-Date: 2020-05-18 15:51+0300\n"
 "PO-Revision-Date: 2007-06-21 00:45+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -16,56 +16,56 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: src/popt.c:37
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "ismeretlen hibaszám"
 
-#: src/popt.c:1196
+#: src/popt.c:1206
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "a kapcsolótípus (%d) nincs megvalósítva a popt-ban\n"
 
-#: src/popt.c:1607
+#: src/popt.c:1625
 msgid "missing argument"
 msgstr "hiányzó paraméter"
 
-#: src/popt.c:1609
+#: src/popt.c:1627
 msgid "unknown option"
 msgstr "ismeretlen kapcsoló"
 
-#: src/popt.c:1611
+#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr "kölcsönösen kizáró logikai műveleteket kért"
 
-#: src/popt.c:1613
+#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr "az opt->arg nem lehet NULL"
 
-#: src/popt.c:1615
+#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "az álnevek túl mélyen vannak egymásba ágyazva"
 
-#: src/popt.c:1617
+#: src/popt.c:1635
 msgid "error in parameter quoting"
 msgstr "hiba a paraméter idézésében"
 
-#: src/popt.c:1619
+#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "érvénytelen numerikus érték"
 
-#: src/popt.c:1621
+#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "a szám túl nagy vagy túl kicsi"
 
-#: src/popt.c:1623
+#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr "a memóriafoglalás meghiúsult"
 
-#: src/popt.c:1625
+#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1629
+#: src/popt.c:1647
 msgid "unknown error"
 msgstr "ismeretlen hiba"
 
@@ -135,10 +135,10 @@ msgstr "DUPLA"
 msgid "ARG"
 msgstr "PAR"
 
-#: src/popthelp.c:608
+#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "Használat:"
 
-#: src/popthelp.c:630
+#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[KAPCSOLÓ...]"
