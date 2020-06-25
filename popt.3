@@ -126,12 +126,12 @@ Value	Description	arg Type
 POPT_ARG_NONE	No argument expected	int
 POPT_ARG_STRING	No type checking to be performed	char *
 POPT_ARG_ARGV	No type checking to be performed	char **
-POPT_ARG_SHORT	An short argument is expected	short
+POPT_ARG_SHORT	A short argument is expected	short
 POPT_ARG_INT	An integer argument is expected	int
 POPT_ARG_LONG	A long integer is expected	long
 POPT_ARG_LONGLONG	A long long integer is expected	long long
 POPT_ARG_VAL	Integer value taken from \f(CWval\fR	int
-POPT_ARG_FLOAT	An float argument is expected	float
+POPT_ARG_FLOAT	A float argument is expected	float
 POPT_ARG_DOUBLE	A double argument is expected	double
 .TE
 .sp
@@ -191,7 +191,7 @@ command-line argument.
 .RI "The last two options, " descrip " and " argDescrip " are only required
 if automatic help messages are desired (automatic usage messages can
 .RI "be generated without them). " descrip " is a text description of the
-.RI "argument and " argdescrip " is a short summary of the type of arguments
+.RI "argument and " argDescrip " is a short summary of the type of arguments
 .RI "the option expects, or NULL if the option doesn't require any 
 arguments.
 .sp
@@ -230,7 +230,7 @@ in graphical programming toolkits, for example). To do this, set
 the \fIargInfo\fR field to \fBPOPT_ARG_INCLUDE_TABLE\fR and the
 \fRarg\fR field to point to the table which is being included. If
 automatic help generation is being used, the \fIdescrip\fR field should
-contain a overall description of the option table being included.
+contain an overall description of the option table being included.
 .sp
 The other special option table entry type tells popt to call a function (a
 callback) when any option in that table is found. This is especially useful
