@@ -64,5 +64,6 @@ static inline char * stpcpy (char *dest, const char * src) {
 #endif
 #define UNUSED(x) x __attribute__((__unused__))
 #define FORMAT(a, b, c) __attribute__((__format__ (a, b, c)))
+#define NORETURN __attribute__((__noreturn__))
 
 #include "popt.h"

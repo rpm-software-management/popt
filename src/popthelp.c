@@ -30,6 +30,7 @@
  * @param arg		(unused)
  * @param data		(unused)
  */
+NORETURN
 static void displayArgs(poptContext con,
 		UNUSED(enum poptCallbackReason foo),
 		struct poptOption * key, 
