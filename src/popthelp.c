@@ -613,7 +613,7 @@ static size_t showHelpIntro(poptContext con, FILE * fp)
 {
     size_t len = (size_t)6;
 
-    POPT_fprintf(fp, POPT_("Usage:"));
+    POPT_fprintf(fp, "%s", POPT_("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {
 	struct optionStackEntry * os = con->optionStack;
 	const char * fn = (os->argv ? os->argv[0] : NULL);
