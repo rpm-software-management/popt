@@ -11,38 +11,38 @@
 
 #include "system.h"
 
-char *PathnameOfKeyFile		= NULL;
-char *PathnameOfOfferFile	= NULL;
+static char *PathnameOfKeyFile		= NULL;
+static char *PathnameOfOfferFile	= NULL;
 
-char *txHost			= NULL;
-int   txSslPort			= 443;
-int   txStoreId			= 0;
+static char *txHost			= NULL;
+static int   txSslPort			= 443;
+static int   txStoreId			= 0;
 
-char *contentProtocol		= NULL;
-char *contentHost		= NULL;
-int   contentPort		= 80;
-char *contentPath		= NULL;
+static char *contentProtocol		= NULL;
+static char *contentHost		= NULL;
+static int   contentPort		= 80;
+static char *contentPath		= NULL;
 
-char *dbPassword		= NULL;
-char *dbUserName		= NULL;
+static char *dbPassword			= NULL;
+static char *dbUserName			= NULL;
 
-const char *rcfile = "createuser-defaults";
-char *username=NULL;
+static const char *rcfile		= "createuser-defaults";
+static char *username			= NULL;
 
-char *password			= NULL;
-char *firstname			= NULL;
-char *lastname			= NULL;
-char *addr1			= NULL;
-char *addr2			= NULL;
-char *city			= NULL;
-char *state			= NULL;
-char *postal			= NULL;
-char *country			= NULL;
+static char *password			= NULL;
+static char *firstname			= NULL;
+static char *lastname			= NULL;
+static char *addr1			= NULL;
+static char *addr2			= NULL;
+static char *city			= NULL;
+static char *state			= NULL;
+static char *postal			= NULL;
+static char *country			= NULL;
 
-char *email			= NULL;
+static char *email			= NULL;
 
-char *dayphone			= NULL;
-char *fax			= NULL;
+static char *dayphone			= NULL;
+static char *fax			= NULL;
 
 
 int 
