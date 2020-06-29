@@ -209,7 +209,7 @@ int main(int argc, const char ** argv)
 
 #if 1
     while ((rc = poptGetNextOpt(optCon)) > 0)	/* Read all the options ... */
-	{};
+	{}
 
     poptResetContext(optCon);			/* ... and then start over. */
     resetVars();
