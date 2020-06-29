@@ -18,9 +18,7 @@ static char *txHost			= NULL;
 static int   txSslPort			= 443;
 static int   txStoreId			= 0;
 
-static char *contentProtocol		= NULL;
 static char *contentHost		= NULL;
-static int   contentPort		= 80;
 static char *contentPath		= NULL;
 
 static char *dbPassword			= NULL;
