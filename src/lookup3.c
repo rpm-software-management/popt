@@ -270,7 +270,7 @@ uint32_t jlu32l(uint32_t h, const void *key, size_t size)
 	 * rest of the string.  Every machine with memory protection I've seen
 	 * does it on word boundaries, so is OK with this.  But VALGRIND will
 	 * still catch it and complain.  The masking trick does make the hash
-	 * noticably faster for short strings (like English words).
+	 * noticeably faster for short strings (like English words).
 	 */
 #ifndef VALGRIND
 
@@ -479,7 +479,7 @@ void jlu32lpair(const void *key, size_t size, uint32_t *pc, uint32_t *pb)
 	 * rest of the string.  Every machine with memory protection I've seen
 	 * does it on word boundaries, so is OK with this.  But VALGRIND will
 	 * still catch it and complain.  The masking trick does make the hash
-	 * noticably faster for short strings (like English words).
+	 * noticeably faster for short strings (like English words).
 	 */
 #ifndef VALGRIND
 
@@ -682,7 +682,7 @@ uint32_t jlu32b(uint32_t h, const void *key, size_t size)
 	 * rest of the string.  Every machine with memory protection I've seen
 	 * does it on word boundaries, so is OK with this.  But VALGRIND will
 	 * still catch it and complain.  The masking trick does make the hash
-	 * noticably faster for short strings (like English words).
+	 * noticeably faster for short strings (like English words).
 	 */
 #ifndef VALGRIND
 
@@ -809,7 +809,7 @@ static void driver2(void)
 	z=0;
 	for (i=0; i<hlen; ++i) {	/*-------------- for each input byte, */
 	    for (j=0; j<8; ++j) {	/*--------------- for each input bit, */
-		for (m=1; m<8; ++m) {	/*--- for serveral possible initvals, */
+		for (m=1; m<8; ++m) {	/*---- for several possible initvals, */
 		    for (l=0; l<HASHSTATE; ++l)
 			e[l]=f[l]=g[l]=h[l]=x[l]=y[l]=~((uint32_t)0);
 

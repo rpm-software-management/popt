@@ -124,7 +124,7 @@ exit:
 }
 
 /* still in the dev stage.
- * return values, perhaps 1== file erro
+ * return values, perhaps 1== file error
  * 2== line to long
  * 3== umm.... more?
  */

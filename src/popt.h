@@ -93,7 +93,7 @@
 #define POPT_ERROR_NOARG	-10	/*!< missing argument */
 #define POPT_ERROR_BADOPT	-11	/*!< unknown option */
 #define POPT_ERROR_OPTSTOODEEP	-13	/*!< aliases nested too deeply */
-#define POPT_ERROR_BADQUOTE	-15	/*!< error in paramter quoting */
+#define POPT_ERROR_BADQUOTE	-15	/*!< error in parameter quoting */
 #define POPT_ERROR_ERRNO	-16	/*!< errno set, use strerror(errno) */
 #define POPT_ERROR_BADNUMBER	-17	/*!< invalid numeric value */
 #define POPT_ERROR_OVERFLOW	-18	/*!< number too large or too small */
@@ -363,7 +363,7 @@ int poptReadConfigFile(poptContext con, const char * fn);
 /** \ingroup popt
  * Read configuration file(s).
  * Colon separated files to read, looping over poptReadConfigFile().
- * Note that an '@' character preceeding a path in the list will
+ * Note that an '@' character preceding a path in the list will
  * also perform additional sanity checks on the file before reading.
  * @param con		context
  * @param paths		colon separated file name(s) to read
@@ -423,8 +423,8 @@ bla=bla
 
 this_is   =   fdsafdas
      bad_line=        
-  reall bad line  
-  reall bad line  = again
+  really bad line
+  really bad line  = again
 5555=   55555   
   test = with lots of spaces
 \endverbatim
@@ -474,7 +474,7 @@ void poptSetExecPath(poptContext con, const char * path, int allowAbsolute);
 /** \ingroup popt
  * Print detailed description of options.
  * @param con		context
- * @param fp		ouput file handle
+ * @param fp		output file handle
  * @param flags		(unused)
  */
 void poptPrintHelp(poptContext con, FILE * fp, int flags);
@@ -482,7 +482,7 @@ void poptPrintHelp(poptContext con, FILE * fp, int flags);
 /** \ingroup popt
  * Print terse description of options.
  * @param con		context
- * @param fp		ouput file handle
+ * @param fp		output file handle
  * @param flags		(unused)
  */
 void poptPrintUsage(poptContext con, FILE * fp, int flags);
