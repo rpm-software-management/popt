@@ -127,6 +127,7 @@ struct poptContext_s {
 char *POPT_dgettext(const char * dom, const char * str);
 #endif
 
+FORMAT(printf, 2, 3)
 int   POPT_fprintf (FILE* stream, const char *format, ...);
 #endif	/* !defined(POPT_fprintf) */
 
