@@ -14,7 +14,7 @@ AC_USE_SYSTEM_EXTENSIONS
 AM_PROG_AR
 
 AC_PROG_INSTALL
-AC_PROG_LIBTOOL
+LT_INIT
 
 AC_SYS_LARGEFILE
 
@@ -32,7 +32,7 @@ case "${host}" in
         ;;
 esac
 AC_ARG_ENABLE([ld-version-script],
-              AC_HELP_STRING([--enable-ld-version-script],
+              AS_HELP_STRING([--enable-ld-version-script],
                              [enable/disable use of linker version script.
                               (default is system dependent)]),
               [have_ld_version_script=$enableval],
