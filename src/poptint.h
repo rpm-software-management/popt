@@ -23,22 +23,6 @@ _free(const void * p)
     return NULL;
 }
 
-/* Bit mask macros. */
-typedef	unsigned int __pbm_bits;
-#define	__PBM_NBITS		(8 * sizeof (__pbm_bits))
-#define	__PBM_IX(d)		((d) / __PBM_NBITS)
-#define __PBM_MASK(d)		((__pbm_bits) 1 << (((unsigned)(d)) % __PBM_NBITS))
-typedef struct {
-    __pbm_bits bits[1];
-} pbm_set;
-#define	__PBM_BITS(set)	((set)->bits)
-
-#define	PBM_ALLOC(d)	calloc(__PBM_IX (d) + 1, sizeof(pbm_set))
-#define	PBM_FREE(s)	_free(s);
-#define PBM_SET(d, s)   (__PBM_BITS (s)[__PBM_IX (d)] |= __PBM_MASK (d))
-#define PBM_CLR(d, s)   (__PBM_BITS (s)[__PBM_IX (d)] &= ~__PBM_MASK (d))
-#define PBM_ISSET(d, s) ((__PBM_BITS (s)[__PBM_IX (d)] & __PBM_MASK (d)) != 0)
-
 extern void poptJlu32lpair(const void *key, size_t size,
                 uint32_t *pc, uint32_t *pb);
 
