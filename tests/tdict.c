@@ -68,7 +68,7 @@ int main(int argc, const char ** argv)
 	goto exit;
     _poptBitsK = 2;
     _poptBitsM = 0;
-    _poptBitsN = _poptBitsK * rc;
+    _poptBitsN = _poptBitsK * (unsigned)rc;
 
     optCon = poptGetContext("tdict", argc, argv, options, 0);
 
