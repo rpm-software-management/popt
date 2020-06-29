@@ -33,8 +33,8 @@ static long aLong = 738905609L;
 static long bLong = 738905609L;
 static long long aLongLong = 738905609LL;
 static long long bLongLong = 738905609LL;
-static float aFloat = 3.1415926535;
-static float bFloat = 3.1415926535;
+static float aFloat = 3.1415926535f;
+static float bFloat = 3.1415926535f;
 static double aDouble = 9.86960440108935861883;
 static double bDouble = 9.86960440108935861883;
 
