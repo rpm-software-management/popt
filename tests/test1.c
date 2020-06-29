@@ -15,7 +15,7 @@ static void option_callback(UNUSED(poptContext con),
 }
 
 static int arg1 = 0;
-static const char * arg2 = "(none)";
+static char * arg2 = NULL;
 static int arg3 = 0;
 static int inc = 0;
 static int shortopt = 0;
@@ -45,7 +45,7 @@ static const char *attributes[] = {
 };
 static size_t nattributes = (sizeof(attributes) / sizeof(attributes[0]));
 
-static char * oStr = (char *) -1;
+static char * oStr = NULL;
 static int singleDash = 0;
 
 static const char * lStr =
@@ -154,7 +154,8 @@ static struct poptOption options[] = {
 static void resetVars(void)
 {
     arg1 = 0;
-    arg2 = "(none)";
+    free(arg2);
+    arg2 = NULL;
     arg3 = 0;
     inc = 0;
     shortopt = 0;
@@ -181,7 +182,8 @@ static void resetVars(void)
     if (aBits)
 	(void) poptBitsClr(aBits);
 
-    oStr = (char *) -1;
+    free(oStr);
+    oStr = NULL;
 
     singleDash = 0;
     pass2 = 0;
@@ -233,8 +235,8 @@ int main(int argc, const char ** argv)
 	goto exit;
     }
 
-    fprintf(stdout, "arg1: %d arg2: %s", arg1, arg2);
-
+    fprintf(stdout, "arg1: %d arg2: %s", arg1, arg2 ? arg2 : "(none)");
+    
     if (arg3)
 	fprintf(stdout, " arg3: %d", arg3);
     if (inc)
@@ -275,8 +277,8 @@ int main(int argc, const char ** argv)
 	    separator = ",";
 	}
     }
-    if (oStr != (char *)-1)
-	fprintf(stdout, " oStr: %s", (oStr ? oStr : "(none)"));
+    if (oStr)
+	fprintf(stdout, " oStr: %s", oStr);
     if (singleDash)
 	fprintf(stdout, " -");
 
@@ -295,6 +297,7 @@ int main(int argc, const char ** argv)
 
 exit:
     optCon = poptFreeContext(optCon);
+    resetVars();
 #if defined(HAVE_MCHECK_H) && defined(HAVE_MTRACE)
     muntrace();   /* Trace malloc only if MALLOC_TRACE=mtrace-output-file. */
 #endif

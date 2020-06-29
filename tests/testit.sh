@@ -96,7 +96,7 @@ run test1 "test1 - 41" "arg1: 0 arg2: (none) aFloat: 10.1" --float 10.1
 run test1 "test1 - 42" "arg1: 0 arg2: (none) aDouble: 10.1" -d 10.1
 run test1 "test1 - 43" "arg1: 0 arg2: (none) aDouble: 10.1" --double 10.1
 
-run test1 "test1 - 44" "arg1: 0 arg2: (none) oStr: (none)" --optional
+run test1 "test1 - 44" "arg1: 0 arg2: (none)" --optional
 run test1 "test1 - 45" "arg1: 0 arg2: (none) oStr: yadda" --optional=yadda
 run test1 "test1 - 46" "arg1: 0 arg2: (none) oStr: yadda" --optional yadda
 run test1 "test1 - 47" "arg1: 0 arg2: (none) oStr: ping rest: pong" --optional=ping pong
@@ -128,7 +128,7 @@ Usage: test1 [OPTION...]
       --arg1                      First argument with a really long
                                   description. After all, we have to test
                                   argument help wrapping somehow, right?
-  -2, --arg2=ARG                  Another argument (default: \"(none)\")
+  -2, --arg2=ARG                  Another argument (default: null)
   -3, --arg3=ANARG                A third argument
       -onedash                    POPT_ARGFLAG_ONEDASH: Option takes a single -
       --optional[=STRING]         POPT_ARGFLAG_OPTIONAL: Takes an optional

@@ -440,6 +440,9 @@ exit:
  * @retval *pc,		IN: primary initval, OUT: primary hash
  * *retval *pb		IN: secondary initval, OUT: secondary hash
  */
+#if defined(__clang__) && defined(__clang_major__) && (__clang_major__ >= 4)
+__attribute__((no_sanitize("unsigned-integer-overflow")))
+#endif
 void jlu32lpair(const void *key, size_t size, uint32_t *pc, uint32_t *pb)
 {
     union { const void *ptr; size_t i; } u;
