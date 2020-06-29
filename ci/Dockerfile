@@ -22,4 +22,4 @@ RUN autoreconf -vi
 RUN ./configure
 RUN make
 
-CMD make distcheck
+CMD ./ci/distcheck.sh
