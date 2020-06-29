@@ -15,7 +15,6 @@ static struct {
 static int loadDict(const char * fn, poptBits * ap)
 {
     char b[BUFSIZ];
-    size_t nb = sizeof(b);
     FILE * fp = fopen(fn, "r");
     char * t, *te;
     int nlines = -1;
@@ -23,7 +22,7 @@ static int loadDict(const char * fn, poptBits * ap)
     if (fp == NULL || ferror(fp)) goto exit;
 
     nlines = 0;
-    while ((t = fgets(b, nb, fp)) != NULL) {
+    while ((t = fgets(b, sizeof(b), fp)) != NULL) {
 	while (*t && isspace(*t)) t++;
 	if (*t == '#') continue;
 	te = t + strlen(t);
