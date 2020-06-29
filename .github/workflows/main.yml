@@ -36,9 +36,34 @@ jobs:
     - name: make distcheck
       run: make distcheck
 
+  analyzer_clang:
+    name: static analysis (clang)
+    runs-on: ubuntu-latest
+    env:
+      CC: clang
+    steps:
+    - uses: actions/checkout@v2
+    - name: install clang repo
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key 2>/dev/null | sudo apt-key add -
+        sudo add-apt-repository 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main' -y
+        sudo apt-get update -q
+    - name: install dependencies
+      run: sudo apt-get install -y autopoint clang-10 clang-tools-10 gettext
+    - name: autogen
+      run: ./autogen.sh
+    - name: configure
+      run: scan-build-10 -analyze-headers --status-bugs -disable-checker deadcode.DeadStores ./configure --enable-werror
+    - name: make
+      run: scan-build-10 -analyze-headers --status-bugs -disable-checker deadcode.DeadStores make
+    - name: make check
+      run: scan-build-10 -analyze-headers --status-bugs -disable-checker deadcode.DeadStores make check || (cat tests/test-suite.log; exit 1)
+
   sanitizer_clang:
     name: sanitizer (clang)
     runs-on: ubuntu-latest
+    env:
+      CC: clang
     steps:
     - uses: actions/checkout@v2
     - name: install clang repo
@@ -53,7 +78,6 @@ jobs:
     - name: configure
       run: ./configure --enable-werror
       env:
-        CC: clang-10
         CFLAGS: '-O1 -g -fsanitize=address -fsanitize-address-use-after-scope -fno-omit-frame-pointer -fsanitize=undefined -fsanitize=nullability -fsanitize=implicit-conversion -fsanitize=integer -fsanitize=float-divide-by-zero -fsanitize=local-bounds'
     - name: make
       run: make
