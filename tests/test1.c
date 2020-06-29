@@ -15,7 +15,7 @@ static void option_callback(UNUSED(poptContext con),
 }
 
 static int arg1 = 0;
-static char * arg2 = "(none)";
+static const char * arg2 = "(none)";
 static int arg3 = 0;
 static int inc = 0;
 static int shortopt = 0;
@@ -48,7 +48,7 @@ static size_t nattributes = (sizeof(attributes) / sizeof(attributes[0]));
 static char * oStr = (char *) -1;
 static int singleDash = 0;
 
-static char * lStr =
+static const char * lStr =
 "This tests default strings and exceeds the ... limit. "
 "123456789+123456789+123456789+123456789+123456789+ "
 "123456789+123456789+123456789+123456789+123456789+ "

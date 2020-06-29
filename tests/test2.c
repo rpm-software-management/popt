@@ -26,7 +26,7 @@ char *contentPath		= NULL;
 char *dbPassword		= NULL;
 char *dbUserName		= NULL;
 
-char *rcfile = "createuser-defaults";
+const char *rcfile = "createuser-defaults";
 char *username=NULL;
 
 char *password			= NULL;
