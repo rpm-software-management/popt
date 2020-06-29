@@ -77,7 +77,7 @@ int main(int argc, const char ** argv)
         char * optArg = poptGetOptArg(optCon);
 	if (optArg) free(optArg);
         switch (rc) {
-        default:	goto exit;	break;
+        default:	goto exit;
         }
     }
     if (rc < -1) {
