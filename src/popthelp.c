@@ -41,7 +41,7 @@ static void displayArgs(poptContext con,
     else
 	poptPrintUsage(con, stdout, 0);
 
-    con = poptFreeContext(con);
+    poptFreeContext(con);
     exit(0);
 }
 
