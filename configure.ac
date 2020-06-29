@@ -53,7 +53,7 @@ AC_ARG_ENABLE(build-gcov,
 AC_SEARCH_LIBS(setreuid, [ucb])
 AC_CHECK_FUNCS(getuid geteuid iconv mtrace secure_getenv __secure_getenv setreuid setuid stpcpy strerror vasprintf srandom)
 
-AM_GNU_GETTEXT_VERSION([0.18.2])
+AM_GNU_GETTEXT_VERSION([0.19.8])
 AM_GNU_GETTEXT([external])
 AM_ICONV_LINK
 
