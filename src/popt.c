@@ -1515,7 +1515,7 @@ poptItem poptFreeItems(poptItem items, int nitems)
 	    item->argv = _free(item->argv);
 	    item++;
 	}
-	items = _free(items);
+	_free(items);
     }
     return NULL;
 }
