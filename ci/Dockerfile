@@ -18,8 +18,8 @@ RUN dnf -y install \
 
 COPY . .
 
-RUN autoreconf -vi
-RUN ./configure
+RUN ./autogen.sh
+RUN ./configure --enable-werror
 RUN make
 
 CMD ./ci/distcheck.sh
