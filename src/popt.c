@@ -1353,21 +1353,20 @@ int poptGetNextOpt(poptContext con)
 
 	    nextCharArg++;
 	    if (*nextCharArg != '\0')
-		con->os->nextCharArg = nextCharArg + (int)(*nextCharArg == '=');
+		con->os->nextCharArg = nextCharArg;
 	}
 
 	if (opt == NULL) return POPT_ERROR_BADOPT;	/* XXX can't happen */
-	if (opt->arg && poptArgType(opt) == POPT_ARG_NONE) {
-	    unsigned int argInfo = poptArgInfo(con, opt);
-	    if (poptSaveInt((int *)opt->arg, argInfo, 1L))
-		return POPT_ERROR_BADOPERATION;
-	} else if (poptArgType(opt) == POPT_ARG_VAL) {
+	if (poptArgType(opt) == POPT_ARG_NONE || poptArgType(opt) == POPT_ARG_VAL) {
+	    if (longArg || (con->os->nextCharArg && con->os->nextCharArg[0] == '='))
+		return POPT_ERROR_UNWANTEDARG;
 	    if (opt->arg) {
+		long val = poptArgType(opt) == POPT_ARG_VAL ? opt->val : 1;
 		unsigned int argInfo = poptArgInfo(con, opt);
-		if (poptSaveInt((int *)opt->arg, argInfo, (long)opt->val))
+		if (poptSaveInt((int *)opt->arg, argInfo, val))
 		    return POPT_ERROR_BADOPERATION;
 	    }
-	} else if (poptArgType(opt) != POPT_ARG_NONE) {
+	} else {
 	    int rc;
 
 	    con->os->nextArg = _free(con->os->nextArg);
@@ -1375,7 +1374,7 @@ int poptGetNextOpt(poptContext con)
 		longArg = expandNextArg(con, longArg);
 		con->os->nextArg = (char *) longArg;
 	    } else if (con->os->nextCharArg) {
-		longArg = expandNextArg(con, con->os->nextCharArg);
+		longArg = expandNextArg(con, con->os->nextCharArg) + (int)(*con->os->nextCharArg == '=');
 		con->os->nextArg = (char *) longArg;
 		con->os->nextCharArg = NULL;
 	    } else {
@@ -1623,6 +1622,8 @@ const char * poptStrerror(const int error)
     switch (error) {
       case POPT_ERROR_NOARG:
 	return POPT_("missing argument");
+      case POPT_ERROR_UNWANTEDARG:
+	return POPT_("option does not take an argument");
       case POPT_ERROR_BADOPT:
 	return POPT_("unknown option");
       case POPT_ERROR_BADOPERATION:
