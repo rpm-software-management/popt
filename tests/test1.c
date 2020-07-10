@@ -132,7 +132,7 @@ static struct poptOption options[] = {
 	"POPT_BIT_SET: |= 0x7777", 0},
   { "bitclr", '\0', POPT_BIT_CLR | POPT_ARGFLAG_TOGGLE | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, 0xf842,
 	"POPT_BIT_CLR: &= ~0xf842", 0},
-  { "bitxor", '\0', POPT_ARG_VAL | POPT_ARGFLAG_XOR | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, (0x8ace^0xfeed),
+  { "bitxor", 'x', POPT_ARG_VAL | POPT_ARGFLAG_XOR | POPT_ARGFLAG_SHOW_DEFAULT, &aFlag, (0x8ace^0xfeed),
 	"POPT_ARGFLAG_XOR: ^= (0x8ace^0xfeed)", 0},
 
   { "nstr", '\0', POPT_ARG_STRING | POPT_ARGFLAG_SHOW_DEFAULT, &nStr, 0,
