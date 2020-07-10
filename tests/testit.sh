@@ -121,7 +121,7 @@ Usage: lt-test1 [-I?] [-c|--cb2=STRING] [--arg1] [-2|--arg2=ARG]
         [-L|--longlong=LONGLONG] [-f|--float=FLOAT] [-d|--double=DOUBLE]
         [--randint=INT] [--randshort=SHORT] [--randlong=LONG]
         [--randlonglong=LONGLONG] [--argv=STRING] [--bitset] [--bitclr]
-        [--bitxor] [--nstr=STRING] [--lstr=STRING] [-I|--inc]
+        [-x|--bitxor] [--nstr=STRING] [--lstr=STRING] [-I|--inc]
         [-c|--cb=STRING] [--longopt] [-?|--help] [--usage] [--simple=ARG]" --usage
 run test1 "test1 - 59" "\
 Usage: lt-test1 [OPTION...]
@@ -149,7 +149,7 @@ Usage: lt-test1 [OPTION...]
                                   (can be used multiple times)
       --[no]bitset                POPT_BIT_SET: |= 0x7777
       --[no]bitclr                POPT_BIT_CLR: &= ~0xf842
-      --bitxor                    POPT_ARGFLAG_XOR: ^= (0x8ace^0xfeed)
+  -x, --bitxor                    POPT_ARGFLAG_XOR: ^= (0x8ace^0xfeed)
       --nstr=STRING               POPT_ARG_STRING: (null) (default: null)
       --lstr=STRING               POPT_ARG_STRING: \"123456789...\" (default:
                                   \"This tests default strings and exceeds the
@@ -170,6 +170,9 @@ Options implemented via popt alias/exec:
 Help options:
   -?, --help                      Show this help message
       --usage                     Display brief usage message" --help
+
+run test1 "test1 - 60" "" --val=foo
+run test1 "test1 - 61" "" -x=f1
 
 #run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
 #run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer
