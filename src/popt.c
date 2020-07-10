@@ -1374,7 +1374,7 @@ int poptGetNextOpt(poptContext con)
 		longArg = expandNextArg(con, longArg);
 		con->os->nextArg = (char *) longArg;
 	    } else if (con->os->nextCharArg) {
-		longArg = expandNextArg(con, con->os->nextCharArg) + (int)(*con->os->nextCharArg == '=');
+		longArg = expandNextArg(con, con->os->nextCharArg + (int)(*con->os->nextCharArg == '='));
 		con->os->nextArg = (char *) longArg;
 		con->os->nextCharArg = NULL;
 	    } else {
