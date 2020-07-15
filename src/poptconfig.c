@@ -21,7 +21,7 @@
 #if defined(HAVE_GLOB_H)
 #include <glob.h>
 
-#if !defined(__GLIBC__)
+#if !defined(HAVE_GLOB_PATTERN_P)
 /* Return nonzero if PATTERN contains any metacharacters.
    Metacharacters can be quoted with backslashes if QUOTE is nonzero.  */
 static int
