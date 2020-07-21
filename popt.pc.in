@@ -7,4 +7,5 @@ Name: popt
 Version: @VERSION@
 Description: popt library.
 Libs: -L${libdir} -lpopt
+Libs.private: @LTLIBICONV@
 Cflags: -I${includedir}
