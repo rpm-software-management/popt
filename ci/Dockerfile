@@ -18,7 +18,7 @@ RUN dnf -y install \
 
 COPY . .
 
-RUN autoreconf -vi
+RUN ./autogen.sh
 RUN ./configure
 RUN make
 
