@@ -908,7 +908,23 @@ int poptSaveString(const char *** argvp,
     return 0;
 }
 
-static unsigned int seed = 0;
+static long long poptRandomValue(long long limit)
+{
+#if defined(HAVE_SRANDOM)
+    static int seed = 1;
+
+    if (seed) {
+	srandom((unsigned)getpid());
+	srandom((unsigned)random());
+	seed = 0;
+    }
+
+    return random() % limit + 1;
+#else
+    /* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
+    return POPT_ERROR_BADOPERATION;
+#endif
+}
 
 int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 {
@@ -917,18 +933,9 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLongLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	    seed = 1;
-	}
-	aLongLong = (long long)(random() % (aLongLong > 0 ? aLongLong : -aLongLong));
-	aLongLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
+	aLongLong = poptRandomValue(aLongLong < -LLONG_MAX ? LLONG_MAX : aLongLong);
+	if (aLongLong < 0)
+	    return aLongLong;
     }
     if (LF_ISSET(NOT))
 	aLongLong = ~aLongLong;
@@ -959,18 +966,9 @@ int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	    seed = 1;
-	}
-	aLong = random() % (aLong > 0 ? aLong : -aLong);
-	aLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
+	aLong = (long)poptRandomValue(aLong < -LONG_MAX ? LONG_MAX : aLong);
+	if (aLong < 0)
+	    return aLong;
     }
     if (LF_ISSET(NOT))
 	aLong = ~aLong;
@@ -993,18 +991,9 @@ int poptSaveInt(int * arg, unsigned int argInfo, long aLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	    seed = 1;
-	}
-	aLong = random() % (aLong > 0 ? aLong : -aLong);
-	aLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
+	aLong = (int)poptRandomValue(aLong < -LONG_MAX ? LONG_MAX : aLong);
+	if (aLong < 0)
+	    return aLong;
     }
     if (LF_ISSET(NOT))
 	aLong = ~aLong;
@@ -1027,18 +1016,9 @@ int poptSaveShort(short * arg, unsigned int argInfo, long aLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
-#if defined(HAVE_SRANDOM)
-	if (!seed) {
-	    srandom((unsigned)getpid());
-	    srandom((unsigned)random());
-	    seed = 1;
-	}
-	aLong = random() % (aLong > 0 ? aLong : -aLong);
-	aLong++;
-#else
-	/* XXX avoid adding POPT_ERROR_UNIMPLEMENTED to minimize i18n churn. */
-	return POPT_ERROR_BADOPERATION;
-#endif
+	aLong = (short)poptRandomValue(aLong < -LONG_MAX ? LONG_MAX : aLong);
+	if (aLong < 0)
+	    return aLong;
     }
     if (LF_ISSET(NOT))
 	aLong = ~aLong;
