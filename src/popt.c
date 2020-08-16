@@ -210,7 +210,10 @@ void poptResetContext(poptContext con)
     con->os->currAlias = NULL;
     con->os->nextCharArg = NULL;
     con->os->nextArg = _free(con->os->nextArg);
-    con->os->next = 1;			/* skip argv[0] */
+    if (!(con->flags & POPT_CONTEXT_KEEP_FIRST))
+	con->os->next = 1;		/* skip argv[0] */
+    else
+	con->os->next = 0;
 
     con->numLeftovers = 0;
     con->nextLeftover = 0;
