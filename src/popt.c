@@ -917,6 +917,7 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 	if (!seed) {
 	    srandom((unsigned)getpid());
 	    srandom((unsigned)random());
+	    seed = 1;
 	}
 	aLongLong = (long long)(random() % (aLongLong > 0 ? aLongLong : -aLongLong));
 	aLongLong++;
@@ -958,6 +959,7 @@ int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 	if (!seed) {
 	    srandom((unsigned)getpid());
 	    srandom((unsigned)random());
+	    seed = 1;
 	}
 	aLong = random() % (aLong > 0 ? aLong : -aLong);
 	aLong++;
@@ -991,6 +993,7 @@ int poptSaveInt(int * arg, unsigned int argInfo, long aLong)
 	if (!seed) {
 	    srandom((unsigned)getpid());
 	    srandom((unsigned)random());
+	    seed = 1;
 	}
 	aLong = random() % (aLong > 0 ? aLong : -aLong);
 	aLong++;
@@ -1024,6 +1027,7 @@ int poptSaveShort(short * arg, unsigned int argInfo, long aLong)
 	if (!seed) {
 	    srandom((unsigned)getpid());
 	    srandom((unsigned)random());
+	    seed = 1;
 	}
 	aLong = random() % (aLong > 0 ? aLong : -aLong);
 	aLong++;
