@@ -91,8 +91,10 @@ strdup_locale_from_utf8 (char * istr)
 	size_t ob = db;
 	size_t err;
 
-	if (dstr == NULL)
+	if (dstr == NULL) {
+	    (void) iconv_close(cd);
 	    return NULL;
+	}
 	err = iconv(cd, NULL, NULL, NULL, NULL);
 	while (1) {
 	    *pout = '\0';
