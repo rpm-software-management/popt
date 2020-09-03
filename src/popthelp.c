@@ -66,7 +66,7 @@ struct poptOption poptHelpOptions[] = {
 } ;
 
 static struct poptOption poptHelpOptions2[] = {
-  { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
+  { NULL, '\0', POPT_ARG_INTL_DOMAIN, (void *)PACKAGE, 0, NULL, NULL},
   { NULL, '\0', POPT_ARG_CALLBACK, (void *)displayArgs, 0, NULL, NULL },
   { "help", '?', 0, NULL, (int)'?', N_("Show this help message"), NULL },
   { "usage", '\0', 0, NULL, (int)'u', N_("Display brief usage message"), NULL },
@@ -311,7 +311,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     if (!(prtshort || prtlong))
 	goto out;
     if (prtshort && prtlong) {
-	char *dash = F_ISSET(opt, ONEDASH) ? "-" : "--";
+	const char *dash = F_ISSET(opt, ONEDASH) ? "-" : "--";
 	left[0] = '-';
 	left[1] = opt->shortName;
 	(void) stpcpy(stpcpy(stpcpy(left+2, ", "), dash), opt->longName);
@@ -321,8 +321,8 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 	left[2] = '\0';
     } else if (prtlong) {
 	/* XXX --long always padded for alignment with/without "-X, ". */
-	char *dash = poptArgType(opt) == POPT_ARG_MAINCALL ? ""
-		   : (F_ISSET(opt, ONEDASH) ? "-" : "--");
+	const char *dash = poptArgType(opt) == POPT_ARG_MAINCALL ? ""
+			 : (F_ISSET(opt, ONEDASH) ? "-" : "--");
 	const char *longName = opt->longName;
 	const char *toggle;
 	if (F_ISSET(opt, TOGGLE)) {
