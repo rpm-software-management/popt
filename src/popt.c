@@ -933,7 +933,7 @@ int poptSaveLongLong(long long * arg, unsigned int argInfo, long long aLongLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLongLong != 0 && LF_ISSET(RANDOM)) {
-	aLongLong = poptRandomValue(aLongLong < -LLONG_MAX ? LLONG_MAX : aLongLong);
+	aLongLong = poptRandomValue(aLongLong);
 	if (aLongLong < 0)
 	    return aLongLong;
     }
@@ -966,7 +966,7 @@ int poptSaveLong(long * arg, unsigned int argInfo, long aLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
-	aLong = (long)poptRandomValue(aLong < -LONG_MAX ? LONG_MAX : aLong);
+	aLong = (long)poptRandomValue(aLong);
 	if (aLong < 0)
 	    return aLong;
     }
@@ -991,7 +991,7 @@ int poptSaveInt(int * arg, unsigned int argInfo, long aLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
-	aLong = (int)poptRandomValue(aLong < -LONG_MAX ? LONG_MAX : aLong);
+	aLong = (int)poptRandomValue(aLong);
 	if (aLong < 0)
 	    return aLong;
     }
@@ -1016,7 +1016,7 @@ int poptSaveShort(short * arg, unsigned int argInfo, long aLong)
 	return POPT_ERROR_NULLARG;
 
     if (aLong != 0 && LF_ISSET(RANDOM)) {
-	aLong = (short)poptRandomValue(aLong < -LONG_MAX ? LONG_MAX : aLong);
+	aLong = (short)poptRandomValue(aLong);
 	if (aLong < 0)
 	    return aLong;
     }
