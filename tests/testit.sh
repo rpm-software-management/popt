@@ -174,6 +174,8 @@ Help options:
 run test1 "test1 - 60" "" --val=foo
 run test1 "test1 - 61" "" -x=f1
 
+run test1 "test1 - 62" "arg1: 0 arg2: (none) aInt: 1" --randint=-1
+
 #run_diff test3 "test3 - 51" test3-data/01.input test3-data/01.answer
 #run_diff test3 "test3 - 52" test3-data/02.input test3-data/02.answer
 #run_diff test3 "test3 - 53" test3-data/03.input test3-data/03.answer
