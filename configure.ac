@@ -18,7 +18,7 @@ LT_INIT
 
 AC_SYS_LARGEFILE
 
-AC_CHECK_HEADERS([fnmatch.h glob.h langinfo.h libintl.h mcheck.h stdalign.h wchar.h])
+AC_CHECK_HEADERS([fnmatch.h glob.h langinfo.h libintl.h mcheck.h stdalign.h])
 
 # For some systems we know that we have ld_version scripts.
 # Use it then as default.
@@ -50,7 +50,7 @@ AC_ARG_ENABLE([build-gcov],
 ])
 
 AC_SEARCH_LIBS([setreuid], [ucb])
-AC_CHECK_FUNCS([getuid geteuid iconv mtrace secure_getenv __secure_getenv setreuid setuid stpcpy strerror vasprintf srandom glob_pattern_p])
+AC_CHECK_FUNCS([getuid geteuid iconv mtrace secure_getenv __secure_getenv setreuid setuid stpcpy strerror vasprintf srandom glob_pattern_p mbsrtowcs])
 
 AM_GNU_GETTEXT_VERSION([0.18.2])
 AM_GNU_GETTEXT([external])
