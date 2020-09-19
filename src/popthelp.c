@@ -15,7 +15,7 @@
 #include <sys/ioctl.h>
 #endif
 
-#ifdef HAVE_WCHAR_H
+#ifdef HAVE_MBSRTOWCS
 #include <wchar.h>			/* for mbsrtowcs */
 #endif
 #include "poptint.h"
@@ -117,7 +117,7 @@ static size_t maxColumnWidth(FILE *fp)
 static inline size_t stringDisplayWidth(const char *s)
 {
     size_t n = strlen(s);
-#ifdef HAVE_WCHAR_H
+#ifdef HAVE_MBSRTOWCS
     mbstate_t t;
 
     memset ((void *)&t, 0, sizeof (t));	/* In initial state.  */
