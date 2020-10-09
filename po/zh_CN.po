@@ -17,127 +17,96 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/popt.c:46
 msgid "unknown errno"
 msgstr "未知的错误"
 
-#: src/popt.c:1206
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "选项类别 (%u) 没有在 popt 中实现\n"
 
-#: src/popt.c:1625
 msgid "missing argument"
 msgstr "缺少参数"
 
-#: src/popt.c:1627
 msgid "unknown option"
 msgstr "未知的选项"
 
-#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr "需要 XOR 逻辑运算"
 
-#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg 不应该为 NULL"
 
-#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "别名嵌套太深"
 
-#: src/popt.c:1635
 msgid "error in parameter quoting"
 msgstr "参数引号错误"
 
-#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "无效的数值"
 
-#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "数值太大或太小"
 
-#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr "内存分配错误"
 
-#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1647
 msgid "unknown error"
 msgstr "未知的错误"
 
-#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "显示这个帮助信息"
 
-#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "显示简短的使用说明"
 
-#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr "在信息中显示默认的选项"
 
-#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr "终止选项"
 
-#: src/popthelp.c:170
 msgid "Help options:"
 msgstr "帮助选项:"
 
-#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr "通过 popt alias/exec 实现的选项:"
 
-#: src/popthelp.c:179
 msgid "NONE"
 msgstr "NONE"
 
-#: src/popthelp.c:181
 msgid "VAL"
 msgstr "VAL"
 
-#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
-#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
-#: src/popthelp.c:188
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
-#: src/popthelp.c:189
 msgid "STRING"
 msgstr "STRING"
 
-#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
-#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
-#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
-#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "用法:"
 
-#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[选项...]"

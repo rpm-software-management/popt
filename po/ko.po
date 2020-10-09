@@ -11,128 +11,97 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: src/popt.c:46
 msgid "unknown errno"
 msgstr "알 수 없는 오류코드(errno) 입니다"
 
-#: src/popt.c:1206
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "옵션 유형 (%d)은 popt에서 사용할 수 없습니다\n"
 
-#: src/popt.c:1625
 msgid "missing argument"
 msgstr "인수가 지정되지 않았습니다"
 
-#: src/popt.c:1627
 msgid "unknown option"
 msgstr "알 수 없는 옵션입니다"
 
-#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr "양쪽에 배타적 논리 연산이 지정되었습니다"
 
-#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr "옵션->인수가 NULL이 되어서는 안됩니다"
 
-#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "별칭(alias)이 복잡하게 설정되었습니다"
 
-#: src/popt.c:1635
 msgid "error in parameter quoting"
 msgstr "매개변수에 오류가 있습니다"
 
-#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "잘못된 수치 값입니다"
 
-#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "숫자가 너무 크거나 너무 적습니다"
 
-#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr "메모리 할당에 실패했습니다"
 
-#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1647
 msgid "unknown error"
 msgstr "알 수 없는 오류입니다"
 
-#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "이 도움말을 보여줍니다"
 
-#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "간단한 사용법을 보여줍니다"
 
-#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr "기본적인 옵션을 보여줍니다"
 
-#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr ""
 
-#: src/popthelp.c:170
 msgid "Help options:"
 msgstr ""
 
-#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: src/popthelp.c:179
 msgid "NONE"
 msgstr "없음(NONE)"
 
-#: src/popthelp.c:181
 msgid "VAL"
 msgstr "값(VAL)"
 
-#: src/popthelp.c:185
 msgid "INT"
 msgstr "정수(INT)"
 
-#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: src/popthelp.c:187
 msgid "LONG"
 msgstr "정수(LONG)"
 
-#: src/popthelp.c:188
 #, fuzzy
 msgid "LONGLONG"
 msgstr "정수(LONG)"
 
-#: src/popthelp.c:189
 msgid "STRING"
 msgstr "문자열(STRING)"
 
-#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "소수(FLOAT)"
 
-#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "소수(DOUBLE)"
 
-#: src/popthelp.c:194
 msgid "ARG"
 msgstr "인수(ARG)"
 
-#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "사용법:"
 
-#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[옵션...]"
