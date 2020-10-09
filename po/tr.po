@@ -1,96 +1,97 @@
 # Translation of popt to Turkish.
 # Nilgun Belma Buguner <nilgun@technologist.com>, 2000.
-#
+# Oğuz Ersen <oguzersen@protonmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
 "POT-Creation-Date: 2020-06-23 13:29+0300\n"
-"PO-Revision-Date: 2000-02-11 13:01+0200\n"
-"Last-Translator: Nilgun Belma Buguner <nilgun@technologist.com>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"PO-Revision-Date: 2020-09-03 12:31+0000\n"
+"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
+"Language-Team: Turkish <https://translate.fedoraproject.org/projects/popt/"
+"master/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.2.2\n"
 
 msgid "unknown errno"
-msgstr "bilinmeyen hata no"
+msgstr "bilinmeyen hata numarası (errno)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "seĂ§enek tĂźrĂź (%d) popt iĂ§in geĂ§ersiz\n"
+msgstr "seçenek türü (%u) popt'ta uygulanmadı\n"
 
 msgid "missing argument"
-msgstr "argĂźman eksik"
+msgstr "argüman eksik"
 
 msgid "unknown option"
-msgstr "bilinmeyen seĂ§enek"
+msgstr "bilinmeyen seçenek"
 
 msgid "mutually exclusive logical operations requested"
-msgstr "birbirini dÄąĹlayan mantÄąksal iĹlemler istendi"
+msgstr "birbirini dışlayan mantıksal işlemler istendi"
 
 msgid "opt->arg should not be NULL"
-msgstr ""
+msgstr "opt->arg NULL olmamalı"
 
 msgid "aliases nested too deeply"
-msgstr "adlarda Ă§ok fazla iĂ§iĂ§elikler"
+msgstr "takma adlar çok fazla iç içe geçmiş"
 
 msgid "error in parameter quoting"
-msgstr "parametrelerde tÄąrnak iĹaretleme hatalÄą "
+msgstr "parametre tırnak işaretleme hatası"
 
 msgid "invalid numeric value"
-msgstr "sayÄąsal deÄer geĂ§ersiz"
+msgstr "sayısal değer geçersiz"
 
 msgid "number too large or too small"
-msgstr "sayÄą ya Ă§ok bĂźyĂźk ya da Ă§ok kĂźĂ§Ăźk"
+msgstr "sayı çok büyük veya çok küçük"
 
 msgid "memory allocation failed"
-msgstr ""
+msgstr "bellek ayırma başarısız"
 
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "yapılandırma dosyası doğruluk testi başarısız"
 
 msgid "unknown error"
 msgstr "bilinmeyen hata"
 
 msgid "Show this help message"
-msgstr "Bu yardÄąm iletisini gĂśsterir"
+msgstr "Bu yardım mesajını göster"
 
 msgid "Display brief usage message"
-msgstr "KÄąsa bir kullanÄąm iletisi gĂśster"
+msgstr "Kısa bir kullanım mesajı göster"
 
-#, fuzzy
 msgid "Display option defaults in message"
-msgstr "KÄąsa bir kullanÄąm iletisi gĂśster"
+msgstr "Mesajda öntanımlı seçenekleri göster"
 
 msgid "Terminate options"
-msgstr ""
+msgstr "Seçenekleri sonlandır"
 
 msgid "Help options:"
-msgstr ""
+msgstr "Yardım seçenekleri:"
 
 msgid "Options implemented via popt alias/exec:"
-msgstr ""
+msgstr "popt alias/exec aracılığıyla uygulanan seçenekler:"
 
 msgid "NONE"
 msgstr "YOK"
 
 msgid "VAL"
-msgstr "DEÄ"
+msgstr "DEĞER"
 
 msgid "INT"
 msgstr "INT"
 
 msgid "SHORT"
-msgstr ""
+msgstr "SHORT"
 
 msgid "LONG"
 msgstr "LONG"
 
-#, fuzzy
 msgid "LONGLONG"
-msgstr "LONG"
+msgstr "LONGLONG"
 
 msgid "STRING"
 msgstr "STRING"
@@ -105,7 +106,7 @@ msgid "ARG"
 msgstr "ARG"
 
 msgid "Usage:"
-msgstr "KullanÄąmÄą:"
+msgstr "Kullanım:"
 
 msgid "[OPTION...]"
-msgstr "[SEĂENEK...]"
+msgstr "[SEÇENEK...]"
