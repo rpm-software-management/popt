@@ -1,26 +1,30 @@
 # Polish translation for popt.
 # This file is distributed under the same license as the popt package.
 # Jakub Bogusz <qboosh@pld-linux.org>, 2002-2008.
-#
+# Piotr Drąg <piotrdrag@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
 "POT-Creation-Date: 2020-06-23 13:29+0300\n"
-"PO-Revision-Date: 2008-02-18 00:30+0100\n"
-"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
-"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2020-08-22 11:25+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Polish <https://translate.fedoraproject.org/projects/popt/"
+"master/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.2.1\n"
 
 msgid "unknown errno"
 msgstr "nieznane errno"
 
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "typ opcji (%u) nie zaimplementowany w popt\n"
+msgstr "typ opcji (%u) nie jest zaimplementowany w popt\n"
 
 msgid "missing argument"
 msgstr "brak parametru"
@@ -29,40 +33,40 @@ msgid "unknown option"
 msgstr "nieznana opcja"
 
 msgid "mutually exclusive logical operations requested"
-msgstr "żądanie wykluczających się operacji"
+msgstr "zażądano wzajemnie wykluczających się działań logicznych"
 
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg nie może być NULL"
 
 msgid "aliases nested too deeply"
-msgstr "zbyt duże zagłębienie aliasów"
+msgstr "za duże zagłębienie aliasów"
 
 msgid "error in parameter quoting"
-msgstr "błąd w cytowaniu parametru"
+msgstr "błąd w cytowaniu parametru"
 
 msgid "invalid numeric value"
-msgstr "błędna wartość liczbowa"
+msgstr "nieprawidłowa wartość liczbowa"
 
 msgid "number too large or too small"
-msgstr "liczba zbyt duża lub zbyt mała"
+msgstr "liczba jest za duża lub za mała"
 
 msgid "memory allocation failed"
-msgstr "błąd alokacji pamięci"
+msgstr "przydzielenie pamięci się nie powiodło"
 
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "test poprawności pliku konfiguracji się nie powiódł"
 
 msgid "unknown error"
 msgstr "nieznany błąd"
 
 msgid "Show this help message"
-msgstr "Pokaż tę pomoc"
+msgstr "Wyświetla ten komunikat pomocy"
 
 msgid "Display brief usage message"
-msgstr "Wyświetl skrócony sposób użycia"
+msgstr "Wyświetla skrócony sposób użycia"
 
 msgid "Display option defaults in message"
-msgstr "Wyświetl domyślne opcje w opisie"
+msgstr "Wyświetla domyślne opcje w komunikacie"
 
 msgid "Terminate options"
 msgstr "Opcje zakończenia"
@@ -71,7 +75,7 @@ msgid "Help options:"
 msgstr "Opcje pomocy:"
 
 msgid "Options implemented via popt alias/exec:"
-msgstr "Opcje zaimplementowane poprzez popt alias/exec:"
+msgstr "Opcje zaimplementowane przez alias/exec popt:"
 
 msgid "NONE"
 msgstr "BRAK"
@@ -83,7 +87,7 @@ msgid "INT"
 msgstr "INT"
 
 msgid "SHORT"
-msgstr ""
+msgstr "SHORT"
 
 msgid "LONG"
 msgstr "LONG"
@@ -92,7 +96,7 @@ msgid "LONGLONG"
 msgstr "LONGLONG"
 
 msgid "STRING"
-msgstr "ŁAŃCUCH"
+msgstr "CIĄG"
 
 msgid "FLOAT"
 msgstr "FLOAT"
@@ -104,7 +108,7 @@ msgid "ARG"
 msgstr "PARAM"
 
 msgid "Usage:"
-msgstr "Składnia:"
+msgstr "Użycie:"
 
 msgid "[OPTION...]"
-msgstr "[OPCJA...]"
+msgstr "[OPCJA…]"
