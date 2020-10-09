@@ -11,129 +11,98 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/popt.c:46
 msgid "unknown errno"
 msgstr "eroare necunoscuta"
 
-#: src/popt.c:1206
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "optiunea de tipul (%d) nu este implementata in popt\n"
 
-#: src/popt.c:1625
 msgid "missing argument"
 msgstr "argument lipsa"
 
-#: src/popt.c:1627
 msgid "unknown option"
 msgstr "optiune necunoscuta"
 
-#: src/popt.c:1629
 msgid "mutually exclusive logical operations requested"
 msgstr ""
 
-#: src/popt.c:1631
 msgid "opt->arg should not be NULL"
 msgstr ""
 
-#: src/popt.c:1633
 msgid "aliases nested too deeply"
 msgstr "recursivitate infinita la optiunile sinonime"
 
-#: src/popt.c:1635
 #, fuzzy
 msgid "error in parameter quoting"
 msgstr "eroare la insertie parametru"
 
-#: src/popt.c:1637
 msgid "invalid numeric value"
 msgstr "valoare numarica invalida"
 
-#: src/popt.c:1639
 msgid "number too large or too small"
 msgstr "numar prea mare sau prea mic"
 
-#: src/popt.c:1641
 msgid "memory allocation failed"
 msgstr ""
 
-#: src/popt.c:1643
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1647
 msgid "unknown error"
 msgstr "eroare necuinoscuta"
 
-#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "Afisare mesaj de help"
 
-#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "Afisare mesaj sintaxa sumar"
 
-#: src/popthelp.c:76
 #, fuzzy
 msgid "Display option defaults in message"
 msgstr "Afisare mesaj sintaxa sumar"
 
-#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr ""
 
-#: src/popthelp.c:170
 msgid "Help options:"
 msgstr ""
 
-#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
-#: src/popthelp.c:179
 msgid "NONE"
 msgstr ""
 
-#: src/popthelp.c:181
 msgid "VAL"
 msgstr ""
 
-#: src/popthelp.c:185
 msgid "INT"
 msgstr ""
 
-#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
-#: src/popthelp.c:187
 msgid "LONG"
 msgstr ""
 
-#: src/popthelp.c:188
 msgid "LONGLONG"
 msgstr ""
 
-#: src/popthelp.c:189
 msgid "STRING"
 msgstr ""
 
-#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr ""
 
-#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr ""
 
-#: src/popthelp.c:194
 msgid "ARG"
 msgstr ""
 
-#: src/popthelp.c:616
 msgid "Usage:"
 msgstr "Sintaxa:"
 
-#: src/popthelp.c:638
 msgid "[OPTION...]"
 msgstr "[OPTIUNE...]"
