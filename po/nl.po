@@ -1,19 +1,22 @@
 # Dutch messages for popt.
 # This file is put in the public domain.
 # Tim Van Holder <tim.van.holder@telenet.be>, 2007, 2008.
-#
+# Geert Warrink <geert.warrink@onsnet.nu>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
 "POT-Creation-Date: 2020-06-23 13:29+0300\n"
-"PO-Revision-Date: 2008-02-20 19:26+0100\n"
-"Last-Translator: Tim Van Holder <tim.van.holder@telenet.be>\n"
-"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"PO-Revision-Date: 2020-10-02 12:30+0000\n"
+"Last-Translator: Geert Warrink <geert.warrink@onsnet.nu>\n"
+"Language-Team: Dutch <https://translate.fedoraproject.org/projects/popt/"
+"master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.2.2\n"
 
 msgid "unknown errno"
 msgstr "onbekend foutnummer (errno)"
@@ -51,7 +54,7 @@ msgid "memory allocation failed"
 msgstr "reserveren van geheugen is mislukt"
 
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "configuratie bestand faalde voor de gezond verstand test"
 
 msgid "unknown error"
 msgstr "onbekende fout"
@@ -85,7 +88,7 @@ msgid "INT"
 msgstr "INT"
 
 msgid "SHORT"
-msgstr ""
+msgstr "KORT"
 
 msgid "LONG"
 msgstr "LONG"
