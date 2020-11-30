@@ -1,4 +1,4 @@
-FROM fedora:latest
+FROM registry.fedoraproject.org/fedora:32
 MAINTAINER rpm-maint@lists.rpm.org
 
 WORKDIR /srv/popt
