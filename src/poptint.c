@@ -85,6 +85,7 @@ strdup_locale_from_utf8 (char * istr)
 	char * shift_pin = NULL;
 	size_t db = strlen(istr);
 	char * dstr = malloc((db + 1) * sizeof(*dstr));
+	char * dstr_tmp;
 	char * pin = istr;
 	char * pout = dstr;
 	size_t ib = db;
@@ -111,12 +112,16 @@ strdup_locale_from_utf8 (char * istr)
 	    case E2BIG:
 	    {	size_t used = (size_t)(pout - dstr);
 		db *= 2;
-		dstr = realloc(dstr, (db + 1) * sizeof(*dstr));
-		if (dstr != NULL) {
-		    pout = dstr + used;
-		    ob = db - used;
-		    continue;
+		dstr_tmp = realloc(dstr, (db + 1) * sizeof(*dstr));
+		if (dstr_tmp == NULL) {
+		    free(dstr);
+		    (void) iconv_close(cd);
+		    return NULL;
 		}
+		dstr = dstr_tmp;
+		pout = dstr + used;
+		ob = db - used;
+		continue;
 	    }   break;
 	    case EINVAL:
 	    case EILSEQ:

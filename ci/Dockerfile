@@ -19,7 +19,7 @@ RUN dnf -y install \
 COPY . .
 
 RUN ./autogen.sh
-RUN ./configure
+RUN ./configure --enable-werror
 RUN make
 
-CMD make distcheck
+CMD make distcheck DISTCHECK_CONFIGURE_FLAGS=--enable-werror

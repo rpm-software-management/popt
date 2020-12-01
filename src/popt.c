@@ -645,7 +645,7 @@ static const char *
 expandNextArg(poptContext con, const char * s)
 {
     const char * a = NULL;
-    char *t, *te;
+    char *t, *t_tmp, *te;
     size_t tn = strlen(s) + 1;
     char c;
 
@@ -671,8 +671,11 @@ expandNextArg(poptContext con, const char * s)
 
 	    tn += strlen(a);
 	    {   size_t pos = (size_t) (te - t);
-		if ((t = realloc(t, tn)) == NULL)	/* XXX can't happen */
+		if ((t_tmp = realloc(t, tn)) == NULL) {	/* XXX can't happen */
+		    free(t);
 		    return NULL;
+		}
+		t = t_tmp;
 		te = stpcpy(t + pos, a);
 	    }
 	    continue;
@@ -1512,7 +1515,7 @@ poptItem poptFreeItems(poptItem items, int nitems)
 	    item->argv = _free(item->argv);
 	    item++;
 	}
-	items = _free(items);
+	_free(items);
     }
     return NULL;
 }
@@ -1565,7 +1568,7 @@ int poptAddAlias(poptContext con, struct poptAlias alias,
 
 int poptAddItem(poptContext con, poptItem newItem, int flags)
 {
-    poptItem * items, item;
+    poptItem * items, item_tmp, item;
     int * nitems;
 
     switch (flags) {
@@ -1582,9 +1585,10 @@ int poptAddItem(poptContext con, poptItem newItem, int flags)
 	break;
     }
 
-    *items = realloc((*items), ((*nitems) + 1) * sizeof(**items));
-    if ((*items) == NULL)
+    item_tmp = realloc((*items), ((*nitems) + 1) * sizeof(**items));
+    if (item_tmp == NULL)
 	return 1;
+    *items = item_tmp;
 
     item = (*items) + (*nitems);
 

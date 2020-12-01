@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <errno.h>
-#include <string.h>
-#include <popt.h>
+
+#include "system.h"
 
 int main (int argc, char **argv) {
     char *out;
@@ -39,6 +37,7 @@ int main (int argc, char **argv) {
 	    printf ("'%s'\n", newargv[j]);
 
 	printf ("\n");
+	free(newargv);
 	free(out);
 	fclose (fp);
     }
