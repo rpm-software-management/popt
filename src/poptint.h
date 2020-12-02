@@ -33,7 +33,7 @@ typedef struct {
 } pbm_set;
 #define	__PBM_BITS(set)	((set)->bits)
 
-#define	PBM_ALLOC(d)	calloc(__PBM_IX (d) + 1, sizeof(__pbm_bits))
+#define	PBM_ALLOC(d)	calloc(__PBM_IX (d) + 1, sizeof(pbm_set))
 #define	PBM_FREE(s)	_free(s);
 #define PBM_SET(d, s)   (__PBM_BITS (s)[__PBM_IX (d)] |= __PBM_MASK (d))
 #define PBM_CLR(d, s)   (__PBM_BITS (s)[__PBM_IX (d)] &= ~__PBM_MASK (d))
