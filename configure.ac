@@ -56,6 +56,14 @@ AM_GNU_GETTEXT_VERSION([0.18.2])
 AM_GNU_GETTEXT([external])
 AM_ICONV_LINK
 
+AC_ARG_ENABLE([werror],
+        [AS_HELP_STRING([--enable-werror],
+                [Treat warnings as errors (default: warnings are not errors)])],
+                [enable_werror="$enableval"],
+                [enable_werror=no])
+AS_IF([test "x$enable_werror" = "xyes"], [AM_CFLAGS="$AM_CFLAGS -Werror"])
+AC_SUBST([AM_CFLAGS])
+
 AC_CONFIG_SUBDIRS()
 AC_CONFIG_FILES([ po/Makefile.in
     Doxyfile Makefile src/Makefile popt.pc tests/test-poptrc tests/Makefile
