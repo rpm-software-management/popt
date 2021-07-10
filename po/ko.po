@@ -1,22 +1,26 @@
+# simmon <simmon@nplob.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
 "POT-Creation-Date: 2020-06-23 13:29+0300\n"
-"PO-Revision-Date: 2001-09-06 20:06+0900\n"
-"Last-Translator: Jong-Hoon Ryu <redhat4u@netian.com>\n"
-"Language-Team: GNU Translation project <ko@li.org>\n"
+"PO-Revision-Date: 2021-03-17 18:01+0000\n"
+"Last-Translator: simmon <simmon@nplob.com>\n"
+"Language-Team: Korean <https://translate.fedoraproject.org/projects/popt/"
+"master/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.5.1\n"
 
 msgid "unknown errno"
 msgstr "알 수 없는 오류코드(errno) 입니다"
 
-#, fuzzy, c-format
+#, c-format
 msgid "option type (%u) not implemented in popt\n"
-msgstr "옵션 유형 (%d)은 popt에서 사용할 수 없습니다\n"
+msgstr "옵션 유형 (%u)은 popt에서 사용할 수 없습니다\n"
 
 msgid "missing argument"
 msgstr "인수가 지정되지 않았습니다"
@@ -46,7 +50,7 @@ msgid "memory allocation failed"
 msgstr "메모리 할당에 실패했습니다"
 
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "설정 파일이 건전성 시험에 실패하였습니다"
 
 msgid "unknown error"
 msgstr "알 수 없는 오류입니다"
@@ -61,13 +65,13 @@ msgid "Display option defaults in message"
 msgstr "기본적인 옵션을 보여줍니다"
 
 msgid "Terminate options"
-msgstr ""
+msgstr "종료 선택"
 
 msgid "Help options:"
-msgstr ""
+msgstr "도움말 선택:"
 
 msgid "Options implemented via popt alias/exec:"
-msgstr ""
+msgstr "popt alias/exec 통해 구현된 선택:"
 
 msgid "NONE"
 msgstr "없음(NONE)"
@@ -79,14 +83,13 @@ msgid "INT"
 msgstr "정수(INT)"
 
 msgid "SHORT"
-msgstr ""
+msgstr "짧은"
 
 msgid "LONG"
 msgstr "정수(LONG)"
 
-#, fuzzy
 msgid "LONGLONG"
-msgstr "정수(LONG)"
+msgstr "LONGLONG"
 
 msgid "STRING"
 msgstr "문자열(STRING)"
