@@ -16,7 +16,7 @@
 /** \ingroup popt
  * \name Arg type identifiers
  */
-/*@{*/
+/**@{*/
 #define POPT_ARG_NONE		 0U	/*!< no arg */
 #define POPT_ARG_STRING		 1U	/*!< arg will be saved as string */
 #define POPT_ARG_INT		 2U	/*!< arg ==> int */
@@ -43,12 +43,12 @@
 #define POPT_ARG_MASK		0x000000FFU
 #define POPT_GROUP_MASK		0x0000FF00U
 
-/*@}*/
+/**@}*/
 
 /** \ingroup popt
  * \name Arg modifiers
  */
-/*@{*/
+/**@{*/
 #define POPT_ARGFLAG_ONEDASH	0x80000000U  /*!< allow -longoption */
 #define POPT_ARGFLAG_DOC_HIDDEN 0x40000000U  /*!< don't show in help/usage */
 #define POPT_ARGFLAG_STRIP	0x20000000U  /*!< strip this arg from argv(only applies to long args) */
@@ -72,24 +72,25 @@
 #define	POPT_ARGFLAG_RANDOM	0x00400000U  /*!< random value in [1,arg] */
 #define	POPT_ARGFLAG_TOGGLE	0x00200000U  /*!< permit --[no]opt prefix toggle */
 
-/*@}*/
+/**@}*/
 
 /** \ingroup popt
  * \name Callback modifiers
  */
-/*@{*/
+/**@{*/
 #define POPT_CBFLAG_PRE		0x80000000U  /*!< call the callback before parse */
 #define POPT_CBFLAG_POST	0x40000000U  /*!< call the callback after parse */
 #define POPT_CBFLAG_INC_DATA	0x20000000U  /*!< use data from the include line,
 					       not the subtable */
 #define POPT_CBFLAG_SKIPOPTION	0x10000000U  /*!< don't callback with option */
 #define POPT_CBFLAG_CONTINUE	0x08000000U  /*!< continue callbacks with option */
-/*@}*/
+
+/**@}*/
 
 /** \ingroup popt
  * \name Error return values
  */
-/*@{*/
+/**@{*/
 #define POPT_ERROR_NOARG	-10	/*!< missing argument */
 #define POPT_ERROR_BADOPT	-11	/*!< unknown option */
 #define POPT_ERROR_UNWANTEDARG	-12	/*!< option does not take an argument */
@@ -102,24 +103,27 @@
 #define	POPT_ERROR_NULLARG	-20	/*!< opt->arg should not be NULL */
 #define	POPT_ERROR_MALLOC	-21	/*!< memory allocation failed */
 #define	POPT_ERROR_BADCONFIG	-22	/*!< config file failed sanity test */
-/*@}*/
+
+/**@}*/
 
 /** \ingroup popt
  * \name poptBadOption() flags
  */
-/*@{*/
+/**@{*/
 #define POPT_BADOPTION_NOALIAS  (1U << 0)  /*!< don't go into an alias */
-/*@}*/
+
+/**@}*/
 
 /** \ingroup popt
  * \name poptGetContext() flags
  */
-/*@{*/
+/**@{*/
 #define POPT_CONTEXT_NO_EXEC	(1U << 0)  /*!< ignore exec expansions */
 #define POPT_CONTEXT_KEEP_FIRST	(1U << 1)  /*!< pay attention to argv[0] */
 #define POPT_CONTEXT_POSIXMEHARDER (1U << 2) /*!< options can't follow args */
 #define POPT_CONTEXT_ARG_OPTS	(1U << 4) /*!< return args as options with value 0 */
-/*@}*/
+
+/**@}*/
 
 /** \ingroup popt
  */
@@ -155,7 +159,7 @@ typedef struct poptItem_s {
 /** \ingroup popt
  * \name Auto-generated help/usage
  */
-/*@{*/
+/**@{*/
 
 /**
  * Empty table marker to enable displaying popt alias/exec options.
@@ -175,7 +179,8 @@ extern struct poptOption * poptHelpOptionsI18N;
 			0, "Help options:", NULL },
 
 #define POPT_TABLEEND { NULL, '\0', 0, NULL, 0, NULL, NULL }
-/*@}*/
+
+/**@}*/
 
 /** \ingroup popt
  */
