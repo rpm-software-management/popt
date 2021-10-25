@@ -1,5 +1,5 @@
 /** \ingroup popt
- * \file popt/poptint.h
+ * @file
  */
 
 /* (C) 1998-2000 Red Hat, Inc. -- Licensing details are in the COPYING

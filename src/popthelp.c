@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 
 /** \ingroup popt
- * \file popt/popthelp.c
+ * @file
  */
 
 /* (C) 1998-2002 Red Hat, Inc. -- Licensing details are in the COPYING

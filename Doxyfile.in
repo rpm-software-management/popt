@@ -460,14 +460,14 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT                  = \
-                        ./popt.c \
-                        ./popt.h \
-                        ./poptconfig.c \
-                        ./popthelp.c \
-                        ./poptint.c \
-                        ./poptint.h \
-                        ./poptparse.c \
-			./system.h
+                        ./src/popt.c \
+                        ./src/popt.h \
+                        ./src/poptconfig.c \
+                        ./src/popthelp.c \
+                        ./src/poptint.c \
+                        ./src/poptint.h \
+                        ./src/poptparse.c \
+                        ./src/system.h
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 

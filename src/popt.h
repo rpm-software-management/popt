@@ -1,4 +1,4 @@
-/** \file popt/popt.h
+/** @file
  * \ingroup popt
  */
 

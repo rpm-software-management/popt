@@ -1,5 +1,5 @@
 /**
- * \file popt/system.h
+ * @file
  */
 
 #ifdef HAVE_CONFIG_H
