@@ -568,9 +568,9 @@ typedef struct poptBits_s {
     unsigned int bits[1];
 } * poptBits;
 
-#define _POPT_BITS_N    1024U    /* estimated population */
+#define _POPT_BITS_N    1024U	/*!< estimated population */
 #define _POPT_BITS_M    ((3U * _POPT_BITS_N) / 2U)
-#define _POPT_BITS_K    16U      /* no. of linear hash combinations */
+#define _POPT_BITS_K    16U	/*!< no. of linear hash combinations */
 
 extern unsigned int _poptBitsN;
 extern  unsigned int _poptBitsM;
