@@ -1,5 +1,5 @@
 /** \ingroup popt
- * \file popt/poptparse.c
+ * @file
  */
 
 /* (C) 1998-2002 Red Hat, Inc. -- Licensing details are in the COPYING
