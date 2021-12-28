@@ -1,13 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # This file is put in the public domain.
 # Gustavo Costa <xfgusta@gmail.com>, 2021.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.18\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
 "POT-Creation-Date: 2020-06-23 13:29+0300\n"
-"PO-Revision-Date: 2021-05-13 16:02+0000\n"
-"Last-Translator: Gustavo Costa <xfgusta@gmail.com>\n"
+"PO-Revision-Date: 2021-07-10 16:04+0000\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.fedoraproject.org/"
 "projects/popt/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: src/popt.c:46
 msgid "unknown errno"
@@ -48,7 +49,7 @@ msgstr "aliases aninhados muito profundamente"
 
 #: src/popt.c:1635
 msgid "error in parameter quoting"
-msgstr ""
+msgstr "erro ao colocar aspas no parâmetro"
 
 #: src/popt.c:1637
 msgid "invalid numeric value"
@@ -64,7 +65,7 @@ msgstr "alocação de memória falhou"
 
 #: src/popt.c:1643
 msgid "config file failed sanity test"
-msgstr ""
+msgstr "arquivo de config falhou no teste de sanidade"
 
 #: src/popt.c:1647
 msgid "unknown error"
@@ -84,7 +85,7 @@ msgstr "Exibe opções padrão na mensagem"
 
 #: src/popthelp.c:78
 msgid "Terminate options"
-msgstr ""
+msgstr "Opções de encerramento"
 
 #: src/popthelp.c:170
 msgid "Help options:"
