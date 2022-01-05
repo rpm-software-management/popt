@@ -216,6 +216,9 @@ void poptResetContext(poptContext con)
     else
 	con->os->next = 0;
 
+    for (i = 0; i < con->numLeftovers; i++) {
+        con->leftovers[i] = _free(con->leftovers[i]);
+    }
     con->numLeftovers = 0;
     con->nextLeftover = 0;
     con->restLeftover = 0;
@@ -1534,7 +1537,7 @@ poptContext poptFreeContext(poptContext con)
     con->numExecs = 0;
 
     for (i = 0; i < con->numLeftovers; i++) {
-        con->leftovers[i] = _free(&con->leftovers[i]);
+        con->leftovers[i] = _free(con->leftovers[i]);
     }
     con->leftovers = _free(con->leftovers);
 
