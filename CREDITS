@@ -1,0 +1,53 @@
+Initial work on POPT was done primarily by:
+
+	Jeff Johnson
+	Erik Troan
+
+Over the years, additional code, documentation, translations, tests etc
+have been contributed by:
+
+	Ettore Atalan
+	John Bradshaw
+	Hela Basa
+	Yuri Chornoivan
+	Gustavo Costa
+	Wayne Davison
+	Michal Domonkos
+	Piotr Drąg
+	Jan Engelhardt
+	Ralf S. Engelschall
+	Oğuz Ersen
+	Marc Ewing
+	Fabrice Fontaine
+	Rafael Fontenelle
+	Cristian Gafton
+	Neal Gompa
+	Christian Göttsche
+	Emilio Herrera
+	Jean-Baptiste Holcroft
+	Michael K. Johnson
+	Peter Jones
+	Charles Lee
+	Elliot Lee
+	Dmitry V. Levin
+	Richard Levitte
+	Carl Henrik Lunde
+	Jordi Mallach
+	Balázs Meskó
+	Arkadiusz Miskiewicz
+	Panu Matilainen
+	Paul Nasrat
+	Elia Pinto
+	Bernhard Rosenkränzer
+	Andreas Schwab
+	Robert Scheck
+	scootergrisen
+	simmon
+	Tobias Stoeckmann
+	Ricky Tigg
+	Alexander Traud
+	Andika Triwidada
+	Miloslav Trmač
+	Göran Uddeborg
+	Geert Warrink
+	Jakub Wilk
