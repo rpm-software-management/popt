@@ -5,12 +5,11 @@ run() {
     name=$1; shift
     answer=$1; shift
 
-    echo Running test $name.
-
     result=`HOME=$builddir $builddir/$prog $*`
     if [ "$answer" != "$result" ]; then
-	echo "Test \"$prog $*\" failed with: \"$result\" != \"$answer\" "
-	exit 2
+        echo "FAIL: $name: \"$result\" != \"$answer\" "
+    else
+        echo "PASS: $name"
     fi
 }
 
@@ -23,17 +22,16 @@ run_diff() {
     out=$builddir/tmp.out
     diff_file=$builddir/tmp.diff
 
-    echo Running test $name.
-
     $builddir/$prog $in_file > $out
     ret=$?
     diff $out $answer_file > $diff_file
     diff_ret=$?
 
     if [ "$diff_ret" != "0" ]; then
-       echo "Test \"$name\" failed output is in $out, diff is:"
+       echo "FAIL $name: failed output is in $out, diff is:"
        cat $diff_file
-       exit 2
+    else
+        echo "PASS $name"
     fi
     rm $out $diff_file
 }
