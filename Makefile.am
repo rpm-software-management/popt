@@ -2,7 +2,7 @@
 
 MCCABE =	pmccabe
 
-EXTRA_DIST = autogen.sh CHANGES CREDITS $(man_MANS) ci/Dockerfile build-aux popt.pdf
+EXTRA_DIST = autogen.sh CREDITS $(man_MANS) ci/Dockerfile build-aux popt.pdf
 
 SUBDIRS = src po tests
 
