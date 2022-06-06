@@ -146,7 +146,7 @@ const char *POPT_next_char (const char *str);
 #define _(foo) foo
 #endif
 
-#if defined(ENABLE_NLS) && defined(HAVE_DCGETTEXT)
+#if defined(ENABLE_NLS) && defined(HAVE_LIBINTL_H) && defined(HAVE_DCGETTEXT)
 #define D_(dom, str) POPT_dgettext(dom, str)
 #define POPT_(foo) D_("popt", foo)
 #else

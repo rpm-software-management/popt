@@ -38,7 +38,7 @@ POPT_next_char (const char *str)
 
 #if !defined(POPT_fprintf)	/* XXX lose all the goop ... */
 
-#if defined(HAVE_DCGETTEXT)
+#if defined(ENABLE_NLS) && defined(HAVE_LIBINTL_H) && defined(HAVE_DCGETTEXT)
 /*
  * Rebind a "UTF-8" codeset for popt's internal use.
  */
