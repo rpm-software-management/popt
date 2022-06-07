@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.18\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-06-23 13:29+0300\n"
+"POT-Creation-Date: 2022-06-07 09:38+0300\n"
 "PO-Revision-Date: 2021-07-10 16:04+0000\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.fedoraproject.org/"
@@ -22,52 +22,56 @@ msgstr ""
 msgid "unknown errno"
 msgstr "errno desconhecido"
 
-#: src/popt.c:1206
+#: src/popt.c:1200
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "tipo de opção (%u) não implementado no popt\n"
 
-#: src/popt.c:1625
+#: src/popt.c:1638
 msgid "missing argument"
 msgstr "argumento faltando"
 
-#: src/popt.c:1627
+#: src/popt.c:1640
+msgid "option does not take an argument"
+msgstr ""
+
+#: src/popt.c:1642
 msgid "unknown option"
 msgstr "opção desconhecida"
 
-#: src/popt.c:1629
+#: src/popt.c:1644
 msgid "mutually exclusive logical operations requested"
 msgstr "operações lógicas mutuamente exclusivas solicitadas"
 
-#: src/popt.c:1631
+#: src/popt.c:1646
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg não deve ser NULL"
 
-#: src/popt.c:1633
+#: src/popt.c:1648
 msgid "aliases nested too deeply"
 msgstr "aliases aninhados muito profundamente"
 
-#: src/popt.c:1635
+#: src/popt.c:1650
 msgid "error in parameter quoting"
 msgstr "erro ao colocar aspas no parâmetro"
 
-#: src/popt.c:1637
+#: src/popt.c:1652
 msgid "invalid numeric value"
 msgstr "valor numérico inválido"
 
-#: src/popt.c:1639
+#: src/popt.c:1654
 msgid "number too large or too small"
 msgstr "número muito grande ou muito pequeno"
 
-#: src/popt.c:1641
+#: src/popt.c:1656
 msgid "memory allocation failed"
 msgstr "alocação de memória falhou"
 
-#: src/popt.c:1643
+#: src/popt.c:1658
 msgid "config file failed sanity test"
 msgstr "arquivo de config falhou no teste de sanidade"
 
-#: src/popt.c:1647
+#: src/popt.c:1662
 msgid "unknown error"
 msgstr "erro desconhecido"
 
@@ -135,10 +139,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: src/popthelp.c:616
+#: src/popthelp.c:615
 msgid "Usage:"
 msgstr "Uso:"
 
-#: src/popthelp.c:638
+#: src/popthelp.c:640
 msgid "[OPTION...]"
 msgstr "[OPÇÃO...]"

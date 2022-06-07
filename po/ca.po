@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.18\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-06-23 13:29+0300\n"
+"POT-Creation-Date: 2022-06-07 09:38+0300\n"
 "PO-Revision-Date: 2020-09-03 12:48+0000\n"
 "Last-Translator: Jordi Mallach <jordi@debian.org>\n"
 "Language-Team: Catalan <https://translate.fedoraproject.org/projects/popt/"
@@ -22,52 +22,56 @@ msgstr ""
 msgid "unknown errno"
 msgstr "número d'error desconegut"
 
-#: src/popt.c:1206
+#: src/popt.c:1200
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "el tipus d'opció (%u) no està implementat en popt\n"
 
-#: src/popt.c:1625
+#: src/popt.c:1638
 msgid "missing argument"
 msgstr "manca un argument"
 
-#: src/popt.c:1627
+#: src/popt.c:1640
+msgid "option does not take an argument"
+msgstr ""
+
+#: src/popt.c:1642
 msgid "unknown option"
 msgstr "opció desconeguda"
 
-#: src/popt.c:1629
+#: src/popt.c:1644
 msgid "mutually exclusive logical operations requested"
 msgstr "s'ha demanat operacions lògiques mutuament excloents"
 
-#: src/popt.c:1631
+#: src/popt.c:1646
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg no hauria de ser NULL"
 
-#: src/popt.c:1633
+#: src/popt.c:1648
 msgid "aliases nested too deeply"
 msgstr "la recursió d'àlias és massa profunda"
 
-#: src/popt.c:1635
+#: src/popt.c:1650
 msgid "error in parameter quoting"
 msgstr "hi ha un error en l'entrecomillat dels paràmetres"
 
-#: src/popt.c:1637
+#: src/popt.c:1652
 msgid "invalid numeric value"
 msgstr "el valor numèric és invàlid"
 
-#: src/popt.c:1639
+#: src/popt.c:1654
 msgid "number too large or too small"
 msgstr "el número és massa gran o massa petit"
 
-#: src/popt.c:1641
+#: src/popt.c:1656
 msgid "memory allocation failed"
 msgstr "l'assignació de memòria ha fallat"
 
-#: src/popt.c:1643
+#: src/popt.c:1658
 msgid "config file failed sanity test"
 msgstr ""
 
-#: src/popt.c:1647
+#: src/popt.c:1662
 msgid "unknown error"
 msgstr "s'ha produït un error desconegut"
 
@@ -135,10 +139,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: src/popthelp.c:616
+#: src/popthelp.c:615
 msgid "Usage:"
 msgstr "Forma d'ús:"
 
-#: src/popthelp.c:638
+#: src/popthelp.c:640
 msgid "[OPTION...]"
 msgstr "[OPCIÓ...]"

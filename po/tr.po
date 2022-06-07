@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-06-23 13:29+0300\n"
+"POT-Creation-Date: 2022-06-07 09:38+0300\n"
 "PO-Revision-Date: 2020-09-03 12:31+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/popt/"
@@ -17,96 +17,131 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.2.2\n"
 
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "bilinmeyen hata numarası (errno)"
 
+#: src/popt.c:1200
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "seçenek türü (%u) popt'ta uygulanmadı\n"
 
+#: src/popt.c:1638
 msgid "missing argument"
 msgstr "argüman eksik"
 
+#: src/popt.c:1640
+msgid "option does not take an argument"
+msgstr ""
+
+#: src/popt.c:1642
 msgid "unknown option"
 msgstr "bilinmeyen seçenek"
 
+#: src/popt.c:1644
 msgid "mutually exclusive logical operations requested"
 msgstr "birbirini dışlayan mantıksal işlemler istendi"
 
+#: src/popt.c:1646
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg NULL olmamalı"
 
+#: src/popt.c:1648
 msgid "aliases nested too deeply"
 msgstr "takma adlar çok fazla iç içe geçmiş"
 
+#: src/popt.c:1650
 msgid "error in parameter quoting"
 msgstr "parametre tırnak işaretleme hatası"
 
+#: src/popt.c:1652
 msgid "invalid numeric value"
 msgstr "sayısal değer geçersiz"
 
+#: src/popt.c:1654
 msgid "number too large or too small"
 msgstr "sayı çok büyük veya çok küçük"
 
+#: src/popt.c:1656
 msgid "memory allocation failed"
 msgstr "bellek ayırma başarısız"
 
+#: src/popt.c:1658
 msgid "config file failed sanity test"
 msgstr "yapılandırma dosyası doğruluk testi başarısız"
 
+#: src/popt.c:1662
 msgid "unknown error"
 msgstr "bilinmeyen hata"
 
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "Bu yardım mesajını göster"
 
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "Kısa bir kullanım mesajı göster"
 
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr "Mesajda öntanımlı seçenekleri göster"
 
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr "Seçenekleri sonlandır"
 
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr "Yardım seçenekleri:"
 
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr "popt alias/exec aracılığıyla uygulanan seçenekler:"
 
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "YOK"
 
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr "DEĞER"
 
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr "SHORT"
 
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
+#: src/popthelp.c:188
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr "STRING"
 
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
+#: src/popthelp.c:615
 msgid "Usage:"
 msgstr "Kullanım:"
 
+#: src/popthelp.c:640
 msgid "[OPTION...]"
 msgstr "[SEÇENEK...]"

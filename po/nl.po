@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.14\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-06-23 13:29+0300\n"
+"POT-Creation-Date: 2022-06-07 09:38+0300\n"
 "PO-Revision-Date: 2020-10-02 12:30+0000\n"
 "Last-Translator: Geert Warrink <geert.warrink@onsnet.nu>\n"
 "Language-Team: Dutch <https://translate.fedoraproject.org/projects/popt/"
@@ -18,100 +18,135 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.2.2\n"
 
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "onbekend foutnummer (errno)"
 
+#: src/popt.c:1200
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "dit optietype (%u) is niet geïmplementeerd in popt\n"
 
+#: src/popt.c:1638
 msgid "missing argument"
 msgstr "ontbrekend argument"
 
+#: src/popt.c:1640
+msgid "option does not take an argument"
+msgstr ""
+
+#: src/popt.c:1642
 msgid "unknown option"
 msgstr "onbekende optie"
 
+#: src/popt.c:1644
 msgid "mutually exclusive logical operations requested"
 msgstr "elkaar uitsluitende logische operatoren werden gevraagd"
 
+#: src/popt.c:1646
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg zou niet NULL mogen zijn"
 
+#: src/popt.c:1648
 msgid "aliases nested too deeply"
 msgstr "aliassen zijn te diep genest"
 
 # of toch beter "quoting" behouden?
+#: src/popt.c:1650
 msgid "error in parameter quoting"
 msgstr "fout in de aanhaling van parameters"
 
+#: src/popt.c:1652
 msgid "invalid numeric value"
 msgstr "ongeldige numerieke waarde"
 
+#: src/popt.c:1654
 msgid "number too large or too small"
 msgstr "getal is te klein of te groot"
 
+#: src/popt.c:1656
 msgid "memory allocation failed"
 msgstr "reserveren van geheugen is mislukt"
 
+#: src/popt.c:1658
 msgid "config file failed sanity test"
 msgstr "configuratie bestand faalde voor de gezond verstand test"
 
+#: src/popt.c:1662
 msgid "unknown error"
 msgstr "onbekende fout"
 
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "Deze hulptekst tonen"
 
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "Een korte gebruikssamenvatting tonen"
 
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr "De standaardwaarden van opties tonen in de tekst"
 
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr "Opties beëindigen"
 
 # of "Help-opties:"?
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr "Hulp-opties:"
 
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr "Opties geïmplementeerd d.m.v. popt alias/exec:"
 
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "GEEN"
 
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr "WAARDE"
 
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr "KORT"
 
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
+#: src/popthelp.c:188
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
 # TEKENREEKS lijkt me niet gepast; dus ofwel STRING behouden, ofwel TEKST
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr "TEKST"
 
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
 # of hier ARGUMENT van maken?
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
+#: src/popthelp.c:615
 msgid "Usage:"
 msgstr "Gebruik:"
 
+#: src/popthelp.c:640
 msgid "[OPTION...]"
 msgstr "[OPTIE...]"

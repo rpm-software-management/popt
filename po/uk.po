@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-06-23 13:29+0300\n"
+"POT-Creation-Date: 2022-06-07 09:38+0300\n"
 "PO-Revision-Date: 2020-08-23 18:29+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <https://translate.fedoraproject.org/projects/popt/"
@@ -15,100 +15,135 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.2.1\n"
 
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "невідомий номер помилки"
 
+#: src/popt.c:1200
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "тип параметра (%u) у popt не реалізовано\n"
 
+#: src/popt.c:1638
 msgid "missing argument"
 msgstr "не вистачає аргументу"
 
+#: src/popt.c:1640
+msgid "option does not take an argument"
+msgstr ""
+
+#: src/popt.c:1642
 msgid "unknown option"
 msgstr "невідомий параметр"
 
+#: src/popt.c:1644
 msgid "mutually exclusive logical operations requested"
 msgstr "надійшов запит на взаємно виключні логічні операції"
 
+#: src/popt.c:1646
 msgid "opt->arg should not be NULL"
 msgstr "параметр->аргумент повинне не дорівнювати NULL"
 
+#: src/popt.c:1648
 msgid "aliases nested too deeply"
 msgstr "надто великий рівень вкладеності у альтернативних назвах"
 
+#: src/popt.c:1650
 msgid "error in parameter quoting"
 msgstr "помилка у використанні лапок у параметрі"
 
+#: src/popt.c:1652
 msgid "invalid numeric value"
 msgstr "некоректне значення символічного посилання"
 
+#: src/popt.c:1654
 msgid "number too large or too small"
 msgstr "число є надто великим або надто малим"
 
+#: src/popt.c:1656
 msgid "memory allocation failed"
 msgstr "не вдалося отримати місце у пам'яті"
 
+#: src/popt.c:1658
 msgid "config file failed sanity test"
 msgstr "файл налаштувань не пройшов перевірку на чинність"
 
+#: src/popt.c:1662
 msgid "unknown error"
 msgstr "невідома помилка"
 
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "Показати цю довідку"
 
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "Показати коротку довідку про використання"
 
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr "Показати типові значення параметрів у повідомленні"
 
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr "Завершити параметри"
 
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr "Пункти довідки:"
 
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr "Параметри, реалізовані за допомогою alias/exec popt:"
 
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "НІЧОГО"
 
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr "ЗНАЧЕННЯ"
 
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr "SHORT"
 
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
+#: src/popthelp.c:188
 msgid "LONGLONG"
 msgstr "LONGLONG"
 
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr "РЯДОК"
 
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "АРГ"
 
+#: src/popthelp.c:615
 msgid "Usage:"
 msgstr "Користування:"
 
+#: src/popthelp.c:640
 msgid "[OPTION...]"
 msgstr "[ПАРАМЕТР...]"
