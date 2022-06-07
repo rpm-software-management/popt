@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.11\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-06-23 13:29+0300\n"
+"POT-Creation-Date: 2022-06-07 09:38+0300\n"
 "PO-Revision-Date: 2005-04-08 17:52+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@pcmail.com.tw>\n"
 "Language-Team: zh_TW <zh-l10n@linux.org.tw>\n"
@@ -15,97 +15,132 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/popt.c:46
 msgid "unknown errno"
 msgstr "未知的錯誤"
 
+#: src/popt.c:1200
 #, fuzzy, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "選項類型 (%d) 沒有在 popt 中實作\n"
 
+#: src/popt.c:1638
 msgid "missing argument"
 msgstr "缺少引數"
 
+#: src/popt.c:1640
+msgid "option does not take an argument"
+msgstr ""
+
+#: src/popt.c:1642
 msgid "unknown option"
 msgstr "未知的選項"
 
+#: src/popt.c:1644
 msgid "mutually exclusive logical operations requested"
 msgstr "需要相互獨立的邏輯運算"
 
+#: src/popt.c:1646
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg 不應為 NULL"
 
+#: src/popt.c:1648
 msgid "aliases nested too deeply"
 msgstr "巢狀別名太深"
 
+#: src/popt.c:1650
 msgid "error in parameter quoting"
 msgstr "參數引號錯誤"
 
+#: src/popt.c:1652
 msgid "invalid numeric value"
 msgstr "不正確的數值"
 
+#: src/popt.c:1654
 msgid "number too large or too small"
 msgstr "數字太大或太小"
 
+#: src/popt.c:1656
 msgid "memory allocation failed"
 msgstr "記憶體配置錯誤"
 
+#: src/popt.c:1658
 msgid "config file failed sanity test"
 msgstr ""
 
+#: src/popt.c:1662
 msgid "unknown error"
 msgstr "未知的錯誤"
 
+#: src/popthelp.c:64 src/popthelp.c:72
 msgid "Show this help message"
 msgstr "顯示本說明訊息"
 
+#: src/popthelp.c:65 src/popthelp.c:73
 msgid "Display brief usage message"
 msgstr "顯示簡短的使用說明"
 
+#: src/popthelp.c:76
 msgid "Display option defaults in message"
 msgstr "在訊息中顯示預設選項"
 
+#: src/popthelp.c:78
 msgid "Terminate options"
 msgstr ""
 
+#: src/popthelp.c:170
 msgid "Help options:"
 msgstr ""
 
+#: src/popthelp.c:171
 msgid "Options implemented via popt alias/exec:"
 msgstr ""
 
+#: src/popthelp.c:179
 msgid "NONE"
 msgstr "NONE"
 
+#: src/popthelp.c:181
 msgid "VAL"
 msgstr "VAL"
 
+#: src/popthelp.c:185
 msgid "INT"
 msgstr "INT"
 
+#: src/popthelp.c:186
 msgid "SHORT"
 msgstr ""
 
+#: src/popthelp.c:187
 msgid "LONG"
 msgstr "LONG"
 
+#: src/popthelp.c:188
 #, fuzzy
 msgid "LONGLONG"
 msgstr "LONG"
 
+#: src/popthelp.c:189
 msgid "STRING"
 msgstr "STRING"
 
+#: src/popthelp.c:190
 msgid "FLOAT"
 msgstr "FLOAT"
 
+#: src/popthelp.c:191
 msgid "DOUBLE"
 msgstr "DOUBLE"
 
+#: src/popthelp.c:194
 msgid "ARG"
 msgstr "ARG"
 
+#: src/popthelp.c:615
 msgid "Usage:"
 msgstr "用法:"
 
+#: src/popthelp.c:640
 msgid "[OPTION...]"
 msgstr "[選項...]"
