@@ -438,15 +438,23 @@ All of the popt functions that can return errors return integers.
 When an error occurs, a negative error code is returned. The 
 following table summarizes the error codes that occur:
 .sp
-.nf
-.B "     Error                      Description"
-.BR "POPT_ERROR_NOARG       " "Argument missing for an option."
-.BR "POPT_ERROR_BADOPT      " "Option's argument couldn't be parsed."
-.BR "POPT_ERROR_OPTSTOODEEP " "Option aliasing nested too deeply."
-.BR "POPT_ERROR_BADQUOTE    " "Quotations do not match."
-.BR "POPT_ERROR_BADNUMBER   " "Option couldn't be converted to number."
-.BR "POPT_ERROR_OVERFLOW    " "A given number was too big or small."
-.fi
+.TS
+lfB lfB
+lfB lfR.
+Error	Description
+POPT_ERROR_NOARG	Argument missing for an option.
+POPT_ERROR_BADOPT	Option's argument couldn't be parsed.
+POPT_ERROR_UNWANTEDARG	Option does not take an argument.
+POPT_ERROR_OPTSTOODEEP	Option aliasing nested too deeply.
+POPT_ERROR_BADQUOTE	Quotations do not match.
+POPT_ERROR_ERRNO	errno set, use strerror(errno).
+POPT_ERROR_BADNUMBER	Option couldn't be converted to number.
+POPT_ERROR_OVERFLOW	A given number was too big or small.
+POPT_ERROR_BADOPERATION	Mutually exclusive logical operations requested.
+POPT_ERROR_NULLARG	opt->arg should not be NULL.
+POPT_ERROR_MALLOC	Memory allocation failed.
+POPT_ERROR_BADCONFIG	Config file failed sanity test.
+.TE
 .sp
 Here is a more detailed discussion of each error:
 .sp
@@ -463,9 +471,12 @@ line, but no argument was given. This can be returned only by
 .sp
 .TP
 .B POPT_ERROR_OPTSTOODEEP
-A set of option aliases is nested too deeply. Currently, popt 
-follows options only 10 levels to prevent infinite recursion. Only 
-.BR poptGetNextOpt() " can return this error."
+A set of option aliases is nested too deeply. Currently, popt
+follows options only 10 levels
+.B (POPT_OPTION_DEPTH)
+to prevent infinite recursion. Only
+.B poptGetNextOpt()
+can return this error.
 .sp
 .TP
 .B POPT_ERROR_BADQUOTE
@@ -474,12 +485,19 @@ A parsed string has a quotation mismatch (such as a single quotation
 .BR poptReadDefaultConfig() " can return this error."
 .sp
 .TP
+.B POPT_ERROR_ERRNO
+.RI "A system call returned with an error, and " errno " still
+contains the error from the system call. Both
+.BR poptReadConfigFile() " and " poptReadDefaultConfig() " can "
+return this error.
+.sp
+.TP
 .B POPT_ERROR_BADNUMBER
 A conversion from a string to a number (int or long) failed due
 to the string containing non-numeric characters. This occurs when
 .BR poptGetNextOpt() " is processing an argument of type " 
 .BR POPT_ARG_INT ", " POPT_ARG_SHORT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", "
-.RB POPT_ARG_FLOAT ", or " POPT_ARG_DOUBLE "."  
+.BR POPT_ARG_FLOAT ", or " POPT_ARG_DOUBLE "."
 .sp
 .TP
 .B POPT_ERROR_OVERFLOW
@@ -487,14 +505,51 @@ A string-to-number conversion failed because the number was too
 .RB "large or too small. Like " POPT_ERROR_BADNUMBER ", this error 
 .RB "can occur only when " poptGetNextOpt() " is processing an "
 .RB "argument of type " POPT_ARG_INT ", " POPT_ARG_SHORT ", " POPT_ARG_LONG ", " POPT_ARG_LONGLONG ", "
-.RB POPT_ARG_FLOAT ", or " POPT_ARG_DOUBLE "."  
+.BR POPT_ARG_FLOAT ", or " POPT_ARG_DOUBLE "."
 .sp
 .TP
-.B POPT_ERROR_ERRNO
-.RI "A system call returned with an error, and " errno " still 
-contains the error from the system call. Both 
-.BR poptReadConfigFile() " and " poptReadDefaultConfig() " can "
-return this error.
+.B POPT_ERROR_BADOPERATION
+More than one logical operation (AND, OR, XOR) was specified for an option, or
+.B POPT_ARGFLAG_RANDOM
+was specified but the platform does not support the
+.B random()
+function. This can be returned only by
+.BR poptSaveLongLong() ", " poptSaveLong() ", " poptSaveInt() ", "
+.BR poptSaveShort() " and " poptGetNextOpt() "."
+.sp
+.TP
+.B POPT_ERROR_NULLARG
+An operation was invoked on a null target
+.I arg
+(including zero-length string arguments). In the
+.B poptBitsArgs()
+case, this includes an empty leftover
+.I argv
+array. This can only be returned by the
+.B poptBits*()
+and
+.B poptSave*()
+functions,
+.B poptConfigFileToString()
+and
+.BR poptGetNextOpt() .
+.sp
+.TP
+.B POPT_ERROR_MALLOC
+Memory allocation failed. This can only be returned by
+.BR poptReadFile() ,
+.BR poptDupArgv() ,
+.BR poptParseArgvString() ,
+.B poptConfigFileToString()
+and
+.BR poptGetNextOpt() .
+.sp
+.TP
+.B POPT_ERROR_BADCONFIG
+The popt configuration files are corrupted. This can only be returned by
+.B poptReadConfigFile()
+and
+.BR poptReadConfigFiles() .
 .sp
 .PP
 Two functions are available to make it easy for applications to provide
