@@ -110,12 +110,12 @@
  */
 struct poptOption {
     const char * longName;	/*!< may be NULL */
-    char shortName;		/*!< may be NUL */
-    unsigned int argInfo;
+    char shortName;		/*!< may be '\0' */
+    unsigned int argInfo;	/*!< type of argument expected after the option */
     void * arg;			/*!< depends on argInfo */
-    int val;			/*!< 0 means don't return, just update flag */
+    int val;			/*!< 0 means don't return, just update arg */
     const char * descrip;	/*!< description for autohelp -- may be NULL */
-    const char * argDescrip;	/*!< argument description for autohelp */
+    const char * argDescrip;	/*!< argument description for autohelp -- may be NULL */
 };
 
 /**
