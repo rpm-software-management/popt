@@ -8,7 +8,7 @@ popt \- Parse command line options
 .BI "poptContext poptGetContext(const char * " name ", int " argc ,
 .BI "                           const char ** "argv ,
 .BI "                           const struct poptOption * " options ,
-.BI "                           int " flags );
+.BI "                           unsigned int " flags );
 .sp
 .BI "void poptFreeContext(poptContext " con );
 .sp
@@ -274,7 +274,7 @@ modified outside the popt library.
 .BI "poptContext poptGetContext(const char * " name ", int "argc ",
 .BI "                           const char ** "argv ",
 .BI "                           const struct poptOption * "options ",
-.BI "                           int "flags ");"
+.BI "                           unsigned int "flags ");"
 .fi
 .sp
 The first parameter, 
@@ -287,7 +287,7 @@ two arguments specify the command-line arguments to parse. These are
 .IR options " parameter points to the table of command-line options, "
 which was described in the previous section. The final parameter, 
 .IR flags ,
-can take one of three values:
+can be any bitwise or combination of the following four values:
 .br
 .TS
 lfB lfB
@@ -296,6 +296,7 @@ Value	Description
 POPT_CONTEXT_NO_EXEC	Ignore exec expansions
 POPT_CONTEXT_KEEP_FIRST	Do not ignore argv[0]
 POPT_CONTEXT_POSIXMEHARDER	Options cannot follow arguments
+POPT_CONTEXT_ARG_OPTS	Return the arguments as options of value 0
 .TE
 .sp
 .RB "A " poptContext " keeps track of which options have already been "
