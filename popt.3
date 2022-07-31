@@ -95,13 +95,13 @@ structures:
 .sp
 .nf
 struct poptOption {
-    const char * longName; /* may be NULL */
-    char shortName;        /* may be '\\0' */
-    int argInfo;
-    void * arg;            /* depends on argInfo */
-    int val;               /* 0 means don't return, just update flag */
-    char * descrip;        /* description for autohelp -- may be NULL */
-    char * argDescrip;     /* argument description for autohelp */
+    const char * longName;   /* may be NULL */
+    char shortName;          /* may be '\\0' */
+    unsigned int argInfo;    /* type of argument expected after the option */
+    void * arg;              /* depends on argInfo */
+    int val;                 /* 0 means don't return, just update arg */
+    const char * descrip;    /* description for autohelp -- may be NULL */
+    const char * argDescrip; /* argument description for autohelp -- may be NULL*/
 };
 .fi
 .sp
@@ -117,7 +117,9 @@ The
 after the option.  If no argument is expected,
 .B POPT_ARG_NONE
 should be used.
-The rest of the valid values are shown in the following table:
+The valid values of
+.IR argInfo
+are shown in the following table:
 .sp
 .TS
 lfB lfB lfB
