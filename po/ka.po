@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: popt 1.18\n"
 "Report-Msgid-Bugs-To: <rpm-maint@lists.rpm.org>\n"
-"POT-Creation-Date: 2020-06-23 13:29+0300\n"
+"POT-Creation-Date: 2022-09-16 10:04+0300\n"
 "PO-Revision-Date: 2022-06-24 06:18+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/popt/"
@@ -21,52 +21,56 @@ msgstr ""
 msgid "unknown errno"
 msgstr "შეცდომის უცნობი ნომერი"
 
-#: src/popt.c:1206
+#: src/popt.c:1200
 #, c-format
 msgid "option type (%u) not implemented in popt\n"
 msgstr "პარამეტრის ტიპი (%u) ჯერ popt-ში განხორციელებული არაა\n"
 
-#: src/popt.c:1625
+#: src/popt.c:1638
 msgid "missing argument"
 msgstr "ნაკლული არგუმენტი"
 
-#: src/popt.c:1627
+#: src/popt.c:1640
+msgid "option does not take an argument"
+msgstr ""
+
+#: src/popt.c:1642
 msgid "unknown option"
 msgstr "უცნობი პარამეტრი"
 
-#: src/popt.c:1629
+#: src/popt.c:1644
 msgid "mutually exclusive logical operations requested"
 msgstr "მოთხოვნილია ურთიერთგამომრიცხავი ლოგიკური ოპერაციები"
 
-#: src/popt.c:1631
+#: src/popt.c:1646
 msgid "opt->arg should not be NULL"
 msgstr "opt->arg ნულოვანი არ უნდა იყოს"
 
-#: src/popt.c:1633
+#: src/popt.c:1648
 msgid "aliases nested too deeply"
 msgstr "მეტსახელები მეტისმეტად ღრმადაა ჩახლართული"
 
-#: src/popt.c:1635
+#: src/popt.c:1650
 msgid "error in parameter quoting"
 msgstr "პარამეტრების ფრჩხილების შეცდომა"
 
-#: src/popt.c:1637
+#: src/popt.c:1652
 msgid "invalid numeric value"
 msgstr "არასწორი რიცხვითი მნიშვნელობა"
 
-#: src/popt.c:1639
+#: src/popt.c:1654
 msgid "number too large or too small"
 msgstr "რიცხვი მეტისმეტად დიდი ან მეტისმეტად პატარაა"
 
-#: src/popt.c:1641
+#: src/popt.c:1656
 msgid "memory allocation failed"
 msgstr "მეხსიერების გამოყოფის შეცდომა"
 
-#: src/popt.c:1643
+#: src/popt.c:1658
 msgid "config file failed sanity test"
 msgstr "კონფიგურაციის ფაილის შემოწმება წარუმატებელია"
 
-#: src/popt.c:1647
+#: src/popt.c:1662
 msgid "unknown error"
 msgstr "უცნობი შეცდომა"
 
@@ -134,10 +138,10 @@ msgstr "DOUBLE"
 msgid "ARG"
 msgstr "ARG"
 
-#: src/popthelp.c:616
+#: src/popthelp.c:615
 msgid "Usage:"
 msgstr "გამოყენება:"
 
-#: src/popthelp.c:638
+#: src/popthelp.c:640
 msgid "[OPTION...]"
 msgstr "[პარამეტრი...]"

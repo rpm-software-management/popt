@@ -1,5 +1,5 @@
 AC_PREREQ([2.57])
-AC_INIT([popt], [1.19-rc1], [rpm-maint@lists.rpm.org])
+AC_INIT([popt], [1.19], [rpm-maint@lists.rpm.org])
 AC_CONFIG_SRCDIR([src/popt.h])
 AC_CONFIG_HEADERS([config.h])
 
