@@ -443,7 +443,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp, int flags);
  * @param error		popt error
  * @return		error string
  */
-const char * poptStrerror(const int error);
+const char * poptStrerror(int error);
 
 /**
  * Limit search for executables.
