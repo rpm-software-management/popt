@@ -8,6 +8,7 @@ run() {
     result=`HOME=$builddir $builddir/$prog $*`
     if [ "$answer" != "$result" ]; then
         echo "FAIL: $name: \"$result\" != \"$answer\" "
+        retval=2
     else
         echo "PASS: $name"
     fi
@@ -30,6 +31,7 @@ run_diff() {
     if [ "$diff_ret" != "0" ]; then
        echo "FAIL $name: failed output is in $out, diff is:"
        cat $diff_file
+       retval=2
     else
         echo "PASS $name"
     fi
@@ -37,6 +39,7 @@ run_diff() {
 }
 
 builddir=`pwd`
+retval=0
 cd ${builddir}
 echo "Running tests in ${builddir}"
 
@@ -181,4 +184,9 @@ run_diff test3 "test3 - 2" test3-data/02.input test3-data/02.answer
 run_diff test3 "test3 - 3" test3-data/03.input test3-data/03.answer
 
 echo ""
-echo "Passed."
+if [ $retval != 0 ]; then
+    echo "Failed."
+    exit $retval
+else
+    echo "Passed."
+fi
