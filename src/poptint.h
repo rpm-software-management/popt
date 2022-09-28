@@ -4,7 +4,7 @@
 
 /* (C) 1998-2000 Red Hat, Inc. -- Licensing details are in the COPYING
    file accompanying popt source distributions, available from 
-   ftp://ftp.rpm.org/pub/rpm/dist. */
+   http://ftp.rpm.org/popt/releases/. */
 
 #ifndef H_POPTINT
 #define H_POPTINT
