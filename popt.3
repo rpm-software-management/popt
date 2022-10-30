@@ -246,12 +246,15 @@ Option callbacks should match the following prototype:
 .sp
 .nf
 .BI "void poptCallbackType(poptContext con, 
+.BI "                      enum poptCallbackReason reason,
 .BI "                      const struct poptOption * opt, 
-.BI "                      const char * arg, void * data);
+.BI "                      const char * arg, const void * data);
 .fi
 .sp
 The first parameter is the context which is being parsed (see the next
-section for information on contexts), \fIopt\fR points to the option
+section for information on contexts). \fIreason\fR is
+\fBPOPT_CALLBACK_REASON_PRE\fR, \fBPOPT_CALLBACK_REASON_POST\fR, or
+\fBPOPT_CALLBACK_REASON_OPTION\fR. \fIopt\fR points to the option
 which triggered this callback, and \fIarg\fR is the option's argument.
 If the option does not take an argument, \fIarg\fR is \fBNULL\fR.  The
 final parameter, \fIdata\fR is taken from the \fIdescrip\fR field
