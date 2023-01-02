@@ -7,9 +7,7 @@ RUN echo -e "deltarpm=0\ninstall_weak_deps=0\ntsflags=nodocs" >> /etc/dnf/dnf.co
 RUN rm -f /etc/yum.repos.d/*modular.repo
 RUN dnf -y update
 RUN dnf -y install \
-  autoconf \
-  automake \
-  libtool \
+  cmake \
   gettext-devel \
   make \
   gcc \
@@ -18,8 +16,5 @@ RUN dnf -y install \
 
 COPY . .
 
-RUN ./autogen.sh
-RUN ./configure --enable-werror CFLAGS="-Wall -Wdeclaration-after-statement -Wextra -Wmissing-format-attribute -Wmissing-noreturn -Wno-gnu-alignof-expression -Wpointer-arith -Wshadow -Wstrict-prototypes -Wundef -Wunused -Wwrite-strings"
-RUN make
-
-CMD make distcheck DISTCHECK_CONFIGURE_FLAGS=--enable-werror
+RUN cmake -S . -B ./build
+CMD cd build && ctest --output-on-failure --force-new-ctest-process
