@@ -8,7 +8,7 @@
 
 #include <ctype.h>
 
-/* XXX isspace(3) has i18n encoding signednesss issues on Solaris. */
+/* XXX isspace(3) has i18n encoding signedness issues on Solaris. */
 #define	_isspaceptr(_chp)	isspace((int)(*(unsigned const char *)(_chp)))
 
 #ifdef HAVE_MCHECK_H
