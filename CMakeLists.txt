@@ -22,6 +22,32 @@ include(CMakePackageConfigHelpers)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_EXTENSIONS ON)
 
+# Build Types
+set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}
+	CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel SanitizeAddress RelWithDebInfoStrict"
+	FORCE
+)
+
+# AddressSanitize
+set(CMAKE_C_FLAGS_SANITIZEADDRESS
+	"-O0 -g -fsanitize=address -fno-optimize-sibling-calls -fsanitize-address-use-after-scope -fno-omit-frame-pointer"
+	CACHE STRING "Flags used by the C compiler during AddressSanitizer builds."
+	FORCE
+)
+
+set(CMAKE_LINK_FLAGS_SANITIZEADDRESS
+	"-fsanitize=address"
+	CACHE STRING "Flags used by the linker during AddressSanitizer builds."
+	FORCE
+)
+
+# RelWithDebInfoStrict
+set(CMAKE_C_FLAGS_RELWITHDEBINFOSTRICT
+	"-O2 -g -Werror -Wall -D_FORTIFY_SOURCE=3 -fstack-protector-strong -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -flto=8 -Wdeclaration-after-statement -Wextra -Wmissing-format-attribute -Wmissing-noreturn -Wpointer-arith -Wshadow -Wstrict-prototypes -Wundef -Wunused -Wwrite-strings"
+	CACHE STRING "Flags used by the C compiler during strict RelWithDebInfo builds."
+	FORCE
+)
+
 # Check for necessary symbols and headers
 include(CheckSymbolExists)
 include(CheckIncludeFile)

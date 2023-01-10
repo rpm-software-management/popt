@@ -16,5 +16,5 @@ RUN dnf -y install \
 
 COPY . .
 
-RUN cmake -S . -B ./build
+RUN cmake -S . -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfoStrict
 CMD cd build && ctest --output-on-failure --force-new-ctest-process
