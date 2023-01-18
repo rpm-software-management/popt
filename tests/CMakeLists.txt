@@ -19,9 +19,9 @@ endforeach()
 
 configure_file(test-poptrc.in test-poptrc @ONLY)
 
-find_program (BASH_PROGRAM bash)
+find_program (SH_PROGRAM sh)
 
-if (BASH_PROGRAM)
-	add_test (testit ${BASH_PROGRAM} -c "srcdir=${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/testit.sh")
+if (SH_PROGRAM)
+	add_test (testit ${SH_PROGRAM} -c "srcdir=${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/testit.sh")
 	set_tests_properties(testit PROPERTIES FIXTURES_REQUIRED testit_fixture)
-endif (BASH_PROGRAM)
+endif (SH_PROGRAM)
