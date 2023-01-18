@@ -72,6 +72,11 @@ foreach(inchdr ${OPTINCS})
 	chkhdr(${inchdr} FALSE)
 endforeach()
 
+find_package(Iconv)
+
+if (Iconv_FOUND)
+	add_compile_definitions(HAVE_ICONV)
+endif()
 
 add_subdirectory(src)
 add_subdirectory(po)
