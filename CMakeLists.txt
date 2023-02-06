@@ -79,8 +79,10 @@ if (Iconv_FOUND)
 endif()
 
 add_subdirectory(src)
-add_subdirectory(po)
 add_subdirectory(doc)
+if (EXISTS po/popt.pot)
+	add_subdirectory(po)
+endif()
 
 # Enable testing
 include(CTest)
