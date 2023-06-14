@@ -9,6 +9,13 @@ project(popt
 	LANGUAGES C
 )
 
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS ON)
+
+option(BUILD_STATIC_LIBS "Build static libraries" OFF)
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+
 # Set soversion
 set(POPT_SOVERSION 0)
 

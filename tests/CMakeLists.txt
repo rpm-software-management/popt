@@ -1,7 +1,13 @@
+if (BUILD_SHARED_LIBS)
+	set(libpopt poptShared)
+else()
+	set(libpopt poptStatic)
+endif()
+
 # Set up macro for building and adding tests
 macro(BuildTest TESTNAME)
 	add_executable(${TESTNAME} EXCLUDE_FROM_ALL ${TESTNAME}.c)
-	target_link_libraries(${TESTNAME} PRIVATE popt)
+	target_link_libraries(${TESTNAME} PRIVATE ${libpopt})
 	add_test(${TESTNAME}_build ${CMAKE_COMMAND} --build "${CMAKE_BINARY_DIR}" --config "$<CONFIG>" --target ${TESTNAME})
 	set_tests_properties(${TESTNAME}_build PROPERTIES FIXTURES_SETUP testit_fixture)
 endmacro()
