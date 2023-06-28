@@ -20,7 +20,9 @@ target_include_directories(popt PUBLIC
 	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-target_link_libraries(popt PRIVATE Iconv::Iconv)
+if (Iconv_FOUND)
+	target_link_libraries(popt PRIVATE Iconv::Iconv)
+endif()
 
 set_target_properties(popt PROPERTIES
 	VERSION ${PROJECT_VERSION}
