@@ -3,8 +3,11 @@ cmake_minimum_required(VERSION 3.12)
 # Ensure built-in policies from CMake are used, (e.g. improved policies for macOS)
 cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 
+set(POPT_VERSION 1)
+set(POPT_REVISION 19)
+
 project(popt
-	VERSION 1.19
+	VERSION ${POPT_VERSION}.${POPT_REVISION}
 	DESCRIPTION "Portable library for parsing command line parameters"
 	LANGUAGES C
 )

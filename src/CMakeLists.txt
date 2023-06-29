@@ -1,5 +1,7 @@
 # Build the library
 
+configure_file(${PROJECT_SOURCE_DIR}/src/popt.h.in ${PROJECT_SOURCE_DIR}/src/popt.h @ONLY)
+
 # autotool compatibility stuff
 add_compile_definitions(POPT_SYSCONFDIR="${CMAKE_INSTALL_FULL_SYSCONFDIR}")
 add_compile_definitions(PACKAGE="${PROJECT_NAME}")

@@ -10,6 +10,9 @@
 
 #include <stdio.h>			/* for FILE * */
 
+#define POPT_VERSION @POPT_VERSION@
+#define POPT_REVISION @POPT_REVISION@
+
 #define POPT_OPTION_DEPTH	10
 
 /**
