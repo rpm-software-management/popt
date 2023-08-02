@@ -754,6 +754,7 @@ at least some of the features of the extremely rich popt library.
 void usage(poptContext optCon, int exitcode, char *error, char *addl) {
     poptPrintUsage(optCon, stderr, 0);
     if (error) fprintf(stderr, "%s: %s\\n", error, addl);
+    poptFreeContext(optCon);
     exit(exitcode);
 }
 
@@ -761,7 +762,7 @@ int main(int argc, char *argv[]) {
    int     c;            /* used for argument parsing */
    int     i = 0;        /* used for tracking options */
    int     speed = 0;    /* used in argument parsing to set speed */
-   int     raw = 0;      /* raw mode? */ 
+   int     raw = 0;      /* raw mode? */
    int     j;
    char    buf[BUFSIZ+1];
    const char *portname;
@@ -770,35 +771,33 @@ int main(int argc, char *argv[]) {
    struct poptOption optionsTable[] = {
       { "bps", 'b', POPT_ARG_INT, &speed, 0,
 	"signaling rate in bits-per-second", "BPS" },
-      { "crnl", 'c', 0, 0, 'c',
+      { "crnl", 'c', POPT_ARG_NONE, 0, 'c',
 	"expand cr characters to cr/lf sequences", NULL },
-      { "hwflow", 'h', 0, 0, 'h',
+      { "hwflow", 'h', POPT_ARG_NONE, 0, 'h',
 	"use hardware (RTS/CTS) flow control", NULL },
-      { "noflow", 'n', 0, 0, 'n',
+      { "noflow", 'n', POPT_ARG_NONE, 0, 'n',
 	"use no flow control", NULL },
-      { "raw", 'r', 0, &raw, 0,
+      { "raw", 'r', POPT_ARG_NONE, &raw, 0,
 	"don't perform any character conversions", NULL },
-      { "swflow", 's', 0, 0, 's',
+      { "swflow", 's', POPT_ARG_NONE, 0, 's',
 	"use software (XON/XOF) flow control", NULL } ,
       POPT_AUTOHELP
-      { NULL, 0, 0, NULL, 0 }
+      POPT_TABLEEND
     };
 
-   optCon = poptGetContext(NULL, argc, argv, optionsTable, 0);
+   optCon = poptGetContext(NULL, argc, (const char **) argv, optionsTable, 0);
    poptSetOtherOptionHelp(optCon, "[OPTIONS]* <port>");
 
-   if (argc < 2) {
-	poptPrintUsage(optCon, stderr, 0);
-	exit(1);
-   }
+   if (argc < 2)
+       usage(optCon, 1, 0, NULL);
 
    /* Now do options processing, get portname */
    while ((c = poptGetNextOpt(optCon)) >= 0) {
       switch (c) {
-       case 'c': 
-          buf[i++] = 'c';         
+       case 'c':
+          buf[i++] = 'c';
           break;
-       case 'h': 
+       case 'h':
           buf[i++] = 'h';
           break;
        case 's':
@@ -815,7 +814,7 @@ int main(int argc, char *argv[]) {
 
    if (c < -1) {
       /* an error occurred during option processing */
-      fprintf(stderr, "%s: %s\\n", 
+      fprintf(stderr, "%s: %s\\n",
               poptBadOption(optCon, POPT_BADOPTION_NOALIAS),
               poptStrerror(c));
       return 1;
