@@ -301,6 +301,40 @@ POPT_CONTEXT_POSIXMEHARDER	Options cannot follow arguments
 POPT_CONTEXT_ARG_OPTS	Return the arguments as options of value 0
 .TE
 .sp
+Here is a more detailed discussion of each flag:
+.sp
+.TP
+.B POPT_CONTEXT_NO_EXEC
+This bit disables all uses of
+.BR exec "(2) from within the given popt context."
+.sp
+.TP
+.B POPT_CONTEXT_KEEP_FIRST
+By default, popt ignores the value in
+.I argv[0]
+as it is typically the name of the program being run rather than a command-line
+argument. Specifying this flag causes popt to treat
+.I argv[0]
+as an option.
+.sp
+.TP
+.B POPT_CONTEXT_POSIXMEHARDER
+When this flag is set, it is required that all options is placed before any
+arguments. This flag is also in effect if any of the environment variables
+.B POSIXLY_CORRECT
+or
+.B POSIX_ME_HARDER
+is set.
+.sp
+.TP
+.B POPT_CONTEXT_ARG_OPTS
+When this flag is set, all non-option arguments will get the value 0. This means
+that
+.B poptGetNextOpt()
+returns 0 for all non-option arguments, while
+.BR poptGetArg() " returns " NULL .
+.sp
+.PP
 .RB "A " poptContext " keeps track of which options have already been "
 parsed and which remain, among other things. If a program wishes to 
 restart option processing of a set of arguments, it can reset the 
