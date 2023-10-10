@@ -1,4 +1,6 @@
 # Build the library
+# Include functionality to automatically generate export header files for shared libraries
+include(GenerateExportHeader)
 
 # autotool compatibility stuff
 add_compile_definitions(POPT_SYSCONFDIR="${CMAKE_INSTALL_FULL_SYSCONFDIR}")
@@ -23,6 +25,12 @@ else ()
 	add_library(popt STATIC ${POTP_SOURCE})
 endif ()
 
+generate_export_header(popt
+		BASE_NAME popt
+		EXPORT_MACRO_NAME POPT_LIB_EXPORT
+		EXPORT_FILE_NAME  ${CMAKE_SOURCE_DIR}/src/poptexport.h
+)
+
 target_include_directories(popt PUBLIC
 	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
 	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
@@ -38,7 +46,7 @@ set_target_properties(popt PROPERTIES
 	C_STANDARD 99
 	C_STANDARD_REQUIRED ON
 	C_EXTENSIONS ON
-	PUBLIC_HEADER popt.h
+	PUBLIC_HEADER "popt.h;poptexport.h"
 	LINK_FLAGS "-Wl,--no-undefined -Wl,--version-script,\"${PROJECT_SOURCE_DIR}/src/libpopt.vers\""
 )
 

@@ -32,7 +32,7 @@ class PoptConan(ConanFile):
     )
     generators = "CMakeDeps"
     default_options = {
-        "shared": False,
+        "shared": True,
         "fPIC": True,
         "doc": False
     }
