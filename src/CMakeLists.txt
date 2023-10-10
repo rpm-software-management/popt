@@ -4,8 +4,8 @@
 add_compile_definitions(POPT_SYSCONFDIR="${CMAKE_INSTALL_FULL_SYSCONFDIR}")
 add_compile_definitions(PACKAGE="${PROJECT_NAME}")
 
-# Setup library target
-add_library(popt SHARED
+# Source library target
+set(POTP_SOURCE
 	popt.c
 	poptconfig.c
 	popthelp.c
@@ -13,7 +13,15 @@ add_library(popt SHARED
 	poptparse.c
 	poptint.h
 	system.h
+	system.c
 )
+
+# Setup library target
+if (BUILD_SHARED_LIBS)
+	add_library(popt SHARED ${POTP_SOURCE})
+else ()
+	add_library(popt STATIC ${POTP_SOURCE})
+endif ()
 
 target_include_directories(popt PUBLIC
 	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>

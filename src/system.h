@@ -63,7 +63,26 @@ static inline char * stpcpy (char *dest, const char * src) {
 #define __attribute__(x) 
 #endif
 #define UNUSED(x) x __attribute__((__unused__))
+#if defined(_MSC_VER)
+#define X_OK 0
+
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+
+#define S_ISREG(m) (((m) & S_IFMT) == S_IFREG)
+#endif
+
 #define FORMAT(a, b, c) __attribute__((__format__ (a, b, c)))
 #define NORETURN __attribute__((__noreturn__))
+
+#ifdef _MSC_VER
+typedef unsigned int uid_t;
+typedef unsigned int gid_t;
+uid_t getuid(void);
+uid_t geteuid(void);
+gid_t getgid(void);
+gid_t getegid(void);
+#endif
+
 
 #include "popt.h"

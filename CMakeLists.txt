@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 3.12)
 cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 
 project(popt
-	VERSION 1.19
-	DESCRIPTION "Portable library for parsing command line parameters"
-	LANGUAGES C
+        VERSION 1.19
+        DESCRIPTION "Portable library for parsing command line parameters"
+        LANGUAGES C
 )
 
 # Set soversion
@@ -27,25 +27,25 @@ include(CheckSymbolExists)
 include(CheckIncludeFile)
 
 function(chkdef func inc)
-	string(TOUPPER ${func} FUNC)
-	set(HAVENAME HAVE_${FUNC})
-	check_symbol_exists(${func} "${inc}" ${HAVENAME})
-	if (${HAVENAME})
-		add_compile_definitions(${HAVENAME})
-	endif()
+    string(TOUPPER ${func} FUNC)
+    set(HAVENAME HAVE_${FUNC})
+    check_symbol_exists(${func} "${inc}" ${HAVENAME})
+    if (${HAVENAME})
+        add_compile_definitions(${HAVENAME})
+    endif ()
 endfunction()
 
 function(chkhdr inc req)
-	string(MAKE_C_IDENTIFIER ${inc} ID)
-	string(TOUPPER ${ID} INC)
-	set(HAVENAME HAVE_${INC})
-	check_include_file(${inc} ${HAVENAME})
-	if (${HAVENAME})
-		add_compile_definitions(${HAVENAME})
-	endif()
-	if (${req} AND NOT ${HAVENAME})
-		message(FATAL_ERROR "required include ${inc} not found")
-	endif()
+    string(MAKE_C_IDENTIFIER ${inc} ID)
+    string(TOUPPER ${ID} INC)
+    set(HAVENAME HAVE_${INC})
+    check_include_file(${inc} ${HAVENAME})
+    if (${HAVENAME})
+        add_compile_definitions(${HAVENAME})
+    endif ()
+    if (${req} AND NOT ${HAVENAME})
+        message(FATAL_ERROR "required include ${inc} not found")
+    endif ()
 endfunction()
 
 chkdef(stpcpy string.h)
@@ -66,23 +66,27 @@ chkdef(mbsrtowcs wchar.h)
 
 
 set(OPTINCS
-	fnmatch.h glob.h langinfo.h libintl.h mcheck.h stdalign.h
+        fnmatch.h glob.h langinfo.h libintl.h mcheck.h stdalign.h
 )
-foreach(inchdr ${OPTINCS})
-	chkhdr(${inchdr} FALSE)
-endforeach()
+foreach (inchdr ${OPTINCS})
+    chkhdr(${inchdr} FALSE)
+endforeach ()
 
 find_package(Iconv)
 
 if (Iconv_FOUND)
-	add_compile_definitions(HAVE_ICONV)
-endif()
+    add_compile_definitions(HAVE_ICONV)
+endif ()
 
 add_subdirectory(src)
-add_subdirectory(doc)
+
+if (BUILD_DOC)
+    add_subdirectory(doc)
+endif ()
+
 if (EXISTS po/popt.pot)
-	add_subdirectory(po)
-endif()
+    add_subdirectory(po)
+endif ()
 
 # Enable testing
 include(CTest)

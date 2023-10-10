@@ -16,3 +16,27 @@ from Addison Wesley in May, 1998).
 Bugs, feature requests and contributions can be submitted at
 https://github.com/rpm-software-management/popt or alternatively
 rpm-maint@lists.rpm.org.
+
+
+**1. Install using Conan 2:**
+> The code below should be executed after Conan 2 has been installed and configured in your environment.
+
+```sh
+conan install . -s build_type=Debug --build=missing --output-folder=./deps
+conan install . -s build_type=Release --build=missing --output-folder=./deps
+```
+
+**2. CMake Configuration::**
+
+> Adjust the path as needed
+
+```sh
+-DCMAKE_TOOLCHAIN_FILE=deps/conan_toolchain.cmake
+```
+
+**3. Creating a package**
+>  Adjust the version as needed. eg: 1.9.4
+
+```sh
+conan create . --build=missing -s build_type=Debug --version=<version>
+```

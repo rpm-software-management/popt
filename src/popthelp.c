@@ -10,7 +10,10 @@
 
 #include "system.h"
 
-#define        POPT_USE_TIOCGWINSZ
+#ifndef _MSC_VER
+#define POPT_USE_TIOCGWINSZ
+#endif
+
 #ifdef POPT_USE_TIOCGWINSZ
 #include <sys/ioctl.h>
 #endif
@@ -32,7 +35,7 @@
 NORETURN
 static void displayArgs(poptContext con,
 		UNUSED(enum poptCallbackReason foo),
-		struct poptOption * key, 
+		struct poptOption * key,
 		UNUSED(const char * arg),
 		UNUSED(void * data))
 {
@@ -92,9 +95,9 @@ typedef struct columns_s {
  * Return no. of columns in output window.
  * @param fp           FILE
  * @return             no. of columns 
- */ 
+ */
 static size_t maxColumnWidth(FILE *fp)
-{   
+{
     size_t maxcols = _POPTHELP_MAXLINE;
 #if defined(TIOCGWINSZ)
     struct winsize ws;
@@ -108,7 +111,7 @@ static size_t maxColumnWidth(FILE *fp)
     }
 #endif
     return maxcols;
-}   
+}
 
 /**
  * Determine number of display characters in a string.
@@ -489,7 +492,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
     size_t max = 0;
     size_t len = 0;
     const char * argDescrip;
-    
+
     if (opt != NULL)
     while (opt->longName || opt->shortName || opt->arg) {
 	if (poptArgType(opt) == POPT_ARG_INCLUDE_TABLE) {
@@ -525,7 +528,7 @@ static size_t maxArgWidth(const struct poptOption * opt,
 	}
 	opt++;
     }
-    
+
     return max;
 }
 
@@ -593,7 +596,7 @@ static void singleTableHelp(poptContext con, FILE * fp,
 	sub_transdom = getTableTranslationDomain(arg);
 	if (sub_transdom == NULL)
 	    sub_transdom = translation_domain;
-	    
+
 	/* If no popt aliases/execs, skip poptAliasOption processing. */
 	if (arg == poptAliasOptions && !(con->numAliases || con->numExecs))
 	    continue;
@@ -686,7 +689,7 @@ static size_t singleOptionUsage(FILE * fp, columns_t columns,
     if ((columns->cur + len) > columns->max) {
 	fprintf(fp, "\n       ");
 	columns->cur = (size_t)7;
-    } 
+    }
 
     fprintf(fp, " [");
     if (prtshort)
@@ -832,7 +835,7 @@ static size_t showShortOptions(const struct poptOption * opt, FILE * fp,
 	    if (arg)	/* XXX program error */
 		len = showShortOptions(arg, fp, s);
 	}
-    } 
+    }
 
     /* On return to top level, print the short options, return print length. */
     if (s != str && *s != '\0') {

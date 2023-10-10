@@ -53,3 +53,7 @@ popt-*.tar.gz
 /po/quot.sed
 /po/remove-potcdate.sin
 /po/stamp-po
+
+cmake-*
+**/CMakeUserPresets.json
+.idea
