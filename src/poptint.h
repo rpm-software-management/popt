@@ -11,6 +11,8 @@
 
 #include <stdint.h>
 
+#define POPT_OPTION_DEPTH	10
+
 /**
  * Wrapper to free(3), hides const compilation noise, permit NULL, return NULL.
  * @param p		memory to free
