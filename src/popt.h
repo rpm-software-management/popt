@@ -36,8 +36,8 @@
 #define	POPT_ARG_SHORT		13U	/*!< arg ==> short */
 #define	POPT_ARG_BITSET		(16U+14U)	/*!< arg ==> bit set */
 
-#define POPT_ARG_MASK		0x000000FFU
-#define POPT_GROUP_MASK		0x0000FF00U
+#define POPT_ARG_MASK		0x000000FFU  /*!< option type mask */
+#define POPT_GROUP_MASK		0x0000FF00U  /*!< option group mask */
 
 /**
  * \name Arg modifiers
@@ -54,7 +54,7 @@
 #define	POPT_ARGFLAG_XOR	0x02000000U  /*!< arg will be xor'ed */
 #define	POPT_ARGFLAG_NOT	0x01000000U  /*!< arg will be negated */
 #define POPT_ARGFLAG_LOGICALOPS \
-        (POPT_ARGFLAG_OR|POPT_ARGFLAG_AND|POPT_ARGFLAG_XOR)
+        (POPT_ARGFLAG_OR|POPT_ARGFLAG_AND|POPT_ARGFLAG_XOR) /*!< arg has a logical op */
 
 #define	POPT_BIT_SET	(POPT_ARG_VAL|POPT_ARGFLAG_OR)
 					/*!< set arg bit(s) */
@@ -105,6 +105,7 @@
 #define POPT_CONTEXT_ARG_OPTS	(1U << 4) /*!< return args as options with value 0 */
 
 /**
+ * Defines a single option that may passed to the program.
  */
 struct poptOption {
     const char * longName;	/*!< may be NULL */
@@ -122,7 +123,7 @@ struct poptOption {
 struct poptAlias {
     const char * longName;	/*!< may be NULL */
     char shortName;		/*!< may be NUL */
-    int argc;
+    int argc;			/*!< argument count */
     const char ** argv;		/*!< must be free()able */
 };
 
@@ -143,6 +144,9 @@ typedef struct poptItem_s {
  * Empty table marker to enable displaying popt alias/exec options.
  */
 extern struct poptOption poptAliasOptions[];
+/**
+ * Include in your options table for automatic alias/exec option listing
+ */
 #define POPT_AUTOALIAS { NULL, '\0', POPT_ARG_INCLUDE_TABLE, poptAliasOptions, \
 			0, "Options implemented via popt alias/exec:", NULL },
 
@@ -151,24 +155,35 @@ extern struct poptOption poptAliasOptions[];
  */
 extern struct poptOption poptHelpOptions[];
 
+/**
+ * Localized popt options
+ */
 extern struct poptOption * poptHelpOptionsI18N;
 
+/**
+ * Include in your options table for automatic help option listing
+ */
 #define POPT_AUTOHELP { NULL, '\0', POPT_ARG_INCLUDE_TABLE, poptHelpOptions, \
 			0, "Help options:", NULL },
-
+/**
+ * Include in your options table as the last element
+ */
 #define POPT_TABLEEND { NULL, '\0', 0, NULL, 0, NULL, NULL }
 
 /**
+ * The main popt context type
  */
 typedef struct poptContext_s * poptContext;
 
 /**
+ * The main popt option type
  */
 #ifndef __cplusplus
 typedef struct poptOption * poptOption;
 #endif
 
 /**
+ * Callback reason values
  */
 enum poptCallbackReason {
     POPT_CALLBACK_REASON_PRE	= 0, 
@@ -323,14 +338,14 @@ int poptSaneFile(const char * fn);
 /**
  * Read a file into a buffer.
  * @param fn		file name
- * @retval *bp		buffer (malloc'd) (or NULL)
- * @retval *nbp		no. of bytes in buffer (including final NUL) (or NULL)
+ * @param[out] *bp		buffer (malloc'd) (or NULL)
+ * @param[out] *nbp		no. of bytes in buffer (including final NUL) (or NULL)
  * @param flags		1 to trim escaped newlines
  * return		0 on success
  */
 int poptReadFile(const char * fn, char ** bp,
 		size_t * nbp, int flags);
-#define	POPT_READFILE_TRIMNEWLINES	1
+#define	POPT_READFILE_TRIMNEWLINES	1	/*!< trim new lines on read? */
 
 /**
  * Read configuration file.
@@ -366,8 +381,8 @@ int poptReadDefaultConfig(poptContext con, int useEnv);
  *
  * @param argc		no. of arguments
  * @param argv		argument array
- * @retval argcPtr	address of returned no. of arguments
- * @retval argvPtr	address of returned argument array
+ * @param[out] argcPtr	address of returned no. of arguments
+ * @param[out] argvPtr	address of returned argument array
  * @return		0 on success, POPT_ERROR_NOARG on failure
  */
 int poptDupArgv(int argc, const char **argv,
@@ -382,8 +397,8 @@ int poptDupArgv(int argc, const char **argv,
  * be free'd.
  *
  * @param s		string to parse
- * @retval argcPtr	address of returned no. of arguments
- * @retval argvPtr	address of returned argument array
+ * @param[out] argcPtr	address of returned no. of arguments
+ * @param[out] argvPtr	address of returned argument array
  */
 int poptParseArgvString(const char * s,
 		int * argcPtr, const char *** argvPtr);
@@ -492,7 +507,7 @@ int poptStrippedArgv(poptContext con, int argc, char ** argv);
 
 /**
  * Add a string to an argv array.
- * @retval *argvp	argv array
+ * @param[out] *argvp	argv array
  * @param argInfo	(unused)
  * @param val		string arg to add (using strdup)
  * @return		0 on success, POPT_ERROR_NULLARG/POPT_ERROR_BADOPERATION
@@ -541,30 +556,59 @@ int poptSaveShort(short * arg, unsigned int argInfo, long aLong);
  */
 int poptSaveInt(int * arg, unsigned int argInfo, long aLong);
 
-/* The bit set typedef. */
+/**
+ * The bit set typedef.
+ */
 typedef struct poptBits_s {
-    unsigned int bits[1];
+    unsigned int bits[1];		/*!< internal */
 } * poptBits;
 
 #define _POPT_BITS_N    1024U	/*!< estimated population */
-#define _POPT_BITS_M    ((3U * _POPT_BITS_N) / 2U)
+#define _POPT_BITS_M    ((3U * _POPT_BITS_N) / 2U) /*!< internal */
 #define _POPT_BITS_K    16U	/*!< no. of linear hash combinations */
 
-extern unsigned int _poptBitsN;
-extern  unsigned int _poptBitsM;
-extern  unsigned int _poptBitsK;
+extern unsigned int _poptBitsN;		/*!< internal */
+extern  unsigned int _poptBitsM;	/*!< internal */
+extern  unsigned int _poptBitsK;	/*!< internal */
 
+/**
+ * Add bits
+ */
 int poptBitsAdd(poptBits bits, const char * s);
+
+/**
+ * Test bits
+ */
 int poptBitsChk(poptBits bits, const char * s);
+
+/**
+ * Clear bitfield
+ */
 int poptBitsClr(poptBits bits);
+
+/**
+ * Delete bits
+ */
 int poptBitsDel(poptBits bits, const char * s);
+
+/**
+ * Test for bit intersection
+ */
 int poptBitsIntersect(poptBits * ap, const poptBits b);
+
+/**
+ * Test for bit union
+ */
 int poptBitsUnion(poptBits * ap, const poptBits b);
+
+/**
+ * Args
+ */
 int poptBitsArgs(poptContext con, poptBits * ap);
 
 /**
  * Save a string into a bit set (experimental).
- * @retval *bits	bit set (lazily malloc'd if NULL)
+ * @param[out] bitsp	bit set (lazily malloc'd if NULL)
  * @param argInfo	logical operation (see POPT_ARGFLAG_*)
  * @param s		string to add to bit set
  * @return		0 on success, POPT_ERROR_NULLARG/POPT_ERROR_BADOPERATION
