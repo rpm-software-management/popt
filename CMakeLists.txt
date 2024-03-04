@@ -78,6 +78,8 @@ if (Iconv_FOUND)
 	add_compile_definitions(HAVE_ICONV)
 endif()
 
+add_compile_options(-Wall)
+
 add_subdirectory(src)
 add_subdirectory(doc)
 if (EXISTS po/popt.pot)
