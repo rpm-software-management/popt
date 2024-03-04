@@ -8,6 +8,9 @@ if(BUILD_DOCUMENTATION)
 	endif()
 
 	set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
+	if (ENABLE_WERROR)
+		set(DOXYGEN_WARN_AS_ERROR YES)
+	endif()
 	doxygen_add_docs(apidocs
 		${CMAKE_SOURCE_DIR}/src/popt.h
 		ALL USE_STAMP_FILE
