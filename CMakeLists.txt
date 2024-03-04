@@ -12,6 +12,9 @@ project(popt
 # Set soversion
 set(POPT_SOVERSION 0)
 
+# Configurable stuff
+option(ENABLE_WERROR "Stop build on warnings" OFF)
+
 # Set up GNU conventions and standard FHS paths
 include(GNUInstallDirs)
 
@@ -79,6 +82,9 @@ if (Iconv_FOUND)
 endif()
 
 add_compile_options(-Wall)
+if (ENABLE_WERROR)
+	add_compile_options(-Werror)
+endif()
 
 add_subdirectory(src)
 add_subdirectory(doc)
