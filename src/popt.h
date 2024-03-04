@@ -10,8 +10,6 @@
 
 #include <stdio.h>			/* for FILE * */
 
-#define POPT_OPTION_DEPTH	10
-
 /**
  * \name Arg type identifiers
  */
