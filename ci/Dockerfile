@@ -16,5 +16,5 @@ RUN dnf -y install \
 
 COPY . .
 
-RUN cmake -S . -B ./build
+RUN cmake -S . -B ./build -DENABLE_WERROR=ON
 CMD cd build && ctest --output-on-failure --force-new-ctest-process
