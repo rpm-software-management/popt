@@ -30,7 +30,11 @@ int main (int argc, char **argv) {
 
 	printf ("single string: '%s'\n", out);
 
-	poptParseArgvString (out, &newargc, &newargv);
+	ret = poptParseArgvString (out, &newargc, &newargv);
+	if (ret != 0) {
+	    printf ("cannot parse %s. ret=%d\n", out, ret);
+	    continue;
+	}
 
 	printf ("popt array: size=%d\n", newargc);
 	for (j = 0; j < newargc; j++)
