@@ -12,7 +12,7 @@ popt \- Parse command line options
 .BI "                           const struct poptOption * " options ,
 .BI "                           unsigned int " flags );
 .sp
-.BI "void poptFreeContext(poptContext " con );
+.BI "poptContext poptFreeContext(poptContext " con );
 .sp
 .BI "void poptResetContext(poptContext " con );
 .sp
@@ -357,7 +357,7 @@ context is using.
 .sp
 .nf
 .B #include <popt.h>
-.BI "void poptFreeContext(poptContext " con ");"
+.BI "poptContext poptFreeContext(poptContext " con ");"
 .BI "void poptResetContext(poptContext " con ");"
 .fi
 .sp
