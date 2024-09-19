@@ -12,7 +12,7 @@ popt \- Parse command line options
 .BI "                           const struct poptOption * " options ,
 .BI "                           unsigned int " flags );
 .sp
-.BI "void poptFreeContext(poptContext " con );
+.BI "poptContext poptFreeContext(poptContext " con );
 .sp
 .BI "void poptResetContext(poptContext " con );
 .sp
@@ -350,14 +350,14 @@ When argument processing is complete, the process should free the
 .BR poptContext " as it contains dynamically allocated components. The "
 .BR poptFreeContext() " function takes a " 
 .BR poptContext " as its sole argument and frees the resources the "
-context is using.
+context is using. It always returns NULL for convenience.
 .sp
 .RB "Here are the prototypes of both " poptResetContext() " and "
 .BR poptFreeContext() :
 .sp
 .nf
 .B #include <popt.h>
-.BI "void poptFreeContext(poptContext " con ");"
+.BI "poptContext poptFreeContext(poptContext " con ");"
 .BI "void poptResetContext(poptContext " con ");"
 .fi
 .sp
