@@ -71,7 +71,7 @@ chkdef(mbsrtowcs wchar.h)
 
 
 set(OPTINCS
-	fnmatch.h glob.h langinfo.h libintl.h mcheck.h stdalign.h
+	fnmatch.h glob.h langinfo.h libintl.h mcheck.h stdalign.h unistd.h
 )
 foreach(inchdr ${OPTINCS})
 	chkhdr(${inchdr} FALSE)
