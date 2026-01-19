@@ -53,6 +53,7 @@ function(chkhdr inc req)
 	endif()
 endfunction()
 
+chkdef(TIOCGWINSZ sys/ioctl.h)
 chkdef(stpcpy string.h)
 chkdef(strerror string.h)
 chkdef(getuid unistd.h)
