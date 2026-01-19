@@ -148,8 +148,12 @@ int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
      || (uintmax_t)nb >= SIZE_MAX
      || lseek(fdno, 0, SEEK_SET) == (off_t)-1
      || (b = calloc(sizeof(*b), (size_t)nb + 1)) == NULL
-     || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb)
-    {
+#ifdef _WIN32
+     || (off_t)_read(fdno, (char *)b, (unsigned)nb) != nb
+#else
+     || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb
+#endif
+    ) {
 	int oerrno = errno;
 	(void) close(fdno);
 	if (nb != (off_t)-1 && (uintmax_t)nb >= SIZE_MAX)
