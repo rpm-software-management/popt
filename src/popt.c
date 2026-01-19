@@ -524,7 +524,7 @@ static int execCommand(poptContext con)
     if (rc) goto exit;
     rc = setreuid(getuid(), getuid());
     if (rc) goto exit;
-#else
+#elif defined(HAVE_GETUID)
     /* refuse to exec if we cannot drop suid/sgid privileges */
     if (getuid() != geteuid() || getgid() != getegid()) {
 	errno = ENOTSUP;
