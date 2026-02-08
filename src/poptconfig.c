@@ -394,8 +394,7 @@ exit:
 int poptReadConfigFiles(poptContext con, const char * paths)
 {
     char * buf = (paths ? xstrdup(paths) : NULL);
-    const char * p;
-    char * pe;
+    char * p, * pe;
     int rc = 0;		/* assume success */
 
     for (p = buf; p != NULL && *p != '\0'; p = pe) {
