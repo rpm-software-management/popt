@@ -172,6 +172,8 @@ run test1 "test1 - 61" "" -x=f1
 
 run test1 "test1 - 62" "arg1: 0 arg2: (none) aInt: 1" --randint=-1
 
+run tstuff "tstuff - 1" "-13"
+
 if ! [ -e test3-data ]; then
   # create symlink for running during 'make distcheck'
   ln -s "${srcdir}/test3-data" test3-data
