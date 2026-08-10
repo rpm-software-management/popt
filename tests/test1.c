@@ -181,7 +181,10 @@ static void resetVars(void)
     if (aBits)
 	(void) poptBitsClr(aBits);
 
-    oStr = (char *) -1;
+    if (oStr != (char *) -1) {
+	free(oStr);
+	oStr = (char *) -1;
+    }
 
     singleDash = 0;
     pass2 = 0;
@@ -294,6 +297,7 @@ int main(int argc, const char ** argv)
     fprintf(stdout, "\n");
 
 exit:
+    resetVars();
     optCon = poptFreeContext(optCon);
 #if defined(HAVE_MCHECK_H) && defined(HAVE_MTRACE)
     muntrace();   /* Trace malloc only if MALLOC_TRACE=mtrace-output-file. */
