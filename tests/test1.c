@@ -15,7 +15,9 @@ static void option_callback(UNUSED(poptContext con),
 }
 
 static int arg1 = 0;
-static const char * arg2 = "(none)";
+static char * const arg2_default = "(none)";
+static char * arg2 = arg2_default;
+static char * myarg2 = NULL;
 static int arg3 = 0;
 static int inc = 0;
 static int shortopt = 0;
@@ -86,7 +88,7 @@ static struct poptOption options[] = {
   { "arg1", '\0', 0, &arg1, 0, "First argument with a really long"
 	    " description. After all, we have to test argument help"
 	    " wrapping somehow, right?", NULL },
-  { "arg2", '2', POPT_ARG_STRING | POPT_ARGFLAG_SHOW_DEFAULT, &arg2, 0,
+  { "arg2", '2', POPT_ARG_STRING | POPT_ARGFLAG_SHOW_DEFAULT, &arg2, 222,
 	"Another argument", "ARG" },
   { "arg3", '3', POPT_ARG_INT, &arg3, 0,
 	"A third argument", "ANARG" },
@@ -153,8 +155,12 @@ static struct poptOption options[] = {
 
 static void resetVars(void)
 {
+    if (arg2 != arg2_default)
+	free(arg2);
+    free(myarg2);
     arg1 = 0;
-    arg2 = "(none)";
+    arg2 = arg2_default;
+    myarg2 = NULL;
     arg3 = 0;
     inc = 0;
     shortopt = 0;
@@ -211,15 +217,30 @@ int main(int argc, const char ** argv)
     poptSetExecPath(optCon, ".", 1);
 
 #if 1
-    while ((rc = poptGetNextOpt(optCon)) > 0)	/* Read all the options ... */
-	{}
+    while ((rc = poptGetNextOpt(optCon)) > 0) {	/* Read all the options ... */
+	if (rc == 222) {
+	    if (arg2 != arg2_default) {
+		free(arg2);
+		arg2 = arg2_default;
+	    }
+	}
+    }
 
     poptResetContext(optCon);			/* ... and then start over. */
     resetVars();
 #endif
 
     pass2 = 1;
-    if ((rc = poptGetNextOpt(optCon)) < -1) {
+    while ((rc = poptGetNextOpt(optCon)) > 0) {
+	if (rc == 222) {
+	    free(myarg2);
+	    myarg2 = strdup(arg2);
+	    if (arg2 != arg2_default)
+		free(arg2);
+	    arg2 = NULL;
+	}
+    }
+    if (rc < -1) {
 	fprintf(stderr, "test1: bad argument %s: %s\n",
 		poptBadOption(optCon, POPT_BADOPTION_NOALIAS),
 		poptStrerror(rc));
@@ -236,7 +257,7 @@ int main(int argc, const char ** argv)
 	goto exit;
     }
 
-    fprintf(stdout, "arg1: %d arg2: %s", arg1, arg2);
+    fprintf(stdout, "arg1: %d arg2: %s", arg1, myarg2 ? myarg2 : "(none)");
 
     if (arg3)
 	fprintf(stdout, " arg3: %d", arg3);
