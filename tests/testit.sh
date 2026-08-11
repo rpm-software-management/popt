@@ -179,6 +179,7 @@ fi
 run_diff test3 "test3 - 1" test3-data/01.input test3-data/01.answer
 run_diff test3 "test3 - 2" test3-data/02.input test3-data/02.answer
 run_diff test3 "test3 - 3" test3-data/03.input test3-data/03.answer
+run_diff test3 "test3 - 5" test3-data/05.input test3-data/05.answer
 
 echo ""
 echo "Passed."
