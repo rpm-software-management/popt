@@ -298,6 +298,9 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
     size_t nb = maxLeftCol + 1;
     int displaypad = 0;
 
+    if (columns->max < indentLength) {
+	lineLength = columns->max - indentLength % columns->max;
+    }
     /* Make sure there's more than enough room in target buffer. */
     if (opt->longName)	nb += strlen(opt->longName);
     if (F_ISSET(opt, TOGGLE)) nb += sizeof("[no]") - 1;
