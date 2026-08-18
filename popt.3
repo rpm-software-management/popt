@@ -632,7 +632,10 @@ information in text files.
 .sp
 .SS "1. SPECIFYING ALIASES"
 .RI "Aliases are normally specified in two places: " /etc/popt 
-.RB "and the " .popt " file in the user's home directory (found through "
+.RB "and the base directory for user-specific configuration files "
+.RB "(found through either the " XDG_CONFIG_HOME " or the " HOME
+.RB "environment variable) "
+.RB "or the " .popt " file in the user's home directory (found through "
 .RB "the " HOME " environment variable). Both files have the same format, "
 an arbitrary number of lines formatted like this:
 .sp
@@ -664,6 +667,7 @@ three functions that define aliases for a context:
 .BI "int poptReadDefaultConfig(poptContext " con ", int " flags ");"
 .fi
 .RI "This function reads aliases from " /etc/popt " and the "
+.BR "base directory for user-specific configuration files or the "
 .BR .popt " file in the user's home directory. Currently, "
 .IR flags " should be "
 .BR NULL ", as it is provided only for future expansion."
