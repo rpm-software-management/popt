@@ -12,7 +12,9 @@
 
 #include <float.h>
 #include <math.h>
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 #include <limits.h>
 #include <errno.h>
 
@@ -433,8 +435,14 @@ const char * findProgramPath(const char * argv0)
 	(void) stpcpy(stpcpy(stpcpy(t, s), "/"), argv0);
 
 	/* If file is executable, bingo! */
+#if defined(HAVE_X_OK)
 	if (!access(t, X_OK))
 	    break;
+#elif defined(_WIN32)
+	struct _stat sb;
+	if (!_stat(t, &sb) && (sb.st_mode & _S_IEXEC))
+	    break;
+#endif
     }
 
     /* If no executable was found in PATH, return NULL. */
@@ -516,7 +524,7 @@ static int execCommand(poptContext con)
     if (rc) goto exit;
     rc = setreuid(getuid(), getuid());
     if (rc) goto exit;
-#else
+#elif defined(HAVE_GETUID)
     /* refuse to exec if we cannot drop suid/sgid privileges */
     if (getuid() != geteuid() || getgid() != getegid()) {
 	errno = ENOTSUP;
