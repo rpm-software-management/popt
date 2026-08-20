@@ -10,6 +10,7 @@
 #define H_POPTINT
 
 #include <stdint.h>
+#include <stdarg.h>
 
 #define POPT_OPTION_DEPTH	10
 
@@ -137,6 +138,9 @@ const char *POPT_prev_char (const char *str);
 const char *POPT_next_char (const char *str);
 
 #endif
+
+int POPT_vasprintf(char **strp, const char *fmt, va_list ap);
+int POPT_asprintf(char **strp, const char *fmt, ...);
 
 #if defined(ENABLE_NLS) && defined(HAVE_LIBINTL_H)
 #include <libintl.h>
