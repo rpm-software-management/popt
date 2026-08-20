@@ -19,7 +19,7 @@ RUN dnf -y install \
 COPY . .
 
 RUN ./autogen.sh
-RUN ./configure --enable-werror CFLAGS="-Wall -Wdeclaration-after-statement -Wextra -Wmissing-format-attribute -Wmissing-noreturn -Wno-gnu-alignof-expression -Wpointer-arith -Wshadow -Wstrict-prototypes -Wundef -Wunused -Wwrite-strings -Wno-suggest-attribute"
+RUN ./configure --enable-werror CFLAGS="-Wall -Wdeclaration-after-statement -Wextra -Wmissing-format-attribute -Wmissing-noreturn -Wno-gnu-alignof-expression -Wpointer-arith -Wshadow -Wstrict-prototypes -Wundef -Wunused -Wwrite-strings -Wno-suggest-attribute=format"
 RUN make
 
 CMD make distcheck DISTCHECK_CONFIGURE_FLAGS=--enable-werror
