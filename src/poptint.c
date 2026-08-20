@@ -192,3 +192,43 @@ POPT_fprintf (FILE * stream, const char * format, ...)
 }
 
 #endif	/* !defined(POPT_fprintf) */
+
+int POPT_vasprintf(char **strp, const char *fmt, va_list ap)
+{
+    char * p = NULL;
+    va_list aq;
+    int n;
+
+    if (strp == NULL)
+	return -1;
+
+    va_copy(aq, ap);
+    n = vsnprintf(NULL, 0, fmt, aq);
+    va_end(aq);
+
+    if (n >= 0) {
+	size_t nb = (size_t)n + 1;
+	if ((p = malloc(nb))) {
+	    va_copy(aq, ap);
+	    n = vsnprintf(p, nb, fmt, aq);
+	    va_end(aq);
+	} else {
+	    n = -1;
+ 	}
+    }
+    *strp = p;
+
+    return n;
+}
+
+int POPT_asprintf(char **strp, const char *fmt, ...)
+{
+    int n;
+    va_list ap;
+
+    va_start(ap, fmt);
+    n = POPT_vasprintf(strp, fmt, ap);
+    va_end(ap);
+
+    return n;
+}
