@@ -10,6 +10,10 @@ set(TEST_PROGRAMS
 	test1
 	test2
 	test3
+	test4-1
+	test4-2
+	test4-3
+	test4-4
 	tdict
 	tstuff
 )

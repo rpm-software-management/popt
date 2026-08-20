@@ -51,7 +51,7 @@ static char * oStr = (char *) -1;
 static int singleDash = 0;
 
 static const char * lStr =
-"This tests default strings and exceeds the ... limit. "
+"This tests default strings and exceeds the former ... limit. "
 "123456789+123456789+123456789+123456789+123456789+ "
 "123456789+123456789+123456789+123456789+123456789+ "
 "123456789+123456789+123456789+123456789+123456789+ "
