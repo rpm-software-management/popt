@@ -12,9 +12,11 @@ RUN dnf -y install \
   make \
   gcc \
   binutils \
+  libasan \
+  libubsan \
   && dnf clean all
 
 COPY . .
 
-RUN cmake -S . -B ./build -DENABLE_WERROR=ON
+RUN cmake -S . -B ./build -DENABLE_WERROR=ON -DENABLE_ASAN=ON -DENABLE_UBSAN=ON
 CMD cd build && ctest --output-on-failure --force-new-ctest-process

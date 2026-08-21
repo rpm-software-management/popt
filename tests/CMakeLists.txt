@@ -11,6 +11,7 @@ set(TEST_PROGRAMS
 	test2
 	test3
 	tdict
+	tstuff
 )
 
 foreach (TESTPROG ${TEST_PROGRAMS})
