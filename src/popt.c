@@ -1668,7 +1668,7 @@ int poptStuffArgs(poptContext con, const char ** argv)
     int argc;
     int rc;
 
-    if ((con->os - con->optionStack) == POPT_OPTION_DEPTH)
+    if ((con->os - con->optionStack + 1) == POPT_OPTION_DEPTH)
 	return POPT_ERROR_OPTSTOODEEP;
 
     for (argc = 0; argv[argc]; argc++)

@@ -11,7 +11,7 @@ EXTRA_DIST = testit.sh \
 
 AM_CPPFLAGS = -I. -I$(top_srcdir)/src
 
-noinst_PROGRAMS = test1 test2 tdict test3
+noinst_PROGRAMS = test1 test2 tdict test3 tstuff
 test1_SOURCES = test1.c
 test1_LDFLAGS = 
 test1_LDADD = $(top_builddir)/src/libpopt.la
@@ -24,6 +24,9 @@ test3_LDADD = $(top_builddir)/src/libpopt.la
 tdict_SOURCES = tdict.c
 tdict_LDFLAGS = 
 tdict_LDADD = $(top_builddir)/src/libpopt.la
+tstuff_SOURCES = tdict.c
+tstuff_LDFLAGS = 
+tstuff_LDADD = $(top_builddir)/src/libpopt.la
 
 noinst_SCRIPTS = testit.sh
 
