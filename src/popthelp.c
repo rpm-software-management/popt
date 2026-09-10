@@ -197,79 +197,60 @@ getArgDescrip(const struct poptOption * opt,
 
 /**
  * Display default value for an option.
- * @param lineLength	display positions remaining
  * @param opt		option(s)
  * @param translation_domain	translation domain
  * @return
  */
 static char *
-singleOptionDefaultValue(size_t lineLength,
+singleOptionDefaultValue(
 		const struct poptOption * opt,
 		/* FIX: i18n macros disabled with lclint */
 		const char * translation_domain)
 {
     const char * defstr = D_(translation_domain, "default");
-    char * le = malloc(4*lineLength + 1);
-    char * l = le;
+    char * l = NULL;
 
-    if (le == NULL) return NULL;	/* XXX can't happen */
-    *le = '\0';
-    *le++ = '(';
-    le = stpcpy(le, defstr);
-    *le++ = ':';
-    *le++ = ' ';
   if (opt->arg) {	/* XXX programmer error */
     poptArg arg = { .ptr = opt->arg };
     switch (poptArgType(opt)) {
     case POPT_ARG_VAL:
     case POPT_ARG_INT:
-	le += sprintf(le, "%d", arg.intp[0]);
+	POPT_asprintf(&l, "(%s: %d)", defstr, arg.intp[0]);
 	break;
     case POPT_ARG_SHORT:
-	le += sprintf(le, "%hd", arg.shortp[0]);
+	POPT_asprintf(&l, "(%s: %hd)", defstr, arg.shortp[0]);
 	break;
     case POPT_ARG_LONG:
-	le += sprintf(le, "%ld", arg.longp[0]);
+	POPT_asprintf(&l, "(%s: %ld)", defstr, arg.longp[0]);
 	break;
     case POPT_ARG_LONGLONG:
-	le += sprintf(le, "%lld", arg.longlongp[0]);
+	POPT_asprintf(&l, "(%s: %lld)", defstr, arg.longlongp[0]);
 	break;
     case POPT_ARG_FLOAT:
     {	double aDouble = (double) arg.floatp[0];
-	le += sprintf(le, "%g", aDouble);
+	POPT_asprintf(&l, "(%s: %g)", defstr, aDouble);
     }	break;
     case POPT_ARG_DOUBLE:
-	le += sprintf(le, "%g", arg.doublep[0]);
+	POPT_asprintf(&l, "(%s: %g)", defstr, arg.doublep[0]);
 	break;
     case POPT_ARG_MAINCALL:
-	le += sprintf(le, "%p", opt->arg);
+	POPT_asprintf(&l, "(%s: %p)", defstr, opt->arg);
 	break;
     case POPT_ARG_ARGV:
-	le += sprintf(le, "%p", opt->arg);
+	POPT_asprintf(&l, "(%s: %p)", defstr, opt->arg);
 	break;
     case POPT_ARG_STRING:
-    {	const char * s = arg.argv[0];
-	if (s == NULL)
-	    le = stpcpy(le, "null");
-	else {
-	    size_t limit = 4*lineLength - (le - l) - sizeof("\"\")");
-	    size_t slen;
-	    *le++ = '"';
-	    strncpy(le, s, limit); le[limit] = '\0'; le += (slen = strlen(le));
-	    if (slen == limit && s[limit])
-		le[-1] = le[-2] = le[-3] = '.';
-	    *le++ = '"';
-	}
-    }	break;
+	if (arg.argv[0])
+	    POPT_asprintf(&l, "(%s: \"%s\")", defstr, arg.argv[0]);
+	else
+	    POPT_asprintf(&l, "(%s: %s)", defstr, "null");
+	break;
     case POPT_ARG_NONE:
     default:
-	l = _free(l);
 	return NULL;
 	break;
     }
   }
-    *le++ = ')';
-    *le = '\0';
 
     return l;
 }
@@ -286,7 +267,9 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 		const char * translation_domain)
 {
     size_t maxLeftCol = columns->cur;
-    size_t indentLength = maxLeftCol + 5;
+    size_t indentLength = maxLeftCol + 5 < columns->max ?
+			maxLeftCol + 5 :
+			columns->max - (maxLeftCol % columns->max);
     size_t lineLength = columns->max - indentLength;
     const char * help = D_(translation_domain, opt->descrip);
     const char * argDescrip = getArgDescrip(opt, translation_domain);
@@ -347,7 +330,7 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 
 	/* Choose type of output */
 	if (F_ISSET(opt, SHOW_DEFAULT)) {
-	    defs = singleOptionDefaultValue(lineLength, opt, translation_domain);
+	    defs = singleOptionDefaultValue(opt, translation_domain);
 	    if (defs) {
 		char * t = malloc((help ? strlen(help) : 0) +
 				strlen(defs) + sizeof(" "));

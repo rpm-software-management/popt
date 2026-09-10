@@ -152,8 +152,8 @@ Usage: test1 [OPTION...]
       --nstr=STRING               POPT_ARG_STRING: (null) (default: null)
       --lstr=STRING               POPT_ARG_STRING: \"123456789...\" (default:
                                   \"This tests default strings and exceeds the
-                                  ... limit.
-                                  123456789+123456789+123456789+123456789+123456789+ 123456789+123456789+123456789+123456789+123456789+ 1234567...\")
+                                  former ... limit.
+                                  123456789+123456789+123456789+123456789+123456789+ 123456789+123456789+123456789+123456789+123456789+ 123456789+123456789+123456789+123456789+123456789+ 123456789+123456789+123456789+123456789+123456789+ \")
 
 arg for cb2
   -c, --cb2=STRING                Test argument callbacks
@@ -185,6 +185,30 @@ run_diff test3 "test3 - 1" test3-data/01.input test3-data/01.answer
 run_diff test3 "test3 - 2" test3-data/02.input test3-data/02.answer
 run_diff test3 "test3 - 3" test3-data/03.input test3-data/03.answer
 run_diff test3 "test3 - 5" test3-data/05.input test3-data/05.answer
+
+run test4-1 "test 4-1 - 63" "\
+Usage: test4-1 [OPTION...]
+      --aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaargh=STRING     Second (default: \"meh\")
+
+Help options:
+  -?, --help                                                                Show this help message
+      --usage                                                               Display brief usage message" --help
+
+run test4-2 "test 4-2 - 64" "\
+Usage: test4-2 [OPTION...]
+      --brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrgh=STRING     Third (default: null)
+
+Help options:
+  -?, --help                                                                                                              Show this help message
+      --usage                                                                                                             Display brief usage message" --help
+
+run test4-3 "test 4-3 - 65" "\
+Usage: test4-3 [OPTION...]
+      --aarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrggggggh=STRING     xxxxx
+
+Help options:
+  -?, --help                                                                   Show this help message
+      --usage                                                                  Display brief usage message" --help
 
 echo ""
 if [ $retval != 0 ]; then
