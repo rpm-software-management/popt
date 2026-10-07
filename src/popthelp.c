@@ -10,8 +10,7 @@
 
 #include "system.h"
 
-#define        POPT_USE_TIOCGWINSZ
-#ifdef POPT_USE_TIOCGWINSZ
+#ifdef HAVE_TIOCGWINSZ
 #include <sys/ioctl.h>
 #endif
 
@@ -96,7 +95,7 @@ typedef struct columns_s {
 static size_t maxColumnWidth(FILE *fp)
 {   
     size_t maxcols = _POPTHELP_MAXLINE;
-#if defined(TIOCGWINSZ)
+#if defined(HAVE_TIOCGWINSZ)
     struct winsize ws;
     int fdno = fileno(fp ? fp : stdout);
 

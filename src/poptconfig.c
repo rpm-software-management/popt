@@ -9,7 +9,9 @@
 #include "system.h"
 #include "poptint.h"
 #include <sys/stat.h>
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 #include <fcntl.h>
 #include <errno.h>
 
@@ -116,10 +118,17 @@ int poptSaneFile(const char * fn)
 	return 0;
     if (stat(fn, &sb) == -1)
 	return 0;
+#ifdef _WIN32
+    if ((sb.st_mode & _S_IFMT) != _S_IFREG)
+	return 0;
+    if (sb.st_mode & _S_IEXEC)
+	return 0;
+#else
     if (!S_ISREG(sb.st_mode))
 	return 0;
     if (sb.st_mode & (S_IXUSR|S_IXGRP|S_IXOTH))
 	return 0;
+#endif
     return 1;
 }
 
@@ -139,8 +148,12 @@ int poptReadFile(const char * fn, char ** bp, size_t * nbp, int flags)
      || (uintmax_t)nb >= SIZE_MAX
      || lseek(fdno, 0, SEEK_SET) == (off_t)-1
      || (b = calloc(sizeof(*b), (size_t)nb + 1)) == NULL
-     || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb)
-    {
+#ifdef _WIN32
+     || (off_t)_read(fdno, (char *)b, (unsigned)nb) != nb
+#else
+     || read(fdno, (char *)b, (size_t)nb) != (ssize_t)nb
+#endif
+    ) {
 	int oerrno = errno;
 	(void) close(fdno);
 	if (nb != (off_t)-1 && (uintmax_t)nb >= SIZE_MAX)
