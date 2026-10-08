@@ -3,7 +3,7 @@
 
 /* (C) 1998-2000 Red Hat, Inc. -- Licensing details are in the COPYING
    file accompanying popt source distributions, available from 
-   ftp://ftp.rpm.org/pub/rpm/dist. */
+   http://ftp.rpm.org/popt/releases/. */
 
 #ifndef H_POPT
 #define H_POPT
@@ -443,7 +443,7 @@ int poptConfigFileToString(FILE *fp, char ** argstrp, int flags);
  * @param error		popt error
  * @return		error string
  */
-const char * poptStrerror(const int error);
+const char * poptStrerror(int error);
 
 /**
  * Limit search for executables.

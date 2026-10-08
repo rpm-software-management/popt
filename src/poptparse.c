@@ -4,7 +4,7 @@
 
 /* (C) 1998-2002 Red Hat, Inc. -- Licensing details are in the COPYING
    file accompanying popt source distributions, available from 
-   ftp://ftp.rpm.org/pub/rpm/dist. */
+   http://ftp.rpm.org/popt/releases/. */
 
 #include "system.h"
 
@@ -139,7 +139,6 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
     char * p;
     char * q;
     char * x;
-    size_t t;
     size_t argvlen = 0;
     size_t maxlinelen = sizeof(line);
     size_t linelen;
@@ -186,9 +185,9 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
 	if (*q == '\0') {
 	    /* single command line option (ie, no name=val, just name) */
 	    q[-1] = '\0';		/* kill off newline from fgets() call */
-	    argvlen += (t = (size_t)(q - p)) + (sizeof(" --")-1);
+	    argvlen += ((size_t)(q - p)) + (sizeof(" --")-1);
 	    if (argvlen >= maxargvlen) {
-		maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
+		maxargvlen = argvlen * 2;
 		argstr_tmp = realloc(argstr, maxargvlen);
 		if (argstr_tmp == NULL) {
 		    free(argstr);
@@ -218,10 +217,9 @@ int poptConfigFileToString(FILE *fp, char ** argstrp,
 	    *x = '\0';	/* null out last char if space (including fgets() NL) */
 
 	/* rest of line accept */
-	t = (size_t)(x - p);
-	argvlen += t + (sizeof("' --='")-1);
+	argvlen += ((size_t)(x - p) + sizeof("' --='")-1);
 	if (argvlen >= maxargvlen) {
-	    maxargvlen = (t > maxargvlen) ? t*2 : maxargvlen*2;
+	    maxargvlen = argvlen * 2;
 	    argstr_tmp = realloc(argstr, maxargvlen);
 	    if (argstr_tmp == NULL) {
 		free(argstr);

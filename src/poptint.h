@@ -4,12 +4,13 @@
 
 /* (C) 1998-2000 Red Hat, Inc. -- Licensing details are in the COPYING
    file accompanying popt source distributions, available from 
-   ftp://ftp.rpm.org/pub/rpm/dist. */
+   http://ftp.rpm.org/popt/releases/. */
 
 #ifndef H_POPTINT
 #define H_POPTINT
 
 #include <stdint.h>
+#include <stdarg.h>
 
 /**
  * Wrapper to free(3), hides const compilation noise, permit NULL, return NULL.
@@ -135,6 +136,9 @@ const char *POPT_prev_char (const char *str);
 const char *POPT_next_char (const char *str);
 
 #endif
+
+int POPT_vasprintf(char **strp, const char *fmt, va_list ap);
+int POPT_asprintf(char **strp, const char *fmt, ...);
 
 #if defined(ENABLE_NLS) && defined(HAVE_LIBINTL_H)
 #include <libintl.h>

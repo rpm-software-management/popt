@@ -4,7 +4,7 @@
 
 /* (C) 1998-2002 Red Hat, Inc. -- Licensing details are in the COPYING
    file accompanying popt source distributions, available from
-   ftp://ftp.rpm.org/pub/rpm/dist */
+   http://ftp.rpm.org/popt/releases/ */
 
 #undef	MYDEBUG
 
@@ -141,8 +141,8 @@ static void invokeCallbacksOPTION(poptContext con,
 			!strcmp(myOpt->longName, opt->longName)))
 	    {	const void *cbData = (cbopt->descrip ? cbopt->descrip : myData);
 		cbarg.cb(con, POPT_CALLBACK_REASON_OPTION,
-			myOpt, con->os->nextArg, cbData);
-		/* Terminate (unless explcitly continuing). */
+			myOpt, myOpt->argInfo ? con->os->nextArg : NULL, cbData);
+		/* Terminate (unless explicitly continuing). */
 		if (!CBF_ISSET(cbopt, CONTINUE))
 		    return;
 	    }
@@ -305,7 +305,7 @@ longOptionStrcmp(const struct poptOption * opt,
     const char * optLongName = opt->longName;
     int rc;
 
-    if (optLongName == NULL || longName == NULL)	/* XXX can't heppen */
+    if (optLongName == NULL || longName == NULL)	/* XXX can't happen */
 	return 0;
 
     if (F_ISSET(opt, TOGGLE)) {
@@ -576,7 +576,7 @@ findOption(const struct poptOption * opt,
 	    opt2 = findOption(arg.opt, longName, longNameLen, shortName, callback,
 			      callbackData, argInfo);
 	    if (opt2 == NULL) continue;
-	    /* Sub-table data will be inheirited if no data yet. */
+	    /* Sub-table data will be inherited if no data yet. */
 	    if (callback && *callback
 	     && callbackData && *callbackData == NULL)
 		*callbackData = opt->descrip;
@@ -1060,7 +1060,7 @@ static unsigned int poptArgInfo(poptContext con, const struct poptOption * opt)
 	/* XXX almost good enough but consider --[no]nofoo corner cases. */
 	if (longName[0] != opt->longName[0] || longName[1] != opt->longName[1])
 	{
-	    if (!LF_ISSET(XOR)) {	/* XXX dont toggle with XOR */
+	    if (!LF_ISSET(XOR)) {	/* XXX don't toggle with XOR */
 		/* Toggle POPT_BIT_SET <=> POPT_BIT_CLR. */
 		if (LF_ISSET(LOGICALOPS))
 		    argInfo ^= (POPT_ARGFLAG_OR|POPT_ARGFLAG_AND);
@@ -1668,7 +1668,7 @@ int poptStuffArgs(poptContext con, const char ** argv)
     int argc;
     int rc;
 
-    if ((con->os - con->optionStack) == POPT_OPTION_DEPTH)
+    if ((con->os - con->optionStack + 1) == POPT_OPTION_DEPTH)
 	return POPT_ERROR_OPTSTOODEEP;
 
     for (argc = 0; argv[argc]; argc++)
