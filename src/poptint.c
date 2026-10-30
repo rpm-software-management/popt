@@ -12,11 +12,13 @@
 #include "lookup3.c"
 
 const char *
-POPT_prev_char (const char *str)
+POPT_prev_char (const char *str, const char *min)
 {
     const char *p = str;
 
     while (1) {
+	if (p <= min)
+	    return p;
 	p--;
 	if (((unsigned)*p & 0xc0) != (unsigned)0x80)
 	    return p;
