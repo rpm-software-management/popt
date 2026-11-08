@@ -29,11 +29,11 @@ run_diff() {
     diff_ret=$?
 
     if [ "$diff_ret" != "0" ]; then
-       echo "FAIL $name: failed output is in $out, diff is:"
+       echo "FAIL: $name: failed output is in $out, diff is:"
        cat $diff_file
        retval=2
     else
-        echo "PASS $name"
+        echo "PASS: $name"
     fi
     rm $out $diff_file
 }
