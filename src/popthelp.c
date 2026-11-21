@@ -428,10 +428,10 @@ static void singleOptionHelp(FILE * fp, columns_t columns,
 
 	ch = help + lineLength - 1;
 	while (ch > help && !_isspaceptr(ch))
-	    ch = POPT_prev_char(ch);
+	    ch = POPT_prev_char(ch, help);
 	if (ch == help) break;		/* give up */
 	while (ch > (help + 1) && _isspaceptr(ch))
-	    ch = POPT_prev_char (ch);
+	    ch = POPT_prev_char (ch, help);
 	ch = POPT_next_char(ch);
 
 	/*

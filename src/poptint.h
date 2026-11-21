@@ -134,7 +134,7 @@ FORMAT(printf, 2, 3)
 int   POPT_fprintf (FILE* stream, const char *format, ...);
 #endif	/* !defined(POPT_fprintf) */
 
-const char *POPT_prev_char (const char *str);
+const char *POPT_prev_char (const char *str, const char *min);
 const char *POPT_next_char (const char *str);
 
 #endif
